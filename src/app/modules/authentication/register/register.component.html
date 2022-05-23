@@ -1,0 +1,170 @@
+<div class="gene-registration-form gene-session wow fadeInDown" style="padding-bottom: 60px;">
+  <div fxLayout="row" fxLayoutAlign="center center" >
+    <div fxLayout="column" fxFlex.xl="540px" fxFlex.lg="540px" fxFlex.md="540px" fxFlex.sm="540px"  fxFlex.xs="100">
+      <mat-card>
+        <div>
+          <div fxLayout="column" fxLayoutAlign="center center mrgn-b-md">
+            <div class="login-logo justify-content" fxLayout="column" fxLayoutAlign="center center">
+              <img src="{{mainLogo}}" style="width: 40%;" class="logo-img" alt="">
+              <h4 class="">{{'CREATE NEW ACCOUNT'|translate}}</h4>
+            </div>
+          </div>
+          <form [formGroup]="form" (ngSubmit)="register(form.value)">
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+                <mat-form-field class="full-wid mrgn-b-md">
+                  <input matInput placeholder="{{'First name' | translate}}" formControlName="fname">
+                </mat-form-field>
+                <small  *ngIf="form.controls['fname'].hasError('required') && form.controls['fname'].touched"
+                        class="warn-text gene-block">
+                  {{'You must include a first name' | translate}}
+                </small>
+                <small  *ngIf="form.controls['fname'].hasError('minlength') && form.controls['fname'].touched"
+                        class="warn-text gene-block">
+                  {{'Your first name must be at least 2 characters long' | translate}}
+                </small>
+                <small  *ngIf="form.controls['fname'].hasError('maxlength') && form.controls['fname'].touched"
+                        class="warn-text gene-block">
+                  {{'Your first name cannot exceed 50 characters' | translate}}
+                </small>
+              </div>
+              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+                <mat-form-field class="full-wid mrgn-b-md">
+                  <input matInput placeholder="{{'Second name' | translate}}" formControlName="sname" type="sname">
+                </mat-form-field>
+                <small  *ngIf="form.controls['sname'].hasError('required') && form.controls['sname'].touched"
+                        class="warn-text gene-block">
+                  {{'You must include a second name' | translate}}
+                </small>
+                <small  *ngIf="form.controls['sname'].hasError('minlength') && form.controls['sname'].touched"
+                        class="warn-text gene-block">
+                  {{'Your second name must be at least 2 characters long' | translate}}
+                </small>
+                <small  *ngIf="form.controls['sname'].hasError('maxlength') && form.controls['sname'].touched"
+                        class="warn-text gene-block">
+                  {{'Your second name cannot exceed 50 characters' | translate}}
+                </small>
+              </div>
+            </div>
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+                <mat-form-field class="full-wid mrgn-b-md">
+                  <input matInput placeholder="{{'Third name' | translate}}" formControlName="tname">
+                </mat-form-field>
+                <small  *ngIf="form.controls['tname'].hasError('required') && form.controls['tname'].touched"
+                        class="warn-text gene-block">
+                  {{'You must include a third name' | translate}}
+                </small>
+                <small  *ngIf="form.controls['tname'].hasError('minlength') && form.controls['tname'].touched"
+                        class="warn-text gene-block">
+                  {{'Your third name must be at least 2 characters long' | translate}}
+                </small>
+                <small  *ngIf="form.controls['tname'].hasError('maxlength') && form.controls['tname'].touched"
+                        class="warn-text gene-block">
+                  {{'Your third name cannot exceed 50 characters' | translate}}
+                </small>
+              </div>
+              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+                <mat-form-field class="full-wid mrgn-b-md">
+                  <input matInput placeholder="{{'Family name' | translate}}" formControlName="lname" type="lname">
+                </mat-form-field>
+                <small  *ngIf="form.controls['lname'].hasError('required') && form.controls['lname'].touched"
+                        class="warn-text gene-block">
+                  {{'You must include a family name' | translate}}
+                </small>
+                <small  *ngIf="form.controls['lname'].hasError('minlength') && form.controls['lname'].touched"
+                        class="warn-text gene-block">
+                  {{'Your family name must be at least 2 characters long' | translate}}
+                </small>
+                <small  *ngIf="form.controls['lname'].hasError('maxlength') && form.controls['lname'].touched"
+                        class="warn-text gene-block">
+                  {{'Your family name cannot exceed 50 characters' | translate}}
+                </small>
+              </div>
+            </div>
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                <mat-form-field class="full-wid mrgn-b-md">
+                  <input matInput placeholder="{{'Email address' | translate}}" formControlName="email" type="email">
+                </mat-form-field>
+                <small  *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched"
+                        class="warn-text gene-block">
+                  {{'You must include an email address' | translate}}
+                </small>
+                <small  *ngIf="form.controls['email'].errors && !(form.controls['email'].hasError('required')) && form.controls['email'].touched"
+                        class="warn-text gene-block">
+                  {{'You must include a valid email address' | translate}}
+                </small>
+              </div>
+            </div>
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+                <mat-form-field class="full-wid mrgn-b-md">
+                  <input matInput placeholder="{{'Password' | translate}}" formControlName="password" type="password">
+                </mat-form-field>
+                <small  *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched"
+                        class="warn-text gene-block">
+                  {{'You must include password' | translate}}
+                </small>
+              </div>
+              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+                <mat-form-field class="full-wid mrgn-b-md">
+                  <input matInput placeholder="{{'Confirm Password' | translate}}" formControlName="confirmPassword" type="password">
+                </mat-form-field>
+                <small  *ngIf="form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched"
+                        class="warn-text gene-block">
+                  {{'You must include confirm password' | translate}}
+                </small>
+                <small  *ngIf="form.controls['confirmPassword'].errors && !(form.controls['confirmPassword'].hasError('required')) && form.controls['confirmPassword'].touched "
+                        class="warn-text gene-block">
+                  {{'Passwords do not match' | translate}}
+                </small>
+              </div>
+            </div>
+            <!--                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">-->
+            <!--                     <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">-->
+            <!--                        <label class="mrgn-r-xs">{{'Gender' | translate}}</label>-->
+            <!--                        <mat-radio-group formControlName="gender">-->
+            <!--                           <mat-radio-button class="mrgn-r-xs" value="male">{{'Male' | translate}}</mat-radio-button>-->
+            <!--                           <mat-radio-button value="female">{{'Female' | translate}}</mat-radio-button>-->
+            <!--                        </mat-radio-group>-->
+            <!--                        <small *ngIf="!form.controls['gender'].valid && form.controls['gender'].touched" class="warn-text gene-block">-->
+            <!--                           {{'You must select a gender' | translate}}-->
+            <!--                        </small>-->
+            <!--                     </div>-->
+            <!--                  </div>-->
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+              <div fxLayout="column" fxLayoutAlign="start" class="mrgn-b-md mrgn-y-lg">
+                <mat-checkbox formControlName="terms">{{'Accept terms and conditions' | translate}}
+                  <a [routerLink]="['/terms-condition']" class="primary-text">{{'terms and conditions.'|translate}}</a></mat-checkbox>
+                <small  *ngIf="(form.controls['terms'].hasError('requiredTrue')) && !form.controls['terms'].pristine "
+                        class="warn-text gene-block m-0">
+                  {{'You must accept the terms and conditions' | translate}}
+                </small>
+
+              </div>
+            </div>
+<!--            <div fxLayout="row" fxLayoutAlign="start" class="mrgn-b-md mrgn-b-md">-->
+<!--              <ngx-recaptcha2 #captchaElem-->
+<!--                              [siteKey]="siteKey"-->
+<!--                              [useGlobalDomain]="false"-->
+<!--                              [type]="'image'"-->
+<!--                              [size]="'normal'"-->
+<!--                              [theme]="'light'"-->
+<!--                              [hl]="language"-->
+<!--                              (reset)="handleReset()"-->
+<!--                              (ready)="handleReady()"-->
+<!--                              (load)="handleLoad(captchaElem)"-->
+<!--                              (success)="handleSuccess($event)"-->
+<!--                              formControlName="recaptcha">-->
+<!--              </ngx-recaptcha2>-->
+<!--            </div>-->
+            <button mat-button mat-raised-button [disabled]="!form.valid" color="primary" class="full-width-btn mrgn-b-md">{{'CREATE ACCOUNT'|translate}}</button>
+            <p>{{'Already have an account?'|translate}} <a [routerLink]="['/auth/login']" class="primary-text">{{'Sign in here'|translate}}</a></p>
+          </form>
+
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

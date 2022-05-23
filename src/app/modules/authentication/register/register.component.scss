@@ -1,0 +1,20 @@
+.gene-registration-form{
+  .login-logo{
+    img{
+      margin-bottom: 1.5rem;
+    }
+  }
+  button{
+    margin-bottom: 1rem;
+  }
+}
+
+@media(max-width: 992px) {
+  .mat-checkbox-inner-container {
+    margin-top: .5rem !important;
+  }
+}
+
+.mat-checkbox-layout {
+  white-space: unset !important;
+}
