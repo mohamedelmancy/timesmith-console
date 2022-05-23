@@ -1,0 +1,36 @@
+<div class="gene-login gene-session wow fadeInDown">
+  <div fxLayout="row" fxLayoutAlign="center start">
+    <div fxLayout="column" fxFlex.xl="540px" fxFlex.lg="540px" fxFlex.md="540px" fxFlex.sm="540px" fxFlex.xs="100">
+      <mat-card class="gene-login-wrapper">
+        <div>
+          <div fxLayout="column" fxLayoutAlign="center center mrgn-b-md">
+            <div class="login-logo justify-content" fxLayout="column" fxLayoutAlign="center center">
+              <img src="{{mainLogo}}" style="width: 40%;" class="logo-img">
+              <h4>{{'Sign in' | translate}}</h4>
+            </div>
+          </div>
+          <form #form="ngForm" (ngSubmit)="login(form.value)">
+            <div fxLayout="column" fxLayoutAlign="start stretch">
+              <mat-form-field class="full-wid mrgn-b-md">
+                <input matInput placeholder="{{'Mobile/Civil number' | translate}}" type="text" name="mobile" required [(ngModel)]="mobile">
+              </mat-form-field>
+              <mat-form-field class="full-wid mrgn-b-md ">
+                <input matInput placeholder="{{'Password' | translate}}" type="password" name="password" required [(ngModel)]="password">
+              </mat-form-field>
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <div fxLayout="column">
+                  <mat-checkbox class="remember-me" color="primary" name="remember" [checked]="remember" [(ngModel)]="remember">{{'Remember Me' | translate}}</mat-checkbox>
+                </div>
+                <span fxFlex></span>
+                <div><a [routerLink]="['/auth/forgot-password']">{{'Forgot Password?' | translate}}</a></div>
+              </div>
+              <button class="primary-bg" mat-raised-button [disabled]="!form.valid">{{'Sign in' | translate}}</button>
+              <!--                  <p class="text-center">{{'Dont have an account?' | translate}} <a [routerLink]="['/company-register']" class="primary-text">-->
+              <!--                     {{'Click here to create one' | translate}}</a></p>-->
+            </div>
+          </form>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

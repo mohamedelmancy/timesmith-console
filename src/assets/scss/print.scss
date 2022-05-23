@@ -1,0 +1,104 @@
+* {
+  direction: ltr;
+}
+.receipt {
+  padding: 0 2rem;
+}
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 1em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: start;
+  font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+  padding: 12px 15px;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.content-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.content-table tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
+
+td:nth-child(2) {
+  border-right: 1px solid #009879;
+}
+td:nth-child(1),
+td:nth-child(2) {
+  text-align: start;
+}
+td:nth-child(3),
+td:nth-child(4) {
+  text-align: end;
+}
+th {
+  text-align: center;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul.dashed,
+ul.dashedAr {
+  list-style-type: none;
+}
+ul.dashed > li,
+ul.dashedAr > li {
+  text-indent: -5px;
+}
+ul.dashed > li:before {
+  content: "- ";
+  text-indent: -5px;
+}
+ul.dashedAr > li::after {
+  content: " -";
+  text-indent: -5px;
+}
+
+.bdr-left{
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+.bdr-all{
+  border:1px solid rgba(0, 0, 0, 0.12);
+}
+.invoice-table-wrap{
+  &.bdr-all{
+     border-bottom: 0;
+  }
+  table{
+     min-width: 536px;
+  }
+}
+@media(max-width:600px){
+  .invoice-meta.text-right{
+     text-align: left !important;
+  }
+  [dir="rtl"] .invoice-meta.text-right{
+     text-align: right !important;
+  }
+}
+

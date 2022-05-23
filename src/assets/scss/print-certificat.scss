@@ -1,0 +1,44 @@
+* {
+  direction: ltr;
+}
+
+.print-content {
+  place-content: unset !important;
+}
+
+.outer-border {
+  width: 800px;
+  height: 650px;
+  padding: 20px;
+  text-align: center;
+  border: 7px solid #000 !important;
+  margin-left: 21%
+}
+
+.inner-dotted-border {
+  width: 750px;
+  height: 600px;
+  text-align: center;
+}
+
+.certification {
+  font-size: 33px;
+  font-weight: bold;
+  color: #000;
+}
+
+.certify {
+  font-size: 24px
+}
+
+.name {
+  font-size: 22px
+}
+
+.fs-30 {
+  font-size: 30px
+}
+
+.fs-20 {
+  font-size: 20px
+}

@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
+import {Router} from "@angular/router";
+import {DateAdapter} from "@angular/material/core";
+import {secureStorage} from "./shared/functions/secure-storage";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +11,23 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'timeSmithConsole';
+  constructor(private translate: TranslateService, private router: Router, private dateAdapter: DateAdapter<any>, ) {
+    // const browserLang: string = translate.getBrowserLang();
+    // translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+  }
+
+  ngOnInit() {
+    this.setLocalization();
+  }
+
+  setLocalization() {
+    this.translate.addLangs(['en','ar']);
+    this.translate.setDefaultLang('en');
+    const lang = secureStorage.getItem('lang') || 'en';
+    secureStorage.setItem('lang', lang);
+    this.translate.use(lang);
+    this.dateAdapter.setLocale(lang);
+    const dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.style.direction = dir;
+  }
 }

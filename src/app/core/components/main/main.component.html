@@ -1,0 +1,54 @@
+<div id = "main-app" class="app sidebar-color-dark header-color-dark" [dir]="layout" [ngClass]="{'app-dark': dark, 'collapsed-sidebar': coreService.collapseSidebar, 'compact-sidebar': compactSidebar, 'customizer-in': customizerIn}" [class.side-panel-opened]="coreService.sidenavOpen && checkAuthority()" [class.side-panel-closed]="!coreService.sidenavOpen || !isLoggedIn">
+  <mat-sidenav-container class="gene-container" >
+    <mat-sidenav *ngIf="isLoggedIn" #sidenav [(opened)]="coreService.sidenavOpen" class="sidebar-area">
+      <app-side-bar [menuList]="menuItems" [verticalMenuStatus] = true></app-side-bar>
+    </mat-sidenav>
+    <mat-toolbar class="gene-header-toolbar">
+      <div class="gene-ham-icon" *ngIf="isLoggedIn" >
+        <button class="" mat-mini-fab color="primary" mat-card-icon (click)="toggleSidebar()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <a class="navbar-brand" *ngIf="isLoggedIn">{{header | translate}}</a>
+      <span fxFlex></span>
+      <div class="secondary-menu">
+        <span class="daily-ops mx-3" *ngIf="isLoggedIn" tooltip="{{'Daily operations count' | translate}}">{{dailyOps}}</span>
+        <button *ngIf="isLoggedIn" class="user-button" mat-button [matMenuTriggerFor]="menu" style="width: fit-content; margin-top: 1px;">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon>account_circle</mat-icon>
+            <p class="mb-0 mx-2 username" tooltip="{{userName?.length > 20 ? userName : ''}}">{{userName}}</p>
+          </div>
+        </button>
+        <app-language-drop-down></app-language-drop-down>
+        <button  mat-icon-button class="overflow-visible" tooltip="{{'Dark mode' | translate}}" (click)="addClassOnBody($event)">
+          <mat-icon>chrome_reader_mode</mat-icon>
+        </button>
+        <button fxHide="true" fxHide.gt-sm="false" tooltip="{{'full screen' | translate}}" mat-button class="fullscreen-toggle" (click)="toggleFullscreen()">
+          <mat-icon *ngIf="!isFullscreen">fullscreen</mat-icon>
+          <mat-icon *ngIf="isFullscreen">fullscreen_exit</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <div class="gene-base-container" id="gene-base-container" #scrollContainer>
+      <div class="inner-container" fxLayout="row wrap">
+        <div class="full-wid mrgn-b-lg" style="min-height: 100%;">
+          <router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
+        </div>
+        <div class="footer-wrap pad-t-none full-wid" fxFLex="100">
+          <app-footer></app-footer>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-container>
+</div>
+<mat-menu class="user-menu" x-position="before" y-position="below" #menu="matMenu">
+  <button mat-menu-item routerLink="/change-password">
+    <mat-icon>password</mat-icon>
+    <span>{{'Change password' | translate}}</span>
+  </button>
+  <mat-divider></mat-divider>
+  <button (click)="logOut()" mat-menu-item>
+    <mat-icon>exit_to_app</mat-icon>
+    <span>{{'Logout'|translate}}</span>
+  </button>
+</mat-menu>

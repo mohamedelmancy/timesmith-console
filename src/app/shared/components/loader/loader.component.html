@@ -1,0 +1,6 @@
+<div class="spinner-border loader" [ngClass]="{'has-text' : loadText}" role="status" *ngIf="isPageLoading || isXHRLoading" >
+  <span class="sr-only" id="loading"></span>
+</div>
+<div class="loadTextContainer" *ngIf="isPageLoading || isXHRLoading && (loadText)">
+  <span  class="loadText">{{loadText}}</span>
+</div>
