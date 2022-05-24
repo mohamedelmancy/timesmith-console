@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 import {DateAdapter} from "@angular/material/core";
@@ -9,7 +9,7 @@ import {secureStorage} from "./shared/functions/secure-storage";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'timeSmithConsole';
   constructor(private translate: TranslateService, private router: Router, private dateAdapter: DateAdapter<any>, ) {
     // const browserLang: string = translate.getBrowserLang();
