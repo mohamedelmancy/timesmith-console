@@ -28,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'timeline',
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/timeline/timeline.module').then(m => m.TimelineModule)
       },
 

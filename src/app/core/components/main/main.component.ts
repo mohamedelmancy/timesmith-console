@@ -28,7 +28,7 @@ const screenfull = require('screenfull');
 export class MainComponent implements OnInit, OnDestroy {
 
   userName: string;
-  isLoggedIn = false;
+  isLoggedIn = true;
   root: any = 'rtl';
   layout: any = 'rtl';
   customizerIn = false;
@@ -103,7 +103,6 @@ export class MainComponent implements OnInit, OnDestroy {
               public translate: TranslateService,
               private router: Router,
               private authService: AuthService,
-              // public ecommerceService: EcommerceService,
               public coreService: CoreService,
               private routes: Router,
               private activatedRoute: ActivatedRoute) {
@@ -115,8 +114,8 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.authService.getLocalStorageUser();
-    this.setUserInfo();
-    this.getCurrentUserName();
+    // this.setUserInfo();
+    // this.getCurrentUserName();
     this.setLocalization();
 
     this.coreService.collapseSidebarStatus = this.coreService.collapseSidebar;
@@ -147,6 +146,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   setLocalization() {
+    this.language =  GetLanguage();
     this.translate.use(this.language);
     const dir = this.language === 'ar' ? 'rtl' : 'ltr';
     document.body.style.direction = dir;
@@ -347,42 +347,42 @@ export class MainComponent implements OnInit, OnDestroy {
 
   // customizeSidebar method is used to change the side bar behaviour.
   customizeSidebar() {
-    if ((this.url === '/dashboard/courses' || this.url === '/courses/courses-list' || this.url === '/courses/course-detail' || this.url === '/ecommerce/shop' || this.url === '/ecommerce/checkout' || this.url === '/ecommerce/invoice') && this.windowSize < 1920) {
-      this.coreService.sidenavMode = 'over';
-      this.coreService.sidenavOpen = false;
-      if (!(document.getElementById('main-app')!.classList.contains('sidebar-overlay'))) {
-        document.getElementById('main-app')!.className += ' sidebar-overlay';
-      }
-
-    } else if ((window.innerWidth > 1200) && (this.url == '/dashboard/crypto' || this.url == '/crypto/marketcap' || this.url == '/crypto/wallet' || this.url == '/crypto/trade')) {
-      this.collapseSidebarStatus = this.coreService.collapseSidebar;
-      if ((this.collapseSidebarStatus == false) && (window.innerWidth > 1200)) {
-        document.getElementById('main-app')!.className += ' collapsed-sidebar';
-        this.coreService.collapseSidebar = true;
-        this.coreService.sidenavOpen = true;
-        this.coreService.sidenavMode = 'side';
-        document.getElementById('main-app')!.classList.remove('sidebar-overlay');
-      }
-    } else if ((window.innerWidth > 1200) && !(this.url === '/dashboard/courses' || this.url === '/courses/courses-list' || this.url === '/courses/course-detail' || this.url === '/ecommerce/shop' || this.url === '/ecommerce/checkout' || this.url === '/ecommerce/invoice')) {
-      this.coreService.sidenavMode = 'side';
-      this.coreService.sidenavOpen = true;
-      // for responsive
-      const main_div = document.getElementsByClassName('app');
-      for (let i = 0; i < main_div.length; i++) {
-        if (main_div[i].classList.contains('sidebar-overlay')) {
-          document.getElementById('main-app')!.classList.remove('sidebar-overlay');
-        }
-      }
-    } else if (window.innerWidth < 1200) {
-      this.coreService.sidenavMode = 'over';
-      this.coreService.sidenavOpen = false;
-      const main_div = document.getElementsByClassName('app');
-      for (let i = 0; i < main_div.length; i++) {
-        if (!(main_div[i].classList.contains('sidebar-overlay'))) {
-          document.getElementById('main-app')!.className += ' sidebar-overlay';
-        }
-      }
-    }
+    // if ((this.url === '/dashboard/courses' || this.url === '/courses/courses-list' || this.url === '/courses/course-detail' || this.url === '/ecommerce/shop' || this.url === '/ecommerce/checkout' || this.url === '/ecommerce/invoice') && this.windowSize < 1920) {
+    //   this.coreService.sidenavMode = 'over';
+    //   this.coreService.sidenavOpen = false;
+    //   if (!(document.getElementById('main-app')!.classList.contains('sidebar-overlay'))) {
+    //     document.getElementById('main-app')!.className += ' sidebar-overlay';
+    //   }
+    //
+    // } else if ((window.innerWidth > 1200) && (this.url == '/dashboard/crypto' || this.url == '/crypto/marketcap' || this.url == '/crypto/wallet' || this.url == '/crypto/trade')) {
+    //   this.collapseSidebarStatus = this.coreService.collapseSidebar;
+    //   if ((this.collapseSidebarStatus == false) && (window.innerWidth > 1200)) {
+    //     document.getElementById('main-app')!.className += ' collapsed-sidebar';
+    //     this.coreService.collapseSidebar = true;
+    //     this.coreService.sidenavOpen = true;
+    //     this.coreService.sidenavMode = 'side';
+    //     document.getElementById('main-app')!.classList.remove('sidebar-overlay');
+    //   }
+    // } else if ((window.innerWidth > 1200) && !(this.url === '/dashboard/courses' || this.url === '/courses/courses-list' || this.url === '/courses/course-detail' || this.url === '/ecommerce/shop' || this.url === '/ecommerce/checkout' || this.url === '/ecommerce/invoice')) {
+    //   this.coreService.sidenavMode = 'side';
+    //   this.coreService.sidenavOpen = true;
+    //   // for responsive
+    //   const main_div = document.getElementsByClassName('app');
+    //   for (let i = 0; i < main_div.length; i++) {
+    //     if (main_div[i].classList.contains('sidebar-overlay')) {
+    //       document.getElementById('main-app')!.classList.remove('sidebar-overlay');
+    //     }
+    //   }
+    // } else if (window.innerWidth < 1200) {
+    //   this.coreService.sidenavMode = 'over';
+    //   this.coreService.sidenavOpen = false;
+    //   const main_div = document.getElementsByClassName('app');
+    //   for (let i = 0; i < main_div.length; i++) {
+    //     if (!(main_div[i].classList.contains('sidebar-overlay'))) {
+    //       document.getElementById('main-app')!.className += ' sidebar-overlay';
+    //     }
+    //   }
+    // }
   }
 
   // To resize the side bar according to window width.

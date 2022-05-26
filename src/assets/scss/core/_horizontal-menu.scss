@@ -30,10 +30,10 @@
          word-wrap: normal;
          -webkit-font-feature-settings: 'liga';
          -webkit-font-smoothing: antialiased;
-         }  
+         }
       }
    }
-   .hr-primary-menu{      
+   .hr-primary-menu{
       > li{
          line-height: 3;
          padding:0 1rem;
@@ -85,7 +85,7 @@
                mat-icon{
                   font-size: 90%;
                }
-            }         
+            }
          }
          .hr-sub-menu{
             left: calc(100% + 1rem);
@@ -107,10 +107,10 @@
             }
          }
       }
-   }   
+   }
    .active-link {
       background-color: transparent !important;
-   } 
+   }
 }
 .hr-menu-wrap,.horizontal-toolbar-wrap .mat-toolbar-multiple-rows{
    height: auto;
@@ -124,15 +124,15 @@
       }
    }
    .hr-sub-menu{
-      font-size: 1rem; 
+      font-size: 1rem;
    }
-   > .hr-sub-menu{      
-      width: 760px;      
+   > .hr-sub-menu{
+      width: 760px;
       column-count: 4;
       column-gap: 1.25rem;
       padding-top: 1.5rem !important;
       overflow:hidden;
-      > li{                   
+      > li{
          padding: 0rem 1rem 0.5rem !important;
          .header-icon-wrap{
             letter-spacing: 1px;
@@ -142,10 +142,10 @@
             content:none !important;
          }
          .hr-sub-menu{
-            position: static!important;            
+            position: static!important;
             min-width: 0;
             background:transparent;
-            box-shadow:none; 
+            box-shadow:none;
             transition-duration:0s;
             li{
                padding-right: 0.5rem;
@@ -154,7 +154,7 @@
                }
             }
          }
-      } 
+      }
    }
 }
 .horizontal-menu .hr-primary-menu .make-mega-menu .hr-sub-menu li a {
@@ -186,7 +186,7 @@
    }
    .horizontal-menu .hr-primary-menu > {
       li:last-child,li:nth-child(3),li:nth-child(4),li:nth-child(5),li:nth-child(6),li:nth-child(7){
-         &.make-mega-menu > .hr-sub-menu{  
+         &.make-mega-menu > .hr-sub-menu{
             left:-200px;
          }
       }

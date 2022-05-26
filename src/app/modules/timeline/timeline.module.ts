@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TimelineRoutingModule } from './timeline-routing.module';
+import { TodayComponent } from './today/today.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    TodayComponent
+  ],
   imports: [
     CommonModule,
     TimelineRoutingModule
