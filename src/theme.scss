@@ -1,0 +1,73 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$custom-primary: (
+  50: #bce1f3,
+  100: #5ab9e3,
+  200: #078dcb,
+  300: #4fc3f7,
+  400: #06628c,
+  500: #277598,
+  600: #039be5,
+  700: #036C9C,
+  800: #0277bd,
+  900: #01579b,
+  A100: #5a9ab6,
+  A200: #40c4ff,
+  A400: #0a5070,
+  A700: #1e9bd3,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+// Typography
+$custom-typography: mat-typography-config(
+  $font-family: Raleway,
+  $headline: mat-typography-level(24px, 48px, 400),
+  $body-1: mat-typography-level(16px, 24px, 400)
+);
+@include angular-material-typography($custom-typography);
+
+// Default colors
+
+$my-app-primary: mat-palette($custom-primary, 700, 100, 800);
+$my-app-accent:  mat-palette($mat-teal, 700, 100, 800);
+
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent);
+@include angular-material-theme($my-app-theme);
+
+// Dark theme
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+
+$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+.dark-theme {
+  @include angular-material-theme($dark-theme);
+}
+
+// Light theme
+$light-primary: mat-palette($mat-grey, 200, 500, 300);
+$light-accent: mat-palette($mat-brown, 200);
+$light-warn: mat-palette($mat-deep-orange, 200);
+
+$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
+
+.light-theme {
+  @include angular-material-theme($light-theme)
+}

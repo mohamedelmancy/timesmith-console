@@ -8,8 +8,8 @@ export const environment = {
   webUrl: '',
   captchaSiteKey: '',
   captchaSecretKey: '',
-  mainLogo: '',
-  secondaryLogo: '',
+  mainLogo: 'assets/img/logos/PNG 4x/Asset 8@4x.png',
+  secondaryLogo: 'assets/img/logos/PNG 4x/Asset 12@4x.png',
   secret_key: 'time94smith987654321',
 };
 

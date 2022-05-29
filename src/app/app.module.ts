@@ -24,6 +24,12 @@ import {ExtendedModule, FlexModule} from "@angular/flex-layout";
 import {MatButtonModule} from "@angular/material/button";
 import {MenuItems} from "./core/menu/menu-items/menu-items";
 import {PageTitleService} from "./core/page-title/page-title.service";
+import {FullCalendarModule} from "@fullcalendar/angular";
+import dayGridPlugin from '@fullcalendar/daygrid';
+import resourceTimelinePlugin from "@fullcalendar/resource-timeline"; // a plugin!
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  resourceTimelinePlugin,
+]);
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -58,6 +64,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FlexModule,
     MatButtonModule,
     ExtendedModule,
+    FullCalendarModule
   ],
   providers: [MenuItems, PageTitleService],
   bootstrap: [AppComponent],

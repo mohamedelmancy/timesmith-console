@@ -20,7 +20,7 @@ const MENUITEMS = [
     name: 'Timeline',
     type: 'button',
     label: '',
-    icon: 'clock',
+    icon: '',
     role: '',
   },
   {
@@ -28,7 +28,7 @@ const MENUITEMS = [
     name: 'Reports',
     type: 'button',
     label: '',
-    icon: 'book',
+    icon: '',
     role: '',
   },
   {
@@ -44,7 +44,7 @@ const MENUITEMS = [
     name: 'Requests',
     type: 'sub',
     label: '',
-    icon: 'contacts',
+    icon: '',
     role: '',
     children: [
       {state: 'allocations', name: 'Allocations', label: '', role: ''},
@@ -56,7 +56,7 @@ const MENUITEMS = [
     name: 'Configurations',
     type: 'sub',
     label: '',
-    icon: 'contacts',
+    icon: '',
     role: '',
     children: [
       {state: 'settings', name: 'Settings', label: '', role: ''},
@@ -79,7 +79,7 @@ const MENUITEMS = [
     name: 'Roles & permissions',
     type: 'sub',
     label: '',
-    icon: 'contacts',
+    icon: '',
     role: '',
     children: [
       {state: 'view-roles', name: 'View Roles', label: '', role: ''},

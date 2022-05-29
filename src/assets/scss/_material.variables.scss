@@ -1,8 +1,39 @@
 // 1.0    Material Variables
 
 @import '~@angular/material/theming';
-
-$primary: mat-palette($mat-blue,800);
+$custom-primary: (
+  50: #bce1f3,
+  100: #5ab9e3,
+  200: #078dcb,
+  300: #4fc3f7,
+  400: #06628c,
+  500: #277598,
+  600: #039be5,
+  700: #036C9C,
+  800: #0277bd,
+  900: #01579b,
+  A100: #5a9ab6,
+  A200: #40c4ff,
+  A400: #0a5070,
+  A700: #1e9bd3,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $light-primary-text,
+  )
+);
+$primary: mat-palette($custom-primary,700);
 $accent:  mat-palette($mat-cyan,700);
 $warn: mat-palette($mat-red,600);
 $error: mat-palette($mat-orange,50);
@@ -13,7 +44,7 @@ $foreground: map-get($theme, foreground);
 
 @include mat-core();
 
-$dark-primary: mat-palette($mat-blue,900);
+$dark-primary: mat-palette($custom-primary,900);
 $dark-accent:  mat-palette($mat-teal,600);
 $dark-success:  mat-palette($mat-green,800);
 $dark-warn: mat-palette($mat-pink,400);

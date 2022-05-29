@@ -20,7 +20,7 @@ export class LanguageDropDownComponent implements OnInit {
       value	: 'en'
     },
     {
-      img: 'assets/img/ar3.png',
+      img: 'assets/img/ar.png',
       name: 'Arabic',
       value: 'ar'
     },

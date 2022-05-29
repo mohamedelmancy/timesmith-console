@@ -35,10 +35,10 @@
             <ul class="hr-primary-menu" fxHide.lt-md="true">
               <li *ngFor="let menuItem of menuItems.getAll()" class="child-menu" [ngClass]="{'menu-item-has-child':menuItem.children}">
                 <ng-container *ngIf="menuItem.type == 'button'; else menu">
-                  <a >{{menuItem.name|translate}}</a>
+                  <a [routerLink]="[menuItem.state]">{{menuItem.name|translate}}</a>
                 </ng-container>
                 <ng-template #menu>
-                  <a>{{menuItem.name|translate}}</a>
+                  <a [routerLink]="[menuItem.state]">{{menuItem.name|translate}}</a>
                 </ng-template>
                 <ul class="hr-sub-menu" *ngIf="menuItem.type != 'button'">
                   <li *ngFor = "let childItem of menuItem.children" class="child-menu">
