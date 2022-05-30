@@ -1,0 +1,10 @@
+full-calendar{
+  //width: 100%;
+  //height: 100vh;
+}
+::ng-deep.fc-datagrid-body{
+  width: 565px !important;
+}
+::ng-deep .fc-license-message{
+  display:  none !important;
+}

@@ -245,13 +245,13 @@ body {
       }
    }
    .gene-base-container {
-      height: calc(100% - 80px);
+      height: calc(100% - 95px);
       overflow-x: hidden;
       overflow-y: auto;
       position: relative;
    }
    .inner-container{
-      padding: 0 0.5rem 0.5rem 0.5rem;
+      //padding: 0 0.5rem 0.5rem 0.5rem;
       height: 100%;
    }
    .footer-wrap{

@@ -41,6 +41,7 @@ export class MainComponent implements OnInit, OnDestroy {
   compactSidebar: boolean;
   isMobileStatus: boolean;
   sidenavMode = 'side';
+  clientLogo = environment.headerLogo
   language: string = GetLanguage();
   popupDeleteResponse: any;
   sidebarColor: any;

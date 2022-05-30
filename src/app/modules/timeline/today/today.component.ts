@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Calendar } from '@fullcalendar/core';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
+import {CoreService} from "../../../services/core.service";
 
 @Component({
   selector: 'app-today',
@@ -9,49 +10,120 @@ import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 })
 export class TodayComponent implements OnInit {
 
-  constructor() { }
+  constructor(private coreService: CoreService) { }
   options;
+  calendar;
   ngOnInit(): void {
-    this.renderCalendar();
+    this.calendar = document.getElementById('calendar');
+    setTimeout(() => {
+      this.renderCalendar();
+      this.getEvents();
+      this.getResources();
+    })
   }
 
   renderCalendar() {
-    var calendarEl = document.getElementById('calendar');
-
     this.options = {
       timeZone: 'UTC',
       plugins: [ resourceTimelinePlugin ],
+      height: 'auto',
       headerToolbar: {
-        left: 'promptResource today prev,next',
-        center: 'title',
-        right: 'resourceTimelineDay,resourceTimelineWeek'
+        // left: 'prev today next',
+        left: 'promptResource prev today next',
+        // center: 'title',
+        // right: 'resourceTimelineDay,resourceTimelineWeek'
+        right: ''
       },
       customButtons: {
         promptResource: {
-          text: '+ room',
-
+          text: '+ Add',
+          click: this.addData.bind(this), // bind is important!
         }
       },
       editable: true,
       aspectRatio: 1.5,
-      eventClick: function(info) {
-        alert('clicked ' + info);
+      eventClick: (info) => {
+        console.log('clicked ', info);
       },
       select: function(info) {
         alert('selected ' + info.startStr + ' to ' + info.endStr);
       },
-      dateClick: this.handleDateClick.bind(this), // bind is important!
+      minTime: '06:30:00',
+      maxTime: '19:30:00',
+      // slotDuration: '00:15:00',
+      slotDuration: {minutes: 15},
+      // slotLabelFormat: 'h(:mm)a',
+      slotLabelFormat: [
+        {month: 'long',
+          year: 'numeric',
+          day: 'numeric',
+          weekday: 'long'}, // top level of text
+        // { weekday: 'short'}, // lower level of text
+        {
+          hour: 'numeric',
+          minute: '2-digit',
+          omitZeroMinute: true,
+          meridiem: 'long'
+        }
+      ],
+      resourceAreaWidth: '25%',
       initialView: 'resourceTimelineDay',
-      resourceAreaHeaderContent: 'Rooms',
-      resources: 'https://fullcalendar.io/demo-resources.json?with-nesting&with-colors',
-      events: [
-        { title: 'event 1', date: '2022-05-01' },
-        { title: 'event 2', date: '2022-05-02' },
-      ]
+      schedulerLicenseKey: 'BUG ',
+      cellClassNames: 'fc-cell',
+      resourceAreaColumns: [
+        {
+          field: 'title',
+          headerContent: 'Employee name',
+          width: '25%'
+        }
+      ],
+      resourceAreaHeaderContent: 'Staff',
+      resources: [{"id":"a","title":"Ahmed abd elazeem"},{"id":"b","title":"Omar khairy","eventColor":"green"},{"id":"c","title":"Mohamed talaat","eventColor":"orange"},{"id":"d","title":"Osama yaser"},{"id":"e","title":"Noha alaa"},{"id":"f","title":"Ibrahim tarek","eventColor":"red"}],
+      events: ""
     }
   }
 
-  handleDateClick(arg) {
-    alert('date click! ' + arg.dateStr)
+  addData() {
+  var title = prompt('Room name');
+  if (title) {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new Calendar(calendarEl, this.options);
+    calendar.addResource({
+      title: title
+    });
+    calendar.render();
   }
+}
+
+  getEvents() {
+   this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-05-30T00:00:00Z&end=2022-05-31T00:00:00Z').subscribe(res => {
+     console.log('res', this.options.events)
+     this.options.events = res;
+   }, error => {
+
+   }, () => {
+     this.options.events.push({
+       "resourceId": "a",
+       "title": "Test",
+       "start": "2022-05-30T07:08:00+00:00",
+       "end": "2022-05-30T09:37:00+00:00",
+       "color": 'orange',
+     })
+   })
+  }
+
+  getResources() {
+   this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/resources.json?with-nesting&with-colors').subscribe(res => {
+     console.log('resources', this.options.resources)
+     // this.options.resources = res;
+   }, error => {
+
+   }, () => {
+     setTimeout(() => {
+       this.options.resources.push({"id":"g","title":"Taha abd Elsalam", eventColor: "yellow"})
+     });
+   })
+  }
+
+
 }

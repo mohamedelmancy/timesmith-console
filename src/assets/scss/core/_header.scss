@@ -6,7 +6,7 @@
 }
 .gene-header-toolbar{
    &.mat-toolbar-row, &.mat-toolbar-single-row{
-      height:75px;
+      height:50px;
    }
     .mat-button, .mat-icon-button, .mat-raised-button,.mat-input-element{
         color: $header-font-color;

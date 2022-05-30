@@ -17,7 +17,7 @@ export interface Menu {
 const MENUITEMS = [
   {
     state: 'timeline',
-    name: 'Timeline',
+    name: 'Today',
     type: 'button',
     label: '',
     icon: '',
@@ -76,7 +76,7 @@ const MENUITEMS = [
   },
   {
     state: 'roles-permissions',
-    name: 'Roles & permissions',
+    name: 'Roles & Permissions',
     type: 'sub',
     label: '',
     icon: '',

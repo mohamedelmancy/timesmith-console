@@ -2,12 +2,12 @@ import {Injectable} from '@angular/core';
 import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {throwError, Observable, BehaviorSubject, of} from 'rxjs';
 import {catchError, filter, take, switchMap, finalize, delay, tap} from 'rxjs/operators';
-import {secureStorage} from '../../Shared/functions/secure-local-storage';
-import {LoaderServiceService} from './loader-service.service';
-import {AuthService} from '../auth-service/auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
-import { HandleResponseError } from 'app/Shared/functions/shared-functions';
+import {secureStorage} from "../shared/functions/secure-storage";
+import {LoaderService} from "./loader.service";
+import {AuthService} from "./auth.service";
+import {HandleResponseError} from "../shared/functions/shared-functions";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
 
     constructor(
-        private loaderService: LoaderServiceService,
+        private loaderService: LoaderService,
         private translateService: TranslateService,
         private authService: AuthService,
         private toastr: ToastrService
@@ -64,8 +64,8 @@ export class AuthInterceptor implements HttpInterceptor {
                         this.toastr.error(word);
                     })
                 } else if (error && error.status === 400) {
-                    error.error.title?.includes('One or more validation errors occurred') ? 
-                        this.translateService.get("One or more validation errors occurred").subscribe(word => this.toastr.error(word)) : 
+                    error.error.title?.includes('One or more validation errors occurred') ?
+                        this.translateService.get("One or more validation errors occurred").subscribe(word => this.toastr.error(word)) :
                         this.toastr.error(HandleResponseError(error));
                 } else {
                     return throwError(error);
@@ -83,7 +83,10 @@ export class AuthInterceptor implements HttpInterceptor {
         // Here we could first retrieve the token from where we store it.
         this.token = secureStorage.getItem('token');
         if (!this.token) {
-            return request;
+          return request.clone({
+            headers: request.headers.delete('Content-Type')
+          });
+            // return request;
         }
         // If you are calling an outside domain then do not add the token.
         if (request.url.includes('Login') || (request.url.includes('Register') && !request.url.includes('RegisterBackOffice')) || request.url.includes('Password') || request.url.includes('assets')) {
