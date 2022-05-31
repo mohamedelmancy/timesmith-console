@@ -1,7 +1,7 @@
 import {DatePipe} from '@angular/common';
 import * as moment from 'moment';
 import {secureStorage} from "../functions/secure-storage";
-
+export const today = new Date();
 export const phone_pattern = '[- +()0-9]+';
 export const currentLanguage = (secureStorage.getItem('lang') || 'ar');
 export const kuwait_civil_number_pattern = new RegExp(/^[0-9]{12}$/)
