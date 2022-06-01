@@ -36,7 +36,8 @@ import {AuthInterceptor} from "./services/interceptor";
 import {ToastrModule} from "ngx-toastr";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import {TooltipModule} from "ng2-tooltip-directive"; // a plugin!
+import {TooltipModule} from "ng2-tooltip-directive";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; // a plugin!
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   resourceTimelinePlugin,
 ]);
@@ -83,7 +84,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ),
     MatAutocompleteModule,
     MatPaginatorModule,
-    TooltipModule
+    TooltipModule,
+    FontAwesomeModule
   ],
   providers: [
     MenuItems, PageTitleService,

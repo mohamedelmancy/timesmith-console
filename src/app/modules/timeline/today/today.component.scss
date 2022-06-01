@@ -1,10 +1,39 @@
-full-calendar{
-  //width: 100%;
-  //height: 100vh;
+.card-body{
+  position: relative;
 }
-::ng-deep.fc-datagrid-body{
-  width: 565px !important;
+::ng-deep.mat-tab-labels{
+  //justify-content: center !important;
+  z-index: 99999;
 }
-::ng-deep .fc-license-message{
-  display:  none !important;
+::ng-deep.mat-tab-header{
+  border: none !important;
+}
+::ng-deep.mat-ink-bar{
+  display: none !important;
+}
+::ng-deep .mat-tab-label {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: 60px !important;
+}
+.fa{
+  font-size: 25px;
+  margin: 0 !important;
+}
+::ng-deep.mat-tab-header{
+  max-width: 200px;
+  position: absolute !important;
+  left: 93.5%;
+  z-index: 99999;
+}
+.filters{
+  position: absolute;
+  left: 39%;
+  min-width: 40%;
+}
+::ng-deep.fc .fc-toolbar.fc-header-toolbar{
+  //width: 30%;
+}
+mat-form-field{
+  z-index: 99999;
 }

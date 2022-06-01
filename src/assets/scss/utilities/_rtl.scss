@@ -562,6 +562,19 @@
   .datatable-icon-prev::before {
     content: '\71';
   }
+  .custom-date{
+    right: 300px;
+    left: unset !important;
+  }
+  .mat-tab-header{
+    left: unset !important;;
+    right: 93.5%;
+  }
+  .filters{
+    left: unset !important;;
+    right: 50%
+  }
+
 }
 
 

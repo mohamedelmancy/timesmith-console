@@ -1,0 +1,17 @@
+<div class="timeline mt-1">
+  <full-calendar id="calendar" *ngIf="options" [options]="options"></full-calendar>
+    <mat-form-field class="example-form-field custom-date" appearance="outline">
+      <mat-label>Select range</mat-label>
+      <mat-date-range-input
+        [formGroup]="customDate"
+        [rangePicker]="campaignOnePicker"
+        [comparisonStart]="customDate.value.start"
+        [comparisonEnd]="customDate.value.end">
+        <input matStartDate placeholder="Start date" formControlName="start">
+        <input readonly matEndDate placeholder="End date" formControlName="end">
+      </mat-date-range-input>
+<!--      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>-->
+      <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+      <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+    </mat-form-field>
+</div>

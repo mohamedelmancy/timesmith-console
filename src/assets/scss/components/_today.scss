@@ -7,3 +7,16 @@
 .fc-cell{
   width: 50px;
 }
+.resource-cell{
+  background-color: #FFFFFF;
+}
+.mat-tab-label-active{
+  background: mat-color($primary) !important;
+  text-align: center;
+  color: white!important;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1 !important;
+}

@@ -1,0 +1,24 @@
+<div fxLayout="row wrap" fxLayoutAlign="start">
+  <div fxFlex="100">
+    <div class="mat-elevation-z8 py-3">
+      <table id="htmlData" mat-table [dataSource]="dataSource">
+        <ng-container *ngFor="let column of displayedColumns?.values; let i = index" [matColumnDef]="column">
+          <th mat-header-cell *matHeaderCellDef>
+            <span class="column-label">{{displayedColumns?.labels[i] | translate}}</span>
+            <div style="width: 100%" *ngIf="showSearch">
+              <input (keydown.space)="$event.stopPropagation()" (click)="$event.stopPropagation()"  matInput placeholder="{{'Search' | translate}}" (keyup)="applyFilter($event, column)" >
+            </div>
+          </th>
+          <td tooltip="{{row[column]?.length > 15 ? row[column] : ''}}" mat-cell *matCellDef="let row"> {{row[column] === 0 ? '0' : row[column] || ' - ' | translate}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns?.values"></tr>
+        <tr [ngClass]="{'animated-bg': row.animate}" mat-row *matRowDef="let row; columns: displayedColumns.values;"></tr>
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell full-wid" [attr.colspan]="displayedColumns.values?.length">{{'No data available' | translate}}</td>
+        </tr>
+      </table>
+      <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[3, 5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+  </div>
+</div>

@@ -56,3 +56,20 @@ export function ReloadCurrentComponent(router) {
     router.onSameUrlNavigation = 'reload';
     router.navigate([currentUrl]);
 }
+
+export function searchInAllTableColumns(filterTypes, backup): any {
+  return backup.filter(item => {
+    for (let i = 0; i < filterTypes.length; i++) {
+      var check = false;
+      if (item[filterTypes[i]?.type] && (item[filterTypes[i]?.type]?.toString().trim().toLowerCase()
+        .indexOf(filterTypes[i]?.value?.trim().toLowerCase()) !== -1)) {
+        check =  true;
+      } else {
+        return  false;
+      }
+      if (i === filterTypes.length - 1) {
+        return check
+      }
+    }
+  })
+}

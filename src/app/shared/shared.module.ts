@@ -36,62 +36,67 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MenuToggleModule} from "../core/menu/menu-toggle.module";
+import { DataTableComponent } from './components/data-table/data-table.component';
+import {TranslateModule} from "@ngx-translate/core";
 
 
 
 @NgModule({
   declarations: [
-    LoaderComponent
+    LoaderComponent,
+    DataTableComponent
   ],
   exports: [
     LoaderComponent,
-    TooltipModule
+    TooltipModule,
+    DataTableComponent
 
   ],
-  imports: [
-    CommonModule,
-    TooltipModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FlexLayoutModule,
-    PerfectScrollbarModule,
-    MenuToggleModule,
-    HttpClientModule,
-    MatSlideToggleModule,
-    MatButtonModule,
-    MatCardModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatBadgeModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatProgressSpinnerModule,
-    MatTableModule,
-    MatExpansionModule,
-    MatSelectModule,
-    MatSnackBarModule,
-    MatTooltipModule,
-    MatChipsModule,
-    MatListModule,
-    MatSidenavModule,
-    MatTabsModule,
-    MatProgressBarModule,
-    MatCheckboxModule,
-    MatSliderModule,
-    MatRadioModule,
-    MatDialogModule,
-    MatGridListModule,
-    ToastrModule.forRoot(
-      {
-        // maxOpened: 1,
-        positionClass: 'toast-custom-position'
-      }
-    ),
-    MatAutocompleteModule,
-    MatPaginatorModule,
-  ]
+    imports: [
+        CommonModule,
+        TooltipModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FlexLayoutModule,
+        PerfectScrollbarModule,
+        MenuToggleModule,
+        HttpClientModule,
+        MatSlideToggleModule,
+        MatButtonModule,
+        MatCardModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatBadgeModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatProgressSpinnerModule,
+        MatTableModule,
+        MatExpansionModule,
+        MatSelectModule,
+        MatSnackBarModule,
+        MatTooltipModule,
+        MatChipsModule,
+        MatListModule,
+        MatSidenavModule,
+        MatTabsModule,
+        MatProgressBarModule,
+        MatCheckboxModule,
+        MatSliderModule,
+        MatRadioModule,
+        MatDialogModule,
+        MatGridListModule,
+        ToastrModule.forRoot(
+            {
+                // maxOpened: 1,
+                positionClass: 'toast-custom-position'
+            }
+        ),
+        MatAutocompleteModule,
+        MatPaginatorModule,
+        TranslateModule,
+    ]
 })
 export class SharedModule { }
