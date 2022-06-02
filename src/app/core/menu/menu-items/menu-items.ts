@@ -47,8 +47,8 @@ const MENUITEMS = [
     icon: '',
     role: '',
     children: [
-      {state: 'allocations', name: 'Allocations', label: '', role: ''},
-      {state: 'time-off', name: 'Time Off', label: '', role: ''},
+      {state: 'allocations', name: 'Allocations', label: '', role: '', type: 'link'},
+      {state: 'time-off', name: 'Time Off', label: '', role: '', type: 'link'},
     ]
   },
   {
@@ -59,11 +59,11 @@ const MENUITEMS = [
     icon: '',
     role: '',
     children: [
-      {state: 'settings', name: 'Settings', label: '', role: ''},
-      {state: 'sites', name: 'Sites', label: '', role: ''},
-      {state: 'shifts', name: 'Shifts', label: '', role: ''},
-      {state: 'leaves', name: 'Leaves', label: '', role: ''},
-      {state: 'exceptions-codes', name: 'Exceptions Codes', label: '', role: ''},
+      {state: 'settings', name: 'Settings', label: '', role: '', type: 'link'},
+      {state: 'sites', name: 'Sites', label: '', role: '', type: 'link'},
+      {state: 'shifts', name: 'Shifts', label: '', role: '', type: 'link'},
+      {state: 'leaves', name: 'Leaves', label: '', role: '', type: 'link'},
+      {state: 'exceptions-codes', name: 'Exceptions Codes', label: '', role: '', type: 'link'},
     ]
   },
   {
@@ -82,8 +82,8 @@ const MENUITEMS = [
     icon: '',
     role: '',
     children: [
-      {state: 'view-roles', name: 'View Roles', label: '', role: ''},
-      {state: 'manage-permissions', name: 'Manage Permissions', label: '', role: ''},
+      {state: 'view-roles', name: 'View Roles', label: '', role: '', type: 'link'},
+      {state: 'manage-permissions', name: 'Manage Permissions', label: '', role: '', type: 'link'},
     ]
   },
   {

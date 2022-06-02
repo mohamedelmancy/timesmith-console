@@ -1,54 +1,14 @@
 <div class="card-body my-3">
   <div class="d-flex">
-    <div class="d-flex filters">
-      <form [formGroup]="form" style="text-align: center" fxLayout="row wrap" fxLayoutAlign="center center">
-        <div class="d-flex justify-content-center">
-          <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100" class="mrgn-x-sm" style="text-align: center">
-            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-              <mat-label>{{'Department' | translate}}</mat-label>
-              <input type="text" matInput formControlName="department" [matAutocomplete]="auto0">
-              <mat-autocomplete #auto0="matAutocomplete" [displayWith]="displayFn" (opened)="handlerAutocomplete('type')">
-                <mat-option *ngFor="let option of departmentsFilteredOptions | async" [value]="option">
-                  {{option.name}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </div>
-          <div fxFlex.gt-sm="25" fxFlex.g t-xs="25" fxFlex="100" class="mrgn-x-sm" style="text-align: center">
-            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-              <mat-label>{{'Site' | translate}}</mat-label>
-              <input type="text" matInput formControlName="site" [matAutocomplete]="auto2">
-              <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn" (opened)="handlerAutocomplete('rate')">
-                <mat-option *ngFor="let option of sitesFilteredOptions | async" [value]="option">
-                  {{option.name}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </div>
-          <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100" class="mrgn-x-sm" style="text-align: center">
-            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-              <mat-label>{{'Sort' | translate}}</mat-label>
-              <input type="text" matInput formControlName="sort" [matAutocomplete]="auto1">
-              <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
-                                (opened)="handlerAutocomplete('country')">
-                <mat-option *ngFor="let option of sortsFilteredOptions | async" [value]="option">
-                  {{option.name}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="mt-3 w-100">
+    <div class="w-100 p-2 tabs pb-5">
       <mat-tab-group>
-        <mat-tab>
+        <mat-tab tooltip="View as timeline">
           <ng-template mat-tab-label>
             <i class="fa fa-table"></i>
           </ng-template>
           <app-timeline-view></app-timeline-view>
         </mat-tab>
-        <mat-tab>
+        <mat-tab tooltip="View as table grid">
           <ng-template mat-tab-label>
             <i class="fa fa-list-ul"></i>
           </ng-template>
@@ -57,5 +17,4 @@
       </mat-tab-group>
     </div>
   </div>
-
 </div>

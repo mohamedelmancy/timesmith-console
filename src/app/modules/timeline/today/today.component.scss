@@ -14,7 +14,8 @@
 ::ng-deep .mat-tab-label {
   padding: 0 !important;
   margin: 0 !important;
-  min-width: 60px !important;
+  min-width: 50px !important;
+  height: 40px !important;
 }
 .fa{
   font-size: 25px;
@@ -23,17 +24,31 @@
 ::ng-deep.mat-tab-header{
   max-width: 200px;
   position: absolute !important;
-  left: 93.5%;
+  left: 50%;
+  top: -8px;
   z-index: 99999;
 }
 .filters{
   position: absolute;
-  left: 39%;
+  left: 48.5%;
   min-width: 40%;
+  top: 70px;
 }
-::ng-deep.fc .fc-toolbar.fc-header-toolbar{
-  //width: 30%;
+::ng-deep {
+  .fc-datagrid-body{
+    background-color: #FFFFFF !important;
+  }
+  .fc .fc-toolbar.fc-header-toolbar{
+    //width: 30%;
+  }
 }
 mat-form-field{
   z-index: 99999;
+}
+.tabs{
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  margin-top: 35px;
+  max-height: 100vh;
+  overflow: hidden;
 }

@@ -1,0 +1,56 @@
+<div class="d-flex timeline-filters justify-content-end">
+  <form [formGroup]="form" style="text-align: center" fxLayout="row wrap" fxLayoutAlign="center center">
+    <div class="d-flex justify-content-center inner-cont">
+      <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" [ngClass]="{'mrgn-x-sm': language === 'en'}"  class="" style="text-align: center">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Select range</mat-label>
+          <mat-date-range-input
+            [formGroup]="customDate"
+            [rangePicker]="dateRange">
+            <input readonly matStartDate placeholder="Start date" formControlName="start">
+            <input readonly matEndDate placeholder="End date" formControlName="end">
+          </mat-date-range-input>
+          <!--      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>-->
+          <mat-datepicker-toggle matSuffix [for]="dateRange"></mat-datepicker-toggle>
+          <mat-date-range-picker #dateRange></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+      <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" class="mrgn-x-sm" style="text-align: center">
+        <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+          <mat-label>{{'Department' | translate}}</mat-label>
+          <input type="text" matInput formControlName="department" [matAutocomplete]="auto0">
+          <mat-autocomplete #auto0="matAutocomplete" [displayWith]="displayFn"
+                            (opened)="handlerAutocomplete('department')">
+            <mat-option *ngFor="let option of departmentsFilteredOptions | async" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" class="mrgn-x-sm" style="text-align: center">
+        <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+          <mat-label>{{'Site' | translate}}</mat-label>
+          <input type="text" matInput formControlName="site" [matAutocomplete]="auto2">
+          <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn"
+                            (opened)="handlerAutocomplete('site')">
+            <mat-option *ngFor="let option of sitesFilteredOptions | async" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" [ngClass]="{'mrgn-x-sm': language === 'ar'}" class="" style="text-align: center">
+        <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+          <mat-label>{{'Sort' | translate}}</mat-label>
+          <input type="text" matInput formControlName="sort" [matAutocomplete]="auto1">
+          <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
+                            (opened)="handlerAutocomplete('sort')">
+            <mat-option *ngFor="let option of sortsFilteredOptions | async" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>

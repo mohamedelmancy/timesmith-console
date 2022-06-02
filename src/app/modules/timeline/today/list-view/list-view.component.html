@@ -1,3 +1,6 @@
-<div class="list mt-5">
-<app-data-table [displayedColumns]="displayedColumns" [data]="data"></app-data-table>
+<div class="list d-flex flex-column">
+  <app-filters></app-filters>
+  <div class="mt-5">
+    <app-data-table [displayedColumns]="displayedColumns" [data]="data"></app-data-table>
+  </div>
 </div>

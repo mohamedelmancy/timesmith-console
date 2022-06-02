@@ -17,13 +17,19 @@ import {SharedModule} from "../../shared/shared.module";
 import {FlexModule} from "@angular/flex-layout";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {TranslateModule} from "@ngx-translate/core";
+import {TooltipModule} from "ng2-tooltip-directive";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDividerModule} from "@angular/material/divider";
+import { FiltersComponent } from './today/filters/filters.component';
+import {NgxMatDatetimePickerModule, NgxMatTimepickerModule} from "@angular-material-components/datetime-picker";
 
 
 @NgModule({
   declarations: [
     TodayComponent,
     ListViewComponent,
-    TimelineViewComponent
+    TimelineViewComponent,
+    FiltersComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +46,12 @@ import {TranslateModule} from "@ngx-translate/core";
     SharedModule,
     FlexModule,
     MatAutocompleteModule,
-    TranslateModule
+    TranslateModule,
+    TooltipModule,
+    MatButtonModule,
+    MatDividerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule
   ]
 })
 export class TimelineModule { }

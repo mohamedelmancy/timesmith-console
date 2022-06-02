@@ -37,9 +37,24 @@ import {ToastrModule} from "ngx-toastr";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {TooltipModule} from "ng2-tooltip-directive";
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; // a plugin!
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {MenuToggleModule} from "./core/menu/menu-toggle.module";
+import {MatRippleModule} from "@angular/material/core"; // a plugin!
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction';
+import { CreateTimelineComponent } from './modals/create-timeline/create-timeline.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
+import {NgxMatDatetimePickerModule, NgxMatTimepickerModule} from "@angular-material-components/datetime-picker";
+import {NgxMatMomentModule} from "@angular-material-components/moment-adapter"; // a plugin!
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   resourceTimelinePlugin,
+  // dayGridPlugin,
+  interactionPlugin,
 ]);
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -51,42 +66,55 @@ export function HttpLoaderFactory(http: HttpClient) {
     SideBarComponent,
     FooterComponent,
     LanguageDropDownComponent,
+    CreateTimelineComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    SharedModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    MatIconModule,
-    MatDividerModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    PerfectScrollbarModule,
-    MatCardModule,
-    FlexModule,
-    MatButtonModule,
-    ExtendedModule,
-    FullCalendarModule,
-    ToastrModule.forRoot(
-      {
-        // maxOpened: 1,
-        positionClass: 'toast-custom-position'
-      }
-    ),
-    MatAutocompleteModule,
-    MatPaginatorModule,
-    TooltipModule,
-    FontAwesomeModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        SharedModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        MatIconModule,
+        MatDividerModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule,
+        PerfectScrollbarModule,
+        MatCardModule,
+        FlexModule,
+        MatButtonModule,
+        ExtendedModule,
+        FullCalendarModule,
+        ToastrModule.forRoot(
+            {
+                // maxOpened: 1,
+                positionClass: 'toast-custom-position'
+            }
+        ),
+        MatAutocompleteModule,
+        MatPaginatorModule,
+        TooltipModule,
+        FontAwesomeModule,
+        MenuToggleModule,
+        MatRippleModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatInputModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        NgxMatDatetimePickerModule,
+        NgxMatTimepickerModule,
+        MatNativeDateModule,
+        NgxMatMomentModule
+    ],
   providers: [
     MenuItems, PageTitleService,
     PageTitleService,
@@ -103,6 +131,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi: true
     },],
   bootstrap: [AppComponent],
+  entryComponents: [ CreateTimelineComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
