@@ -82,6 +82,7 @@ export class FiltersComponent extends AutoComplete implements OnInit {
       department: new FormControl(null, []),
       site: new FormControl(null, []),
       sort: new FormControl(null, []),
+      date: new FormControl(null, []),
     });
 
     this.handlerAutocomplete('department');

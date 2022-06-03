@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Calendar} from '@fullcalendar/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Calendar, CalendarApi} from '@fullcalendar/core';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import {CoreService} from "../../../../services/core.service";
 import {GetLanguage} from "../../../../shared/functions/shared-functions";
@@ -12,15 +12,18 @@ import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateTimelineComponent} from "../../../../modals/create-timeline/create-timeline.component";
 import {date} from "ng2-validation/dist/date";
-
+import {today} from "../../../../shared/variables/variables";
+import {FullCalendarComponent} from "@fullcalendar/angular";
+declare var $: any;
 @Component({
   selector: 'app-timeline-view',
   templateUrl: './timeline-view.component.html',
-  styleUrls: ['./timeline-view.component.scss']
+  styleUrls: ['./timeline-view.component.scss'],
+  providers: [CalendarApi]
 })
 export class TimelineViewComponent implements OnInit {
+  @ViewChild("fullcalendar", { static: false }) calendarComponent: FullCalendarComponent;
   options;
-  calendar;
   exceptionCodes = [
     {
       title: 'Open time',
@@ -62,13 +65,12 @@ export class TimelineViewComponent implements OnInit {
       color: 'grey'
     }
   ]
-
+  calendarApi: Calendar;
   constructor(private coreService: CoreService, private translateService: TranslateService, public dialog: MatDialog) {
   }
 
   // https://codepen.io/pen?editors=0010
   ngOnInit(): void {
-    this.calendar = document.getElementById('calendar');
     var _this = this;
     setTimeout(() => {
       let draggableEl = document.getElementById('mydraggable');
@@ -80,16 +82,21 @@ export class TimelineViewComponent implements OnInit {
         eventData: function (eventEl) {
           return {
             title: eventEl.innerText,
-            duration: '03:00'
+            duration: '00:15'
           };
         }
       });
     });
   }
 
+  ngAfterViewChecked() {
+    this.calendarApi = this.calendarComponent?.getApi();
+  }
+
   renderCalendar() {
+    // https://fullcalendar.io/docs/upgrading-from-v4#current-date
     this.options = {
-      timeZone: 'UTC',
+      timeZone: 'Africa/Cairo',
       plugins: [resourceTimelinePlugin],
       height: '70vh',
       headerToolbar: {
@@ -106,8 +113,10 @@ export class TimelineViewComponent implements OnInit {
         },
         today: {
           text: `${this.translateService.instant('Today')}`,
+          click: this.todayClick.bind(this)
         }
       },
+      initialDate: today, // will be parsed as local
       eventResize: function (info) {
         console.log('info.event ', info.event);
 
@@ -137,10 +146,14 @@ export class TimelineViewComponent implements OnInit {
       // validRange: {
       //   start: today
       // },
+      stickyHeaderDates: true,
+      stickyFooterScrollbar: true,
+      slotMinTime: '09:00:00', /* calendar start Timing */
+      slotMaxTime: '19:00:00',  /* calendar end Timing */
       aspectRatio: 1.5,
       eventClick: (info) => {
         console.log('info.event ', info.event);
-        alert(info.event.title + " start is now " + info.event.start.toISOString() + ' and end in ' + info.event.end.toISOString());
+        alert(info.event.title + " start is now " + info.event.start + ' and end in ' + info.event.end);
       },
       // select: function(info) {
       //   alert('selected ' + info.startStr + ' to ' + info.endStr);
@@ -163,7 +176,7 @@ export class TimelineViewComponent implements OnInit {
           meridiem: 'long'
         }
       ],
-      slotWidth: 20,
+      // slotMinWidth: 2,
       resourceAreaWidth: '20%',
       initialView: 'resourceTimelineDay',
       schedulerLicenseKey: 'BUG ',
@@ -183,6 +196,7 @@ export class TimelineViewComponent implements OnInit {
       eventResizableFromStart: true,
       eventDurationEditable: true,
       eventResourceEditable: true,
+      eventLimit: true,
       resourceAreaHeaderContent: 'Staff',
       // resources: "https://fullcalendar.io/api/demo-feeds/resources.json?with-nesting&with-colors",
       resources: [{"id": "5", "title": "Taha abd Elsalam", eventColor: "yellow"}, {
@@ -201,6 +215,10 @@ export class TimelineViewComponent implements OnInit {
     }
   }
 
+  todayClick() {
+    this.calendarApi.today();
+  }
+
   addData() {
     const dialogRef = this.dialog.open(CreateTimelineComponent, {
       data: {},
@@ -211,40 +229,38 @@ export class TimelineViewComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', new Date(result?.data?.dateFrom));
-      const id = 'g';
-      this.options.resources = [...this.options.resources, {title: result?.data?.name, id, 'eventColor': 'green'}];
-      this.options.events.push({
-        "resourceId": 'g',
+      console.log('The dialog was closed', result);
+      console.log('from', new Date(result?.data?.dateFrom));
+      console.log('to', new Date(result?.data?.dateTo));
+      const id = Math.random().toString();
+      this.calendarApi.addResource({title: result?.data?.name, id, 'eventColor': 'green'});
+      this.calendarApi.addEvent({
+        "resourceId": id,
         "title": result?.data?.name,
-        // "start": new Date(result?.data?.dateFrom),
-        // "end": new Date(result?.data?.dateTo),
-        "start": '2022-06-02T09:00:00+00:00',
-        "end": '2022-06-02T10:00:00+00:00',
+        "start": new Date(result?.data?.dateFrom),
+        "end": new Date(result?.data?.dateTo),
       })
-      console.log('ee', this.options.events)
-      console.log('ss', this.options.resources)
     });
   }
 
   getEvents() {
-    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-02T00:00:00Z&end=2022-06-03T00:00:00Z').subscribe(res => {
+    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-03T00:00:00Z&end=2022-06-04T00:00:00Z').subscribe(res => {
       console.log('res', this.options.events)
       this.options.events = res;
     }, error => {
 
     }, () => {
-      this.options.events.push({
-        "resourceId": "a",
-        "title": "Test",
-        "start": "2022-06-02T07:08:00+00:00",
-        "end": "2022-06-02T09:37:00+00:00",
-        "color": 'orange',
-        "editable": true,
-        "startEditable": true,
-        "durationEditable": true,
-        "resourceEditable": true
-      })
+      // this.options.events.push({
+      //   "resourceId": "a",
+      //   "title": "Test test test ",
+      //   "start": "2022-06-03T02:08:00+00:00",
+      //   "end": "2022-06-03T03:37:00+00:00",
+      //   "color": 'orange',
+      //   "editable": true,
+      //   "startEditable": true,
+      //   "durationEditable": true,
+      //   "resourceEditable": true
+      // })
     })
   }
 

@@ -32,7 +32,7 @@
     <div class="timeline-view d-flex flex-column">
       <app-filters></app-filters>
       <div>
-        <full-calendar id="calendar" *ngIf="options" [options]="options"></full-calendar>
+        <full-calendar #fullcalendar id="calendar" *ngIf="options" [options]="options"></full-calendar>
       </div>
     </div>
   </div>

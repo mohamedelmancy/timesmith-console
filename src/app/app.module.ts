@@ -53,7 +53,7 @@ import {NgxMatDatetimePickerModule, NgxMatTimepickerModule} from "@angular-mater
 import {NgxMatMomentModule} from "@angular-material-components/moment-adapter"; // a plugin!
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   resourceTimelinePlugin,
-  // dayGridPlugin,
+  dayGridPlugin,
   interactionPlugin,
 ]);
 export function HttpLoaderFactory(http: HttpClient) {

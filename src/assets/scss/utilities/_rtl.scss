@@ -1,7 +1,8 @@
 /*=============|RTL|============*/
 
 [dir="rtl"] {
-   //horizontal menu
+  body, h1, h2, h3, h4, h5, h6, p, div, a, label { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; }
+  //horizontal menu
    .horizontal-menu .hr-primary-menu .hr-sub-menu{
       right: 0;
       left: auto;
@@ -574,6 +575,7 @@
     left: unset !important;;
     right: 50%
   }
+
 
 }
 
