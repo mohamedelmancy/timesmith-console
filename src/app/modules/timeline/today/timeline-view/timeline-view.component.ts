@@ -14,7 +14,9 @@ import {CreateTimelineComponent} from "../../../../modals/create-timeline/create
 import {date} from "ng2-validation/dist/date";
 import {today} from "../../../../shared/variables/variables";
 import {FullCalendarComponent} from "@fullcalendar/angular";
+
 declare var $: any;
+
 @Component({
   selector: 'app-timeline-view',
   templateUrl: './timeline-view.component.html',
@@ -22,8 +24,11 @@ declare var $: any;
   providers: [CalendarApi]
 })
 export class TimelineViewComponent implements OnInit {
-  @ViewChild("fullcalendar", { static: false }) calendarComponent: FullCalendarComponent;
+  @ViewChild("fullcalendar", {static: false}) calendarComponent: FullCalendarComponent;
   options;
+  eventDidMounted = false;
+  stillEvent;
+  movingEvent;
   exceptionCodes = [
     {
       title: 'Open time',
@@ -66,10 +71,12 @@ export class TimelineViewComponent implements OnInit {
     }
   ]
   calendarApi: Calendar;
+
   constructor(private coreService: CoreService, private translateService: TranslateService, public dialog: MatDialog) {
   }
 
   // https://codepen.io/pen?editors=0010
+  // https://stackoverflow.com/questions/71299412/fullcalendar-how-to-display-non-overlapping-events-inside-same-day-cell-in-one
   ngOnInit(): void {
     var _this = this;
     setTimeout(() => {
@@ -94,9 +101,10 @@ export class TimelineViewComponent implements OnInit {
   }
 
   renderCalendar() {
+    let _this = this;
     // https://fullcalendar.io/docs/upgrading-from-v4#current-date
     this.options = {
-      timeZone: 'Africa/Cairo',
+      timeZone: 'local',
       plugins: [resourceTimelinePlugin],
       height: '70vh',
       headerToolbar: {
@@ -109,7 +117,7 @@ export class TimelineViewComponent implements OnInit {
       customButtons: {
         promptResource: {
           text: `+ ${this.translateService.instant('Add')}`,
-          click: this.addData.bind(this), // bind is important!
+          click: this.openDialog.bind(this), // bind is important!
         },
         today: {
           text: `${this.translateService.instant('Today')}`,
@@ -118,30 +126,26 @@ export class TimelineViewComponent implements OnInit {
       },
       initialDate: today, // will be parsed as local
       eventResize: function (info) {
-        console.log('info.event ', info.event);
+        console.log('eventResize ', info.event);
 
-        alert(info.event.title + " start is now " + info.event.start.toISOString() + ' and end in ' + info.event.end.toISOString());
+        // alert(info.event.title + " start is now " + info.event.start.toISOString() + ' and end in ' + info.event.end.toISOString());
 
-        if (!confirm("is this okay?")) {
-          info.revert();
-        }
+        // if (!confirm("is this okay?")) {
+        // info.revert();
+        // }
       },
       eventDrop: function (info) {
-        console.log('info.event ', info.event);
-
-        alert(info.event.title + " start is now " + info.event.start.toISOString() + ' and end in ' + info.event.end.toISOString());
-
-        if (!confirm("is this okay?")) {
-          info.revert();
-        }
+        console.log('eventDropped ', info);
+        _this.handleOverlapping(_this.stillEvent, _this.movingEvent);
       },
-      drop: function (data) {
-        console.log('data ', data);
-        alert(" start is now " + data.dateStr + ' and end in ' + data.date + "for " + data.resource.title);
+      drop: function (info) {
+        console.log('drop ', info);
+        console.log('resource ', info.resource._resource);
+        // alert(" start is now " + data.dateStr + ' and end in ' + data.date + "for " + data.resource.title);
 
-        if (!confirm("is this okay?")) {
-          data.revert();
-        }
+        // if (!confirm("is this okay?")) {
+        // data.revert();
+        // }
       },
       // validRange: {
       //   start: today
@@ -151,9 +155,18 @@ export class TimelineViewComponent implements OnInit {
       slotMinTime: '09:00:00', /* calendar start Timing */
       slotMaxTime: '19:00:00',  /* calendar end Timing */
       aspectRatio: 1.5,
+      // eventDidMount: function(event, element, view) {
+      // console.log('eventDidMount')
+      // $(".fc-resource-timeline table tbody tr .fc-datagrid-cell div").addClass('fc-resized-row');
+      // $(".fc-content table tbody tr .fc-widget-content div").addClass('fc-resized-row');
+      // $(".fc-body .fc-resource-area .fc-cell-content").css('padding', '0px');
+      // },
+      eventDidMount: function (event, element, view) {
+      },
       eventClick: (info) => {
-        console.log('info.event ', info.event);
-        alert(info.event.title + " start is now " + info.event.start + ' and end in ' + info.event.end);
+        console.log('eventClicked ', info.event);
+        _this.openDialog(info.event);
+        // alert(info.event.title + " start is now " + info.event.start + ' and end in ' + info.event.end);
       },
       // select: function(info) {
       //   alert('selected ' + info.startStr + ' to ' + info.endStr);
@@ -180,6 +193,7 @@ export class TimelineViewComponent implements OnInit {
       resourceAreaWidth: '20%',
       initialView: 'resourceTimelineDay',
       schedulerLicenseKey: 'BUG ',
+      dragScroll: false,
       locales: [enLocale, arLocale],
       locale: GetLanguage(),
       direction: GetLanguage() === 'ar' ? 'rtl' : 'ltr',
@@ -193,10 +207,13 @@ export class TimelineViewComponent implements OnInit {
       ],
       editable: true,
       droppable: true,
-      eventResizableFromStart: true,
-      eventDurationEditable: true,
-      eventResourceEditable: true,
-      eventLimit: true,
+      // eventResizableFromStart: true,
+      // eventDurationEditable: true,
+      // eventResourceEditable: true,
+      // eventOverlap: true,
+      // dayMaxEventRows: true,
+      // dayMaxEvents: 3,
+      eventOverlap: this.checkOverlapping.bind(this),
       resourceAreaHeaderContent: 'Staff',
       // resources: "https://fullcalendar.io/api/demo-feeds/resources.json?with-nesting&with-colors",
       resources: [{"id": "5", "title": "Taha abd Elsalam", eventColor: "yellow"}, {
@@ -215,13 +232,62 @@ export class TimelineViewComponent implements OnInit {
     }
   }
 
+  checkOverlapping(stillEvent, movingEvent) {
+    // const outgoingEvent = info
+    // const resId = outgoingEvent.event._def.resourceIds;
+    // console.log('eventMount ', outgoingEvent.event);
+    // console.log('resources ', resId);
+    // const resource = this.calendarApi.getResourceById(resId);
+    // const resourceEvents = resource.getEvents();
+    // console.log('resource events', resourceEvents);
+    // resourceEvents.map(event => {
+    //   console.log('event', event.start)
+    //   console.log('dates >> old',  new Date(event?.start).getTime(), 'new ', new Date(outgoingEvent?.event?.start).getTime())
+    //   if (new Date(outgoingEvent?.event?.start).getTime() <= new Date(event?.start).getTime()) {
+    //     console.log('hey overlap ')
+    //   }
+    // })
+    this.stillEvent = stillEvent;
+    this.movingEvent = movingEvent;
+    return true
+  }
+
+  handleOverlapping(stillEvent, movingEvent) {
+    console.log('stillEvent', stillEvent)
+    console.log('movingEvent', movingEvent)
+    console.log('dates >> old', new Date(stillEvent?.start).getTime(), 'new ', new Date(movingEvent?.start).getTime())
+    // if the moving event start before the still event the moving event will take this overlapping zone
+    if (new Date(movingEvent?.start).getTime() <= new Date(stillEvent?.start).getTime() && new Date(stillEvent?.end).getTime() > new Date(movingEvent?.end).getTime()) {
+      console.log('move to end', stillEvent)
+      stillEvent.setStart(movingEvent.end);
+    } else {
+      // stillEvent.setEnd(movingEvent.start);
+    }
+
+
+    // if the moving event duration will cover all still event duration the remove the still event
+    if (new Date(movingEvent?.start).getTime() <= new Date(stillEvent?.start).getTime() && new Date(movingEvent?.end).getTime() >= new Date(stillEvent?.end).getTime()) {
+      const index = this.options.events?.findIndex(ev => new Date(stillEvent?.start).getTime() === new Date(ev?.start).getTime() && new Date(stillEvent?.end).getTime() === new Date(ev?.end).getTime());
+      if (index !== -1) {
+        console.log('removed************************************ ', index);
+        stillEvent.remove()
+      }
+    }
+    console.log('events ', this.options.events);
+    console.log('calendarApi events ', this.calendarApi.getEvents());
+  }
+
   todayClick() {
     this.calendarApi.today();
   }
 
-  addData() {
+  openDialog(event?) {
+    this.options.resources.forEach((res: any) => {
+      res.name = res.title;
+      return res
+    });
     const dialogRef = this.dialog.open(CreateTimelineComponent, {
-      data: {},
+      data: {employees: this.options.resources, event},
       direction: GetLanguage() === 'ar' ? 'rtl' : 'ltr',
       minHeight: '50%',
       width: window.innerWidth > 1199 ? '35%' : '90%',
@@ -232,35 +298,43 @@ export class TimelineViewComponent implements OnInit {
       console.log('The dialog was closed', result);
       console.log('from', new Date(result?.data?.dateFrom));
       console.log('to', new Date(result?.data?.dateTo));
-      const id = Math.random().toString();
-      this.calendarApi.addResource({title: result?.data?.name, id, 'eventColor': 'green'});
-      this.calendarApi.addEvent({
-        "resourceId": id,
-        "title": result?.data?.name,
-        "start": new Date(result?.data?.dateFrom),
-        "end": new Date(result?.data?.dateTo),
-      })
+      const id = result?.data?.employee?.id;
+      // this.calendarApi.addResource({title: result?.employee?.name, id, 'eventColor': 'green'});
+        this.calendarApi.addEvent({
+          "resourceId": id,
+          "title": result?.data?.type?.name,
+          "start": new Date(result?.data?.dateFrom),
+          "overlap": true,
+          "end": new Date(result?.data?.dateTo),
+          "color": 'green'
+        })
     });
   }
 
   getEvents() {
-    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-03T00:00:00Z&end=2022-06-04T00:00:00Z').subscribe(res => {
+    const colors = ['#000', '#9e32a8', '#54ab98', '#becf3e', '#d95d7c', '#35e6e3', '#c414c1']
+    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-04T00:00:00Z&end=2022-06-05T00:00:00Z').subscribe(res => {
       console.log('res', this.options.events)
+      res.map((event, index) => {
+        event.overlap = true;
+        event.color = colors[index]
+      });
       this.options.events = res;
     }, error => {
 
     }, () => {
-      // this.options.events.push({
-      //   "resourceId": "a",
-      //   "title": "Test test test ",
-      //   "start": "2022-06-03T02:08:00+00:00",
-      //   "end": "2022-06-03T03:37:00+00:00",
-      //   "color": 'orange',
-      //   "editable": true,
-      //   "startEditable": true,
-      //   "durationEditable": true,
-      //   "resourceEditable": true
-      // })
+      // console.log('1', new Date('Sat Jun 04 2022 09:00:00 GMT+0200').getTime())
+      // console.log('2', new Date('Sat Jun 04 2022 10:00:00 GMT+0200').getTime())
+      // console.log(new Date('Sat Jun 04 2022 10:00:00 GMT+0200').getTime() - new Date('Sat Jun 04 2022 09:00:00 GMT+0200').getTime())
+      this.options.events.push({
+        "resourceId": "l",
+        "title": "Test test test ",
+        "start": "2022-06-04T02:10:00+00:00",
+        "end": "2022-06-04T15:37:00+00:00",
+        "color": 'orange',
+        "overlap": true,
+      })
+      console.log('events', this.options.events)
     })
   }
 

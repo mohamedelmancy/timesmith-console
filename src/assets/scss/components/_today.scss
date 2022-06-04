@@ -33,3 +33,17 @@
 .fc .fc-datagrid-cell-cushion{
   //padding: 3px !important;
 }
+.fc-datagrid-cell-frame{
+  //height: 33px !important;
+}
+.fc-resource-timeline table tbody tr .fc-datagrid-cell div { height: 33px !important; }
+.fc .fc-timeline-overlap-enabled .fc-timeline-lane-frame .fc-timeline-events{
+  padding-bottom: 0 !important;
+  height: 33px !important;
+}
+.fc-timeline-event{
+  padding: 4px 1px !important;
+}
+.fc-timeline-event-harness{
+  top: 0 !important;
+}

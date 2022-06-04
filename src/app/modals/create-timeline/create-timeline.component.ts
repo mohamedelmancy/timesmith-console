@@ -15,6 +15,8 @@ import moment from "moment";
 export class CreateTimelineComponent extends AutoComplete implements OnInit {
   form: FormGroup;
   typesFilteredOptions: Observable<any[]>;
+  employeesFilteredOptions: Observable<any[]>;
+  employees = this.data.employees;
   types = [
     {
       name: 'Attendance',
@@ -47,13 +49,22 @@ export class CreateTimelineComponent extends AutoComplete implements OnInit {
   }
 
   ngOnInit(): void {
+    this.types.push({
+      name: this.data?.event.title,
+      id: Math.random()
+    })
     this.form = this.fb.group({
-      name: ['', Validators.compose([Validators.required])],
-      type: [null, Validators.compose([Validators.required])],
-      dateFrom: [null, Validators.compose([Validators.required])],
-      dateTo: [null, Validators.compose([Validators.required])],
+      employee: ['', Validators.compose([Validators.required])],
+      type: ['', Validators.compose([Validators.required])],
+      dateFrom: [this.data?.event.start, Validators.compose([Validators.required])],
+      dateTo: [this.data?.event.end, Validators.compose([Validators.required])],
     });
     this.handlerAutocomplete('type');
+    this.handlerAutocomplete('employee');
+    console.log('eee', this.data);
+
+    this.form.controls['type'].setValue(this.types.find(x => x.name === this.data?.event.title))
+    this.form.controls['employee'].setValue(this.data.employees.find(x => x.id === this.data?.event._def.resourceIds[0]))
   }
 
   handlerAutocomplete(type) {
@@ -62,6 +73,12 @@ export class CreateTimelineComponent extends AutoComplete implements OnInit {
         startWith(''),
         map(value => (typeof value === 'string' ? value : value?.name)),
         map(name => (name ? this._filter(name, this.types) : this.types.slice())),
+      );
+    } else if (type === 'employee') {
+      this.employeesFilteredOptions = this.form.controls['employee']?.valueChanges.pipe(
+        startWith(''),
+        map(value => (typeof value === 'string' ? value : value?.name)),
+        map(name => (name ? this._filter(name, this.employees) : this.employees.slice())),
       );
     }
   }
@@ -72,7 +89,7 @@ export class CreateTimelineComponent extends AutoComplete implements OnInit {
 
   save(value) {
     console.log('save', value)
-    this.dialogRef.close({data: value});
+    this.dialogRef.close({data: value, edit: this.data.event});
   }
 
 }

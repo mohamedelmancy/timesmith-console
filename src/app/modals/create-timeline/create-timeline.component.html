@@ -1,21 +1,27 @@
 <div class="create-timeline">
-  <h1 mat-dialog-title>Create new timeline</h1>
+  <h1 mat-dialog-title>{{data?.event ? data.event.title : 'Create new timeline' | translate}}</h1>
   <div mat-dialog-content>
     <form [formGroup]="form" (ngSubmit)="save(form?.value)">
       <div fxLayout="column wrap" fxLayoutAlign="space-between start">
         <div fxLayout="row wrap" class="full-wid" fxLayoutAlign="space-between start">
           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" >
             <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-              <mat-label>{{'Employee name' | translate}}</mat-label>
-              <input matInput placeholder="{{'Employee name' | translate}}" formControlName="name" type="text">
+                <mat-label>{{'Employee name' | translate}}</mat-label>
+                <input type="text" matInput formControlName="employee" [matAutocomplete]="auto2">
+                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn"
+                                  (opened)="handlerAutocomplete('employee')">
+                  <mat-option *ngFor="let option of employeesFilteredOptions | async" [value]="option">
+                    {{option.name}}
+                  </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
             <small
-              *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched"
+              *ngIf="form.controls['employee'].hasError('required') && form.controls['employee'].touched"
               class="warn-text gene-block">
               {{'You must include Employee name' | translate}}
             </small>
             <small
-              *ngIf="form.controls['name'].errors && !(form.controls['name'].hasError('required')) && form.controls['name'].touched"
+              *ngIf="form.controls['employee'].errors && !(form.controls['employee'].hasError('required')) && form.controls['employee'].touched"
               class="warn-text gene-block">
               {{'You must include a valid Employee name' | translate}}
             </small>
@@ -90,7 +96,9 @@
   </div>
   <div mat-dialog-actions>
     <button  mat-button class="mx-2" (click)="onNoClick()">Cancel</button>
-    <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>Create</button>
+    <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
+      {{data?.event ? 'Update' : 'Create' | translate}}
+    </button>
   </div>
 
 </div>
