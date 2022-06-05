@@ -50,7 +50,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
 import {NgxMatDatetimePickerModule, NgxMatTimepickerModule} from "@angular-material-components/datetime-picker";
-import {NgxMatMomentModule} from "@angular-material-components/moment-adapter"; // a plugin!
+import {NgxMatMomentModule} from "@angular-material-components/moment-adapter";
+import {DragDropModule} from "@angular/cdk/drag-drop"; // a plugin!
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   resourceTimelinePlugin,
   dayGridPlugin,
@@ -113,7 +114,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         NgxMatDatetimePickerModule,
         NgxMatTimepickerModule,
         MatNativeDateModule,
-        NgxMatMomentModule
+        NgxMatMomentModule,
+        DragDropModule
     ],
   providers: [
     MenuItems, PageTitleService,

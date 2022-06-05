@@ -1,21 +1,12 @@
 <div class="d-flex timeline-filters justify-content-end">
   <form [formGroup]="form" style="text-align: center" fxLayout="row wrap" fxLayoutAlign="center center">
     <div class="d-flex justify-content-center inner-cont">
-      <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" [ngClass]="{'mrgn-x-sm': language === 'en'}"  class="" style="text-align: center">
+      <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" [ngClass]="{'mrgn-x-sm': language === 'en'}" class=""
+           style="text-align: center">
         <mat-form-field class="example-form-field" appearance="outline">
-<!--          <mat-label>Select range</mat-label>-->
-<!--          <mat-date-range-input-->
-<!--            [formGroup]="customDate"-->
-<!--            [rangePicker]="dateRange">-->
-<!--            <input readonly matStartDate placeholder="Start date" formControlName="start">-->
-<!--            <input readonly matEndDate placeholder="End date" formControlName="end">-->
-<!--          </mat-date-range-input>-->
-<!--          &lt;!&ndash;      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>&ndash;&gt;-->
-<!--          <mat-datepicker-toggle matSuffix [for]="dateRange"></mat-datepicker-toggle>-->
-<!--          <mat-date-range-picker #dateRange></mat-date-range-picker>-->
           <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="date">
-<!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
+          <input readonly matInput [matDatepicker]="picker" (dateChange)="changeDate($event.target.value)" formControlName="date" placeholder="MM/DD/YYYY">
+          <!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -31,6 +22,16 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
+        <small
+          *ngIf="form.controls['department'].hasError('required') && form.controls['department'].touched"
+          class="warn-text gene-block">
+          {{'You must include department' | translate}}
+        </small>
+        <small
+          *ngIf="form.controls['department'].errors && !(form.controls['department'].hasError('required')) && form.controls['department'].touched"
+          class="warn-text gene-block">
+          {{'You must include a valid department' | translate}}
+        </small>
       </div>
       <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" class="mrgn-x-sm" style="text-align: center">
         <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
@@ -43,8 +44,19 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
+        <small
+          *ngIf="form.controls['site'].hasError('required') && form.controls['site'].touched"
+          class="warn-text gene-block">
+          {{'You must include site' | translate}}
+        </small>
+        <small
+          *ngIf="form.controls['site'].errors && !(form.controls['site'].hasError('required')) && form.controls['site'].touched"
+          class="warn-text gene-block">
+          {{'You must include a valid site' | translate}}
+        </small>
       </div>
-      <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" [ngClass]="{'mrgn-x-sm': language === 'ar'}" class="" style="text-align: center">
+      <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" [ngClass]="{'mrgn-x-sm': language === 'ar'}" class=""
+           style="text-align: center">
         <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
           <mat-label>{{'Sort' | translate}}</mat-label>
           <input type="text" matInput formControlName="sort" [matAutocomplete]="auto1">
@@ -55,6 +67,16 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
+        <small
+          *ngIf="form.controls['sort'].hasError('required') && form.controls['sort'].touched"
+          class="warn-text gene-block">
+          {{'You must include sort' | translate}}
+        </small>
+        <small
+          *ngIf="form.controls['sort'].errors && !(form.controls['sort'].hasError('required')) && form.controls['sort'].touched"
+          class="warn-text gene-block">
+          {{'You must include a valid sort' | translate}}
+        </small>
       </div>
     </div>
   </form>

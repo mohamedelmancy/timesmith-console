@@ -6,12 +6,12 @@
         <div class="exception-codes">
           <p class="dgraggable-title">Exception Codes ( {{exceptionCodes?.length}} )</p>
           <div class="scrollable">
-            <p [ngStyle]="{'background': item.color}" class="dgraggable"
-               *ngFor="let item of exceptionCodes">{{item.title}}</p>
+            <span [ngStyle]="{'background': ''}" tooltip="{{item.title}}" id="code-{{i}}" class="dgraggable"
+               *ngFor="let item of exceptionCodes; let i = index"><i [ngStyle]="{'color': item.color, 'font-size': '27px'}" class="fa {{item.icon}}"></i></span>
           </div>
           <div class="d-flex justify-content-center align-items-center mt-2">
-            <button color="primary" (click)="showAll('codes')" mat-raised-button
-                    class="primary-bg">{{'Show All'|translate}}</button>
+<!--            <button color="primary" (click)="showAll('codes')" mat-raised-button-->
+<!--                    class="primary-bg">{{'Show All'|translate}}</button>-->
           </div>
         </div>
         <br>
@@ -19,7 +19,7 @@
         <div class="leaves mt-4">
           <p class="dgraggable-title">Leaves ( {{leaves?.length}} )</p>
           <div class="scrollable">
-            <p [ngStyle]="{'background': item.color}" class="dgraggable" *ngFor="let item of leaves">{{item.title}}</p>
+            <p [ngStyle]="{'background': item.color}" tooltip="{{item.title}}" class="dgraggable" [id]="item.color" *ngFor="let item of leaves">{{item.title}}</p>
           </div>
           <div class="d-flex justify-content-center align-items-center mt-2">
             <button (click)="showAll('leaves')" color="primary" mat-raised-button
@@ -30,7 +30,7 @@
 
     </div>
     <div class="timeline-view d-flex flex-column">
-      <app-filters></app-filters>
+      <app-filters (chosenDate)="chooseDate($event)"></app-filters>
       <div>
         <full-calendar #fullcalendar id="calendar" *ngIf="options" [options]="options"></full-calendar>
       </div>

@@ -13,7 +13,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {CreateTimelineComponent} from "../../../../modals/create-timeline/create-timeline.component";
 import {date} from "ng2-validation/dist/date";
 import {today} from "../../../../shared/variables/variables";
-import {FullCalendarComponent} from "@fullcalendar/angular";
+import {EventApi, FullCalendarComponent} from "@fullcalendar/angular";
+import {element} from "screenfull";
 
 declare var $: any;
 
@@ -32,42 +33,51 @@ export class TimelineViewComponent implements OnInit {
   exceptionCodes = [
     {
       title: 'Open time',
-      color: 'orange'
+      color: 'orange',
+      icon: 'fa-reddit'
     },
     {
       title: 'Permission',
-      color: 'green'
+      color: 'green',
+      icon: 'fa-clock-o'
     },
     {
       title: 'External Assignment',
-      color: 'red'
+      color: 'red',
+      icon: 'fa-lastfm-square'
     },
     {
       title: 'Present',
-      color: 'blue'
+      color: 'blue',
+      icon: 'fa-legal'
     },
     {
       title: 'Open time Off Campus',
-      color: 'grey'
+      color: 'grey',
+      icon: 'fa-leaf'
     },
 
   ]
   leaves = [
     {
       title: 'Annual',
-      color: 'grey'
+      color: 'orange',
+      overlap: true
     },
     {
       title: 'Sick',
-      color: 'red'
+      color: 'red',
+      overlap: true
     },
     {
       title: 'Casual',
-      color: 'green'
+      color: 'green',
+      overlap: true
     },
     {
       title: 'Public Holiday',
-      color: 'grey'
+      color: 'grey',
+      overlap: true
     }
   ]
   calendarApi: Calendar;
@@ -87,9 +97,12 @@ export class TimelineViewComponent implements OnInit {
       new Draggable(draggableEl, {
         itemSelector: '.dgraggable',
         eventData: function (eventEl) {
+          const event = _this.leaves.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
           return {
-            title: eventEl.innerText,
-            duration: '00:15'
+            title: eventEl.innerHTML,
+            duration: '00:15',
+            backgroundColor: event?.color,
+            borderColor: event?.color,
           };
         }
       });
@@ -127,12 +140,6 @@ export class TimelineViewComponent implements OnInit {
       initialDate: today, // will be parsed as local
       eventResize: function (info) {
         console.log('eventResize ', info.event);
-
-        // alert(info.event.title + " start is now " + info.event.start.toISOString() + ' and end in ' + info.event.end.toISOString());
-
-        // if (!confirm("is this okay?")) {
-        // info.revert();
-        // }
       },
       eventDrop: function (info) {
         console.log('eventDropped ', info);
@@ -141,36 +148,44 @@ export class TimelineViewComponent implements OnInit {
       drop: function (info) {
         console.log('drop ', info);
         console.log('resource ', info.resource._resource);
-        // alert(" start is now " + data.dateStr + ' and end in ' + data.date + "for " + data.resource.title);
-
-        // if (!confirm("is this okay?")) {
-        // data.revert();
-        // }
       },
-      // validRange: {
-      //   start: today
-      // },
-      stickyHeaderDates: true,
-      stickyFooterScrollbar: true,
-      slotMinTime: '09:00:00', /* calendar start Timing */
-      slotMaxTime: '19:00:00',  /* calendar end Timing */
-      aspectRatio: 1.5,
+      eventReceive: function (info) {
+        console.log('eventReceive ', info);
+        console.log('calendarApi events ', _this.calendarApi.getEvents());
+      },
+      eventWillUnmount: function (info) {
+
+      },
       // eventDidMount: function(event, element, view) {
       // console.log('eventDidMount')
       // $(".fc-resource-timeline table tbody tr .fc-datagrid-cell div").addClass('fc-resized-row');
       // $(".fc-content table tbody tr .fc-widget-content div").addClass('fc-resized-row');
       // $(".fc-body .fc-resource-area .fc-cell-content").css('padding', '0px');
       // },
-      eventDidMount: function (event, element, view) {
+      eventDidMount: function (info) {
+        console.log('eventDidMount ', info);
+        console.log('title ', info.event.title);
+        if (info.event?.title?.includes('class="')) {
+          console.log('hey has icon  ', info.event);
+           const dragged: EventApi = _this.calendarApi.getEvents().find(ev => ev.title === info.event.title);
+          // dragged.remove();
+          // _this.calendarApi.addEvent(info.event)
+          // info.el.getElementsByClassName('.fc-event-main')[0].addClass('icon-events')
+          info.el.querySelector('.fc-event-title').innerHTML = info.event.title;
+        }
       },
       eventClick: (info) => {
         console.log('eventClicked ', info.event);
         _this.openDialog(info.event);
-        // alert(info.event.title + " start is now " + info.event.start + ' and end in ' + info.event.end);
       },
       // select: function(info) {
       //   alert('selected ' + info.startStr + ' to ' + info.endStr);
       // },
+      stickyHeaderDates: true,
+      stickyFooterScrollbar: true,
+      slotMinTime: '09:00:00', /* calendar start Timing */
+      slotMaxTime: '19:00:00',  /* calendar end Timing */
+      aspectRatio: 1.5,
       // slotDuration: '00:15:00',
       slotDuration: {minutes: 15},
       // slotLabelFormat: 'h(:mm)a',
@@ -216,10 +231,9 @@ export class TimelineViewComponent implements OnInit {
       eventOverlap: this.checkOverlapping.bind(this),
       resourceAreaHeaderContent: 'Staff',
       // resources: "https://fullcalendar.io/api/demo-feeds/resources.json?with-nesting&with-colors",
-      resources: [{"id": "5", "title": "Taha abd Elsalam", eventColor: "yellow"}, {
+      resources: [{"id": "5", "title": "Taha abd Elsalam"}, {
         "id": "l",
         "title": "Saeed El Sharkawy",
-        eventColor: "yellow"
       }, {"id": "a", "title": "Ahmed abd elazeem"}, {
         "id": "b",
         "title": "Omar khairy",
@@ -294,26 +308,29 @@ export class TimelineViewComponent implements OnInit {
       hasBackdrop: false
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: any) => {
       console.log('The dialog was closed', result);
-      console.log('from', new Date(result?.data?.dateFrom));
-      console.log('to', new Date(result?.data?.dateTo));
       const id = result?.data?.employee?.id;
       // this.calendarApi.addResource({title: result?.employee?.name, id, 'eventColor': 'green'});
-        this.calendarApi.addEvent({
-          "resourceId": id,
-          "title": result?.data?.type?.name,
-          "start": new Date(result?.data?.dateFrom),
-          "overlap": true,
-          "end": new Date(result?.data?.dateTo),
-          "color": 'green'
-        })
+      if (result?.event?.title) {
+        event.remove();
+      }
+      this.calendarApi.addEvent({
+        "resourceId": id,
+        "title": result?.data?.type?.name,
+        "start": new Date(result?.data?.dateFrom),
+        "overlap": true,
+        "end": new Date(result?.data?.dateTo),
+        "color": event ? result?.event.backgroundColor : 'green'
+      })
+      console.log('calendarApi events', this.calendarApi.getEvents())
+      console.log('events', this.options.events)
     });
   }
 
   getEvents() {
     const colors = ['#000', '#9e32a8', '#54ab98', '#becf3e', '#d95d7c', '#35e6e3', '#c414c1']
-    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-04T00:00:00Z&end=2022-06-05T00:00:00Z').subscribe(res => {
+    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-05T00:00:00Z&end=2022-06-06T00:00:00Z').subscribe(res => {
       console.log('res', this.options.events)
       res.map((event, index) => {
         event.overlap = true;
@@ -329,8 +346,8 @@ export class TimelineViewComponent implements OnInit {
       this.options.events.push({
         "resourceId": "l",
         "title": "Test test test ",
-        "start": "2022-06-04T02:10:00+00:00",
-        "end": "2022-06-04T15:37:00+00:00",
+        "start": "2022-06-05T02:10:00+00:00",
+        "end": "2022-06-05T15:37:00+00:00",
         "color": 'orange',
         "overlap": true,
       })
@@ -346,7 +363,7 @@ export class TimelineViewComponent implements OnInit {
 
     }, () => {
       setTimeout(() => {
-        this.options.resources.push({"id": "a", "title": "Taha abd Elsalam", eventColor: "yellow"})
+        this.options.resources.push({"id": "a", "title": "Taha abd Elsalam"})
       });
     })
   }
@@ -361,6 +378,11 @@ export class TimelineViewComponent implements OnInit {
         this.leaves.push(this.leaves[0]);
       }
     }
+  }
+
+  chooseDate(ev) {
+    console.log('ev', ev);
+    this.calendarApi.gotoDate(ev);
   }
 
 }

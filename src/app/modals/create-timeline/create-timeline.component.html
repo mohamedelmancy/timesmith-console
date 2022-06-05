@@ -1,5 +1,5 @@
-<div class="create-timeline">
-  <h1 mat-dialog-title>{{data?.event ? data.event.title : 'Create new timeline' | translate}}</h1>
+<div class="create-timeline" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <h1 mat-dialog-title>{{data?.event?.title ? data.event.title : 'Create new timeline' | translate}}</h1>
   <div mat-dialog-content>
     <form [formGroup]="form" (ngSubmit)="save(form?.value)">
       <div fxLayout="column wrap" fxLayoutAlign="space-between start">
@@ -37,27 +37,24 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+            <small
+              *ngIf="form.controls['type'].hasError('required') && form.controls['type'].touched"
+              class="warn-text gene-block">
+              {{'You must include type' | translate}}
+            </small>
+            <small
+              *ngIf="form.controls['type'].errors && !(form.controls['type'].hasError('required')) && form.controls['type'].touched"
+              class="warn-text gene-block">
+              {{'You must include a valid type' | translate}}
+            </small>
           </div>
           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
-<!--            <mat-form-field class="example-form-field w-100" appearance="outline">-->
-<!--              <mat-label>Select range</mat-label>-->
-<!--              <mat-date-range-input-->
-<!--                [formGroup]="customDate"-->
-<!--                [rangePicker]="dateRange">-->
-<!--                <input readonly matStartDate placeholder="Start date" formControlName="start">-->
-<!--                <input readonly matEndDate placeholder="End date" formControlName="end">-->
-<!--              </mat-date-range-input>-->
-<!--              &lt;!&ndash;      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>&ndash;&gt;-->
-<!--              <mat-datepicker-toggle matSuffix [for]="dateRange"></mat-datepicker-toggle>-->
-<!--              <mat-date-range-picker class="w-100" #dateRange></mat-date-range-picker>-->
-<!--            </mat-form-field>-->
-
-
-            <mat-form-field>
-              <input readonly matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" formControlName="dateFrom"
+            <mat-form-field appearance="outline">
+              <mat-label>Choose a date</mat-label>
+              <input readonly matInput [ngxMatDatetimePicker]="picker" placeholder="MM/DD/YYYY, h:mm:ss a" formControlName="dateFrom"
                      [disabled]="false">
               <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
-              <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="true"
+              <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false"
                                        [stepHour]="1" [stepMinute]="1" [stepSecond]="1"
                                        [touchUi]="false" [color]="'primary'" [enableMeridian]="true"
                                        [disableMinute]="false" [hideTime]="false">
@@ -65,25 +62,12 @@
             </mat-form-field>
           </div>
           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
-            <!--            <mat-form-field class="example-form-field w-100" appearance="outline">-->
-            <!--              <mat-label>Select range</mat-label>-->
-            <!--              <mat-date-range-input-->
-            <!--                [formGroup]="customDate"-->
-            <!--                [rangePicker]="dateRange">-->
-            <!--                <input readonly matStartDate placeholder="Start date" formControlName="start">-->
-            <!--                <input readonly matEndDate placeholder="End date" formControlName="end">-->
-            <!--              </mat-date-range-input>-->
-            <!--              &lt;!&ndash;      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>&ndash;&gt;-->
-            <!--              <mat-datepicker-toggle matSuffix [for]="dateRange"></mat-datepicker-toggle>-->
-            <!--              <mat-date-range-picker class="w-100" #dateRange></mat-date-range-picker>-->
-            <!--            </mat-form-field>-->
-
-
-            <mat-form-field>
-              <input readonly matInput [ngxMatDatetimePicker]="picker2" placeholder="Choose a date" formControlName="dateTo"
+            <mat-form-field appearance="outline">
+              <mat-label>Choose a date</mat-label>
+              <input readonly matInput [ngxMatDatetimePicker]="picker2" placeholder="MM/DD/YYYY, h:mm:ss a" formControlName="dateTo"
                      [disabled]="false">
               <mat-datepicker-toggle matSuffix [for]="$any(picker2)"></mat-datepicker-toggle>
-              <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="true"
+              <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="false"
                                        [stepHour]="1" [stepMinute]="1" [stepSecond]="1"
                                        [touchUi]="false" [color]="'primary'" [enableMeridian]="true"
                                        [disableMinute]="false" [hideTime]="false">
@@ -97,7 +81,7 @@
   <div mat-dialog-actions>
     <button  mat-button class="mx-2" (click)="onNoClick()">Cancel</button>
     <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
-      {{data?.event ? 'Update' : 'Create' | translate}}
+      {{data?.event?.title ? 'Update' : 'Create' | translate}}
     </button>
   </div>
 
