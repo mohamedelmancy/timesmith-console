@@ -15,6 +15,7 @@ import {date} from "ng2-validation/dist/date";
 import {today} from "../../../../shared/variables/variables";
 import {EventApi, FullCalendarComponent} from "@fullcalendar/angular";
 import {element} from "screenfull";
+import {Subject} from "rxjs";
 
 declare var $: any;
 
@@ -28,8 +29,10 @@ export class TimelineViewComponent implements OnInit {
   @ViewChild("fullcalendar", {static: false}) calendarComponent: FullCalendarComponent;
   options;
   eventDidMounted = false;
+  resizeCounter: Subject<any> = new Subject();
   stillEvent;
   movingEvent;
+  resizedEvent;
   exceptionCodes = [
     {
       title: 'Open time',
@@ -593,9 +596,6 @@ export class TimelineViewComponent implements OnInit {
         }
       },
       initialDate: today, // will be parsed as local
-      eventResize: function (info) {
-        console.log('eventResize ', info.event);
-      },
       eventDrop: function (info) {
         console.log('eventDropped ', info);
         _this.handleOverlapping(_this.stillEvent, _this.movingEvent);
@@ -622,9 +622,34 @@ export class TimelineViewComponent implements OnInit {
         console.log('title ', info.event.title);
         console.log('html ', info.event.extendedProps.html);
         if (info.event?.extendedProps.html) {
+          let icons = info.event.extendedProps.html;
+          _this.resizedEvent = info.el.querySelector('.fc-event-title').innerHTML = icons;
+          _this.resizeCounter.subscribe(data => {
+           console.log('icons before ', icons);
+           console.log('dataaaaaaaaaaaaaaa ', data);
+           icons = info.event.extendedProps.html;
+           for (let i = 0; i < data - 1; i ++) {
+             icons = icons + info.event.extendedProps.html;
+           }
+           console.log('icons after ', icons);
+           console.log('_this.resizedEvent ', _this.resizedEvent);
+           _this.resizedEvent = info.el.querySelector('.fc-event-title').innerHTML = icons;
+            console.log('_this.calendarApi events ', _this.calendarApi.getEvents());
+          })
+        }
+      },
+      eventResize: function (info) {
+        console.log('eventResize ', info.event);
+        if (info.event?.extendedProps.html) {
+          const diff = new Date(info.event._instance.range.end).getTime() - new Date(info.event._instance.range.start).getTime();
+          const minutes = Math.floor(diff / 60000);
+          const iconCount = minutes / _this.calendarApi.getOption('slotDuration')['minutes'];
+          _this.resizeCounter.next(iconCount);
+          console.log('diff  ', diff);
+          console.log('iconCount  ', iconCount);
+          console.log('minutes  ', minutes);
           console.log('hey is code  ', info.event);
           console.log('_this.calendarApi.getEvents()  ', _this.calendarApi.getEvents());
-          info.el.querySelector('.fc-event-title').innerHTML = info.event.extendedProps.html;
         }
       },
       eventClick: (info) => {
