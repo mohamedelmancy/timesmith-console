@@ -34,27 +34,467 @@ export class TimelineViewComponent implements OnInit {
     {
       title: 'Open time',
       color: 'orange',
-      icon: 'fa-reddit'
+      icon: 'fa-reddit',
+      code: true
     },
     {
       title: 'Permission',
       color: 'green',
-      icon: 'fa-clock-o'
+      icon: 'fa-clock-o',
+      code: true
     },
     {
       title: 'External Assignment',
       color: 'red',
-      icon: 'fa-lastfm-square'
+      icon: 'fa-s15',
+      code: true
     },
     {
       title: 'Present',
       color: 'blue',
-      icon: 'fa-legal'
+      icon: 'fa-legal',
+      code: true
     },
     {
       title: 'Open time Off Campus',
       color: 'grey',
-      icon: 'fa-leaf'
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },{
+      title: 'Open time',
+      color: 'orange',
+      icon: 'fa-reddit',
+      code: true
+    },
+    {
+      title: 'Permission',
+      color: 'green',
+      icon: 'fa-clock-o',
+      code: true
+    },
+    {
+      title: 'External Assignment',
+      color: 'red',
+      icon: 'fa-s15',
+      code: true
+    },
+    {
+      title: 'Present',
+      color: 'blue',
+      icon: 'fa-legal',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
     },
 
   ]
@@ -88,24 +528,39 @@ export class TimelineViewComponent implements OnInit {
   // https://codepen.io/pen?editors=0010
   // https://stackoverflow.com/questions/71299412/fullcalendar-how-to-display-non-overlapping-events-inside-same-day-cell-in-one
   ngOnInit(): void {
-    var _this = this;
     setTimeout(() => {
-      let draggableEl = document.getElementById('mydraggable');
-      _this.renderCalendar();
-      _this.getEvents();
+      this.renderCalendar();
+      this.getEvents();
       // this.getResources();
-      new Draggable(draggableEl, {
-        itemSelector: '.dgraggable',
-        eventData: function (eventEl) {
-          const event = _this.leaves.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
-          return {
-            title: eventEl.innerHTML,
-            duration: '00:15',
-            backgroundColor: event?.color,
-            borderColor: event?.color,
-          };
-        }
-      });
+      this.handleDragging();
+    });
+  }
+
+  handleDragging() {
+    var _this = this;
+    let draggableEl = document.getElementById('mydraggable');
+    new Draggable(draggableEl, {
+      itemSelector: '.dgraggable',
+      eventData: function (eventEl) {
+        const leavesEvent = _this.leaves.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
+        let isCode = false;
+        let expCodeColor = '';
+        eventEl.classList.forEach(x=> {
+          if (x.includes('codes')) { //Example codes-green
+            isCode = true;
+            expCodeColor = x.split('-')[1];
+          }
+        })
+        return {
+          title:  isCode ? '' : eventEl.innerHTML,
+          duration: leavesEvent ? '04:00' : '00:15',
+          html: leavesEvent ? null : eventEl.innerHTML,
+          durationEditable: true,
+          overlap: true,
+          backgroundColor: leavesEvent ? leavesEvent?.color : 'white',
+          borderColor: leavesEvent ? leavesEvent?.color : 'white',
+        };
+      }
     });
   }
 
@@ -163,21 +618,20 @@ export class TimelineViewComponent implements OnInit {
       // $(".fc-body .fc-resource-area .fc-cell-content").css('padding', '0px');
       // },
       eventDidMount: function (info) {
-        console.log('eventDidMount ', info);
+        console.log('eventDidMount *******************', info);
         console.log('title ', info.event.title);
-        if (info.event?.title?.includes('class="')) {
-          console.log('hey has icon  ', info.event);
-           const dragged: EventApi = _this.calendarApi.getEvents().find(ev => ev.title === info.event.title);
-          // dragged.remove();
-          // _this.calendarApi.addEvent(info.event)
-          // info.el.getElementsByClassName('.fc-event-main')[0].addClass('icon-events')
-          info.el.querySelector('.fc-event-title').innerHTML = info.event.title;
+        console.log('html ', info.event.extendedProps.html);
+        if (info.event?.extendedProps.html) {
+          console.log('hey is code  ', info.event);
+          console.log('_this.calendarApi.getEvents()  ', _this.calendarApi.getEvents());
+          info.el.querySelector('.fc-event-title').innerHTML = info.event.extendedProps.html;
         }
       },
       eventClick: (info) => {
         console.log('eventClicked ', info.event);
         _this.openDialog(info.event);
       },
+      eventOverlap: this.checkOverlapping.bind(this),
       // select: function(info) {
       //   alert('selected ' + info.startStr + ' to ' + info.endStr);
       // },
@@ -228,7 +682,6 @@ export class TimelineViewComponent implements OnInit {
       // eventOverlap: true,
       // dayMaxEventRows: true,
       // dayMaxEvents: 3,
-      eventOverlap: this.checkOverlapping.bind(this),
       resourceAreaHeaderContent: 'Staff',
       // resources: "https://fullcalendar.io/api/demo-feeds/resources.json?with-nesting&with-colors",
       resources: [{"id": "5", "title": "Taha abd Elsalam"}, {
@@ -247,20 +700,6 @@ export class TimelineViewComponent implements OnInit {
   }
 
   checkOverlapping(stillEvent, movingEvent) {
-    // const outgoingEvent = info
-    // const resId = outgoingEvent.event._def.resourceIds;
-    // console.log('eventMount ', outgoingEvent.event);
-    // console.log('resources ', resId);
-    // const resource = this.calendarApi.getResourceById(resId);
-    // const resourceEvents = resource.getEvents();
-    // console.log('resource events', resourceEvents);
-    // resourceEvents.map(event => {
-    //   console.log('event', event.start)
-    //   console.log('dates >> old',  new Date(event?.start).getTime(), 'new ', new Date(outgoingEvent?.event?.start).getTime())
-    //   if (new Date(outgoingEvent?.event?.start).getTime() <= new Date(event?.start).getTime()) {
-    //     console.log('hey overlap ')
-    //   }
-    // })
     this.stillEvent = stillEvent;
     this.movingEvent = movingEvent;
     return true
@@ -270,22 +709,17 @@ export class TimelineViewComponent implements OnInit {
     console.log('stillEvent', stillEvent)
     console.log('movingEvent', movingEvent)
     console.log('dates >> old', new Date(stillEvent?.start).getTime(), 'new ', new Date(movingEvent?.start).getTime())
-    // if the moving event start before the still event the moving event will take this overlapping zone
-    if (new Date(movingEvent?.start).getTime() <= new Date(stillEvent?.start).getTime() && new Date(stillEvent?.end).getTime() > new Date(movingEvent?.end).getTime()) {
-      console.log('move to end', stillEvent)
-      stillEvent.setStart(movingEvent.end);
-    } else {
-      // stillEvent.setEnd(movingEvent.start);
-    }
-
-
-    // if the moving event duration will cover all still event duration the remove the still event
-    if (new Date(movingEvent?.start).getTime() <= new Date(stillEvent?.start).getTime() && new Date(movingEvent?.end).getTime() >= new Date(stillEvent?.end).getTime()) {
-      const index = this.options.events?.findIndex(ev => new Date(stillEvent?.start).getTime() === new Date(ev?.start).getTime() && new Date(stillEvent?.end).getTime() === new Date(ev?.end).getTime());
-      if (index !== -1) {
-        console.log('removed************************************ ', index);
+    if (new Date(movingEvent?.start).getTime() <= new Date(stillEvent?.start).getTime()) {
+      if (new Date(stillEvent?.end).getTime() > new Date(movingEvent?.end).getTime()) {
+        // if the moving event start before the still event the moving event will take this overlapping zone and the still event will start after it
+        stillEvent.setStart(movingEvent.end);
+      } else {
+        // if the moving event duration will cover all still event duration the remove the still event
         stillEvent.remove()
       }
+      console.log('move to end', stillEvent)
+    } else {
+      // stillEvent.setEnd(movingEvent.start);
     }
     console.log('events ', this.options.events);
     console.log('calendarApi events ', this.calendarApi.getEvents());
@@ -330,7 +764,7 @@ export class TimelineViewComponent implements OnInit {
 
   getEvents() {
     const colors = ['#000', '#9e32a8', '#54ab98', '#becf3e', '#d95d7c', '#35e6e3', '#c414c1']
-    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-05T00:00:00Z&end=2022-06-06T00:00:00Z').subscribe(res => {
+    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-06T00:00:00Z&end=2022-06-07T00:00:00Z').subscribe(res => {
       console.log('res', this.options.events)
       res.map((event, index) => {
         event.overlap = true;

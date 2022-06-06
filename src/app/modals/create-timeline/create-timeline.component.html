@@ -50,7 +50,7 @@
           </div>
           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
             <mat-form-field appearance="outline">
-              <mat-label>Choose a date</mat-label>
+              <mat-label>From</mat-label>
               <input readonly matInput [ngxMatDatetimePicker]="picker" placeholder="MM/DD/YYYY, h:mm:ss a" formControlName="dateFrom"
                      [disabled]="false">
               <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
@@ -63,7 +63,7 @@
           </div>
           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
             <mat-form-field appearance="outline">
-              <mat-label>Choose a date</mat-label>
+              <mat-label>To</mat-label>
               <input readonly matInput [ngxMatDatetimePicker]="picker2" placeholder="MM/DD/YYYY, h:mm:ss a" formControlName="dateTo"
                      [disabled]="false">
               <mat-datepicker-toggle matSuffix [for]="$any(picker2)"></mat-datepicker-toggle>

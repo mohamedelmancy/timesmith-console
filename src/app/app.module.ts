@@ -45,6 +45,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { CreateTimelineComponent } from './modals/create-timeline/create-timeline.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { TooltipOptions } from 'ng2-tooltip-directive';
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatDatepickerModule} from "@angular/material/datepicker";
@@ -57,6 +58,11 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin,
 ]);
+
+export const MyDefaultTooltipOptions: TooltipOptions = {
+  'show-delay': 0,
+  'hideDelay': 0,
+}
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -101,7 +107,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ),
         MatAutocompleteModule,
         MatPaginatorModule,
-        TooltipModule,
+        TooltipModule.forRoot(MyDefaultTooltipOptions as TooltipOptions),
         FontAwesomeModule,
         MenuToggleModule,
         MatRippleModule,
