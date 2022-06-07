@@ -31,22 +31,10 @@ export class CreateTimelineComponent extends AutoComplete implements OnInit {
       id: 3
     },
   ];
-  customDate: FormGroup;
-
   constructor(public dialogRef: MatDialogRef<CreateTimelineComponent>,
               private coreService: CoreService,
               private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,) {
     super()
-    const today = new Date();
-    const month = today.getMonth();
-    const year = today.getFullYear();
-    const day = today.getDate();
-    const tomorrow = moment().add(1, 'days');
-
-    this.customDate = new FormGroup({
-      start: new FormControl(null, Validators.compose([Validators.required])),
-      end: new FormControl(null, Validators.compose([Validators.required])),
-    });
   }
 
   ngOnInit(): void {

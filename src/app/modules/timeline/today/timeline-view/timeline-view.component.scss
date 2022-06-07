@@ -35,7 +35,7 @@ full-calendar{
   border-radius: 3px;
   cursor: move;
   font-weight: 600;
-  margin: 10px 2px;
+  //margin: 10px 2px;
   display: inline-block;
 }
 .scrollable{
@@ -48,4 +48,13 @@ full-calendar{
 }
 .timeline-view{
   width: 90%;
+}
+.calendar-container{
+  position: relative;
+}
+.event-info{
+  width: 585px;
+  position: absolute;
+  top: -7px;
+  left: 312px;
 }

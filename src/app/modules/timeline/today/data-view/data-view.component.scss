@@ -1,0 +1,26 @@
+.inner-cont{
+  max-height: 40px;
+}
+::ng-deep{
+  .view-event {
+    .mat-form-field-appearance-outline .mat-form-field-infix input{
+      //text-align: center;
+      padding: 2px;
+      font-size: 13px;
+      height: 28px;
+    }
+    .mat-form-field-infix{
+      padding: 3px !important;
+      border-top: 12px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+    .mat-button-wrapper{
+      svg{
+        height: 20px !important;
+      }
+    }
+    .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix{
+      top: -4px !important;
+    }
+  }
+}

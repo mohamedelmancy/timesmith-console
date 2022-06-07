@@ -22,6 +22,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import { FiltersComponent } from './today/filters/filters.component';
 import {NgxMatDatetimePickerModule, NgxMatTimepickerModule} from "@angular-material-components/datetime-picker";
+import { DataViewComponent } from './today/data-view/data-view.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {NgxMatDatetimePickerModule, NgxMatTimepickerModule} from "@angular-mater
     TodayComponent,
     ListViewComponent,
     TimelineViewComponent,
-    FiltersComponent
+    FiltersComponent,
+    DataViewComponent
   ],
   imports: [
     CommonModule,

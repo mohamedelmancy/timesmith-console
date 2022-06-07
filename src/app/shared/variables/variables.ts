@@ -5,7 +5,7 @@ export const today = new Date();
 export const phone_pattern = '[- +()0-9]+';
 export const currentLanguage = (secureStorage.getItem('lang') || 'ar');
 export const dateFormat = currentLanguage === 'en' ? 'D/M/yyyy' : 'yyyy/M/D';
-export const dateTimeFormat = currentLanguage === 'en' ? 'D/M/yyyy A HH:MM::SS' : 'yyyy/M/D A HH:MM:SS ';
+export const dateTimeFormat = currentLanguage === 'en' ? 'DD-MM-yyyy HH:MM A' : 'yyyy-MM-DD HH:MM A';
 export const monthDateFormat = currentLanguage === 'en' ? 'M/yyyy' : 'yyyy/M';
 export const datePipe = new DatePipe('en');
 export const momentDateFormat = (date, normal?, format?) => {

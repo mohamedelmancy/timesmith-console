@@ -1,0 +1,54 @@
+<div class="view-event d-flex justify-content-center">
+    <form [formGroup]="form" (ngSubmit)="save(form?.value)" style="text-align: center" fxLayout="row wrap" fxLayoutAlign="center center">
+        <div class="d-flex justify-content-center inner-cont">
+          <div fxFlex.gt-sm="24" fxFlex.gt-xs="24" fxFlex="100"  [ngClass]="{'mrgn-x-sm': language === 'en'}" class="" style="text-align: center">
+            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+              <mat-label>{{'Type' | translate}}</mat-label>
+              <input type="text" matInput formControlName="type" [matAutocomplete]="auto1">
+              <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
+                                (opened)="handlerAutocomplete('type')">
+                <mat-option *ngFor="let option of typesFilteredOptions | async" [value]="option">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+<!--            <small-->
+<!--              *ngIf="form.controls['type'].hasError('required') && form.controls['type'].touched"-->
+<!--              class="warn-text gene-block">-->
+<!--              {{'You must include type' | translate}}-->
+<!--            </small>-->
+<!--            <small-->
+<!--              *ngIf="form.controls['type'].errors && !(form.controls['type'].hasError('required')) && form.controls['type'].touched"-->
+<!--              class="warn-text gene-block">-->
+<!--              {{'You must include a valid type' | translate}}-->
+<!--            </small>-->
+          </div>
+          <div fxFlex.gt-sm="24" fxFlex.gt-xs="24" fxFlex="100"  class="mrgn-x-sm" style="text-align: center">
+            <mat-form-field class="full-wid mrgn-b-md" appearance="outline" >
+              <mat-label>From</mat-label>
+              <input (dateChange)="changeDate($event.target.value, 'start')" readonly matInput [ngxMatDatetimePicker]="picker" placeholder="MM/DD/YYYY, h:mm:ss a" formControlName="dateFrom"
+                     [disabled]="!data?.start">
+              <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false"
+                                       [stepHour]="1" [stepMinute]="1" [stepSecond]="1"
+                                       [touchUi]="false" [color]="'primary'" [enableMeridian]="true"
+                                       [disableMinute]="false" [hideTime]="false">
+              </ngx-mat-datetime-picker>
+            </mat-form-field>
+          </div>
+          <div fxFlex.gt-sm="24" fxFlex.gt-xs="24" fxFlex="100" [ngClass]="{'mrgn-x-sm': language === 'ar'}" class="" style="text-align: center">
+            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+              <mat-label>To</mat-label>
+              <input (dateChange)="changeDate($event.target.value, 'end')" readonly matInput [ngxMatDatetimePicker]="picker2" placeholder="MM/DD/YYYY, h:mm:ss a" formControlName="dateTo"
+                     [disabled]="!data?.end">
+              <mat-datepicker-toggle matSuffix [for]="$any(picker2)"></mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="false"
+                                       [stepHour]="1" [stepMinute]="1" [stepSecond]="1"
+                                       [touchUi]="false" [color]="'primary'" [enableMeridian]="true"
+                                       [disableMinute]="false" [hideTime]="false">
+              </ngx-mat-datetime-picker>
+            </mat-form-field>
+          </div>
+        </div>
+    </form>
+</div>

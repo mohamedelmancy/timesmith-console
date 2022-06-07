@@ -12,10 +12,10 @@ import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateTimelineComponent} from "../../../../modals/create-timeline/create-timeline.component";
 import {date} from "ng2-validation/dist/date";
-import {today} from "../../../../shared/variables/variables";
+import {dateTimeFormat, today} from "../../../../shared/variables/variables";
 import {EventApi, FullCalendarComponent} from "@fullcalendar/angular";
 import {element} from "screenfull";
-import {Subject} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 
 declare var $: any;
 
@@ -30,9 +30,11 @@ export class TimelineViewComponent implements OnInit {
   options;
   eventDidMounted = false;
   resizeCounter: Subject<any> = new Subject();
+  subscription: Subscription
   stillEvent;
   movingEvent;
   resizedEvent;
+  selectedEvent;
   exceptionCodes = [
     {
       title: 'Open time',
@@ -547,20 +549,29 @@ export class TimelineViewComponent implements OnInit {
       eventData: function (eventEl) {
         const leavesEvent = _this.leaves.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
         let isCode = false;
+        let expCodeTitle = '';
         let expCodeColor = '';
         eventEl.classList.forEach(x=> {
-          if (x.includes('codes')) { //Example codes-green
+          if (x.includes('title')) { // Example title-Permission
+            isCode = true;
+            expCodeTitle = x.split('-')[1];
+          }
+          if (x.includes('color')) { // Example color-green
             isCode = true;
             expCodeColor = x.split('-')[1];
           }
         })
+        console.log('eventEl', expCodeColor)
         return {
           title:  isCode ? '' : eventEl.innerHTML,
           duration: leavesEvent ? '04:00' : '00:15',
           html: leavesEvent ? null : eventEl.innerHTML,
           durationEditable: true,
           overlap: true,
-          backgroundColor: leavesEvent ? leavesEvent?.color : 'white',
+          id: Math.random(),
+          fColor: leavesEvent ? leavesEvent?.color : expCodeColor,
+          description: leavesEvent ? '' : expCodeTitle,
+          backgroundColor:  leavesEvent ? leavesEvent?.color : 'white',
           borderColor: leavesEvent ? leavesEvent?.color : 'white',
         };
       }
@@ -580,13 +591,13 @@ export class TimelineViewComponent implements OnInit {
       height: '70vh',
       headerToolbar: {
         // left: 'prev today next',
-        left: GetLanguage() === 'en' ? 'promptResource prev today next' : '',
+        left: GetLanguage() === 'en' ? 'create prev today next' : '',
         // center: 'title',
         // right: 'resourceTimelineDay,resourceTimelineWeek'
-        right: GetLanguage() === 'ar' ? 'promptResource prev today next' : ''
+        right: GetLanguage() === 'ar' ? 'create prev today next' : ''
       },
       customButtons: {
-        promptResource: {
+        create: {
           text: `+ ${this.translateService.instant('Add')}`,
           click: this.openDialog.bind(this), // bind is important!
         },
@@ -609,7 +620,7 @@ export class TimelineViewComponent implements OnInit {
         console.log('calendarApi events ', _this.calendarApi.getEvents());
       },
       eventWillUnmount: function (info) {
-
+        console.log('eventWillUnmount ', info);
       },
       // eventDidMount: function(event, element, view) {
       // console.log('eventDidMount')
@@ -619,42 +630,16 @@ export class TimelineViewComponent implements OnInit {
       // },
       eventDidMount: function (info) {
         console.log('eventDidMount *******************', info);
-        console.log('title ', info.event.title);
-        console.log('html ', info.event.extendedProps.html);
-        if (info.event?.extendedProps.html) {
-          let icons = info.event.extendedProps.html;
-          _this.resizedEvent = info.el.querySelector('.fc-event-title').innerHTML = icons;
-          _this.resizeCounter.subscribe(data => {
-           console.log('icons before ', icons);
-           console.log('dataaaaaaaaaaaaaaa ', data);
-           icons = info.event.extendedProps.html;
-           for (let i = 0; i < data - 1; i ++) {
-             icons = icons + info.event.extendedProps.html;
-           }
-           console.log('icons after ', icons);
-           console.log('_this.resizedEvent ', _this.resizedEvent);
-           _this.resizedEvent = info.el.querySelector('.fc-event-title').innerHTML = icons;
-            console.log('_this.calendarApi events ', _this.calendarApi.getEvents());
-          })
-        }
+        _this.eventMounted(info);
       },
       eventResize: function (info) {
         console.log('eventResize ', info.event);
-        if (info.event?.extendedProps.html) {
-          const diff = new Date(info.event._instance.range.end).getTime() - new Date(info.event._instance.range.start).getTime();
-          const minutes = Math.floor(diff / 60000);
-          const iconCount = minutes / _this.calendarApi.getOption('slotDuration')['minutes'];
-          _this.resizeCounter.next(iconCount);
-          console.log('diff  ', diff);
-          console.log('iconCount  ', iconCount);
-          console.log('minutes  ', minutes);
-          console.log('hey is code  ', info.event);
-          console.log('_this.calendarApi.getEvents()  ', _this.calendarApi.getEvents());
-        }
+        _this.eventResized(info);
       },
       eventClick: (info) => {
         console.log('eventClicked ', info.event);
-        _this.openDialog(info.event);
+        // _this.openDialog(info.event);
+        _this.selectedEvent = info.event;
       },
       eventOverlap: this.checkOverlapping.bind(this),
       // select: function(info) {
@@ -724,6 +709,59 @@ export class TimelineViewComponent implements OnInit {
     }
   }
 
+  eventResized(info) {
+    this.resizedEvent = info.event;
+    if (info.event?.extendedProps.html) {
+      const diff = new Date(info.event._instance.range.end).getTime() - new Date(info.event._instance.range.start).getTime();
+      const minutes = Math.floor(diff / 60000);
+      const iconCount = minutes / this.calendarApi.getOption('slotDuration')['minutes'];
+      this.resizeCounter.next(iconCount);
+      console.log('minutes  ', minutes);
+    }
+    this.subscription.unsubscribe();
+  }
+
+  eventMounted(info) {
+    if (info.event?.extendedProps.html) {
+      let icons = info.event.extendedProps.html;
+      const element = info.el.querySelector('.fc-event-title');
+      element.innerHTML = icons;
+      this.subscription = this.resizeCounter.subscribe(data => {
+        console.log('count ', data);
+        console.log('_this.resizedEvent ', this.resizedEvent);
+        console.log('info.event ', info.event);
+        if (this.resizedEvent.id === info.event.id) {
+          icons = info.event.extendedProps.html;
+          for (let i = 0; i < data - 1; i ++) {
+            icons = icons + ((info.event.extendedProps.html).slice(0, 3) + `style="margin-right: 0 !Important; width: 32px;height: 27px;margin-left: 0px; color: ${info.event.extendedProps.fColor}; font-size: 25px "` + (info.event.extendedProps.html).slice(3));
+          }
+          element.innerHTML = icons;
+        }
+      })
+    }
+    this.addTooltip(info);
+  }
+
+  addTooltip(info) {
+   setTimeout(() => {
+     const header = (info.event.title || info.event.extendedProps.description)
+     const content = `From ( ${moment(info.event.star).format(dateTimeFormat)} )To ( ${moment(info.event.end).format(dateTimeFormat)}) `
+     // $(info.el).tooltip({
+     //   title: info.event.title || info.event.extendedProps.description,
+     //   placement: "top",
+     //   trigger: "hover",
+     //   container: "body"
+     // });
+     // $(info.el).popover({
+     //   title: header.slice(0, 1).toUpperCase() + header.slice(1),
+     //   placement: "top",
+     //   trigger: "hover",
+     //   container: "body",
+     //   content: content,
+     // });
+   }, 200)
+  }
+
   checkOverlapping(stillEvent, movingEvent) {
     this.stillEvent = stillEvent;
     this.movingEvent = movingEvent;
@@ -789,7 +827,7 @@ export class TimelineViewComponent implements OnInit {
 
   getEvents() {
     const colors = ['#000', '#9e32a8', '#54ab98', '#becf3e', '#d95d7c', '#35e6e3', '#c414c1']
-    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-06T00:00:00Z&end=2022-06-07T00:00:00Z').subscribe(res => {
+    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-07T00:00:00Z&end=2022-06-08T00:00:00Z').subscribe(res => {
       console.log('res', this.options.events)
       res.map((event, index) => {
         event.overlap = true;
@@ -842,6 +880,11 @@ export class TimelineViewComponent implements OnInit {
   chooseDate(ev) {
     console.log('ev', ev);
     this.calendarApi.gotoDate(ev);
+  }
+
+  eventViewChange(ev) {
+    this.selectedEvent.setStart(new Date(ev.dateFrom));
+    this.selectedEvent.setEnd(new Date(ev.dateTo));
   }
 
 }
