@@ -27,7 +27,7 @@
           {{'You must include department' | translate}}
         </small>
         <small
-          *ngIf="form.controls['department'].errors && !(form.controls['department'].hasError('required')) && form.controls['department'].touched"
+          *ngIf="form.controls['department'].errors && (form.controls['department'].hasError('wrong')) && form.controls['department'].touched"
           class="warn-text gene-block">
           {{'You must include a valid department' | translate}}
         </small>
@@ -49,7 +49,7 @@
           {{'You must include site' | translate}}
         </small>
         <small
-          *ngIf="form.controls['site'].errors && !(form.controls['site'].hasError('required')) && form.controls['site'].touched"
+          *ngIf="form.controls['site'].errors && (form.controls['site'].hasError('wrong')) && form.controls['site'].touched"
           class="warn-text gene-block">
           {{'You must include a valid site' | translate}}
         </small>
@@ -71,7 +71,7 @@
           {{'You must include sort' | translate}}
         </small>
         <small
-          *ngIf="form.controls['sort'].errors && !(form.controls['sort'].hasError('required')) && form.controls['sort'].touched"
+          *ngIf="form.controls['sort'].errors && (form.controls['sort'].hasError('wrong')) && form.controls['sort'].touched"
           class="warn-text gene-block">
           {{'You must include a valid sort' | translate}}
         </small>

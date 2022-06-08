@@ -4,7 +4,7 @@
           <div fxFlex.gt-sm="24" fxFlex.gt-xs="24" fxFlex="100"  [ngClass]="{'mrgn-x-sm': language === 'en'}" class="" style="text-align: center">
             <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
               <mat-label>{{'Type' | translate}}</mat-label>
-              <input type="text" matInput formControlName="type" [matAutocomplete]="auto1">
+              <input [readonly]="!data?.title" type="text" matInput formControlName="type" [matAutocomplete]="auto1">
               <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
                                 (opened)="handlerAutocomplete('type')">
                 <mat-option *ngFor="let option of typesFilteredOptions | async" [value]="option">
@@ -26,7 +26,7 @@
           <div fxFlex.gt-sm="24" fxFlex.gt-xs="24" fxFlex="100"  class="mrgn-x-sm" style="text-align: center">
             <mat-form-field class="full-wid mrgn-b-md" appearance="outline" >
               <mat-label>From</mat-label>
-              <input (dateChange)="changeDate($event.target.value, 'start')" readonly matInput [ngxMatDatetimePicker]="picker" placeholder="MM/DD/YYYY, h:mm:ss a" formControlName="dateFrom"
+              <input (dateChange)="changeDate($event.target.value, 'start')" readonly matInput [ngxMatDatetimePicker]="picker" placeholder="MM/DD/YYYY, h:mm a" formControlName="dateFrom"
                      [disabled]="!data?.start">
               <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
               <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false"
@@ -39,7 +39,7 @@
           <div fxFlex.gt-sm="24" fxFlex.gt-xs="24" fxFlex="100" [ngClass]="{'mrgn-x-sm': language === 'ar'}" class="" style="text-align: center">
             <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
               <mat-label>To</mat-label>
-              <input (dateChange)="changeDate($event.target.value, 'end')" readonly matInput [ngxMatDatetimePicker]="picker2" placeholder="MM/DD/YYYY, h:mm:ss a" formControlName="dateTo"
+              <input (dateChange)="changeDate($event.target.value, 'end')" readonly matInput [ngxMatDatetimePicker]="picker2" placeholder="MM/DD/YYYY, h:mm a" formControlName="dateTo"
                      [disabled]="!data?.end">
               <mat-datepicker-toggle matSuffix [for]="$any(picker2)"></mat-datepicker-toggle>
               <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="false"

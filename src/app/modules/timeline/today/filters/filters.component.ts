@@ -130,17 +130,17 @@ export class FiltersComponent extends AutoComplete implements OnInit {
       const indexSort = this.sorts.findIndex(res => res === sort.value);
       const indexSite = this.sites.findIndex(res => res === site.value);
       // const indexStatus = this.districtsOptions.findIndex(res => res === status.value);
-      if (indexDep === -1) {
+      if (indexDep === -1 && department.value) {
         department.setErrors({wrong: true});
       } else {
         department.setErrors(null);
       }
-      if (indexSort === -1) {
+      if (indexSort === -1  && sort.value) {
         sort.setErrors({wrong: true});
       } else {
         sort.setErrors(null);
       }
-      if (indexSite === -1) {
+      if (indexSite === -1  && site.value) {
         site.setErrors({wrong: true});
       } else {
         site.setErrors(null);

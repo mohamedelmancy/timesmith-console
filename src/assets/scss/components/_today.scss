@@ -159,6 +159,11 @@
 .fc-event-draggable {
   border-left: 1px dotted #ddd !important;
 }
-.fc .fc-toolbar.fc-header-toolbar{
-  max-width: 310px;
+.fc{
+  .fc-toolbar.fc-header-toolbar{
+    max-width: 310px;
+  }
+  .fc-toolbar-chunk{
+    z-index: 9999 !important;
+  }
 }

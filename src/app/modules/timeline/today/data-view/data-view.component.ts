@@ -43,7 +43,6 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
   }
 
   ngOnInit(): void {
-    this.initialize();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -52,10 +51,7 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
 
   initialize() {
       console.log('selectedEvent', this.selectedEvent);
-      if (this.selectedEvent) {
-        const d = JSON.stringify(this.selectedEvent);
-        this.data = JSON.parse(d);
-      }
+      this.data = this.selectedEvent;
       this.form = this.fb.group({
           type: ['', Validators.compose([])],
           dateFrom: [new Date(this.data?.start), Validators.compose([])],
@@ -64,12 +60,14 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
         {validators: [this.checkAutoComplete()]}
       );
       this.handlerAutocomplete('type');
-      if (this.data?.title) {
+      if (this.data?.title || this.data?.extendedProps?.excepTitle) {
       this.types.push({
-        name: this.data?.title,
+        name: (this.data?.title || this.data?.extendedProps?.excepTitle),
         id: Math.random()
       });
-      this.form.controls['type'].setValue(this.types.find(x => x.name === this.data?.title))
+      this.form.controls['type'].setValue(this.types.find(x => x.name === (this.data?.title || this.data?.extendedProps?.excepTitle)))
+      this.form.controls['dateFrom'].setValue(this.data?.start)
+      this.form.controls['dateTo'].setValue(this.data?.end)
     }
     this.form.valueChanges.subscribe(changes => {
       console.log('changes', changes)
@@ -112,12 +110,12 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
 
   changeDate(e, type) {
     console.log('e', e);
-    if (type === 'start') {
-      this.form.controls['dateFrom'].setValue(e);
-    } else {
-      this.form.controls['dateTo'].setValue(e);
-    }
-    this.emittedData.emit(this.form.value)
+    // if (type === 'start') {
+    //   this.form.controls['dateFrom'].setValue(e);
+    // } else {
+    //   this.form.controls['dateTo'].setValue(e);
+    // }
+    // this.emittedData.emit(this.form.value)
   }
 
 }

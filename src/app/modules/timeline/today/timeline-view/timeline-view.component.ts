@@ -569,6 +569,7 @@ export class TimelineViewComponent implements OnInit {
           durationEditable: true,
           overlap: true,
           id: Math.random(),
+          excepTitle: leavesEvent ? '' : expCodeTitle,
           fColor: leavesEvent ? leavesEvent?.color : expCodeColor,
           description: leavesEvent ? '' : expCodeTitle,
           backgroundColor:  leavesEvent ? leavesEvent?.color : 'white',
@@ -707,6 +708,10 @@ export class TimelineViewComponent implements OnInit {
       }, {"id": "e", "title": "Noha alaa"}, {"id": "f", "title": "Ibrahim tarek", "eventColor": "red"}],
       events: "https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline"
     }
+    setTimeout(() => {
+      this.calendarApi.addResource({"id": "m", "title": "Yousef Essam"}, true)
+
+    }, 2000)
   }
 
   eventResized(info) {
