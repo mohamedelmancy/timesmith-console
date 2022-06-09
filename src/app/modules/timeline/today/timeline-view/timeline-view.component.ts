@@ -3,7 +3,6 @@ import {Calendar, CalendarApi} from '@fullcalendar/core';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import {CoreService} from "../../../../services/core.service";
 import {GetLanguage} from "../../../../shared/functions/shared-functions";
-import {FormControl, FormGroup} from "@angular/forms";
 import moment from "moment";
 import interactionPlugin, {Draggable} from '@fullcalendar/interaction';
 import enLocale from '@fullcalendar/core/locales/en-au';
@@ -11,10 +10,8 @@ import arLocale from '@fullcalendar/core/locales/ar-sa';
 import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateTimelineComponent} from "../../../../modals/create-timeline/create-timeline.component";
-import {date} from "ng2-validation/dist/date";
 import {dateTimeFormat, today} from "../../../../shared/variables/variables";
 import {EventApi, FullCalendarComponent} from "@fullcalendar/angular";
-import {element} from "screenfull";
 import {Subject, Subscription} from "rxjs";
 
 declare var $: any;
@@ -546,37 +543,48 @@ export class TimelineViewComponent implements OnInit {
     let draggableEl = document.getElementById('mydraggable');
     new Draggable(draggableEl, {
       itemSelector: '.dgraggable',
-      eventData: function (eventEl) {
-        const leavesEvent = _this.leaves.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
-        let isCode = false;
-        let expCodeTitle = '';
-        let expCodeColor = '';
-        eventEl.classList.forEach(x=> {
-          if (x.includes('title')) { // Example title-Permission
-            isCode = true;
-            expCodeTitle = x.split('-')[1];
-          }
-          if (x.includes('color')) { // Example color-green
-            isCode = true;
-            expCodeColor = x.split('-')[1];
-          }
-        })
-        console.log('eventEl', expCodeColor)
-        return {
-          title:  isCode ? '' : eventEl.innerHTML,
-          duration: leavesEvent ? '04:00' : '00:15',
-          html: leavesEvent ? null : eventEl.innerHTML,
-          durationEditable: true,
-          overlap: true,
-          id: Math.random(),
-          excepTitle: leavesEvent ? '' : expCodeTitle,
-          fColor: leavesEvent ? leavesEvent?.color : expCodeColor,
-          description: leavesEvent ? '' : expCodeTitle,
-          backgroundColor:  leavesEvent ? leavesEvent?.color : 'white',
-          borderColor: leavesEvent ? leavesEvent?.color : 'white',
-        };
-      }
+      eventData: _this.addNewEvent.bind(this)
     });
+  }
+
+  addNewEvent(eventEl, start?, end?) {
+    console.log('eventEl', eventEl)
+      var _this = this;
+      const leavesEvent = _this.leaves.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
+      let isCode = false;
+      let expCodeTitle = '';
+      let expCodeColor = '';
+      eventEl.classList.forEach(x=> {
+        if (x.includes('title')) { // Example title-Permission
+          isCode = true;
+          expCodeTitle = x.split('-')[1];
+        }
+        if (x.includes('color')) { // Example color-green
+          isCode = true;
+          expCodeColor = x.split('-')[1];
+        }
+      })
+      console.log('eventEl', expCodeColor)
+      let e:any = {
+        title:  isCode ? '' : eventEl.innerHTML,
+        duration: leavesEvent ? '04:00' : '00:15',
+        html: leavesEvent ? null : eventEl.innerHTML,
+        durationEditable: true,
+        overlap: true,
+        id: Math.random(),
+        excepTitle: leavesEvent ? '' : expCodeTitle,
+        fColor: leavesEvent ? leavesEvent?.color : expCodeColor,
+        description: leavesEvent ? '' : expCodeTitle,
+        backgroundColor:  leavesEvent ? leavesEvent?.color : 'white',
+        borderColor: leavesEvent ? leavesEvent?.color : 'white',
+      };
+
+      if (start && end) {
+        e['start'] = start;
+        e['end'] = end;
+      }
+      console.log('ee', e)
+      return e;
   }
 
   ngAfterViewChecked() {
@@ -889,8 +897,24 @@ export class TimelineViewComponent implements OnInit {
   }
 
   eventViewChange(ev) {
+    console.log('ev', ev);
     this.selectedEvent.setStart(new Date(ev.start));
     this.selectedEvent.setEnd(new Date(ev.end));
+    const newEvent = this.selectedEvent;
+    if (ev.form.type.code) {
+      this.selectedEvent.remove();
+      let event = ev.form.type;
+      const eventEl: string = `<span tooltip="${event.title}" id="code-" class="my-2 dgraggable ${'title-' + event.title} ${'color-' + event.color}"><i style="margin-right: 0; color: ${event.color}; font-size: 25px; width: 32px; height: 27px}" class="fa ${event.icon}"></i></span>`;
+      var doc = this.createElementFromHTML(eventEl)
+      this.addNewEvent(doc, new Date(ev.start), new Date(ev.end));
+    }
+  }
+
+   createElementFromHTML(htmlString) {
+    var div = document.createElement('div');
+    div.innerHTML = htmlString.trim();
+    // Change this to div.childNodes to support multiple top-level nodes.
+    return div.firstChild;
   }
 
 }

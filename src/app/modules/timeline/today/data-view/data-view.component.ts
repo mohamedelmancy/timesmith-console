@@ -18,6 +18,7 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
   form: FormGroup;
   language = GetLanguage();
   @Input() selectedEvent: any;
+  @Input() exceptionCodes: any;
   @Output() emittedData = new EventEmitter<any>();
   typesFilteredOptions: Observable<any[]>;
   employeesFilteredOptions: Observable<any[]>;
@@ -43,6 +44,10 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
   }
 
   ngOnInit(): void {
+    this.exceptionCodes?.forEach(code => {
+      code.name = code.title;
+      this.types.push(code);
+    })
   }
 
   ngOnChanges(changes: SimpleChanges) {

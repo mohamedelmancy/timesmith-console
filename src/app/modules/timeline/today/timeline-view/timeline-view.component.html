@@ -33,7 +33,7 @@
       <app-filters (chosenDate)="chooseDate($event)"></app-filters>
       <div class="mt-5 calendar-container">
         <div class="event-info">
-          <app-data-view [selectedEvent]="selectedEvent" (emittedData)="eventViewChange($event)"></app-data-view>
+          <app-data-view [exceptionCodes]="exceptionCodes" [selectedEvent]="selectedEvent" (emittedData)="eventViewChange($event)"></app-data-view>
         </div>
         <full-calendar #fullcalendar id="calendar" *ngIf="options" [options]="options"></full-calendar>
       </div>
