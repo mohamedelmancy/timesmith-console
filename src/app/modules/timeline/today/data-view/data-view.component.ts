@@ -54,8 +54,8 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
       this.data = this.selectedEvent;
       this.form = this.fb.group({
           type: ['', Validators.compose([])],
-          dateFrom: [new Date(this.data?.start), Validators.compose([])],
-          dateTo: [new Date(this.data?.end), Validators.compose([])],
+          dateFrom: ['', Validators.compose([])],
+          dateTo: ['', Validators.compose([])],
         },
         {validators: [this.checkAutoComplete()]}
       );
@@ -65,13 +65,17 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
         name: (this.data?.title || this.data?.extendedProps?.excepTitle),
         id: Math.random()
       });
-      this.form.controls['type'].setValue(this.types.find(x => x.name === (this.data?.title || this.data?.extendedProps?.excepTitle)))
-      this.form.controls['dateFrom'].setValue(this.data?.start)
-      this.form.controls['dateTo'].setValue(this.data?.end)
+      if (this.data) {
+        this.form.controls['type'].setValue(this.types.find(x => x.name === (this.data?.title || this.data?.extendedProps?.excepTitle)))
+        this.form.controls['dateFrom'].setValue(moment(this.data?.start).format('HH:MM A'))
+        this.form.controls['dateTo'].setValue(moment(this.data?.end).format('HH:MM A'))
+      }
     }
     this.form.valueChanges.subscribe(changes => {
-      console.log('changes', changes)
-      this.emittedData.emit(this.form.value);
+      console.log('changes', changes);
+      const start = `${this.data.startStr.split('T')[0]}T${this.form.value.dateFrom.split(' ')[0]}`
+      const end = `${this.data.endStr.split('T')[0]}T${this.form.value.dateTo.split(' ')[0]}`
+      this.emittedData.emit({form: this.form.value, start, end});
     })
     console.log('eee', this.data);
   }

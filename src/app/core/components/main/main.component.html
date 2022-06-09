@@ -4,7 +4,7 @@
       <app-side-bar [menuList]="menuItems" [verticalMenuStatus] = false></app-side-bar>
     </mat-sidenav>
     <mat-toolbar class="gene-header-toolbar horizontal-toolbar-wrap">
-      <div class="gene-logo mat-pad-none"><img src="{{clientLogo}}" width="120" height="27"></div>
+      <div class="gene-logo mat-pad-none"><img src="{{clientLogo}}" width="120" height="27" alt="logo"></div>
       <a class="navbar-brand" *ngIf="isLoggedIn">{{header | translate}}</a>
       <span fxFlex></span>
       <div class="secondary-menu">

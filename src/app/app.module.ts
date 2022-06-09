@@ -50,9 +50,11 @@ import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
-import {NgxMatDatetimePickerModule, NgxMatTimepickerModule} from "@angular-material-components/datetime-picker";
+import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
 import {NgxMatMomentModule} from "@angular-material-components/moment-adapter";
-import {DragDropModule} from "@angular/cdk/drag-drop"; // a plugin!
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import {NgxMatTimepickerModule} from "ngx-mat-timepicker";
+import {GetLanguage} from "./shared/functions/shared-functions"; // a plugin!
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   resourceTimelinePlugin,
   dayGridPlugin,
@@ -118,7 +120,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ReactiveFormsModule,
         MatDatepickerModule,
         NgxMatDatetimePickerModule,
-        NgxMatTimepickerModule,
+        NgxMatTimepickerModule.setLocale(GetLanguage() === 'ar' ? 'ar-SA' : 'en-GB'),
         MatNativeDateModule,
         NgxMatMomentModule,
         DragDropModule

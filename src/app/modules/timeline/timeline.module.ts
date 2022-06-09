@@ -21,8 +21,9 @@ import {TooltipModule} from "ng2-tooltip-directive";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import { FiltersComponent } from './today/filters/filters.component';
-import {NgxMatDatetimePickerModule, NgxMatTimepickerModule} from "@angular-material-components/datetime-picker";
+import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
 import { DataViewComponent } from './today/data-view/data-view.component';
+import {NgxMatTimepickerModule} from "ngx-mat-timepicker";
 
 
 @NgModule({
@@ -33,27 +34,27 @@ import { DataViewComponent } from './today/data-view/data-view.component';
     FiltersComponent,
     DataViewComponent
   ],
-  imports: [
-    CommonModule,
-    TimelineRoutingModule,
-    FullCalendarModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatTabsModule,
-    MatIconModule,
-    FontAwesomeModule,
-    ReactiveFormsModule,
-    SharedModule,
-    FlexModule,
-    MatAutocompleteModule,
-    TranslateModule,
-    TooltipModule,
-    MatButtonModule,
-    MatDividerModule,
-    NgxMatDatetimePickerModule,
-    NgxMatTimepickerModule
-  ]
+    imports: [
+        CommonModule,
+        TimelineRoutingModule,
+        FullCalendarModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatTabsModule,
+        MatIconModule,
+        FontAwesomeModule,
+        ReactiveFormsModule,
+        SharedModule,
+        FlexModule,
+        MatAutocompleteModule,
+        TranslateModule,
+        TooltipModule,
+        MatButtonModule,
+        MatDividerModule,
+        NgxMatDatetimePickerModule,
+        NgxMatTimepickerModule,
+    ]
 })
 export class TimelineModule { }

@@ -526,7 +526,7 @@ export class TimelineViewComponent implements OnInit {
     }
   ]
   calendarApi: Calendar;
-
+  selectedDate: any = today;
   constructor(private coreService: CoreService, private translateService: TranslateService, public dialog: MatDialog) {
   }
 
@@ -607,7 +607,7 @@ export class TimelineViewComponent implements OnInit {
           click: this.todayClick.bind(this)
         }
       },
-      initialDate: today, // will be parsed as local
+      initialDate: this.selectedDate, // will be parsed as local
       eventDrop: function (info) {
         console.log('eventDropped ', info);
         _this.handleOverlapping(_this.stillEvent, _this.movingEvent);
@@ -884,12 +884,13 @@ export class TimelineViewComponent implements OnInit {
 
   chooseDate(ev) {
     console.log('ev', ev);
+    this.selectedDate = ev;
     this.calendarApi.gotoDate(ev);
   }
 
   eventViewChange(ev) {
-    this.selectedEvent.setStart(new Date(ev.dateFrom));
-    this.selectedEvent.setEnd(new Date(ev.dateTo));
+    this.selectedEvent.setStart(new Date(ev.start));
+    this.selectedEvent.setEnd(new Date(ev.end));
   }
 
 }
