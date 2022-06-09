@@ -47,8 +47,8 @@ const MENUITEMS = [
     icon: '',
     role: '',
     children: [
-      {state: 'allocations', name: 'Allocations', label: '', role: '', type: 'link'},
-      {state: 'time-off', name: 'Time Off', label: '', role: '', type: 'link'},
+      {state: 'allocations', name: 'Allocations', label: '', role: '', type: 'subChild'},
+      {state: 'time-off', name: 'Time Off', label: '', role: '', type: 'subChild'},
     ]
   },
   {
@@ -59,11 +59,11 @@ const MENUITEMS = [
     icon: '',
     role: '',
     children: [
-      {state: 'settings', name: 'Settings', label: '', role: '', type: 'link'},
-      {state: 'sites', name: 'Sites', label: '', role: '', type: 'link'},
-      {state: 'shifts', name: 'Shifts', label: '', role: '', type: 'link'},
-      {state: 'leaves', name: 'Leaves', label: '', role: '', type: 'link'},
-      {state: 'exceptions-codes', name: 'Exceptions Codes', label: '', role: '', type: 'link'},
+      {state: 'departments', name: 'Departments', label: '', role: '', type: 'subChild'},
+      {state: 'sites', name: 'Sites', label: '', role: '', type: 'subChild'},
+      {state: 'shifts', name: 'Shifts', label: '', role: '', type: 'subChild'},
+      {state: 'leaves', name: 'Leaves', label: '', role: '', type: 'subChild'},
+      {state: 'exceptions-codes', name: 'Exceptions Codes', label: '', role: '', type: 'subChild'},
     ]
   },
   {
@@ -82,8 +82,8 @@ const MENUITEMS = [
     icon: '',
     role: '',
     children: [
-      {state: 'view-roles', name: 'View Roles', label: '', role: '', type: 'link'},
-      {state: 'manage-permissions', name: 'Manage Permissions', label: '', role: '', type: 'link'},
+      {state: 'view-roles', name: 'View Roles', label: '', role: '', type: 'subChild'},
+      {state: 'manage-permissions', name: 'Manage Permissions', label: '', role: '', type: 'subChild'},
     ]
   },
   {

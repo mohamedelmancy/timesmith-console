@@ -16,7 +16,8 @@
       <div class="sidenav-scrollbar-container" fxLayout="column">
           <mat-nav-list fxLayout="column" menuToggleDirective class="navigation">
             <mat-list-item  *ngFor="let menuitem of menuList.getAll()" menuToggleLink>
-              <a menuToggle class="gene-relative" mat-ripple *ngIf="menuitem.type === 'button'" routerLinkActive="active-link" [routerLink]="[menuitem.state]">
+
+              <a menuToggle class="gene-relative" mat-ripple *ngIf="menuitem.type === 'button'; else menu" routerLinkActive="active-link" [routerLink]="[menuitem.state]">
                 <mat-icon *ngIf="menuitem?.icon">{{ menuitem.icon }}</mat-icon>
                 <i *ngIf="menuitem?.font" class="{{ menuitem.font }}"></i>
                 <span class="list-item-name">{{ menuitem.name | translate }}</span>
@@ -24,30 +25,22 @@
                   <span class="sidebar-label">{{ menuitem.label}}</span>
                 </ng-container>
               </a>
-              <a href="javascript:void(0)" *ngIf="menuitem.type === 'sub'">
-                <span class="gene-text-sm">{{ menuitem.name | translate }}</span>
-              </a>
-              <mat-nav-list *ngIf="menuitem.type === 'sub'">
-                <mat-list-item menuToggleLink *ngFor = "let childItems of menuitem.children" [ngClass]="{'open':childItems.isOpen}">
-                  <a class="anglo-relative" menuToggle routerLinkActive="active-link"  [routerLink]="['/'+childItems.state]" *ngIf="childItems.type==='link'">
-                    <mat-icon >{{ childItems.icon }}</mat-icon>
-                    <span>{{ childItems.name | translate }}</span>
-                  </a>
-<!--                  <a class="anglo-relative" menuToggle href="javascript:void(0)" *ngIf="childItems.type==='subChild'">-->
-<!--                    <mat-icon >{{ childItems.icon }}</mat-icon>-->
-<!--                    <span>{{ childItems.name | translate }}</span>-->
-<!--                    <span fxFlex></span>-->
-<!--                    <mat-icon class="menu-caret">chevron_right</mat-icon>-->
-<!--                  </a>-->
-<!--                  <mat-nav-list class="sub-menu" *ngIf="childItems.type === 'subChild'">-->
-<!--                    <mat-list-item *ngFor="let subchilditem of childItems.children" routerLinkActive="open">-->
-<!--                      <a class="anglo-relative" [routerLink]="['/'+childItems.state+'/'+subchilditem.state]" routerLinkActive="active-link">-->
-<!--                        <span>{{ subchilditem.name | translate }}</span>-->
-<!--                      </a>-->
-<!--                    </mat-list-item>-->
-<!--                  </mat-nav-list>-->
-                </mat-list-item>
-              </mat-nav-list>
+              <ng-template #menu>
+                <a class="gene-relative" menuToggle href="javascript:void(0)">
+                  <mat-icon *ngIf="menuitem?.icon">{{ menuitem.icon }}</mat-icon>
+                  <i *ngIf="menuitem?.font" class="{{ menuitem.font }}"></i>
+                  <span class="list-item-name">{{ menuitem.name | translate }}</span>
+                  <span fxFlex></span>
+                  <mat-icon class="menu-caret">chevron_right</mat-icon>
+                </a>
+                <mat-nav-list class="sub-menu" *ngIf="menuitem.type === 'sub'">
+                  <mat-list-item menuToggleLink *ngFor="let subchilditem of menuitem.children" routerLinkActive="open">
+                    <a class="anglo-relative" menuToggle [routerLink]="['/'+menuitem.state+'/'+subchilditem.state]" routerLinkActive="active-link">
+                      <span>{{ subchilditem.name | translate }}</span>
+                    </a>
+                  </mat-list-item>
+                </mat-nav-list>
+              </ng-template>
             </mat-list-item>
             <mat-divider></mat-divider>
           </mat-nav-list>

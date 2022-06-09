@@ -25,6 +25,7 @@ export class SideBarComponent implements OnInit {
 
   // render to the crm page
   onClick() {
+    console.log('ddd')
     const first = location.pathname.split('/')[1];
     // if(first == 'horizontal'){
     //    this.router.navigate(['/horizontal/dashboard/crm']);

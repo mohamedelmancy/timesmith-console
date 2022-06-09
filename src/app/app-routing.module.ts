@@ -7,11 +7,6 @@ import {MainComponent} from "./core/components/main/main.component";
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'timeline',
-    pathMatch: 'full',
-  },
-  {
-    path: '',
     component: MainComponent,
     // canActivate: [AuthGuard],
     runGuardsAndResolvers: 'always',
@@ -23,7 +18,7 @@ const routes: Routes = [
       },
       {
         path: 'auth',
-        canActivate: [LandingGuard],
+        // canActivate: [LandingGuard],
         loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule)
       },
       {
@@ -47,31 +42,31 @@ const routes: Routes = [
         loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule)
       },
       {
-        path: 'configurations ',
+        path: 'configurations',
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/configurations/configurations.module').then(m => m.ConfigurationsModule)
       },
       {
-        path: 'team ',
+        path: 'team',
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/team/team.module').then(m => m.TeamModule)
       },
       {
-        path: 'roles-permissions ',
+        path: 'roles-permissions',
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/roles-permissions/roles-permissions.module').then(m => m.RolesPermissionsModule)
       },
       {
-        path: 'support ',
+        path: 'support',
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/support/support.module').then(m => m.SupportModule)
       },
     ]
   },
-  {
-    path: '**',
-    redirectTo: 'auth/login'
-  }
+  // {
+  //   path: '**',
+  //   redirectTo: 'auth/login'
+  // }
 ];
 
 @NgModule({
