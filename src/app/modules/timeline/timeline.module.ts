@@ -24,6 +24,7 @@ import { FiltersComponent } from './today/filters/filters.component';
 import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
 import { DataViewComponent } from './today/data-view/data-view.component';
 import {NgxMatTimepickerModule} from "ngx-mat-timepicker";
+import {ClickOutsideModule} from "ng-click-outside";
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import {NgxMatTimepickerModule} from "ngx-mat-timepicker";
         MatDividerModule,
         NgxMatDatetimePickerModule,
         NgxMatTimepickerModule,
+        ClickOutsideModule
     ]
 })
 export class TimelineModule { }

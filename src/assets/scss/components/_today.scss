@@ -170,3 +170,8 @@
 .low-opacity{
   opacity: 0.3 !important;
 }
+@media (max-width: 1024px) {
+  .mydraggable{
+    display: none !important;
+  }
+}

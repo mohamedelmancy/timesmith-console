@@ -19,44 +19,49 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
   language = GetLanguage();
   @Input() selectedEvent: any;
   @Input() exceptionCodes: any;
+  @Input() leaves: any;
   @Output() emittedData = new EventEmitter<any>();
+  @Output() removeEvent = new EventEmitter<any>();
   typesFilteredOptions: Observable<any[]>;
   employeesFilteredOptions: Observable<any[]>;
   data;
   types = [
-    {
-      name: 'Attendance',
-      id: 1
-    },
-    {
-      name: 'Permission',
-      id: 2
-    },
-    {
-      name: 'Leave',
-      id: 3
-    },
+    // {
+    //   name: 'Attendance',
+    //   title: 'Attendance',
+    //   id: 1,
+    //   color: '#09706c'
+    // },
+    // {
+    //   name: 'Permission',
+    //   title: 'Permission',
+    //   id: 2,
+    //   color: '#d0052a'
+    // },
+    // {
+    //   name: 'Leave',
+    //   title: 'Leave',
+    //   id: 3,
+    //   color: '#653d08'
+    // },
   ];
-
+  changed = false;
   constructor(private coreService: CoreService,
               private fb: FormBuilder) {
     super()
   }
 
   ngOnInit(): void {
-    this.exceptionCodes?.forEach(code => {
-      code.name = code.title;
-      this.types.push(code);
-    })
+    this.handleTypes();
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.data = this.selectedEvent;
+    this.handleTypes();
     this.initialize();
   }
 
   initialize() {
-      console.log('selectedEvent', this.selectedEvent);
-      this.data = this.selectedEvent;
       this.form = this.fb.group({
           type: ['', Validators.compose([])],
           dateFrom: ['', Validators.compose([])],
@@ -68,21 +73,35 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
       if (this.data?.title || this.data?.extendedProps?.excepTitle) {
       this.types.push({
         name: (this.data?.title || this.data?.extendedProps?.excepTitle),
-        id: Math.random()
+        title: (this.data?.title || this.data?.extendedProps?.excepTitle),
+        id: Math.random(),
+        color: '#d0052a',
       });
       if (this.data) {
         this.form.controls['type'].setValue(this.types.find(x => x.name === (this.data?.title || this.data?.extendedProps?.excepTitle)))
-        this.form.controls['dateFrom'].setValue(moment(this.data?.start).format('HH:MM A'))
-        this.form.controls['dateTo'].setValue(moment(this.data?.end).format('HH:MM A'))
+        this.form.controls['dateFrom'].setValue(moment(this.data?.start).format('hh:mm A'))
+        this.form.controls['dateTo'].setValue(moment(this.data?.end).format('hh:mm A'))
       }
     }
     this.form.valueChanges.subscribe(changes => {
       console.log('changes', changes);
-      const start = `${this.data.startStr.split('T')[0]}T${this.form.value.dateFrom.split(' ')[0]}`
-      const end = `${this.data.endStr.split('T')[0]}T${this.form.value.dateTo.split(' ')[0]}`
-      this.emittedData.emit({form: this.form.value, start, end});
+      this.changed = true;
     })
-    console.log('eee', this.data);
+  }
+
+  handleTypes() {
+    this.types = [];
+    if (this.data?.extendedProps?.html) {
+      this.exceptionCodes?.forEach(code => {
+        code.name = code.title;
+        this.types.push(code);
+      })
+    } else {
+      this.leaves?.forEach(leave => {
+        leave.name = leave.title;
+        this.types.push(leave);
+      })
+    }
   }
 
   handlerAutocomplete(type) {
@@ -113,7 +132,15 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
 
   save(value) {
     console.log('save', value)
-    // this.dialogRef.close({data: value, event: this.data.event});
+    const start = `${this.data.startStr.split('T')[0]}T${this.form.value.dateFrom.split(' ')[0]}`
+    const end = `${this.data.endStr.split('T')[0]}T${this.form.value.dateTo.split(' ')[0]}`
+    this.emittedData.emit({form: this.form.value, start, end, event: this.data});
+    this.changed = false;
+  }
+
+  remove(value) {
+    console.log('remove', value)
+    this.removeEvent.emit(this.data);
   }
 
 

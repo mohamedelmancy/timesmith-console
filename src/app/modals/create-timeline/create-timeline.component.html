@@ -79,7 +79,7 @@
     </form>
   </div>
   <div mat-dialog-actions>
-    <button  mat-button class="mx-2" (click)="onNoClick()">Cancel</button>
+    <button  mat-button class="mx-2 warn-bg" (click)="onNoClick()">Cancel</button>
     <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
       {{data?.event?.title ? 'Update' : 'Create' | translate}}
     </button>
