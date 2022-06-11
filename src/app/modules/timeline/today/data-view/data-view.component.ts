@@ -21,6 +21,7 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
   @Input() exceptionCodes: any;
   @Input() leaves: any;
   @Output() emittedData = new EventEmitter<any>();
+  @Output() closeDrawer = new EventEmitter<any>();
   @Output() removeEvent = new EventEmitter<any>();
   typesFilteredOptions: Observable<any[]>;
   employeesFilteredOptions: Observable<any[]>;
@@ -136,11 +137,18 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
     const end = `${this.data.endStr.split('T')[0]}T${this.form.value.dateTo.split(' ')[0]}`
     this.emittedData.emit({form: this.form.value, start, end, event: this.data});
     this.changed = false;
+    this.closeDrawer.emit(false);
   }
 
   remove(value) {
     console.log('remove', value)
     this.removeEvent.emit(this.data);
+    this.closeDrawer.emit(false);
+  }
+
+  close(event) {
+    console.log('close')
+    this.closeDrawer.emit(false);
   }
 
 

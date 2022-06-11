@@ -3,6 +3,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 import {DateAdapter} from "@angular/material/core";
 import {secureStorage} from "./shared/functions/secure-storage";
+import {GetLanguage} from "./shared/functions/shared-functions";
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit{
     const lang = secureStorage.getItem('lang') || 'en';
     secureStorage.setItem('lang', lang);
     this.translate.use(lang);
-    this.dateAdapter.setLocale(lang);
+    this.dateAdapter.setLocale(GetLanguage() === 'ar' ? 'ar-SA' : 'en-GB');
     const dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.body.style.direction = dir;
   }

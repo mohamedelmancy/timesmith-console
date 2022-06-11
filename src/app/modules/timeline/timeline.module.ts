@@ -20,12 +20,27 @@ import {TranslateModule} from "@ngx-translate/core";
 import {TooltipModule} from "ng2-tooltip-directive";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
-import { FiltersComponent } from './today/filters/filters.component';
+import {FiltersComponent} from './today/filters/filters.component';
 import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
 import { DataViewComponent } from './today/data-view/data-view.component';
 import {NgxMatTimepickerModule} from "ngx-mat-timepicker";
 import {ClickOutsideModule} from "ng-click-outside";
-
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material/core";
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from "@angular/material-moment-adapter";
+import {dateFormat} from "../../shared/variables/variables";
+import {GetLanguage} from "../../shared/functions/shared-functions";
+import {MatSidenavModule} from "@angular/material/sidenav";
+export const MY_FORMATS = {
+  parse: {
+    dateInput: dateFormat,
+  },
+  display: {
+    dateInput: dateFormat,
+    monthYearLabel: dateFormat,
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -35,28 +50,38 @@ import {ClickOutsideModule} from "ng-click-outside";
     FiltersComponent,
     DataViewComponent
   ],
-    imports: [
-        CommonModule,
-        TimelineRoutingModule,
-        FullCalendarModule,
-        MatDatepickerModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatTabsModule,
-        MatIconModule,
-        FontAwesomeModule,
-        ReactiveFormsModule,
-        SharedModule,
-        FlexModule,
-        MatAutocompleteModule,
-        TranslateModule,
-        TooltipModule,
-        MatButtonModule,
-        MatDividerModule,
-        NgxMatDatetimePickerModule,
-        NgxMatTimepickerModule,
-        ClickOutsideModule
-    ]
+  imports: [
+    CommonModule,
+    TimelineRoutingModule,
+    FullCalendarModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatTabsModule,
+    MatIconModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    SharedModule,
+    FlexModule,
+    MatAutocompleteModule,
+    TranslateModule,
+    TooltipModule,
+    MatButtonModule,
+    MatDividerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    ClickOutsideModule,
+    MatSidenavModule
+  ],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    {provide: MAT_DATE_LOCALE, useValue: GetLanguage() === 'ar' ? 'ar-SA' : 'en-GB'},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ]
 })
 export class TimelineModule { }

@@ -170,8 +170,20 @@
 .low-opacity{
   opacity: 0.3 !important;
 }
-@media (max-width: 1024px) {
+mat-drawer{
+  width: 100vw;
+}
+@media (max-width: 1200px) {
   .mydraggable{
     display: none !important;
   }
+  .fc-datagrid-cell-main, .fc-timeline-slot-cushion, .fc-event-title{
+    font-size: 12px !important;
+  }
+  .mat-tab-header{
+    left: 45% !important;
+  }
+}
+.ngx-mat-timepicker-dialog{
+  z-index: 999999999999;
 }

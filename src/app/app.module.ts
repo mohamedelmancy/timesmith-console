@@ -35,11 +35,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 import {AuthInterceptor} from "./services/interceptor";
 import {ToastrModule} from "ngx-toastr";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatPaginatorIntl, MatPaginatorModule} from "@angular/material/paginator";
 import {TooltipModule} from "ng2-tooltip-directive";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MenuToggleModule} from "./core/menu/menu-toggle.module";
-import {MatRippleModule} from "@angular/material/core"; // a plugin!
+import {MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatRippleModule} from "@angular/material/core"; // a plugin!
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
 import { CreateTimelineComponent } from './modals/create-timeline/create-timeline.component';
@@ -50,11 +50,13 @@ import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
-import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
+import {NgxMatDatetimePickerModule, NgxMatNativeDateModule} from "@angular-material-components/datetime-picker";
 import {NgxMatMomentModule} from "@angular-material-components/moment-adapter";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {NgxMatTimepickerModule} from "ngx-mat-timepicker";
-import {GetLanguage} from "./shared/functions/shared-functions"; // a plugin!
+import {GetLanguage} from "./shared/functions/shared-functions";
+import {MY_FORMATS} from "./modules/timeline/timeline.module";
+import {getDutchPaginatorIntl} from "./shared/functions/dutch-paginator-intl"; // a plugin!
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   resourceTimelinePlugin,
   dayGridPlugin,
@@ -123,7 +125,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         NgxMatTimepickerModule.setLocale(GetLanguage() === 'ar' ? 'ar-SA' : 'en-GB'),
         MatNativeDateModule,
         NgxMatMomentModule,
-        DragDropModule
+        DragDropModule,
+        NgxMatNativeDateModule
     ],
   providers: [
     MenuItems, PageTitleService,
@@ -139,7 +142,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    },],
+    },
+    {provide: MAT_DATE_LOCALE, useValue: GetLanguage() === 'ar' ? 'ar-SA' : 'en-GB'},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ CreateTimelineComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

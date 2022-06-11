@@ -1,8 +1,7 @@
-<div class="d-flex timeline-filters justify-content-end">
-  <form [formGroup]="form" style="text-align: center" fxLayout="row wrap" fxLayoutAlign="center center">
-    <div class="d-flex justify-content-center inner-cont">
-      <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" [ngClass]="{'mrgn-x-sm': language === 'en'}" class="" style="text-align: center">
-        <mat-form-field class="example-form-field" appearance="outline">
+<div class="container-fluid">
+  <form [formGroup]="form" class="row inner-cont justify-content-end">
+      <div class="col-sm-12 col-md-6 col-lg-2">
+        <mat-form-field class="example-form-field full-wid" appearance="outline">
           <mat-label>Choose a date</mat-label>
           <input readonly matInput [matDatepicker]="picker" (dateChange)="changeDate($event.target.value)" formControlName="date" placeholder="MM/DD/YYYY">
           <!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
@@ -10,7 +9,7 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
-      <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" class="mrgn-x-sm" style="text-align: center">
+      <div class="col-sm-12 col-md-6 col-lg-2">
         <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
           <mat-label>{{'Department' | translate}}</mat-label>
           <input type="text" matInput formControlName="department" [matAutocomplete]="auto0">
@@ -32,7 +31,7 @@
           {{'You must include a valid department' | translate}}
         </small>
       </div>
-      <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" class="mrgn-x-sm" style="text-align: center">
+      <div class="col-sm-12 col-md-6 col-lg-2">
         <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
           <mat-label>{{'Site' | translate}}</mat-label>
           <input type="text" matInput formControlName="site" [matAutocomplete]="auto2">
@@ -54,7 +53,7 @@
           {{'You must include a valid site' | translate}}
         </small>
       </div>
-      <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" [ngClass]="{'mrgn-x-sm': language === 'ar'}" class="" style="text-align: center">
+      <div class="col-sm-12 col-md-6 col-lg-2">
         <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
           <mat-label>{{'Sort' | translate}}</mat-label>
           <input type="text" matInput formControlName="sort" [matAutocomplete]="auto1">
@@ -76,6 +75,5 @@
           {{'You must include a valid sort' | translate}}
         </small>
       </div>
-    </div>
   </form>
 </div>

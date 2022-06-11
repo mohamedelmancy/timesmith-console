@@ -53,8 +53,35 @@ full-calendar{
   position: relative;
 }
 .event-info{
-  width: 585px;
+  //width: 585px;
   position: absolute;
   top: -7px;
-  left: 437px;
+  left: 312px;
+}
+@media (max-width: 1200px) {
+  .event-info{
+    top: 60px !important;
+    left: -10px !important;
+  }
+  #calendar{
+    //margin-top: 322px;
+  }
+  .calendar-container{
+    //margin-top: 0 !important;
+  }
+  .edit-event{
+    display: none !important;
+  }
+  .container-fluid{
+    height: 100vh;
+  }
+  .timeline-view{
+    width: 100%;
+  }
+  ::ng-deep .timeline .mat-form-field-appearance-outline {
+    margin-bottom: 0 !important;
+    .mat-form-field-wrapper {
+      padding-bottom: 0 !important;
+    }
+  }
 }
