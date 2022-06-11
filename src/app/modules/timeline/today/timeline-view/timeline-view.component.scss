@@ -1,6 +1,8 @@
 full-calendar{
   //width: 100%;
   //height: 100vh;
+  border: 2px dashed grey;
+  padding: 8px;
 }
 ::ng-deep.fc-datagrid-body{
   width: 565px !important;
@@ -44,7 +46,10 @@ full-calendar{
 }
 .mydraggable{
   width: 10%;
-  margin-top: 38px;
+  margin-top: 87px;
+  background-color: #e0e0e0;
+  padding: 11px;
+  border-radius: 5px;
 }
 .timeline-view{
   width: 90%;
@@ -55,7 +60,7 @@ full-calendar{
 .event-info{
   //width: 585px;
   position: absolute;
-  top: -7px;
+  top: 7px;
   left: 312px;
 }
 @media (max-width: 1200px) {

@@ -6,7 +6,7 @@
         <div class="exception-codes">
           <p class="dgraggable-title">Exception Codes ( {{exceptionCodes?.length}} )</p>
           <div class="scrollable">
-            <span [ngStyle]="{'background': ''}" tooltip="{{item.title}}" [id]="'code-' + i" class="my-2 dgraggable {{'title-' + item.title.replace(' ', '_' )}} {{'color-' + item.color}}"
+            <span [ngStyle]="{'background': ''}" tooltip="{{item.title}}" [id]="'code-' + i" class="my-2 dgraggable {{'title-' + item.title.replaceAll(' ', '_' )}} {{'color-' + item.color}}"
                *ngFor="let item of exceptionCodes; let i = index"><i style="margin-right: 0" [ngStyle]="{'color': item.color, 'font-size': '25px','width': '32px','height': '27px'}" class="fa {{item.icon}}"></i></span>
           </div>
           <div class="d-flex justify-content-center align-items-center mt-2">

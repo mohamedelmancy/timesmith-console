@@ -25,7 +25,8 @@
     "strictNullChecks": false,
     "lib": [
       "es2020",
-      "dom"
+      "dom",
+      "ES2021.String"
     ],
     "types": ["node"]
   },

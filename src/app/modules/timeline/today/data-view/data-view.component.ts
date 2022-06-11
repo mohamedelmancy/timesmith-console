@@ -88,6 +88,7 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
       console.log('changes', changes);
       this.changed = true;
     })
+    console.log('data', this.data);
   }
 
   handleTypes() {

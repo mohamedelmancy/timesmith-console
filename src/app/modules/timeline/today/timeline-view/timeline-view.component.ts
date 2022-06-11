@@ -15,6 +15,7 @@ import {EventApi, FullCalendarComponent} from "@fullcalendar/angular";
 import {first, Subject, Subscription} from "rxjs";
 import {take} from "rxjs/operators";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ToastrService} from "ngx-toastr";
 
 declare var $: any;
 
@@ -127,7 +128,11 @@ export class TimelineViewComponent implements OnInit {
   ]
   calendarApi: Calendar;
   selectedDate: any = today;
-  constructor(private coreService: CoreService, private translateService: TranslateService, public dialog: MatDialog, private modalService: NgbModal) {
+  constructor(private coreService: CoreService,
+              private translateService: TranslateService,
+              public dialog: MatDialog,
+              private toastr: ToastrService,
+              private modalService: NgbModal) {
   }
 
   // https://codepen.io/pen?editors=0010
@@ -161,7 +166,7 @@ export class TimelineViewComponent implements OnInit {
       eventEl.classList.forEach(x=> {
         if (x.includes('title')) { // Example title-Permission
           isCode = true;
-          expCodeTitle = x.split('-')[1].replace('_', ' ');
+          expCodeTitle = x.split('-')[1].replaceAll('_', ' ');
         }
         if (x.includes('color')) { // Example color-green
           isCode = true;
@@ -179,8 +184,8 @@ export class TimelineViewComponent implements OnInit {
         excepTitle: leavesEvent ? '' : expCodeTitle,
         fColor: leavesEvent ? leavesEvent?.color : expCodeColor,
         description: leavesEvent ? '' : expCodeTitle,
-        backgroundColor:  leavesEvent ? leavesEvent?.color : 'white',
-        borderColor: leavesEvent ? leavesEvent?.color : 'white',
+        backgroundColor:  leavesEvent ? leavesEvent?.color : '#ebf8fc',
+        borderColor: leavesEvent ? leavesEvent?.color : '#ebf8fc',
       };
       return e;
   }
@@ -536,7 +541,7 @@ export class TimelineViewComponent implements OnInit {
     let comingEvent;
     let previousEvent = data.event;
     let nextEvent: any;
-    if (data.event.extendedProps.html) {
+    if (data.event.extendedProps.type === 'code') {
       const allEvents = [...this.exceptionCodes];
       nextEvent = allEvents.find(ev => ev.title === data.form.type.name);
       console.log('has html*******************');
@@ -548,8 +553,8 @@ export class TimelineViewComponent implements OnInit {
         "resourceId": data.event._def.resourceIds[0],
         "title": '',
         "color": nextEvent?.color,
-        "backgroundColor": 'white',
-        "borderColor": 'white',
+        "backgroundColor": '#ebf8fc',
+        "borderColor": '#ebf8fc',
         "overlap": true,
         id: data.event.id,
         fColor: nextEvent?.color,
@@ -557,7 +562,8 @@ export class TimelineViewComponent implements OnInit {
         excepTitle: nextEvent?.title,
         html: `<i style="margin-right: 0; color: ${nextEvent?.color}; font-size: 25px; width: 32px; height: 27px" class="fa ${nextEvent?.icon}"></i>`
       };
-    } else {
+      this.insertUpdatesEvent(previousEvent, comingEvent);
+    } else if (data.event.extendedProps.type === 'leave'){
       const allEvents = [...this.leaves];
       nextEvent = allEvents.find(ev => ev.title === data.form.type.name);
       let previousEvent = data.event
@@ -575,13 +581,23 @@ export class TimelineViewComponent implements OnInit {
         id: data.event.id,
         fColor: nextEvent?.color,
       };
+      this.insertUpdatesEvent(previousEvent, comingEvent);
+    } else {
+      this.selectedEvent.setStart(new Date(data.start));
+      this.selectedEvent.setEnd(new Date(data.end));
+      console.log('selectedEvent', this.selectedEvent);
+      this.resetEditEvent();
+      this.toastr.success('Event updated successfully!')
     }
-    console.log('comingEvent', comingEvent);
+  }
+
+  insertUpdatesEvent(previousEvent, comingEvent) {
     const event = this.calendarApi.addEvent(comingEvent);
     previousEvent.remove();
     this.resizedEvent = null;
     this.eventResized(event);
     this.resetEditEvent();
+    this.toastr.success('Event updated successfully!')
   }
 
    createElementFromHTML(htmlString) {
@@ -594,6 +610,7 @@ export class TimelineViewComponent implements OnInit {
   removeEvent(ev) {
     this.resetEditEvent();
     ev.remove();
+    this.toastr.success('Event removed successfully!')
   }
 
   closeEditEvent(event) {
