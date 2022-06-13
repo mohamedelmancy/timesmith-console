@@ -12,6 +12,14 @@ import { LeavesComponent } from './leaves/leaves.component';
 import { CreateLeaveComponent } from './leaves/create-leave/create-leave.component';
 import { ExceptionCodesComponent } from './exception-codes/exception-codes.component';
 import { CreateExceptionCodeComponent } from './exception-codes/create-exception-code/create-exception-code.component';
+import {SharedModule} from "../../shared/shared.module";
+import {MatButtonModule} from "@angular/material/button";
+import {TranslateModule} from "@ngx-translate/core";
+import {MatIconModule} from "@angular/material/icon";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -29,7 +37,15 @@ import { CreateExceptionCodeComponent } from './exception-codes/create-exception
   ],
   imports: [
     CommonModule,
-    ConfigurationsRoutingModule
+    ConfigurationsRoutingModule,
+    SharedModule,
+    MatButtonModule,
+    TranslateModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatInputModule
   ]
 })
 export class ConfigurationsModule { }

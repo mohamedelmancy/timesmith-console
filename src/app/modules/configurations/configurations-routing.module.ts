@@ -5,6 +5,7 @@ import {DepartmentsComponent} from "./departments/departments.component";
 import {ShiftsComponent} from "./shifts/shifts.component";
 import {LeavesComponent} from "./leaves/leaves.component";
 import {ExceptionCodesComponent} from "./exception-codes/exception-codes.component";
+import {CreateSiteComponent} from "./sites/create-site/create-site.component";
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: 'sites',
         component: SitesComponent,
+      },
+      {
+        path: 'create-site',
+        component: CreateSiteComponent,
       },
       {
         path: 'departments',

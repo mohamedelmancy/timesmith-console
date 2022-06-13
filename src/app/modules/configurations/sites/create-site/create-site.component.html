@@ -1,1 +1,105 @@
-<p>create-site works!</p>
+<div class="card-body container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-sm-6 card d-flex flex-column p-3">
+      <div class="col-sm-12">
+        <form [formGroup]="form" class="col-sm-12 justify-content-start">
+          <div class="d-flex justify-content-center align-items-center"><h2>Create new site</h2></div>
+          <div class="d-flex row">
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>Site name</mat-label>
+                <input matInput placeholder="{{'Name' | translate}}" type="text" name="name" formControlName="name">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched"
+                class="warn-text gene-block">
+                {{'You must include name' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['name'].errors && (form.controls['name'].hasError('wrong')) && form.controls['name'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid name' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Individuals' | translate}}</mat-label>
+                <input matInput placeholder="{{'Individuals' | translate}}" type="number" name="individuals"
+                       formControlName="individuals">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['individuals'].hasError('required') && form.controls['individuals'].touched"
+                class="warn-text gene-block">
+                {{'You must include individuals' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['individuals'].errors && (form.controls['individuals'].hasError('wrong')) && form.controls['individuals'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid individuals' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Tolerance' | translate}}</mat-label>
+                <input matInput placeholder="{{'Tolerance' | translate}}" type="text" name="tolerance"
+                       formControlName="tolerance">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['tolerance'].hasError('required') && form.controls['tolerance'].touched"
+                class="warn-text gene-block">
+                {{'You must include tolerance' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['tolerance'].errors && (form.controls['tolerance'].hasError('wrong')) && form.controls['tolerance'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid tolerance' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Latitude' | translate}}</mat-label>
+                <input matInput placeholder="{{'latitude' | translate}}" type="text" name="name"
+                       formControlName="latitude">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['latitude'].hasError('required') && form.controls['latitude'].touched"
+                class="warn-text gene-block">
+                {{'You must include longitude' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['latitude'].errors && (form.controls['longitude'].hasError('wrong')) && form.controls['latitude'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid longitude' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Longitude' | translate}}</mat-label>
+                <input matInput placeholder="{{'longitude' | translate}}" type="text" name="longitude"
+                       formControlName="longitude">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['longitude'].hasError('required') && form.controls['longitude'].touched"
+                class="warn-text gene-block">
+                {{'You must include longitude' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['longitude'].errors && (form.controls['longitude'].hasError('wrong')) && form.controls['longitude'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid longitude' | translate}}
+              </small>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-12">
+        <!--        <agm-map [latitude]="lat" [longitude]="lng">-->
+        <!--          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>-->
+        <!--        </agm-map>-->
+        <div id="map"></div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

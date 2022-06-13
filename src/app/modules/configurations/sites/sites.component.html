@@ -1,1 +1,10 @@
-<p>sites works!</p>
+<div class="list d-flex flex-column card-body">
+  <div class="col-sm-12 d-flex mt-5 justify-content-end">
+    <button [routerLink]="['/configurations/create-site']" tooltip="Add new row" color="primary" mat-raised-button type="button" class="primary-bg">
+      <mat-icon>add</mat-icon>
+      {{'Create'| translate}}</button>
+  </div>
+  <div class="">
+    <app-data-table [displayedColumns]="displayedColumns" [data]="data"></app-data-table>
+  </div>
+</div>

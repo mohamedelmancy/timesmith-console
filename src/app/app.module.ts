@@ -56,7 +56,7 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import {NgxMatTimepickerModule} from "ngx-mat-timepicker";
 import {GetLanguage} from "./shared/functions/shared-functions";
 import {MY_FORMATS} from "./modules/timeline/timeline.module";
-import {getDutchPaginatorIntl} from "./shared/functions/dutch-paginator-intl"; // a plugin!
+import {getDutchPaginatorIntl} from "./shared/functions/dutch-paginator-intl";
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   resourceTimelinePlugin,
   dayGridPlugin,
@@ -126,7 +126,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatNativeDateModule,
         NgxMatMomentModule,
         DragDropModule,
-        NgxMatNativeDateModule
+        NgxMatNativeDateModule,
     ],
   providers: [
     MenuItems, PageTitleService,

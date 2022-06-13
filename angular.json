@@ -37,12 +37,16 @@
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/wowjs/css/libs/animate.css"
+              "node_modules/wowjs/css/libs/animate.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/leaflet-geosearch/dist/geosearch.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "node_modules/wowjs/dist/wow.js"
+              "node_modules/wowjs/dist/wow.js",
+              "node_modules/leaflet/dist/leaflet.js",
+              "node_modules/leaflet-geosearch/dist/geosearch.js"
             ]
           },
           "configurations": {
