@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Confirm</h1>
+<div mat-dialog-content>Are you sure you want to delete this row</div>
+<div mat-dialog-actions>
+  <button  mat-button class="mx-2 warn-bg" mat-dialog-close>No</button>
+  <button (click)="yes()"  color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
+    {{'Yes' | translate}}
+  </button>
+</div>

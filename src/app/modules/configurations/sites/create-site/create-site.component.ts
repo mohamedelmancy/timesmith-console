@@ -3,6 +3,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 declare var require: any;
 var L  = require('leaflet')
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+import {ActivatedRoute, Router} from "@angular/router";
+import {CoreService} from "../../../../services/core.service";
+import {secureStorage} from "../../../../shared/functions/secure-storage";
 
 @Component({
   selector: 'app-create-site',
@@ -12,10 +15,11 @@ import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 export class CreateSiteComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService) { }
   lat = 51.678418;
   lng = 7.809007;
   map;
+  data;
   ngOnInit(): void {
     this.form = this.fb.group({
         name: ['', Validators.compose([Validators.required])],
@@ -46,10 +50,23 @@ export class CreateSiteComponent implements OnInit {
 
     this.form.valueChanges.subscribe(changes => {
       console.log('changes', changes);
-      this.map.panTo(new L.LatLng(changes.latitude, changes?.longitude));
-    })
+      if (changes.latitude && changes?.longitude) {
+        this.map?.panTo(new L.LatLng(changes?.latitude, changes?.longitude));
+      }
+    });
+    this.data = this.activatedRoute.snapshot.data['site'];
+    this.data = secureStorage.getItem('row');
+    this.fillForm();
+    console.log('this.data', this.data);
   }
 
+  fillForm() {
+    this.form.controls['name'].setValue(this.data?.name);
+    this.form.controls['latitude'].setValue(this.data?.latitude);
+    this.form.controls['longitude'].setValue(this.data?.longitude);
+    this.form.controls['tolerance'].setValue(this.data?.tolerance);
+    this.form.controls['individuals'].setValue(this.data?.individuals);
+  }
 
   async addSearchBox() {
     const provider = new OpenStreetMapProvider();
@@ -78,6 +95,10 @@ export class CreateSiteComponent implements OnInit {
     }).addTo(this.map);
   }
   mapClicked(event) {
+  }
+
+  save(value) {
+
   }
 
 }

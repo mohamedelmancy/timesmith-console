@@ -9,6 +9,7 @@ import {AuthService} from "../../../services/auth.service";
 import {CoreService} from "../../../services/core.service";
 import {secureStorage} from "../../../shared/functions/secure-storage";
 import {environment} from "../../../../environments/environment";
+import {BreadcrumbService} from "ng5-breadcrumb";
 
 declare var require;
 
@@ -97,6 +98,7 @@ export class MainComponent implements OnInit, OnDestroy {
               private pageTitleService: PageTitleService,
               public translate: TranslateService,
               private router: Router,
+              private breadcrumbService: BreadcrumbService,
               private authService: AuthService,
               public coreService: CoreService,
               private routes: Router,
@@ -104,7 +106,7 @@ export class MainComponent implements OnInit, OnDestroy {
     if (window.innerWidth > 1199) {
       // this.tourService.start();
     }
-
+         this.setBreadCrumbs();
   }
 
   ngOnInit() {
@@ -121,6 +123,20 @@ export class MainComponent implements OnInit, OnDestroy {
       this.header = val;
       secureStorage.setItem('title', val)
     });
+  }
+
+  setBreadCrumbs() {
+    this.breadcrumbService.addFriendlyNameForRoute('/timeline', 'Today');
+    this.breadcrumbService.addFriendlyNameForRoute('/auth/login', 'Login');
+    this.breadcrumbService.addFriendlyNameForRoute('/auth/register', 'Register');
+    this.breadcrumbService.addFriendlyNameForRoute('/auth/forgot-password', 'Forgot Password');
+    this.breadcrumbService.addFriendlyNameForRoute('/requests', 'Requests');
+    this.breadcrumbService.addFriendlyNameForRoute('/reports', 'Reports');
+    this.breadcrumbService.addFriendlyNameForRoute('/notifications', 'Notifications');
+    this.breadcrumbService.addFriendlyNameForRoute('/configurations', 'Configurations');
+    this.breadcrumbService.addFriendlyNameForRoute('/team', 'Team');
+    this.breadcrumbService.addFriendlyNameForRoute('/team', 'Roles & permissions');
+    this.breadcrumbService.addFriendlyNameForRoute('/support', 'Support');
   }
 
   setLocalization() {

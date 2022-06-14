@@ -10,7 +10,7 @@ import {dateTimeFormat} from "../../../shared/variables/variables";
 export class SitesComponent implements OnInit {
   displayedColumns = {
     labels: ['Site name', 'Latitude', 'Longitude', 'Tolerance', 'Individuals', 'Actions'],
-    values: ['name', 'latitude', 'longitude', 'tolerance', 'individuals'],
+    values: ['name', 'latitude', 'longitude', 'tolerance', 'individuals', 'actions'],
   };
   constructor() { }
   data = [
@@ -24,21 +24,21 @@ export class SitesComponent implements OnInit {
     }, {
       name: 'Al nozha Al Gdida',
       latitude: 2.11479588,
-      id: 1,
+      id: 2,
       longitude: 2.99874557,
       tolerance: 18,
       individuals: 5
     }, {
       name: 'Sues',
       latitude: 2.7444778,
-      id: 1,
+      id: 3,
       longitude: 2.99688854,
       tolerance: 20,
       individuals: 9
     }, {
       name: 'fifth settlement',
       latitude: 2.125547851,
-      id: 1,
+      id: 4,
       longitude: 2.33214478,
       tolerance: 12,
       individuals: 5
@@ -48,6 +48,13 @@ export class SitesComponent implements OnInit {
     this.data.forEach(item => {
 
     })
+  }
+
+  deleteRow(event) {
+    console.log('e', event)
+    const i = this.data.findIndex(x => x?.id === event.id);
+    console.log('i', i)
+    this.data = this.data.filter(x =>  x.id !== event?.id);
   }
 
 }

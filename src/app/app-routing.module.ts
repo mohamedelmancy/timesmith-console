@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {LandingGuard} from "./core/guards/landing.guard";
 import {AuthGuard} from "./core/guards/auth.guard";
 import {MainComponent} from "./core/components/main/main.component";
+import {ChangePasswordComponent} from "./modules/authentication/change-password/change-password.component";
 
 const routes: Routes = [
   {
@@ -60,6 +61,10 @@ const routes: Routes = [
         path: 'support',
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/support/support.module').then(m => m.SupportModule)
+      },
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent
       },
     ]
   },

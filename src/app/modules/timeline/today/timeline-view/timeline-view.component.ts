@@ -479,7 +479,7 @@ export class TimelineViewComponent implements OnInit {
 
   getEvents() {
     const colors = ['#000', '#9e32a8', '#54ab98', '#becf3e', '#d95d7c', '#35e6e3', '#c414c1']
-    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-11T00:00:00Z&end=2022-06-12T00:00:00Z').subscribe(res => {
+    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-14T00:00:00Z&end=2022-06-15T00:00:00Z').subscribe(res => {
       console.log('res', this.options.events)
       res.map((event, index) => {
         event.overlap = true;

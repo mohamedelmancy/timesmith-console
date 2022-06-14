@@ -1,1 +1,135 @@
-<p>create-leave works!</p>
+<div class="card-body container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-sm-6 card d-flex flex-column p-3">
+      <div class="col-sm-12">
+        <form [formGroup]="form" class="col-sm-12 justify-content-start">
+          <div class="d-flex justify-content-center align-items-center my-4"><h2>{{data ? 'Update leave' : 'Create new leave'}}</h2></div>
+          <div class="d-flex row">
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>Shift name</mat-label>
+                <input matInput placeholder="{{'Name' | translate}}" type="text" name="name" formControlName="name">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched"
+                class="warn-text gene-block">
+                {{'You must include name' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['name'].errors && (form.controls['name'].hasError('wrong')) && form.controls['name'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid name' | translate}}
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Type' | translate}}</mat-label>
+                <input type="text" matInput formControlName="type" [matAutocomplete]="auto1">
+                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
+                                  (opened)="handlerAutocomplete('type')">
+                  <mat-option *ngFor="let option of typesFilteredOptions | async" [value]="option">
+                    {{option.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['type'].hasError('required') && form.controls['type'].touched"
+                class="warn-text gene-block">
+                {{'You must include type' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['type'].errors && !(form.controls['type'].hasError('required')) && form.controls['type'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid type' | translate}}
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Balance' | translate}}</mat-label>
+                <input matInput placeholder="{{'Balance' | translate}}" type="number" name="balance"
+                       formControlName="balance">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['balance'].hasError('required') && form.controls['balance'].touched"
+                class="warn-text gene-block">
+                {{'You must include balance' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['balance'].errors && (form.controls['balance'].hasError('wrong')) && form.controls['balance'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid balance' | translate}}
+              </small>
+            </div>
+
+
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="example-form-field full-wid" appearance="outline">
+                <mat-label>Balance start</mat-label>
+                <input readonly matInput [matDatepicker]="picker" formControlName="start" placeholder="MM/DD/YYYY">
+                <!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['start'].hasError('required') && form.controls['start'].touched"
+                class="warn-text gene-block">
+                {{'You must include start' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['start'].errors && (form.controls['start'].hasError('wrong')) && form.controls['start'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid start' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="example-form-field full-wid" appearance="outline">
+                <mat-label>Balance end</mat-label>
+                <input readonly matInput [matDatepicker]="picker2" formControlName="end" placeholder="MM/DD/YYYY">
+                <!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['end'].hasError('required') && form.controls['end'].touched"
+                class="warn-text gene-block">
+                {{'You must include end' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['end'].errors && (form.controls['end'].hasError('wrong')) && form.controls['end'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid end' | translate}}
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>Symbol</mat-label>
+                <input matInput placeholder="{{'Symbol' | translate}}" type="color" name="symbol" formControlName="symbol">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['symbol'].hasError('required') && form.controls['symbol'].touched"
+                class="warn-text gene-block">
+                {{'You must include symbol' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['symbol'].errors && (form.controls['symbol'].hasError('wrong')) && form.controls['symbol'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid symbol' | translate}}
+              </small>
+            </div>
+
+
+            <div class="col-sm-12 d-flex justify-content-end mt-5">
+              <button  mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/leaves']">Back</button>
+              <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
+                {{data ? 'Update' : 'Create'}}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

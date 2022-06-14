@@ -20,6 +20,10 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
+import {SiteResolver} from "../../resolvers/site.resolver";
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import {NgxMatTimepickerModule} from "ngx-mat-timepicker";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 @NgModule({
@@ -35,17 +39,21 @@ import {MatInputModule} from "@angular/material/input";
     ExceptionCodesComponent,
     CreateExceptionCodeComponent
   ],
-  imports: [
-    CommonModule,
-    ConfigurationsRoutingModule,
-    SharedModule,
-    MatButtonModule,
-    TranslateModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    MatInputModule
-  ]
+    imports: [
+        CommonModule,
+        ConfigurationsRoutingModule,
+        SharedModule,
+        MatButtonModule,
+        TranslateModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        NgMultiSelectDropDownModule,
+        NgxMatTimepickerModule,
+        MatAutocompleteModule,
+    ],
+  providers: [SiteResolver]
 })
 export class ConfigurationsModule { }

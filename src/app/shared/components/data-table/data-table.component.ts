@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {PageTitleService} from "../../../core/page-title/page-title.service";
 import {GetLanguage, searchInAllTableColumns} from "../../functions/shared-functions";
 import {secureStorage} from "../../functions/secure-storage";
+import {DeleteComponent} from "../../../modals/delete/delete.component";
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
@@ -18,19 +19,22 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() pageSize = 5;
   @Input() showSearch = true;
   @Input() data;
+  @Input() dataTableName;
+  @Output() deleteEvent = new EventEmitter<any>();
   rows = [];
   filterTypes = [];
   gradeValidation = [];
   finalGrade: number;
   backup = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private pageTitleService: PageTitleService, private _liveAnnouncer: LiveAnnouncer, private _Router: Router,
+  constructor(private pageTitleService: PageTitleService, private _liveAnnouncer: LiveAnnouncer, private router: Router,
               private dialog: MatDialog) {
   }
   ngOnChanges() {
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
-    this.backup = [...this.dataSource.data]
+    this.backup = [...this.dataSource.data];
+    console.log('data', this.data)
   }
 
 
@@ -42,6 +46,37 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  takeAction(type, row) {
+    if (type === 'Update') {
+      secureStorage.setItem('row', row);
+      if (this.dataTableName === 'departments') {
+        this.router.navigate(['/configurations/view-department', row?.id])
+      } else if (this.dataTableName === 'sites') {
+        this.router.navigate(['/configurations/view-site', row?.id])
+      } else if (this.dataTableName === 'shifts') {
+        this.router.navigate(['/configurations/view-shift', row?.id])
+      } else if (this.dataTableName === 'leaves') {
+        this.router.navigate(['/configurations/view-leave', row?.id])
+      } else if (this.dataTableName === 'exception-codes') {
+        this.router.navigate(['/configurations/view-exception-code', row?.id])
+      }
+    } else {
+      const dialogRef = this.dialog.open(DeleteComponent, {
+          data: row,
+          direction: GetLanguage() === 'ar' ? 'rtl' : 'ltr',
+          minHeight: '50%',
+          width: window.innerWidth > 1199 ? '35%' : '90%'
+        }
+      );
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('res', result);
+        if (result === 'yes') {
+          this.deleteEvent.emit(row);
+        }
+      })
+    }
   }
 
   applyFilter(event: Event, type) {

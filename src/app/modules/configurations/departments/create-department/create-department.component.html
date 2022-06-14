@@ -1,1 +1,74 @@
-<p>create-department works!</p>
+<div class="card-body container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-sm-6 card d-flex flex-column p-3">
+      <div class="col-sm-12">
+        <form [formGroup]="form" class="col-sm-12 justify-content-start">
+          <div class="d-flex justify-content-center align-items-center my-4"><h2>{{data ? 'Update department' : 'Create new department'}}</h2></div>
+          <div class="d-flex row">
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>Department name</mat-label>
+                <input matInput placeholder="{{'Name' | translate}}" type="text" name="name" formControlName="name">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched"
+                class="warn-text gene-block">
+                {{'You must include name' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['name'].errors && (form.controls['name'].hasError('wrong')) && form.controls['name'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid name' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6 ">
+                <mat-label>{{'Employees' | translate}}</mat-label>
+                <ng-multiselect-dropdown
+                  [placeholder]="placeholderText"
+                  [settings]="dropdownSettings"
+                  [data]="employees"
+                  formControlName="employees"
+                  [disabled]="disabled"
+                >
+                </ng-multiselect-dropdown>
+              <small
+                *ngIf="form.controls['employees'].hasError('required') && form.controls['employees'].touched"
+                class="warn-text gene-block">
+                {{'You must include employees' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['employees'].errors && (form.controls['employees'].hasError('wrong')) && form.controls['employees'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid employees' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Manager' | translate}}</mat-label>
+                <input matInput placeholder="{{'Manager' | translate}}" type="text" name="manager"
+                       formControlName="manager">
+              </mat-form-field>
+<!--              <small-->
+<!--                *ngIf="form.controls['tolerance'].hasError('required') && form.controls['tolerance'].touched"-->
+<!--                class="warn-text gene-block">-->
+<!--                {{'You must include tolerance' | translate}}-->
+<!--              </small>-->
+<!--              <small-->
+<!--                *ngIf="form.controls['tolerance'].errors && (form.controls['tolerance'].hasError('wrong')) && form.controls['tolerance'].touched"-->
+<!--                class="warn-text gene-block">-->
+<!--                {{'You must include a valid tolerance' | translate}}-->
+<!--              </small>-->
+            </div>
+            <div class="col-sm-12 col-md-6 ">
+              <button  mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/departments']">Back</button>
+              <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
+                {{data ? 'Update' : 'Create'}}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

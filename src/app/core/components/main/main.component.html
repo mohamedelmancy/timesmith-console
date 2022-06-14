@@ -6,6 +6,7 @@
     <mat-toolbar class="gene-header-toolbar horizontal-toolbar-wrap">
       <div class="gene-logo mat-pad-none"><img src="{{clientLogo}}" width="120" height="27" alt="logo"></div>
       <a class="navbar-brand" *ngIf="isLoggedIn">{{header | translate}}</a>
+      <breadcrumb class="gene-breadcrumbs"></breadcrumb>
       <span fxFlex></span>
       <div class="secondary-menu">
         <button *ngIf="isLoggedIn" class="user-button" mat-button [matMenuTriggerFor]="menu" style="width: fit-content; margin-top: 1px;">

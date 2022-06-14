@@ -57,6 +57,9 @@ import {NgxMatTimepickerModule} from "ngx-mat-timepicker";
 import {GetLanguage} from "./shared/functions/shared-functions";
 import {MY_FORMATS} from "./modules/timeline/timeline.module";
 import {getDutchPaginatorIntl} from "./shared/functions/dutch-paginator-intl";
+import { DeleteComponent } from './modals/delete/delete.component';
+import {BreadcrumbService, Ng5BreadcrumbModule} from "ng5-breadcrumb";
+import { ChangePasswordComponent } from './modules/authentication/change-password/change-password.component';
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   resourceTimelinePlugin,
   dayGridPlugin,
@@ -78,6 +81,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FooterComponent,
     LanguageDropDownComponent,
     CreateTimelineComponent,
+    DeleteComponent,
+    ChangePasswordComponent,
   ],
     imports: [
         BrowserModule,
@@ -127,6 +132,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         NgxMatMomentModule,
         DragDropModule,
         NgxMatNativeDateModule,
+        Ng5BreadcrumbModule.forRoot(),
     ],
   providers: [
     MenuItems, PageTitleService,
@@ -145,10 +151,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     },
     {provide: MAT_DATE_LOCALE, useValue: GetLanguage() === 'ar' ? 'ar-SA' : 'en-GB'},
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
-    { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() }
+    { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() },
+    BreadcrumbService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ CreateTimelineComponent],
+  entryComponents: [ CreateTimelineComponent, DeleteComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
