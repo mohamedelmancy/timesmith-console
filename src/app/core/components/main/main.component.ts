@@ -135,7 +135,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.breadcrumbService.addFriendlyNameForRoute('/notifications', 'Notifications');
     this.breadcrumbService.addFriendlyNameForRoute('/configurations', 'Configurations');
     this.breadcrumbService.addFriendlyNameForRoute('/team', 'Team');
-    this.breadcrumbService.addFriendlyNameForRoute('/team', 'Roles & permissions');
+    this.breadcrumbService.addFriendlyNameForRoute('/roles-permissions', 'Roles & permissions');
     this.breadcrumbService.addFriendlyNameForRoute('/support', 'Support');
   }
 

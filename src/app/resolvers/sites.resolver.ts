@@ -10,12 +10,11 @@ import {CoreService} from "../services/core.service";
 @Injectable({
   providedIn: 'root'
 })
-export class DepartmentResolver implements Resolve<boolean> {
+export class SitesResolver implements Resolve<boolean> {
   constructor(private coreService: CoreService) {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    const id = route.params['id'];
-    // return this.coreService.getRequest(`departments/${id}`)
+    // return this.coreService.getRequest(`sites`)
     return of(true);
   }
 }

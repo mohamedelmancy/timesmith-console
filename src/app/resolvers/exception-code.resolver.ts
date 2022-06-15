@@ -15,7 +15,7 @@ export class ExceptionCodeResolver implements Resolve<boolean> {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const id = route.params['id'];
-    // return this.coreService.getRequest(`codes/${id}?auditPageCode=BoShowEvaluationPanels`)
+    // return this.coreService.getRequest(`codes/${id}`)
     return of(true);
   }
 }

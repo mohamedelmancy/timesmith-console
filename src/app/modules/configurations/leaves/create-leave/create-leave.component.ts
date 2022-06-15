@@ -35,10 +35,10 @@ export class CreateLeaveComponent extends AutoComplete implements OnInit {
     this.form = this.fb.group({
         name: ['', Validators.compose([Validators.required])],
         type: ['', Validators.compose([Validators.required])],
-        balance: ['', Validators.compose([Validators.required])],
+        balance: ['', Validators.compose([])],
         start: [null, Validators.compose([Validators.required])],
         end: [null, Validators.compose([Validators.required])],
-        symbol: [null, Validators.compose([Validators.required])],
+        color: [null, Validators.compose([Validators.required])],
       },
       {validators: []}
     );
@@ -68,7 +68,7 @@ export class CreateLeaveComponent extends AutoComplete implements OnInit {
     this.form.controls['balance'].setValue(this.data?.balance);
     this.form.controls['start'].setValue(new Date(this.data?.start));
     this.form.controls['end'].setValue(new Date(this.data?.end));
-    this.form.controls['symbol'].setValue(this.data?.symbol);
+    this.form.controls['color'].setValue(this.data?.color);
   }
 
   save(value) {

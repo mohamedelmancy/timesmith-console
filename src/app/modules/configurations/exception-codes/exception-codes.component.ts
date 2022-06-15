@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import moment from "moment";
 import {dateFormat, dateTimeFormat} from "../../../shared/variables/variables";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-exception-codes',
@@ -13,7 +14,7 @@ export class ExceptionCodesComponent implements OnInit {
     labels: ['Exception code', 'Symbol', 'Actions'],
     values: ['code', 'symbol', 'actions'],
   };
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { }
   data = [
     {
       code: 'Assignment',
@@ -31,6 +32,7 @@ export class ExceptionCodesComponent implements OnInit {
     },
   ]
   ngOnInit(): void {
+    // this.data = this.activatedRoute.snapshot.data['exceptionCode'];
     this.data.forEach(item => {
     })
   }

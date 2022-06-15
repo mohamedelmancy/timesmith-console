@@ -15,6 +15,11 @@ import {LeaveResolver} from "../../resolvers/leave.resolver";
 import {CreateExceptionCodeComponent} from "./exception-codes/create-exception-code/create-exception-code.component";
 import {ExceptionCodeResolver} from "../../resolvers/exception-code.resolver";
 import {DepartmentResolver} from "../../resolvers/department.resolver";
+import {SitesResolver} from "../../resolvers/sites.resolver";
+import {DepartmentsResolver} from "../../resolvers/departments.resolver";
+import {ShiftsResolver} from "../../resolvers/shifts.resolver";
+import {LeavesResolver} from "../../resolvers/leaves.resolver";
+import {ExceptionCodesResolver} from "../../resolvers/exception-codes.resolver";
 
 const routes: Routes = [
   {
@@ -28,6 +33,9 @@ const routes: Routes = [
       {
         path: 'sites',
         component: SitesComponent,
+        resolve: {
+          sites: SitesResolver
+        }
       },
       {
         path: 'create-site',
@@ -43,6 +51,9 @@ const routes: Routes = [
       {
         path: 'departments',
         component: DepartmentsComponent,
+        resolve: {
+          departments: DepartmentsResolver
+        }
       },
       {
         path: 'create-department',
@@ -58,6 +69,9 @@ const routes: Routes = [
       {
         path: 'shifts',
         component: ShiftsComponent,
+        resolve: {
+          shifts: ShiftsResolver
+        }
       },
       {
         path: 'create-shift',
@@ -73,6 +87,9 @@ const routes: Routes = [
       {
         path: 'leaves',
         component: LeavesComponent,
+        resolve: {
+          leaves: LeavesResolver
+        }
       },
       {
         path: 'create-leave',
@@ -88,6 +105,9 @@ const routes: Routes = [
       {
         path: 'exceptions-codes',
         component: ExceptionCodesComponent,
+        resolve: {
+          exceptionCodes: ExceptionCodesResolver
+        }
       },
       {
         path: 'create-exception-code',

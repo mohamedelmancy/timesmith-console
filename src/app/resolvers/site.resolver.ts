@@ -15,7 +15,7 @@ export class SiteResolver implements Resolve<boolean> {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const id = route.params['id'];
-    // return this.coreService.getRequest(`site/${id}?auditPageCode=BoShowEvaluationPanels`)
+    // return this.coreService.getRequest(`site/${id}`)
     return of(true);
   }
 }

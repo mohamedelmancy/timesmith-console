@@ -38,6 +38,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {MenuToggleModule} from "../core/menu/menu-toggle.module";
 import { DataTableComponent } from './components/data-table/data-table.component';
 import {TranslateModule} from "@ngx-translate/core";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -49,7 +50,8 @@ import {TranslateModule} from "@ngx-translate/core";
   exports: [
     LoaderComponent,
     TooltipModule,
-    DataTableComponent
+    DataTableComponent,
+    TranslateModule
 
   ],
     imports: [
@@ -97,6 +99,7 @@ import {TranslateModule} from "@ngx-translate/core";
         MatAutocompleteModule,
         MatPaginatorModule,
         TranslateModule,
+        RouterModule,
     ]
 })
 export class SharedModule { }

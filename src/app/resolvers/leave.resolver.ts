@@ -15,7 +15,7 @@ export class LeaveResolver implements Resolve<boolean> {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const id = route.params['id'];
-    // return this.coreService.getRequest(`leave/${id}?auditPageCode=BoShowEvaluationPanels`)
+    // return this.coreService.getRequest(`leave/${id}`)
     return of(true);
   }
 }

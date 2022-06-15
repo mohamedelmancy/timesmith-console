@@ -59,27 +59,27 @@
               </mat-form-field>
               <ngx-mat-timepicker #pickerB></ngx-mat-timepicker>
             </div>
-            <div class="col-sm-12 col-md-6 ">
-              <mat-label>{{'Employees' | translate}}</mat-label>
-              <ng-multiselect-dropdown
-                [placeholder]="placeholderText"
-                [settings]="dropdownSettings"
-                [data]="employees"
-                formControlName="employees"
-                [disabled]="disabled"
-              >
-              </ng-multiselect-dropdown>
-              <small
-                *ngIf="form.controls['employees'].hasError('required') && form.controls['employees'].touched"
-                class="warn-text gene-block">
-                {{'You must include employees' | translate}}
-              </small>
-              <small
-                *ngIf="form.controls['employees'].errors && (form.controls['employees'].hasError('wrong')) && form.controls['employees'].touched"
-                class="warn-text gene-block">
-                {{'You must include a valid employees' | translate}}
-              </small>
-            </div>
+<!--            <div class="col-sm-12 col-md-6 ">-->
+<!--              <mat-label>{{'Employees' | translate}}</mat-label>-->
+<!--              <ng-multiselect-dropdown-->
+<!--                [placeholder]="placeholderText"-->
+<!--                [settings]="dropdownSettings"-->
+<!--                [data]="employees"-->
+<!--                formControlName="employees"-->
+<!--                [disabled]="disabled"-->
+<!--              >-->
+<!--              </ng-multiselect-dropdown>-->
+<!--              <small-->
+<!--                *ngIf="form.controls['employees'].hasError('required') && form.controls['employees'].touched"-->
+<!--                class="warn-text gene-block">-->
+<!--                {{'You must include employees' | translate}}-->
+<!--              </small>-->
+<!--              <small-->
+<!--                *ngIf="form.controls['employees'].errors && (form.controls['employees'].hasError('wrong')) && form.controls['employees'].touched"-->
+<!--                class="warn-text gene-block">-->
+<!--                {{'You must include a valid employees' | translate}}-->
+<!--              </small>-->
+<!--            </div>-->
             <div class="col-sm-12 col-md-6 ">
               <mat-label>{{'Weekends' | translate}}</mat-label>
               <ng-multiselect-dropdown

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import moment from "moment";
 import {dateTimeFormat} from "../../../shared/variables/variables";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-sites',
@@ -12,39 +13,40 @@ export class SitesComponent implements OnInit {
     labels: ['Site name', 'Latitude', 'Longitude', 'Tolerance', 'Individuals', 'Actions'],
     values: ['name', 'latitude', 'longitude', 'tolerance', 'individuals', 'actions'],
   };
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { }
   data = [
     {
       name: 'Abbas el Akkad',
-      latitude: 2.55878754,
+      latitude: 29.98833754091559,
       id: 1,
-      longitude: 2.44878754,
+      longitude: 31.127786800599356,
       tolerance: 10,
       individuals: 3
     }, {
       name: 'Al nozha Al Gdida',
-      latitude: 2.11479588,
+      latitude: 30.11479588,
       id: 2,
-      longitude: 2.99874557,
+      longitude: 30.99874557,
       tolerance: 18,
       individuals: 5
     }, {
       name: 'Sues',
-      latitude: 2.7444778,
+      latitude: 30.7444778,
       id: 3,
-      longitude: 2.99688854,
+      longitude: 30.99688854,
       tolerance: 20,
       individuals: 9
     }, {
       name: 'fifth settlement',
-      latitude: 2.125547851,
+      latitude: 30.125547851,
       id: 4,
-      longitude: 2.33214478,
+      longitude: 30.33214478,
       tolerance: 12,
       individuals: 5
     },
   ]
   ngOnInit(): void {
+    // this.data = this.activatedRoute.snapshot.data['sites'];
     this.data.forEach(item => {
 
     })

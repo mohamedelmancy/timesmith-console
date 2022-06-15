@@ -21,23 +21,23 @@ export class CreateShiftComponent implements OnInit {
   searchText: string = 'type name...';
   disabled = false;
   noDataAvailText: string = 'No data available';
-  employees = [
-    {
-      name: 'ahmed',
-      id: 1
-    },
-    {
-      name: 'Ali',
-      id: 2
-    },
-    {
-      name: 'Ola',
-      id: 3
-    },{
-      name: 'Sama',
-      id: 4
-    },
-  ]
+  // employees = [
+  //   {
+  //     name: 'ahmed',
+  //     id: 1
+  //   },
+  //   {
+  //     name: 'Ali',
+  //     id: 2
+  //   },
+  //   {
+  //     name: 'Ola',
+  //     id: 3
+  //   },{
+  //     name: 'Sama',
+  //     id: 4
+  //   },
+  // ]
 
   weekends = [
     {
@@ -68,7 +68,7 @@ export class CreateShiftComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
         name: ['', Validators.compose([Validators.required])],
-        employees: ['', Validators.compose([Validators.required])],
+        // employees: ['', Validators.compose([Validators.required])],
         weekends: ['', Validators.compose([Validators.required])],
         from: [null, Validators.compose([Validators.required])],
         to: [null, Validators.compose([Validators.required])],
@@ -87,7 +87,7 @@ export class CreateShiftComponent implements OnInit {
 
   fillForm() {
     this.form.controls['name'].setValue(this.data?.name);
-    this.form.controls['employees'].setValue(this.data?.employees);
+    // this.form.controls['employees'].setValue(this.data?.employees);
     this.form.controls['weekends'].setValue(this.data?.weekends);
     this.form.controls['from'].setValue(this.data?.from);
     this.form.controls['to'].setValue(this.data?.to);

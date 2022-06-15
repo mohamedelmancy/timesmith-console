@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import moment from "moment";
 import {dateFormat, dateTimeFormat} from "../../../shared/variables/variables";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-leaves',
@@ -11,9 +12,9 @@ export class LeavesComponent implements OnInit {
 
   displayedColumns = {
     labels: ['Leave name', 'Type', 'Balance', 'Balance start', 'Balance end', 'Symbol', 'Actions'],
-    values: ['name', 'type', 'balance', 'start', 'end', 'symbol', 'actions'],
+    values: ['name', 'type', 'balance', 'start', 'end', 'color', 'actions'],
   };
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { }
   data = [
     {
       name: 'Sick leave',
@@ -21,7 +22,7 @@ export class LeavesComponent implements OnInit {
       balance: 2,
       end: '2022-06-09',
       start: '2022-06-07',
-      symbol: '#ff1122',
+      color: '#ff1122',
       id: 1
     },{
       name: 'Permission',
@@ -29,7 +30,7 @@ export class LeavesComponent implements OnInit {
       balance: 12,
       end: '2022-06-09',
       start: '2022-06-07',
-      symbol: '#669f28',
+      color: '#669f28',
       id: 1
     },
     {
@@ -38,7 +39,7 @@ export class LeavesComponent implements OnInit {
       balance: 2,
       end: '2022-06-09',
       start: '2022-06-07',
-      symbol: '#1e3cad',
+      color: '#1e3cad',
       id: 2
     },{
       name: 'Annual',
@@ -46,7 +47,7 @@ export class LeavesComponent implements OnInit {
       balance: 2,
       end: '2022-06-09',
       start: '2022-06-07',
-      symbol: '#dea413',
+      color: '#dea413',
       id: 3
     },{
       name: 'Casual',
@@ -54,7 +55,7 @@ export class LeavesComponent implements OnInit {
       balance: 2,
       end: '2022-06-09',
       start: '2022-06-07',
-      symbol: '#9f0c7c',
+      color: '#9f0c7c',
       id: 4
     },{
       name: 'Easter',
@@ -62,11 +63,12 @@ export class LeavesComponent implements OnInit {
       balance: 2,
       end: '2022-06-09',
       start: '2022-06-07',
-      symbol: '#2da449',
+      color: '#2da449',
       id: 5
     }
   ]
   ngOnInit(): void {
+    // this.data = this.activatedRoute.snapshot.data['leaves'];
     this.data.forEach(item => {
       item.start = moment(item.start).format(dateFormat);
       item.end = moment(item.end).format(dateFormat);

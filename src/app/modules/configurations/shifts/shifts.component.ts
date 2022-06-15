@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import moment from "moment";
 import {dateTimeFormat} from "../../../shared/variables/variables";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-shifts',
@@ -11,9 +12,9 @@ export class ShiftsComponent implements OnInit {
 
   displayedColumns = {
     labels: ['Site name', 'From', 'To', 'Duration', 'Weekends', 'Employees', 'Actions'],
-    values: ['name', 'from', 'to', 'duration', 'weekends', 'employeesCount', 'actions'],
+    values: ['name', 'from', 'to', 'duration', 'weekends', 'individuals', 'actions'],
   };
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { }
   data = [
     {
       name: 'Shift1',
@@ -138,6 +139,7 @@ export class ShiftsComponent implements OnInit {
 
   ]
   ngOnInit(): void {
+    // this.data = this.activatedRoute.snapshot.data['shifts'];
     this.data.forEach(item => {
       item.from = moment(item.from).format('hh:mm A');
       item.to = moment(item.to).format('hh:mm A');

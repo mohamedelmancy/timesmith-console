@@ -50,6 +50,7 @@
     "leaflet": "^1.8.0",
     "leaflet-geosearch": "^3.6.1",
     "leaflet-search": "^3.0.2",
+    "leaflet.locatecontrol": "^0.76.1",
     "moment": "^2.24.0",
     "ng-click-outside": "^9.0.1",
     "ng-multiselect-dropdown": "^0.3.8",

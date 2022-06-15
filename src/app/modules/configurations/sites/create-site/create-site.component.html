@@ -21,23 +21,23 @@
                 {{'You must include a valid name' | translate}}
               </small>
             </div>
-            <div class="col-sm-12 col-md-6 ">
-              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                <mat-label>{{'Individuals' | translate}}</mat-label>
-                <input matInput placeholder="{{'Individuals' | translate}}" type="number" name="individuals"
-                       formControlName="individuals">
-              </mat-form-field>
-              <small
-                *ngIf="form.controls['individuals'].hasError('required') && form.controls['individuals'].touched"
-                class="warn-text gene-block">
-                {{'You must include individuals' | translate}}
-              </small>
-              <small
-                *ngIf="form.controls['individuals'].errors && (form.controls['individuals'].hasError('wrong')) && form.controls['individuals'].touched"
-                class="warn-text gene-block">
-                {{'You must include a valid individuals' | translate}}
-              </small>
-            </div>
+<!--            <div class="col-sm-12 col-md-6 ">-->
+<!--              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">-->
+<!--                <mat-label>{{'Individuals' | translate}}</mat-label>-->
+<!--                <input matInput placeholder="{{'Individuals' | translate}}" type="number" name="individuals"-->
+<!--                       formControlName="individuals">-->
+<!--              </mat-form-field>-->
+<!--              <small-->
+<!--                *ngIf="form.controls['individuals'].hasError('required') && form.controls['individuals'].touched"-->
+<!--                class="warn-text gene-block">-->
+<!--                {{'You must include individuals' | translate}}-->
+<!--              </small>-->
+<!--              <small-->
+<!--                *ngIf="form.controls['individuals'].errors && (form.controls['individuals'].hasError('wrong')) && form.controls['individuals'].touched"-->
+<!--                class="warn-text gene-block">-->
+<!--                {{'You must include a valid individuals' | translate}}-->
+<!--              </small>-->
+<!--            </div>-->
             <div class="col-sm-12 col-md-6 ">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>{{'Tolerance' | translate}}</mat-label>
@@ -89,12 +89,7 @@
                 {{'You must include a valid longitude' | translate}}
               </small>
             </div>
-            <div class="col-sm-12 col-md-6 ">
-              <button  mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/sites']">Back</button>
-              <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
-                {{data ? 'Update' : 'Create'}}
-              </button>
-            </div>
+
           </div>
         </form>
       </div>
@@ -103,7 +98,12 @@
         <!--          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>-->
         <!--        </agm-map>-->
         <div id="map"></div>
-
+      </div>
+      <div class="col-sm-12 d-flex justify-content-end align-items-center my-3">
+        <button  mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/sites']">Back</button>
+        <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
+          {{data ? 'Update' : 'Create'}}
+        </button>
       </div>
     </div>
   </div>

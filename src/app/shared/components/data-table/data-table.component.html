@@ -33,9 +33,9 @@
           </div>
 
 
-          <div *ngIf="column === 'symbol'">
+          <div *ngIf="column === 'color'">
             <th mat-header-cell *matHeaderCellDef>
-              <span class="column-label">{{'Symbol' | translate}}</span>
+              <span class="column-label">{{'Color' | translate}}</span>
               <div style="width: 100%" *ngIf="showSearch">
                 <input (keydown.space)="$event.stopPropagation()" (click)="$event.stopPropagation()"  matInput placeholder="{{'Search' | translate}}" (keyup)="applyFilter($event, column)" >
               </div>
@@ -44,6 +44,21 @@
             <td mat-cell *matCellDef="let row; let i = index">
               <div >
                 <input class="w-25" readonly disabled matInput type="color" [value]="row[column]">
+              </div>
+            </td>
+          </div>
+
+          <div *ngIf="column === 'individuals'">
+            <th mat-header-cell *matHeaderCellDef>
+              <span class="column-label">{{'Individuals' | translate}}</span>
+              <div style="width: 100%" *ngIf="showSearch">
+                <input (keydown.space)="$event.stopPropagation()" (click)="$event.stopPropagation()"  matInput placeholder="{{'Search' | translate}}" (keyup)="applyFilter($event, column)" >
+              </div>
+            </th>
+
+            <td mat-cell *matCellDef="let row; let i = index">
+              <div >
+                <a  class="primary-text cursor-pointer" [routerLink]="['/team']">{{row[column]}}</a>
               </div>
             </td>
           </div>

@@ -7,7 +7,7 @@
           <div class="d-flex row">
             <div class="col-sm-12 col-md-6 ">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                <mat-label>Shift name</mat-label>
+                <mat-label>Leave name</mat-label>
                 <input matInput placeholder="{{'Name' | translate}}" type="text" name="name" formControlName="name">
               </mat-form-field>
               <small
@@ -105,18 +105,18 @@
 
             <div class="col-sm-12 col-md-6 ">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                <mat-label>Symbol</mat-label>
-                <input matInput placeholder="{{'Symbol' | translate}}" type="color" name="symbol" formControlName="symbol">
+                <mat-label>Color</mat-label>
+                <input matInput placeholder="{{'Color' | translate}}" type="color" name="color" formControlName="color">
               </mat-form-field>
               <small
-                *ngIf="form.controls['symbol'].hasError('required') && form.controls['symbol'].touched"
+                *ngIf="form.controls['color'].hasError('required') && form.controls['color'].touched"
                 class="warn-text gene-block">
-                {{'You must include symbol' | translate}}
+                {{'You must include color' | translate}}
               </small>
               <small
-                *ngIf="form.controls['symbol'].errors && (form.controls['symbol'].hasError('wrong')) && form.controls['symbol'].touched"
+                *ngIf="form.controls['color'].errors && (form.controls['color'].hasError('wrong')) && form.controls['color'].touched"
                 class="warn-text gene-block">
-                {{'You must include a valid symbol' | translate}}
+                {{'You must include a valid color' | translate}}
               </small>
             </div>
 

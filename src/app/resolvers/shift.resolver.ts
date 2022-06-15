@@ -15,7 +15,7 @@ export class ShiftResolver implements Resolve<boolean> {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const id = route.params['id'];
-    // return this.coreService.getRequest(`shift/${id}?auditPageCode=BoShowEvaluationPanels`)
+    // return this.coreService.getRequest(`shift/${id}`)
     return of(true);
   }
 }

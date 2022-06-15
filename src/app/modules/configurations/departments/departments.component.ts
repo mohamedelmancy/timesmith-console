@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-departments',
@@ -8,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class DepartmentsComponent implements OnInit {
   displayedColumns = {
     labels: ['Site name', 'Connected employees', 'Manager', 'Actions'],
-    values: ['name', 'employeesCount', 'manager', 'actions'],
+    values: ['name', 'individuals', 'manager', 'actions'],
   };
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { }
   data = [
     {
       name: 'Sales',
@@ -55,8 +56,9 @@ export class DepartmentsComponent implements OnInit {
     },
   ]
   ngOnInit(): void {
+    // this.data = this.activatedRoute.snapshot.data['departments'];
     this.data.forEach(item => {
-        item['employeesCount'] = item.employees?.length;
+        item['individuals'] = item.employees?.length;
     })
   }
 

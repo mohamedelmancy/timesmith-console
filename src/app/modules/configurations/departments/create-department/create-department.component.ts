@@ -21,29 +21,27 @@ export class CreateDepartmentComponent implements OnInit {
   searchText: string = 'type name...';
   disabled = false;
   noDataAvailText: string = 'No data available';
-  employees = [
-    {
-      name: 'ahmed',
-      id: 1
-    },
-    {
-      name: 'Ali',
-      id: 2
-    },
-    {
-      name: 'Ola',
-      id: 3
-    },{
-      name: 'Sama',
-      id: 4
-    },
-
-
-  ]
+  // employees = [
+  //   {
+  //     name: 'ahmed',
+  //     id: 1
+  //   },
+  //   {
+  //     name: 'Ali',
+  //     id: 2
+  //   },
+  //   {
+  //     name: 'Ola',
+  //     id: 3
+  //   },{
+  //     name: 'Sama',
+  //     id: 4
+  //   },
+  // ]
   ngOnInit(): void {
     this.form = this.fb.group({
         name: ['', Validators.compose([Validators.required])],
-        employees: ['', Validators.compose([Validators.required])],
+        // employees: ['', Validators.compose([Validators.required])],
         manager: [null, Validators.compose([])],
       },
       {validators: []}
@@ -60,7 +58,7 @@ export class CreateDepartmentComponent implements OnInit {
 
   fillForm() {
     this.form.controls['name'].setValue(this.data?.name);
-    this.form.controls['employees'].setValue(this.data?.employees);
+    // this.form.controls['employees'].setValue(this.data?.employees);
     this.form.controls['manager'].setValue(this.data?.manager);
   }
   setNewAutoSetting() {
