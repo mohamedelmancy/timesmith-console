@@ -42,23 +42,29 @@
 <!--                {{'You must include a valid employees' | translate}}-->
 <!--              </small>-->
 <!--            </div>-->
-            <div class="col-sm-12 col-md-6 ">
+            <div class="col-sm-12 col-md-6 col-lg-2">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>{{'Manager' | translate}}</mat-label>
-                <input matInput placeholder="{{'Manager' | translate}}" type="text" name="manager"
-                       formControlName="manager">
+                <input type="text" matInput formControlName="manager" [matAutocomplete]="auto1">
+                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
+                                  (opened)="handlerAutocomplete('manager')">
+                  <mat-option *ngFor="let option of managersFilteredOptions | async" [value]="option">
+                    {{option.name}}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
-<!--              <small-->
-<!--                *ngIf="form.controls['tolerance'].hasError('required') && form.controls['tolerance'].touched"-->
-<!--                class="warn-text gene-block">-->
-<!--                {{'You must include tolerance' | translate}}-->
-<!--              </small>-->
-<!--              <small-->
-<!--                *ngIf="form.controls['tolerance'].errors && (form.controls['tolerance'].hasError('wrong')) && form.controls['tolerance'].touched"-->
-<!--                class="warn-text gene-block">-->
-<!--                {{'You must include a valid tolerance' | translate}}-->
-<!--              </small>-->
+              <small
+                *ngIf="form.controls['manager'].hasError('required') && form.controls['manager'].touched"
+                class="warn-text gene-block">
+                {{'You must include manager' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['manager'].errors && (form.controls['manager'].hasError('wrong')) && form.controls['manager'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid manager' | translate}}
+              </small>
             </div>
+
             <div class="col-sm-12 col-md-6 ">
               <button  mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/departments']">Back</button>
               <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>

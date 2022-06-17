@@ -61,6 +61,8 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
         this.router.navigate(['/configurations/view-leave', row?.id])
       } else if (this.dataTableName === 'exception-codes') {
         this.router.navigate(['/configurations/view-exception-code', row?.id])
+      } else if (this.dataTableName === 'team') {
+        this.router.navigate(['/team/view-team', row?.id])
       }
     } else {
       const dialogRef = this.dialog.open(DeleteComponent, {

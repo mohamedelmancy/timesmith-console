@@ -1,1 +1,265 @@
-<p>create-individual works!</p>
+<div class="card-body container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-sm-6 card d-flex flex-column p-3">
+      <div class="col-sm-12">
+        <form [formGroup]="form" class="col-sm-12 justify-content-start">
+          <div class="d-flex justify-content-center align-items-center my-4">
+            <h2>{{data ? 'Update team member' : 'Create new team member'}}</h2></div>
+          <div class="d-flex row">
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="{{'Name' | translate}}" type="text" name="name" formControlName="name">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched"
+                class="warn-text gene-block">
+                {{'You must include name' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['name'].errors && (form.controls['name'].hasError('wrong')) && form.controls['name'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid name' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6 ">
+              <div class=" mb-2 text-center">
+                <!--                <mat-label>Personal Photo</mat-label>-->
+                <div class="d-flex justify-content-center align-items-center">
+                  <div class="col-sm-6">
+                    <label class="avatar" for="avatar">
+                      <input name="name" type="file" formControlName="avatar" accept="image/*" style="display: none"
+                             id="avatar" (change)="onAvatarSelect($event)"/>
+                      <figure class="personal-figure">
+                        <img src="{{avatarSrc ? avatarSrc : 'assets/img/avatar/images.webp'}}"
+                             (load)="checkDimentions($event);" class="personal-avatar" alt="avatar">
+                        <figcaption class="personal-figcaption">
+                          <img
+                            src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
+                        </figcaption>
+                      </figure>
+                    </label>
+                  </div>
+                  <div class="col-sm-6">
+                    <button *ngIf="avatarSrc" type="button" class="btn btn-danger " (click)="removeAvatar()">{{'Remove'
+                      | translate}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <small
+                *ngIf="form.controls['avatar'].hasError('required') && form.controls['avatar'].touched"
+                class="warn-text gene-block">
+                {{'You must include avatar' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['avatar'].errors && (form.controls['avatar'].hasError('invalidFile')) && form.controls['avatar'].touched"
+                class="warn-text gene-block">
+                {{'Image max size must not exceed 2MB' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['avatar'].errors && (form.controls['avatar'].hasError('dimentions')) && form.controls['avatar'].touched"
+                class="warn-text gene-block">
+                {{'Image dimentions must be greater than 64 x 64' | translate}}
+              </small>
+            </div>
+
+
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="{{'Password' | translate}}" type="password" name="name"
+                       formControlName="password">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched"
+                class="warn-text gene-block">
+                {{'You must include name' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['password'].errors && (form.controls['password'].hasError('wrong')) && form.controls['password'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid name' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput placeholder="{{'Confirm Password' | translate}}" formControlName="confirmPassword"
+                       type="password">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched"
+                class="warn-text gene-block">
+                {{'You must include confirm password' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['confirmPassword'].errors && !(form.controls['confirmPassword'].hasError('required')) && form.controls['confirmPassword'].touched "
+                class="warn-text gene-block">
+                {{'Passwords do not match' | translate}}
+              </small>
+            </div>
+
+
+            <div class="col-sm-12 col-md-6">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Department' | translate}}</mat-label>
+                <input type="text" matInput formControlName="department" [matAutocomplete]="auto0">
+                <mat-autocomplete #auto0="matAutocomplete" [displayWith]="displayFn"
+                                  (opened)="handlerAutocomplete('department')">
+                  <mat-option *ngFor="let option of departmentsFilteredOptions | async" [value]="option">
+                    {{option.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['department'].hasError('required') && form.controls['department'].touched"
+                class="warn-text gene-block">
+                {{'You must include department' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['department'].errors && (form.controls['department'].hasError('wrong')) && form.controls['department'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid department' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Site' | translate}}</mat-label>
+                <input type="text" matInput formControlName="site" [matAutocomplete]="auto2">
+                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn"
+                                  (opened)="handlerAutocomplete('site')">
+                  <mat-option *ngFor="let option of sitesFilteredOptions | async" [value]="option">
+                    {{option.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['site'].hasError('required') && form.controls['site'].touched"
+                class="warn-text gene-block">
+                {{'You must include site' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['site'].errors && (form.controls['site'].hasError('wrong')) && form.controls['site'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid site' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Shift' | translate}}</mat-label>
+                <input type="text" matInput formControlName="shift" [matAutocomplete]="auto1">
+                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
+                                  (opened)="handlerAutocomplete('shift')">
+                  <mat-option *ngFor="let option of shiftsFilteredOptions | async" [value]="option">
+                    {{option.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['shift'].hasError('required') && form.controls['shift'].touched"
+                class="warn-text gene-block">
+                {{'You must include shift' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['shift'].errors && (form.controls['shift'].hasError('wrong')) && form.controls['shift'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid shift' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Manager' | translate}}</mat-label>
+                <input type="text" matInput formControlName="manager" [matAutocomplete]="auto1">
+                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
+                                  (opened)="handlerAutocomplete('manager')">
+                  <mat-option *ngFor="let option of managersFilteredOptions | async" [value]="option">
+                    {{option.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['manager'].hasError('required') && form.controls['manager'].touched"
+                class="warn-text gene-block">
+                {{'You must include manager' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['manager'].errors && (form.controls['manager'].hasError('wrong')) && form.controls['manager'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid manager' | translate}}
+              </small>
+            </div>
+
+
+            <div class="col-sm-12 col-md-6">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>Mobile number</mat-label>
+                <input matInput placeholder="{{'Mobile number' | translate}}" formControlName="mobile"
+                       type="password">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['mobile'].hasError('required') && form.controls['mobile'].touched"
+                class="warn-text gene-block">
+                {{'You must include Mobile number' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['mobile'].errors && !(form.controls['mobile'].hasError('required')) && form.controls['mobile'].touched "
+                class="warn-text gene-block">
+                {{'You must include a valid Mobile number' | translate}}
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-6" [ngClass]="{'hidden': !data}">
+              <mat-slide-toggle
+                class="example-margin"
+                formControlName="connected"
+                [color]="'primary'"
+                [checked]="false"
+                [disabled]="false">
+                Connected
+              </mat-slide-toggle>
+              <small *ngIf="(form.controls['connected'].hasError('required')) && !form.controls['connected'].pristine "
+                     class="warn-text gene-block m-0">
+                {{'You must choose' | translate}}
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+              <mat-checkbox formControlName="punchAnyWhere">{{'Punch any where' | translate}}
+                <!--                <a  class="primary-text">{{'Punch any where'|translate}}</a>-->
+              </mat-checkbox>
+              <small
+                *ngIf="(form.controls['punchAnyWhere'].hasError('requiredTrue')) && !form.controls['punchAnyWhere'].pristine "
+                class="warn-text gene-block m-0">
+                {{'You must choose' | translate}}
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+              <mat-checkbox formControlName="autoPunch">{{'Auto punch' | translate}}
+                <!--                <a class="primary-text">{{'Auto punch'|translate}}</a>-->
+              </mat-checkbox>
+              <small
+                *ngIf="(form.controls['autoPunch'].hasError('requiredTrue')) && !form.controls['autoPunch'].pristine "
+                class="warn-text gene-block m-0">
+                {{'You must choose' | translate}}
+              </small>
+            </div>
+
+
+            <div class="col-sm-12 col-md-6 my-5">
+              <button mat-button class="mx-2 warn-bg" [routerLink]="['/team']">Back</button>
+              <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
+                      class="primary-bg" cdkFocusInitial>
+                {{data ? 'Update' : 'Create'}}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
