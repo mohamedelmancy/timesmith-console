@@ -68,34 +68,3 @@
 * {
    font-family: 'Cairo', sans-serif;
 }
-.mat-toolbar.mat-primary{
-  color: #fff !important;
-  text-decoration: none !important;
-}
-.gene-base-container{
-  .mat-form-field-appearance-outline .mat-form-field-infix input{
-    //text-align: center;
-    padding: 2px;
-    font-size: 14px;
-    height: 28px;
-  }
-  .mat-form-field-infix{
-    padding: 3px !important;
-    border-top: 12px solid transparent;
-    border-bottom: 0px solid transparent;
-  }
-  .mat-button-wrapper{
-    svg{
-      height: 26px !important;
-    }
-    .mat-datepicker-toggle-default-icon{
-      width: 1em;
-    }
-  }
-  .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix{
-    top: -4px !important;
-  }
-  .mat-form-field-label{
-    font-size: 14px;
-  }
-}

@@ -57,17 +57,17 @@ export function ReloadCurrentComponent(router) {
     router.navigate([currentUrl]);
 }
 
-export function searchInAllTableColumns(filterTypes, backup): any {
+export function searchInAllTableColumns(filterColumns, backup): any {
   return backup.filter(item => {
-    for (let i = 0; i < filterTypes.length; i++) {
+    for (let i = 0; i < filterColumns.length; i++) {
       var check = false;
-      if (item[filterTypes[i]?.type] && (item[filterTypes[i]?.type]?.toString().trim().toLowerCase()
-        .indexOf(filterTypes[i]?.value?.trim().toLowerCase()) !== -1)) {
+      if (item[filterColumns[i]?.type] && (item[filterColumns[i]?.type]?.toString().trim().toLowerCase()
+        .indexOf(filterColumns[i]?.value?.trim().toLowerCase()) !== -1)) {
         check =  true;
       } else {
         return  false;
       }
-      if (i === filterTypes.length - 1) {
+      if (i === filterColumns.length - 1) {
         return check
       }
     }

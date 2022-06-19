@@ -59,8 +59,8 @@ const MENUITEMS = [
     icon: '',
     role: '',
     children: [
-      {state: 'departments', name: 'Departments', label: '', role: '', type: 'subChild'},
       {state: 'sites', name: 'Sites', label: '', role: '', type: 'subChild'},
+      {state: 'departments', name: 'Departments', label: '', role: '', type: 'subChild'},
       {state: 'shifts', name: 'Shifts', label: '', role: '', type: 'subChild'},
       {state: 'leaves', name: 'Leaves', label: '', role: '', type: 'subChild'},
       {state: 'exceptions-codes', name: 'Exceptions Codes', label: '', role: '', type: 'subChild'},

@@ -1,0 +1,32 @@
+<div class="col-sm-12 d-flex flex-column side-filters px-2 py-3">
+  <div class="sites-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('sites')">
+    <p class="filter-title">Sites ( {{sites?.length}} )</p>
+      <mat-selection-list #siteSelection (selectionChange)="filterChanged('sites', siteSelection.selectedOptions.selected)">
+        <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"  *ngFor="let item of sites" [value]="item">
+          {{item.name}}
+        </mat-list-option>
+      </mat-selection-list>
+  </div>
+  <mat-divider class="mb-3"></mat-divider>
+  <div class="departments-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('departments')">
+    <p class="filter-title">Departments ( {{sites?.length}} )</p>
+    <mat-selection-list #departmentSelection (selectionChange)="filterChanged('departments', departmentSelection.selectedOptions.selected)">
+      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"  *ngFor="let item of departments" [value]="item">
+        {{item.name}}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+  <mat-divider class="mb-3"></mat-divider>
+  <div class="individuals-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('individuals')">
+    <p class="filter-title">Individuals ( {{sites?.length}} )</p>
+    <mat-selection-list #individualSelection (selectionChange)="filterChanged('individuals', individualSelection.selectedOptions.selected)">
+      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"  *ngFor="let item of individuals" [value]="item">
+        {{item.name}}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+<!--  <mat-divider class="mb-3"></mat-divider>-->
+  <button (click)="apply()" *ngIf="isMobile" tooltip="Add new row" color="primary" mat-raised-button type="button" class="primary-bg">
+    <mat-icon>check</mat-icon>
+    {{'Apply'| translate}}</button>
+</div>

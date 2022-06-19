@@ -1,13 +1,25 @@
-import { Component, ViewChild, OnInit, ViewEncapsulation, AfterViewInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatPaginator } from '@angular/material/paginator';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  Component,
+  ViewChild,
+  OnInit,
+  ViewEncapsulation,
+  AfterViewInit,
+  Input,
+  OnChanges,
+  Output,
+  EventEmitter
+} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
+import {MatPaginator} from '@angular/material/paginator';
+import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
 import {PageTitleService} from "../../../core/page-title/page-title.service";
 import {GetLanguage, searchInAllTableColumns} from "../../functions/shared-functions";
 import {secureStorage} from "../../functions/secure-storage";
 import {DeleteComponent} from "../../../modals/delete/delete.component";
+import {isMobile} from "../../variables/variables";
+
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
@@ -18,18 +30,25 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() displayedColumns;
   @Input() pageSize = 5;
   @Input() showSearch = true;
+  @Input() showCreate = true;
+  @Input() sideFilters;
   @Input() data;
+  @Input() createLink;
+  @Input() viewLink;
   @Input() dataTableName;
   @Output() deleteEvent = new EventEmitter<any>();
   rows = [];
-  filterTypes = [];
+  filterColumns = [];
+  isMobile = isMobile;
   gradeValidation = [];
   finalGrade: number;
   backup = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private pageTitleService: PageTitleService, private _liveAnnouncer: LiveAnnouncer, private router: Router,
+
+  constructor(private pageTitleService: PageTitleService, private router: Router,
               private dialog: MatDialog) {
   }
+
   ngOnChanges() {
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
@@ -50,20 +69,9 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   takeAction(type, row) {
     if (type === 'Update') {
+      console.log(this.viewLink)
       secureStorage.setItem('row', row);
-      if (this.dataTableName === 'departments') {
-        this.router.navigate(['/configurations/view-department', row?.id])
-      } else if (this.dataTableName === 'sites') {
-        this.router.navigate(['/configurations/view-site', row?.id])
-      } else if (this.dataTableName === 'shifts') {
-        this.router.navigate(['/configurations/view-shift', row?.id])
-      } else if (this.dataTableName === 'leaves') {
-        this.router.navigate(['/configurations/view-leave', row?.id])
-      } else if (this.dataTableName === 'exception-codes') {
-        this.router.navigate(['/configurations/view-exception-code', row?.id])
-      } else if (this.dataTableName === 'team') {
-        this.router.navigate(['/team/view-team', row?.id])
-      }
+      this.router.navigate([this.viewLink, row?.id])
     } else {
       const dialogRef = this.dialog.open(DeleteComponent, {
           data: row,
@@ -84,18 +92,18 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   applyFilter(event: Event, type) {
     // console.log('type', type)
     const filterValue = (event.target as HTMLInputElement).value;
-    const lastTypeIndex = this.filterTypes.findIndex(x => x.type === type);
+    const lastTypeIndex = this.filterColumns.findIndex(x => x.type === type);
     const obj = {
       type: type,
       value: filterValue,
     }
     if (lastTypeIndex === -1) {
-      this.filterTypes.push(obj);
+      this.filterColumns.push(obj);
     } else {
-      this.filterTypes[lastTypeIndex] = obj;
+      this.filterColumns[lastTypeIndex] = obj;
     }
-    this.dataSource.data = searchInAllTableColumns(this.filterTypes, this.backup);
-    // console.log('filterTypes', this.filterTypes)
+    this.dataSource.data = searchInAllTableColumns(this.filterColumns, this.backup);
+    // console.log('filterTypes', this.filterColumns)
     // console.log('data', this.data)
 
     // if (filterValue && filterValue?.length > 0) {
@@ -124,5 +132,61 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
     //     this.dataSource.paginator.firstPage();
     // }
     // }
+  }
+
+  sideFilter(e) {
+    console.log('e', e);
+    let loopedArr;
+    let data;
+    data = this.backup.filter(item => {
+      if (e.sites?.length) {
+        loopedArr = e.sites;
+        return this.loopOverFilter(loopedArr, item, 'site');
+      } else {
+        return true;
+      }
+    });
+    data = data.filter(item => {
+      if (e.departments?.length) {
+        loopedArr = e.departments;
+        return this.loopOverFilter(loopedArr, item, 'department');
+      } else {
+        return true;
+      }
+    });
+    data = data.filter(item => {
+      if (e.individuals?.length) {
+        loopedArr = e.individuals;
+        return this.loopOverFilter(loopedArr, item, 'employee');
+      } else {
+        return true;
+      }
+    });
+    data = data.filter(item => {
+      if (e.pwa) {
+        loopedArr = e.sites;
+        return this.loopOverFilter(loopedArr, item, 'pwa');
+      } else {
+        return true;
+      }
+    });
+
+    if (!e.individuals?.length && !e.sites?.length && !e.departments?.length && !e.pwa) {
+      data = this.backup;
+    }
+    this.dataSource.data = data
+  }
+
+  loopOverFilter(loopedArr, item, column): boolean {
+    for (let i = 0; i < loopedArr.length; i++) {
+      if (i < loopedArr.length) {
+        return (item[column]?.toString().trim().toLowerCase()
+            .indexOf(loopedArr[i]?.name?.trim().toLowerCase()) !== -1 ||
+          item[column]?.toString().trim().toLowerCase()
+            .indexOf(loopedArr[i + 1]?.name?.trim().toLowerCase()) !== -1
+        );
+
+      }
+    }
   }
 }

@@ -66,6 +66,7 @@ export class CreateDepartmentComponent extends AutoComplete implements OnInit {
       console.log('changes', changes);
     });
     this.setNewAutoSetting();
+    this.handlerAutocomplete('manager')
     this.data = this.activatedRoute.snapshot.data['department'];
     this.data = secureStorage.getItem('row');
     this.fillForm();

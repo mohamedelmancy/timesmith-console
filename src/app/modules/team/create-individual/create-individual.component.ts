@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import {map, startWith} from "rxjs/operators";
 import {AutoComplete} from "../../../shared/auto-complete";
 import {ConfirmedValidator} from "../../../shared/functions/shared-functions";
+import {primaryColor} from "../../../shared/variables/variables";
 
 @Component({
   selector: 'app-create-individual',
@@ -15,10 +16,12 @@ import {ConfirmedValidator} from "../../../shared/functions/shared-functions";
 })
 export class CreateIndividualComponent extends AutoComplete implements OnInit {
   form: FormGroup;
-
+  primaryColor =  primaryColor
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService) {
     super()
   }
+  hidePass = true;
+  hideConfirmPass = true;
   acceptedAvatarFileTypes = [
     'image/jpeg',
     'image/png',
@@ -196,7 +199,7 @@ export class CreateIndividualComponent extends AutoComplete implements OnInit {
 
   onAvatarSelect(event) {
     event.preventDefault();
-    this.removeAvatar();
+    // this.removeAvatar();
     if (event.target.files[0]) {
       for (let type of this.acceptedAvatarFileTypes) {
         if (event.target.files[0].type === type) {                        // check if file type is acceptable
@@ -217,6 +220,10 @@ export class CreateIndividualComponent extends AutoComplete implements OnInit {
         }
       }
     }
+  }
+
+  inputFocused(e) {
+    console.log('e', e.target.value)
   }
 
   checkDimentions(event) {

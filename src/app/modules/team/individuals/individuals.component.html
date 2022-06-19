@@ -1,10 +1,9 @@
-<div class="list d-flex flex-column card-body">
-  <div class="col-sm-12 d-flex mt-2 justify-content-end">
-    <button [routerLink]="['/team/create-team']" tooltip="Add new row" color="primary" mat-raised-button type="button" class="primary-bg">
-      <mat-icon>add</mat-icon>
-      {{'Create'| translate}}</button>
-  </div>
-  <div class="">
-    <app-data-table (deleteEvent)="deleteRow($event)" [dataTableName]="'team'" [displayedColumns]="displayedColumns" [data]="data"></app-data-table>
-  </div>
-</div>
+<app-data-table-container
+  [sideFilters]="['sites', 'departments', 'individuals', 'PAW']"
+  (deleteEvent)="deleteRow($event)"
+  [dataTableName]="'team'"
+  [displayedColumns]="displayedColumns"
+  [data]="data"
+  [createLink]="'/team/create-team'"
+  [viewLink]="'/team/view-team'"
+></app-data-table-container>

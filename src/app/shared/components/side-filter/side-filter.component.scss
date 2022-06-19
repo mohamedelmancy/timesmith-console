@@ -1,0 +1,25 @@
+.filter-title{
+  font-weight: 600;
+  font-size: 15px;
+}
+mat-list-option{
+  height: 30px !important;
+}
+::ng-deep .side-filters {
+  .mat-list-item-content {
+    max-height: 20px;
+    /* padding: 0; */
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+  .mat-list-text {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block !important;
+  }
+}
+mat-selection-list{
+  max-height: 220px;
+  overflow-y: auto;
+}

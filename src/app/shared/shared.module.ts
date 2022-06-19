@@ -39,19 +39,24 @@ import {MenuToggleModule} from "../core/menu/menu-toggle.module";
 import { DataTableComponent } from './components/data-table/data-table.component';
 import {TranslateModule} from "@ngx-translate/core";
 import {RouterModule} from "@angular/router";
+import { SideFilterComponent } from './components/side-filter/side-filter.component';
+import { DataTableContainerComponent } from './components/data-table-container/data-table-container.component';
 
 
 
 @NgModule({
   declarations: [
     LoaderComponent,
-    DataTableComponent
+    DataTableComponent,
+    SideFilterComponent,
+    DataTableContainerComponent
   ],
   exports: [
     LoaderComponent,
     TooltipModule,
     DataTableComponent,
-    TranslateModule
+    TranslateModule,
+    DataTableContainerComponent
 
   ],
     imports: [

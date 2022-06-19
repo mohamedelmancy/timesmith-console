@@ -1,0 +1,15 @@
+@media(max-width:720px){
+  *{
+    font-size: 12px;
+  }
+  table {
+    .mat-cell, .mat-header-cell span{
+      font-size: 11px !important;
+    }
+
+    th.mat-header-cell input{
+      width: 50% !important;
+      height: 17px !important;
+    }
+  }
+}

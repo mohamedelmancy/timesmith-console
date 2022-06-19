@@ -30,5 +30,9 @@ export class AppComponent implements OnInit{
     this.dateAdapter.setLocale(GetLanguage() === 'ar' ? 'ar-SA' : 'en-GB');
     const dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.body.style.direction = dir;
+    (window as any).primaryColor =  '#036c9c';
+    (window as any).secondaryColor =  '#b1dff5';
+    document.documentElement.style.setProperty('--primary-color', (window as any).primaryColor);
+    document.documentElement.style.setProperty('--secondary-color', (window as any).secondaryColor);
   }
 }

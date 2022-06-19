@@ -10,7 +10,7 @@ import arLocale from '@fullcalendar/core/locales/ar-sa';
 import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateTimelineComponent} from "../../../../modals/create-timeline/create-timeline.component";
-import {dateTimeFormat, today} from "../../../../shared/variables/variables";
+import {dateTimeFormat, isMobile, today} from "../../../../shared/variables/variables";
 import {EventApi, FullCalendarComponent} from "@fullcalendar/angular";
 import {first, Subject, Subscription} from "rxjs";
 import {take} from "rxjs/operators";
@@ -37,7 +37,6 @@ export class TimelineViewComponent implements OnInit {
   resizedEvent;
   selectedEvent;
   closeResult = '';
-  isMobile;
   exceptionCodes = [
     {
       title: 'Open time',
@@ -139,7 +138,6 @@ export class TimelineViewComponent implements OnInit {
   // https://stackoverflow.com/questions/71299412/fullcalendar-how-to-display-non-overlapping-events-inside-same-day-cell-in-one
   ngOnInit(): void {
     setTimeout(() => {
-      this.isMobile = window.innerWidth < 1300;
       this.renderCalendar();
       this.getEvents();
       // this.getResources();
@@ -268,7 +266,7 @@ export class TimelineViewComponent implements OnInit {
       eventClick: (info) => {
         console.log('eventClicked ', info.event);
         // _this.openDialog(info.event);
-        if(this.isMobile) {
+        if(isMobile) {
           this.open(this.editEvent);
         }
         _this.selectedEvent = info.event;
@@ -301,7 +299,7 @@ export class TimelineViewComponent implements OnInit {
         }
       ],
       // slotMinWidth: 2,
-      resourceAreaWidth: this.isMobile ? '45%' : '20%',
+      resourceAreaWidth: isMobile ? '45%' : '20%',
       initialView: 'resourceTimelineDay',
       schedulerLicenseKey: 'BUG ',
       dragScroll: false,
@@ -479,7 +477,7 @@ export class TimelineViewComponent implements OnInit {
 
   getEvents() {
     const colors = ['#000', '#9e32a8', '#54ab98', '#becf3e', '#d95d7c', '#35e6e3', '#c414c1']
-    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-15T00:00:00Z&end=2022-06-16T00:00:00Z').subscribe(res => {
+    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-19T00:00:00Z&end=2022-06-20T00:00:00Z').subscribe(res => {
       console.log('res', this.options.events)
       res.map((event, index) => {
         event.overlap = true;

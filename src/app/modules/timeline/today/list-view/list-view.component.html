@@ -1,6 +1,13 @@
 <div class="list d-flex flex-column">
   <app-filters></app-filters>
-  <div class="mt-5">
-    <app-data-table [displayedColumns]="displayedColumns" [data]="data"></app-data-table>
+  <div class="">
+    <app-data-table-container
+      [dataTableName]="'timeline'"
+      [displayedColumns]="displayedColumns"
+      [data]="data"
+      [showCreate]="false"
+    ></app-data-table-container>
+
   </div>
 </div>
+

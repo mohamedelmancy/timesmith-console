@@ -15,19 +15,71 @@ export class IndividualsComponent implements OnInit {
   data = [
     {
       name: 'team1',
-      site: 'Abbas Al Akkad',
+      siteObj: {
+        name: 'Abbas Al Akkad',
+        id: 1
+      },
       id: 1,
-      department: 'dep1',
-      shift: '8 Am to 6 PM',
+      departmentObj: {
+        name: 'marketing',
+        id: 2
+      },
+      shiftObj: {
+        name: '8 Am to 6 PM',
+        id: 3
+      },
       phone: '01069024844',
       manager: 'Dahi',
       connected: true,
       PAW: true,
-    }
+    },
+    {
+      name: 'team2',
+      siteObj: {
+        name: 'Site2',
+        id: 1
+      },
+      id: 1,
+      departmentObj: {
+        name: 'sales',
+        id: 2
+      },
+      shiftObj: {
+        name: '8 Am to 7 PM',
+        id: 3
+      },
+      phone: '01069088844',
+      manager: 'Salman',
+      connected: false,
+      PAW: false,
+    },
+    {
+      name: 'team3',
+      siteObj: {
+        name: 'Site4',
+        id: 1
+      },
+      id: 1,
+      departmentObj: {
+        name: 'sales',
+        id: 2
+      },
+      shiftObj: {
+        name: '8 Am to 9 PM',
+        id: 3
+      },
+      phone: '01069089944',
+      manager: 'Yosef',
+      connected: false,
+      PAW: false,
+    },
   ]
   ngOnInit(): void {
     // this.data = this.activatedRoute.snapshot.data['sites'];
     this.data.forEach(item => {
+      item['site'] = item.siteObj.name;
+      item['department'] = item.departmentObj.name;
+      item['shift'] = item.shiftObj.name;
     })
   }
 

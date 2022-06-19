@@ -8,6 +8,8 @@ export const dateFormat = currentLanguage === 'en' ? 'D/M/yyyy' : 'yyyy/M/D';
 export const dateTimeFormat = currentLanguage === 'en' ? 'DD-MM-yyyy HH:MM A' : 'yyyy-MM-DD HH:MM A';
 export const monthDateFormat = currentLanguage === 'en' ? 'M/yyyy' : 'yyyy/M';
 export const datePipe = new DatePipe('en');
+export const primaryColor = (window as any).primaryColor;
+export const isMobile = window.innerWidth < 1300;
 export const momentDateFormat = (date, normal?, format?) => {
     if (normal) {
         return moment(date).format(format || dateFormat);

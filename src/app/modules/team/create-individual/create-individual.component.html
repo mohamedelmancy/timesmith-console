@@ -23,9 +23,9 @@
               </small>
             </div>
             <div class="col-sm-12 col-md-6 ">
-              <div class=" mb-2 text-center">
-                <!--                <mat-label>Personal Photo</mat-label>-->
-                <div class="d-flex justify-content-center align-items-center">
+              <div class="mb-2 text-center d-flex justify-content-start">
+               <mat-label>Personal Avatar</mat-label>
+                <div class="d-flex justify-content-center align-items-center col-sm-8">
                   <div class="col-sm-6">
                     <label class="avatar" for="avatar">
                       <input name="name" type="file" formControlName="avatar" accept="image/*" style="display: none"
@@ -35,7 +35,7 @@
                              (load)="checkDimentions($event);" class="personal-avatar" alt="avatar">
                         <figcaption class="personal-figcaption">
                           <img
-                            src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
+                            src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" alt="overlay">
                         </figcaption>
                       </figure>
                     </label>
@@ -70,25 +70,27 @@
             <div class="col-sm-12 col-md-6 ">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="{{'Password' | translate}}" type="password" name="name"
+                <input matInput placeholder="{{'Password' | translate}}" [type]="hidePass ? 'password' : 'text'" name="name"
                        formControlName="password">
+                <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
               </mat-form-field>
               <small
                 *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched"
                 class="warn-text gene-block">
-                {{'You must include name' | translate}}
+                {{'You must include password' | translate}}
               </small>
               <small
                 *ngIf="form.controls['password'].errors && (form.controls['password'].hasError('wrong')) && form.controls['password'].touched"
                 class="warn-text gene-block">
-                {{'You must include a valid name' | translate}}
+                {{'You must include a valid password' | translate}}
               </small>
             </div>
             <div class="col-sm-12 col-md-6">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>Confirm Password</mat-label>
                 <input matInput placeholder="{{'Confirm Password' | translate}}" formControlName="confirmPassword"
-                       type="password">
+                       [type]="hideConfirmPass ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="hideConfirmPass = !hideConfirmPass">{{hideConfirmPass ? 'visibility_off' : 'visibility'}}</mat-icon>
               </mat-form-field>
               <small
                 *ngIf="form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched"
@@ -215,7 +217,7 @@
               <mat-slide-toggle
                 class="example-margin"
                 formControlName="connected"
-                [color]="'primary'"
+                [color]="primaryColor"
                 [checked]="false"
                 [disabled]="false">
                 Connected
@@ -227,7 +229,7 @@
             </div>
 
             <div class="col-sm-12 col-md-6">
-              <mat-checkbox formControlName="punchAnyWhere">{{'Punch any where' | translate}}
+              <mat-checkbox color="primary" formControlName="punchAnyWhere">{{'Can Punch Anywhere' | translate}}
                 <!--                <a  class="primary-text">{{'Punch any where'|translate}}</a>-->
               </mat-checkbox>
               <small
@@ -238,7 +240,7 @@
             </div>
 
             <div class="col-sm-12 col-md-6">
-              <mat-checkbox formControlName="autoPunch">{{'Auto punch' | translate}}
+              <mat-checkbox color="primary" formControlName="autoPunch">{{'Auto punch' | translate}}
                 <!--                <a class="primary-text">{{'Auto punch'|translate}}</a>-->
               </mat-checkbox>
               <small

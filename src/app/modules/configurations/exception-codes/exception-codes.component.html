@@ -1,10 +1,8 @@
-<div class="list d-flex flex-column card-body">
-  <div class="col-sm-12 d-flex mt-2 justify-content-end">
-    <button [routerLink]="['/configurations/create-exception-code']" tooltip="Add new row" color="primary" mat-raised-button type="button" class="primary-bg">
-      <mat-icon>add</mat-icon>
-      {{'Create'| translate}}</button>
-  </div>
-  <div class="">
-    <app-data-table (deleteEvent)="deleteRow($event)" [dataTableName]="'exception-codes'" [displayedColumns]="displayedColumns" [data]="data"></app-data-table>
-  </div>
-</div>
+<app-data-table-container
+  (deleteEvent)="deleteRow($event)"
+  [dataTableName]="'exception-codes'"
+  [displayedColumns]="displayedColumns"
+  [data]="data"
+  [createLink]="'/configurations/create-exception-code'"
+  [viewLink]="'/configurations/view-exception-code'"
+></app-data-table-container>
