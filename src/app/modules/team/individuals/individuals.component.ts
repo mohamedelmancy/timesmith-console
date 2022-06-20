@@ -8,8 +8,8 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class IndividualsComponent implements OnInit {
   displayedColumns = {
-    labels: ['ID', 'Name', 'Site', 'Department', 'Shift', 'Mobile number', 'Manager',  'Connected', 'Punch any way', 'Actions'],
-    values: ['id', 'name', 'site', 'department', 'shift', 'phone', 'manager', 'connected', 'PAW', 'actions'],
+    labels: ['ID', 'Name', 'Site', 'Department', 'Shift', 'Mobile number', 'Manager',  'Connected', 'Punch any way', 'Role', 'Actions'],
+    values: ['id', 'name', 'site', 'department', 'shift', 'phone', 'manager', 'connected', 'PAW', 'role', 'actions'],
   };
   constructor(private activatedRoute: ActivatedRoute) { }
   data = [
@@ -30,8 +30,12 @@ export class IndividualsComponent implements OnInit {
       },
       phone: '01069024844',
       manager: 'Dahi',
-      connected: true,
-      PAW: true,
+      connected: 'yes',
+      PAW: 'yes',
+      roleObj: {
+        name: 'SuperAdmin',
+        id: 3
+      },
     },
     {
       name: 'team2',
@@ -50,8 +54,12 @@ export class IndividualsComponent implements OnInit {
       },
       phone: '01069088844',
       manager: 'Salman',
-      connected: false,
-      PAW: false,
+      connected: 'no',
+      PAW: 'no',
+      roleObj: {
+        name: 'Admin',
+        id: 3
+      },
     },
     {
       name: 'team3',
@@ -70,8 +78,12 @@ export class IndividualsComponent implements OnInit {
       },
       phone: '01069089944',
       manager: 'Yosef',
-      connected: false,
-      PAW: false,
+      connected: 'no',
+      PAW: 'no',
+      roleObj: {
+        name: 'Manager',
+        id: 3
+      },
     },
   ]
   ngOnInit(): void {
@@ -80,6 +92,7 @@ export class IndividualsComponent implements OnInit {
       item['site'] = item.siteObj.name;
       item['department'] = item.departmentObj.name;
       item['shift'] = item.shiftObj.name;
+      item['role'] = item.roleObj.name;
     })
   }
 

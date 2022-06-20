@@ -1,7 +1,7 @@
 <mat-drawer-container class="example-container" autosize>
   <div class="list d-flex flex-column card-body">
     <div class="col-sm-12 d-flex mt-2 justify-content-between justify-content-lg-end" *ngIf="showCreate">
-      <button (click)="openDrawer()" *ngIf="isMobile" tooltip="Add new row" color="primary" mat-raised-button type="button"
+      <button (click)="openDrawer()" *ngIf="isMobile" tooltip="Open filters" color="primary" mat-raised-button type="button"
               class="primary-bg">
         <i class="fa fa-filter"></i>
         {{'Filters'| translate}}</button>
@@ -17,6 +17,6 @@
     </div>
   </div>
   <mat-drawer #drawer2 class="example-sidenav" mode="side">
-    <app-side-filter class="" (emittedData)="sideFilter($event)" [sideFilters]="sideFilters" (closeDrawer)="closeDrawer($event)"></app-side-filter>
+    <app-side-filter class="" [fromContainer]="true" (emittedData)="sideFilter($event)" [sideFilters]="sideFilters" (closeDrawer)="closeDrawer($event)"></app-side-filter>
   </mat-drawer>
 </mat-drawer-container>

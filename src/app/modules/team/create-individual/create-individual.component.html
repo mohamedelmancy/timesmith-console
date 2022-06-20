@@ -193,13 +193,35 @@
                 {{'You must include a valid manager' | translate}}
               </small>
             </div>
+            <div class="col-sm-12 col-md-6">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Role' | translate}}</mat-label>
+                <input type="text" matInput formControlName="role" [matAutocomplete]="auto7">
+                <mat-autocomplete #auto7="matAutocomplete" [displayWith]="displayFn"
+                                  (opened)="handlerAutocomplete('role')">
+                  <mat-option *ngFor="let option of rolesFilteredOptions | async" [value]="option">
+                    {{option.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['role'].hasError('required') && form.controls['role'].touched"
+                class="warn-text gene-block">
+                {{'You must include role' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['role'].errors && (form.controls['role'].hasError('wrong')) && form.controls['role'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid role' | translate}}
+              </small>
+            </div>
 
 
             <div class="col-sm-12 col-md-6">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>Mobile number</mat-label>
                 <input matInput placeholder="{{'Mobile number' | translate}}" formControlName="mobile"
-                       type="password">
+                       type="text">
               </mat-form-field>
               <small
                 *ngIf="form.controls['mobile'].hasError('required') && form.controls['mobile'].touched"
@@ -213,7 +235,29 @@
               </small>
             </div>
 
-            <div class="col-sm-12 col-md-6" [ngClass]="{'hidden': !data}">
+            <div class="col-sm-12 col-md-4">
+              <mat-checkbox color="primary" formControlName="punchAnyWhere">{{'Can Punch Anywhere' | translate}}
+                <!--                <a  class="primary-text">{{'Punch any where'|translate}}</a>-->
+              </mat-checkbox>
+              <small
+                *ngIf="(form.controls['punchAnyWhere'].hasError('requiredTrue')) && !form.controls['punchAnyWhere'].pristine "
+                class="warn-text gene-block m-0">
+                {{'You must choose' | translate}}
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-4">
+              <mat-checkbox color="primary" formControlName="autoPunch">{{'Auto Punch' | translate}}
+                <!--                <a class="primary-text">{{'Auto punch'|translate}}</a>-->
+              </mat-checkbox>
+              <small
+                *ngIf="(form.controls['autoPunch'].hasError('requiredTrue')) && !form.controls['autoPunch'].pristine "
+                class="warn-text gene-block m-0">
+                {{'You must choose' | translate}}
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-4 my-3 my-lg-0" [ngClass]="{'hidden': !data}">
               <mat-slide-toggle
                 class="example-margin"
                 formControlName="connected"
@@ -227,29 +271,6 @@
                 {{'You must choose' | translate}}
               </small>
             </div>
-
-            <div class="col-sm-12 col-md-6">
-              <mat-checkbox color="primary" formControlName="punchAnyWhere">{{'Can Punch Anywhere' | translate}}
-                <!--                <a  class="primary-text">{{'Punch any where'|translate}}</a>-->
-              </mat-checkbox>
-              <small
-                *ngIf="(form.controls['punchAnyWhere'].hasError('requiredTrue')) && !form.controls['punchAnyWhere'].pristine "
-                class="warn-text gene-block m-0">
-                {{'You must choose' | translate}}
-              </small>
-            </div>
-
-            <div class="col-sm-12 col-md-6">
-              <mat-checkbox color="primary" formControlName="autoPunch">{{'Auto punch' | translate}}
-                <!--                <a class="primary-text">{{'Auto punch'|translate}}</a>-->
-              </mat-checkbox>
-              <small
-                *ngIf="(form.controls['autoPunch'].hasError('requiredTrue')) && !form.controls['autoPunch'].pristine "
-                class="warn-text gene-block m-0">
-                {{'You must choose' | translate}}
-              </small>
-            </div>
-
 
             <div class="col-sm-12 col-md-6 my-5">
               <button mat-button class="mx-2 warn-bg" [routerLink]="['/team']">Back</button>

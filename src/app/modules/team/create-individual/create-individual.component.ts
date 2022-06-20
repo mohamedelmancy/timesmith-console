@@ -35,6 +35,7 @@ export class CreateIndividualComponent extends AutoComplete implements OnInit {
   departmentsFilteredOptions: Observable<any[]>;
   sitesFilteredOptions: Observable<any[]>;
   managersFilteredOptions: Observable<any[]>;
+  rolesFilteredOptions: Observable<any[]>;
   shiftsFilteredOptions: Observable<any[]>;
   shifts  = [
     {
@@ -78,6 +79,25 @@ export class CreateIndividualComponent extends AutoComplete implements OnInit {
     },
 
   ];
+  roles = [
+    {
+      name: 'SuperAdmin',
+      id: 1
+    },
+    {
+      name: 'Admin',
+      id: 3
+    },
+    {
+      name: 'Manager',
+      id: 2
+    },
+    {
+      name: 'User',
+      id: 4
+    },
+
+  ];
   ngOnInit(): void {
     this.form = this.fb.group({
         name: ['', Validators.compose([Validators.required])],
@@ -92,6 +112,7 @@ export class CreateIndividualComponent extends AutoComplete implements OnInit {
         punchAnyWhere: [null, Validators.compose([])],
         autoPunch: [null, Validators.compose([])],
         connected: [null, Validators.compose([])],
+        role: [null, Validators.compose([Validators.required])],
       },
       {validators: [this.checkAutoComplete(), ConfirmedValidator('password', 'confirmPassword')]}
     );
@@ -100,6 +121,7 @@ export class CreateIndividualComponent extends AutoComplete implements OnInit {
     this.handlerAutocomplete('site');
     this.handlerAutocomplete('shift');
     this.handlerAutocomplete('manager');
+    this.handlerAutocomplete('role');
     this.form.valueChanges.subscribe(changes => {
       console.log('changes', changes);
     });
@@ -113,7 +135,6 @@ export class CreateIndividualComponent extends AutoComplete implements OnInit {
 
   fillForm() {
     this.form.controls['name'].setValue(this.data?.name);
-    this.form.controls['manager'].setValue(this.data?.manager);
     this.form.controls['avatar'].setValue(this.data?.avatar);
     this.form.controls['password'].setValue(this.data?.password);
     this.form.controls['punchAnyWhere'].setValue(this.data?.punchAnyWhere);
@@ -123,6 +144,7 @@ export class CreateIndividualComponent extends AutoComplete implements OnInit {
     this.form.controls['site'].setValue(this.sites.find(x => x.id === this.data?.site?.id));
     this.form.controls['shift'].setValue(this.shifts.find(x => x.id === this.data?.shift?.id));
     this.form.controls['manager'].setValue(this.managers.find(x => x.id === this.data?.manager?.id));
+    this.form.controls['role'].setValue(this.managers.find(x => x.id === this.data?.manager?.id));
   }
 
   handlerAutocomplete(type) {
@@ -150,6 +172,12 @@ export class CreateIndividualComponent extends AutoComplete implements OnInit {
         map(value => (typeof value === 'string' ? value : value?.name)),
         map(name => (name ? this._filter(name, this.managers) : this.managers.slice())),
       );
+    } else if (type === 'role') {
+      this.rolesFilteredOptions = this.form.controls['role']?.valueChanges.pipe(
+        startWith(''),
+        map(value => (typeof value === 'string' ? value : value?.name)),
+        map(name => (name ? this._filter(name, this.roles) : this.roles.slice())),
+      );
     }
   }
 
@@ -159,11 +187,13 @@ export class CreateIndividualComponent extends AutoComplete implements OnInit {
       const shift = formGroup?.controls['shift'];
       const site = formGroup?.controls['site'];
       const manager = formGroup?.controls['manager'];
+      const role = formGroup?.controls['role'];
       //////////////////////////////////////////////////////////////
       const indexDep = this.departments.findIndex(res => res === department.value);
       const indexShift = this.shifts.findIndex(res => res === shift.value);
       const indexSite = this.sites.findIndex(res => res === site.value);
       const indexManager = this.managers.findIndex(res => res === manager.value);
+      const indexRole = this.roles.findIndex(res => res === role.value);
       if (indexDep === -1 && department.value) {
         department.setErrors({wrong: true});
       } else {
@@ -183,6 +213,11 @@ export class CreateIndividualComponent extends AutoComplete implements OnInit {
         manager.setErrors({wrong: true});
       } else {
         manager.setErrors(null);
+      }
+      if (indexRole === -1  && role.value) {
+        role.setErrors({wrong: true});
+      } else {
+        role.setErrors(null);
       }
     }
 

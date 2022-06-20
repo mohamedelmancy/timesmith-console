@@ -1,9 +1,10 @@
-import {Component, OnInit, Output, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, Output, ViewChild} from '@angular/core';
 import {DataTableComponent} from "../data-table/data-table.component";
 import {PageTitleService} from "../../../core/page-title/page-title.service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {isMobile} from "../../variables/variables";
+import {filterTable} from "../../functions/shared-functions";
 
 @Component({
   selector: 'app-data-table-container',
@@ -12,10 +13,12 @@ import {isMobile} from "../../variables/variables";
 })
 export class DataTableContainerComponent extends DataTableComponent implements OnInit {
   showFilters = false;
-  @ViewChild('drawer2', {static: true}) filters;
-  constructor(private pt: PageTitleService, private rt: Router,
+  @ViewChild('drawer2', {static: true}) drawer;
+  constructor(private pt: PageTitleService,
+              private cdr2: ChangeDetectorRef,
+              private rt: Router,
               private dialog1: MatDialog) {
-    super(pt, rt, dialog1)
+    super(pt, cdr2, rt, dialog1)
   }
 
   override ngOnInit(): void {
@@ -27,12 +30,13 @@ export class DataTableContainerComponent extends DataTableComponent implements O
 
   openDrawer() {
     if(isMobile) {
-      this.filters.toggle();
+      this.drawer.toggle();
     }
   }
 
-  closeDrawer(e) {
-    this.filters.toggle();
+  closeDrawer(data) {
+    this.drawer.toggle();
+    this.data = filterTable(data, this.backup);
   }
 
 }

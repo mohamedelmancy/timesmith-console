@@ -1,9 +1,11 @@
 .filter-title{
-  font-weight: 600;
-  font-size: 15px;
+  color: #4d4d4d;
+  font-size: 16px;
+  font-weight: 500;
 }
 mat-list-option{
   height: 30px !important;
+  direction: rtl;
 }
 ::ng-deep .side-filters {
   .mat-list-item-content {
@@ -13,13 +15,35 @@ mat-list-option{
     width: 100%;
   }
   .mat-list-text {
-    width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
     display: block !important;
+    font-size: 14px;
+    color: #333;
+    line-height: 32px;
+    text-align: left;
+    direction: ltr;
+    padding-left: 12px !important;
+    width: 40px;
+  }
+  .mat-list-item-content{
+    padding: 0 !important;
   }
 }
 mat-selection-list{
   max-height: 220px;
+  //overflow-y: auto;
+}
+.scrollable{
   overflow-y: auto;
+}
+.fa{
+  color: #b3b3b3;
+  font-size: 12px;
+  transition: all 0.4s ease 0s;
+}
+.collapsed[aria-expanded = false]{
+  .fa{
+    transform: rotate(180deg);
+  }
 }

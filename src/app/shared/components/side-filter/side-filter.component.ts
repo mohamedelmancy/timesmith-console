@@ -12,6 +12,7 @@ import {isMobile} from "../../variables/variables";
 })
 export class SideFilterComponent implements OnInit {
   @Input() sideFilters;
+  @Input() fromContainer = false;
   @Output() emittedData = new EventEmitter<any>();
   @Output() closeDrawer = new EventEmitter<any>();
   departments = [
@@ -132,63 +133,95 @@ export class SideFilterComponent implements OnInit {
 
   ];
   individuals = [
-      {
-        name: 'ahmed taha',
-        id: 1
-      },
-      {
-        name: 'Ali alaaa',
-        id: 2
-      },
-      {
-        name: 'Ola osama',
-        id: 3
-      },{
-        name: 'Sama taher',
-        id: 4
-      },
-    ];
+    {
+      name: 'ahmed taha',
+      id: 1
+    },
+    {
+      name: 'Ali alaaa',
+      id: 2
+    },
+    {
+      name: 'Ola osama',
+      id: 3
+    }, {
+      name: 'Sama taher',
+      id: 4
+    },
+  ];
+  roles = [
+    {
+      name: 'SuperAdmin',
+      id: 1
+    },
+    {
+      name: 'Admin',
+      id: 3
+    },
+    {
+      name: 'Manager',
+      id: 2
+    },
+    {
+      name: 'User',
+      id: 4
+    },
+
+  ];
   allFilters;
   selectedSites = [];
   selectedDepartments = [];
   selectedIndividuals = [];
-  pwa;
+  selectedRoles = [];
+  paw;
   isMobile = isMobile;
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService) { }
+
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService) {
+  }
 
   ngOnInit(): void {
   }
 
 
   filterChanged(type, selected) {
+    console.log('selected', selected)
     if (type === 'sites') {
       this.selectedSites = [];
-      for(let a of selected) {
+      for (let a of selected) {
         this.selectedSites.push(a.value);
       }
-    } else  if (type === 'departments') {
+    } else if (type === 'departments') {
       this.selectedDepartments = [];
-      for(let a of selected) {
+      for (let a of selected) {
         this.selectedDepartments.push(a.value);
       }
-    } else  if (type === 'individuals') {
+    } else if (type === 'individuals') {
       this.selectedIndividuals = [];
-      for(let a of selected) {
+      for (let a of selected) {
         this.selectedIndividuals.push(a.value);
       }
+    } else if (type === 'roles') {
+      this.selectedRoles = [];
+      for (let a of selected) {
+        this.selectedRoles.push(a.value);
+      }
+    } else if (type === 'paw') {
+      this.paw = selected.value
     }
     this.allFilters = {
       sites: this.selectedSites,
       departments: this.selectedDepartments,
       individuals: this.selectedIndividuals,
-      pwa: this.pwa,
+      roles: this.selectedRoles,
+      paw: this.paw,
     };
     console.log('allFilters', this.allFilters)
-    this.emittedData.emit(this.allFilters);
+    // if (!this.fromContainer) {
+      this.emittedData.emit(this.allFilters);
+    // }
   }
 
   apply() {
-    this.emittedData.emit(this.allFilters);
-    this.closeDrawer.emit(false);
+    this.closeDrawer.emit(this.allFilters);
   }
 }

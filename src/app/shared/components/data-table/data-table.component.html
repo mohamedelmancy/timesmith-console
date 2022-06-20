@@ -5,7 +5,7 @@
         <app-side-filter  (emittedData)="sideFilter($event)" [sideFilters]="sideFilters"></app-side-filter>
       </div>
       <div class="mat-elevation-z8 py-3 w-100" [ngClass]="{'table-with-filters': sideFilters?.length && !isMobile}">
-        <table id="htmlData" mat-table [dataSource]="dataSource">
+        <table #table id="htmlData" mat-table [dataSource]="dataSource">
           <ng-container *ngFor="let column of displayedColumns?.values; let i = index" [matColumnDef]="column">
 
             <div *ngIf="column === 'actions'">

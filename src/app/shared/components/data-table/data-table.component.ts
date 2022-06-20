@@ -7,15 +7,15 @@ import {
   Input,
   OnChanges,
   Output,
-  EventEmitter
+  EventEmitter, ChangeDetectorRef
 } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatPaginator} from '@angular/material/paginator';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {PageTitleService} from "../../../core/page-title/page-title.service";
-import {GetLanguage, searchInAllTableColumns} from "../../functions/shared-functions";
+import {filterTable, GetLanguage, searchInAllTableColumns} from "../../functions/shared-functions";
 import {secureStorage} from "../../functions/secure-storage";
 import {DeleteComponent} from "../../../modals/delete/delete.component";
 import {isMobile} from "../../variables/variables";
@@ -37,6 +37,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() viewLink;
   @Input() dataTableName;
   @Output() deleteEvent = new EventEmitter<any>();
+  filteredData;
   rows = [];
   filterColumns = [];
   isMobile = isMobile;
@@ -44,8 +45,11 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   finalGrade: number;
   backup = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatTable) table: MatTable<any>;
 
-  constructor(private pageTitleService: PageTitleService, private router: Router,
+  constructor(private pageTitleService: PageTitleService,
+              private cdr: ChangeDetectorRef,
+              private router: Router,
               private dialog: MatDialog) {
   }
 
@@ -65,6 +69,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.cdr.detectChanges();
   }
 
   takeAction(type, row) {
@@ -135,58 +140,6 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   sideFilter(e) {
-    console.log('e', e);
-    let loopedArr;
-    let data;
-    data = this.backup.filter(item => {
-      if (e.sites?.length) {
-        loopedArr = e.sites;
-        return this.loopOverFilter(loopedArr, item, 'site');
-      } else {
-        return true;
-      }
-    });
-    data = data.filter(item => {
-      if (e.departments?.length) {
-        loopedArr = e.departments;
-        return this.loopOverFilter(loopedArr, item, 'department');
-      } else {
-        return true;
-      }
-    });
-    data = data.filter(item => {
-      if (e.individuals?.length) {
-        loopedArr = e.individuals;
-        return this.loopOverFilter(loopedArr, item, 'employee');
-      } else {
-        return true;
-      }
-    });
-    data = data.filter(item => {
-      if (e.pwa) {
-        loopedArr = e.sites;
-        return this.loopOverFilter(loopedArr, item, 'pwa');
-      } else {
-        return true;
-      }
-    });
-
-    if (!e.individuals?.length && !e.sites?.length && !e.departments?.length && !e.pwa) {
-      data = this.backup;
-    }
-    this.dataSource.data = data
-  }
-
-  loopOverFilter(loopedArr, item, column): boolean {
-    for (let i = 0; i < loopedArr.length; i++) {
-      if (i < loopedArr.length) {
-        return (item[column]?.toString().trim().toLowerCase()
-            .indexOf(loopedArr[i]?.name?.trim().toLowerCase()) !== -1 ||
-          item[column]?.toString().trim().toLowerCase()
-            .indexOf(loopedArr[i + 1]?.name?.trim().toLowerCase()) !== -1
-        );
-
-      }
-    }
+    this.dataSource.data = filterTable(e, this.backup);
   }
 }

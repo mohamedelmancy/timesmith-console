@@ -14,7 +14,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material/core";
+import {MatNativeDateModule, MatRippleModule} from "@angular/material/core";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatTableModule} from "@angular/material/table";
 import {MatExpansionModule} from "@angular/material/expansion";
@@ -41,6 +41,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {RouterModule} from "@angular/router";
 import { SideFilterComponent } from './components/side-filter/side-filter.component';
 import { DataTableContainerComponent } from './components/data-table-container/data-table-container.component';
+import {MenuToggleAnchorDirective, MenuToggleDirective, MenuToggleLinkDirective} from "../core/menu/menu-toggle";
 
 
 
@@ -105,6 +106,12 @@ import { DataTableContainerComponent } from './components/data-table-container/d
         MatPaginatorModule,
         TranslateModule,
         RouterModule,
-    ]
+        MatRippleModule,
+    ],
+  providers: [
+    MenuToggleDirective,
+    MenuToggleLinkDirective,
+    MenuToggleAnchorDirective
+  ]
 })
 export class SharedModule { }
