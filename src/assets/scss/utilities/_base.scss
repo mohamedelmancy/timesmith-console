@@ -865,9 +865,13 @@ div.material-icon-picker input[type="text"] {
   border-radius: 17px !important;
   padding: 14px !important;
 }
+.mat-slide-toggle-thumb-container{
+  top: 2px !important;
+  //left: unset !important;
+}
 .mat-slide-toggle-thumb{
   height: 28px !important;
-  margin: 5px 0 0 0;
+  //margin: 5px 0 0 0;
   width: 27px !important;
 }
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
