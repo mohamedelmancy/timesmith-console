@@ -867,12 +867,16 @@ div.material-icon-picker input[type="text"] {
 }
 .mat-slide-toggle-thumb-container{
   top: 2px !important;
-  //left: unset !important;
+  left: 2px !important;
 }
 .mat-slide-toggle-thumb{
-  height: 28px !important;
+  height: 27px !important;
   //margin: 5px 0 0 0;
-  width: 27px !important;
+  width: 26px !important;
+}
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb-container {
+  left: unset !important;
+  right: 24px;
 }
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
   background-color: var(--primary-color);
@@ -886,3 +890,4 @@ div.material-icon-picker input[type="text"] {
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
   background-color: var(--secondary-color);
 }
+

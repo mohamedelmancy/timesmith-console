@@ -17,6 +17,6 @@
     </div>
   </div>
   <mat-drawer #drawer2 class="example-sidenav" mode="side">
-    <app-side-filter class="" [fromContainer]="true" (emittedData)="sideFilter($event)" [sideFilters]="sideFilters" (closeDrawer)="closeDrawer($event)"></app-side-filter>
+    <app-side-filter class="" [pawStatistics]="pawStatistics" [fromContainer]="true" (emittedData)="sideFilter($event)" [sideFilters]="sideFilters" (closeDrawer)="closeDrawer($event)"></app-side-filter>
   </mat-drawer>
 </mat-drawer-container>

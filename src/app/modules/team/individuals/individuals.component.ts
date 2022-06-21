@@ -43,7 +43,7 @@ export class IndividualsComponent implements OnInit {
         name: 'Site2',
         id: 1
       },
-      id: 1,
+      id: 2,
       departmentObj: {
         name: 'sales',
         id: 2
@@ -67,7 +67,7 @@ export class IndividualsComponent implements OnInit {
         name: 'Site4',
         id: 1
       },
-      id: 1,
+      id: 3,
       departmentObj: {
         name: 'sales',
         id: 2
@@ -86,7 +86,12 @@ export class IndividualsComponent implements OnInit {
       },
     },
   ]
+  viewedConfigurationRowId;
+  viewedConfigurationName;
   ngOnInit(): void {
+    console.log('activatedRoute', this.activatedRoute.snapshot);
+    this.viewedConfigurationRowId = this.activatedRoute.snapshot.queryParams['id'];
+    this.viewedConfigurationName = this.activatedRoute.snapshot.fragment;
     // this.data = this.activatedRoute.snapshot.data['sites'];
     this.data.forEach(item => {
       item['site'] = item.siteObj.name;

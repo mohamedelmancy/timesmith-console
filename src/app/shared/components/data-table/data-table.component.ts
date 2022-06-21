@@ -44,6 +44,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   gradeValidation = [];
   finalGrade: number;
   backup = [];
+  pawStatistics;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<any>;
 
@@ -57,6 +58,9 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
     this.backup = [...this.dataSource.data];
+    if (this.sideFilters?.includes('PAW')) {
+     this.getPawStatistics();
+    }
     console.log('data', this.data)
   }
 
@@ -70,6 +74,14 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.cdr.detectChanges();
+  }
+
+  getPawStatistics() {
+    this.pawStatistics = {
+      yes: this.data.filter(x => x.PAW === 'yes')?.length,
+      no: this.data.filter(x => x.PAW === 'no')?.length
+    }
+
   }
 
   takeAction(type, row) {

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-12 d-flex p-0">
       <div *ngIf="sideFilters?.length && !isMobile" class="side-filters-container">
-        <app-side-filter  (emittedData)="sideFilter($event)" [sideFilters]="sideFilters"></app-side-filter>
+        <app-side-filter  (emittedData)="sideFilter($event)" [pawStatistics]="pawStatistics" [sideFilters]="sideFilters"></app-side-filter>
       </div>
       <div class="mat-elevation-z8 py-3 w-100" [ngClass]="{'table-with-filters': sideFilters?.length && !isMobile}">
         <table #table id="htmlData" mat-table [dataSource]="dataSource">
@@ -62,7 +62,7 @@
 
               <td mat-cell *matCellDef="let row; let i = index">
                 <div >
-                  <a  class="primary-text cursor-pointer" [routerLink]="['/team']">{{row[column]}}</a>
+                  <a  class="primary-text cursor-pointer" [routerLink]="['/team']" [queryParams]="{id: row.id}" [fragment]="dataTableName">{{row[column]}}</a>
                 </div>
               </td>
             </div>

@@ -18,12 +18,12 @@
   <mat-divider class="my-3"></mat-divider>
   <div class="departments-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('departments')">
     <a data-bs-toggle="collapse" href="#collapseDeps" role="button"
-       aria-expanded="true" aria-controls="collapseDeps"
+       aria-expanded="false" aria-controls="collapseDeps"
        class="align-items-center collapsed d-flex filter-title justify-content-between">
       <span>Departments ( {{sites?.length}} )</span>
       <i class="menu-caret fa fa-chevron-down m-0"></i>
     </a>
-    <mat-selection-list class="collapse multi-collapse show" id="collapseDeps"
+    <mat-selection-list class="collapse multi-collapse" id="collapseDeps"
                         [ngClass]="departments?.length > 7 ? 'scrollable' : ''" #departmentSelection
                         (selectionChange)="filterChanged('departments', departmentSelection.selectedOptions.selected)">
       <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"
@@ -35,12 +35,12 @@
   <mat-divider class="my-3"></mat-divider>
   <div class="individuals-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('individuals')">
     <a data-bs-toggle="collapse" href="#collapseIndivid" role="button"
-       aria-expanded="true" aria-controls="collapseIndivid"
+       aria-expanded="false" aria-controls="collapseIndivid"
        class="align-items-center collapsed d-flex filter-title justify-content-between">
       <span>Individuals ( {{sites?.length}} )</span>
       <i class="menu-caret fa fa-chevron-down m-0"></i>
     </a>
-    <mat-selection-list class="collapse multi-collapse show" id="collapseIndivid" #individualSelection
+    <mat-selection-list class="collapse multi-collapse" id="collapseIndivid" #individualSelection
                         (selectionChange)="filterChanged('individuals', individualSelection.selectedOptions.selected)">
       <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"
                        *ngFor="let item of individuals" [value]="item">
@@ -59,8 +59,8 @@
     <mat-radio-group id="collapsePAW"
       class="collapse multi-collapse show example-radio-group row"
       (change)="filterChanged('paw', $event)">
-      <mat-radio-button class="example-radio-button py-2" [value]="'yes'">Yes</mat-radio-button>
-      <mat-radio-button class="example-radio-button" [value]="'no'">No</mat-radio-button>
+      <mat-radio-button class="example-radio-button py-2" [value]="'yes'"><span>Yes</span><span>( {{pawStatistics?.yes}} )</span></mat-radio-button>
+      <mat-radio-button class="example-radio-button" [value]="'no'"><span>No</span><span>( {{pawStatistics?.no}} )</span></mat-radio-button>
     </mat-radio-group>
   </div>
   <mat-divider class="my-3"></mat-divider>

@@ -13,6 +13,7 @@ import {isMobile} from "../../variables/variables";
 export class SideFilterComponent implements OnInit {
   @Input() sideFilters;
   @Input() fromContainer = false;
+  @Input() pawStatistics: {yes, no};
   @Output() emittedData = new EventEmitter<any>();
   @Output() closeDrawer = new EventEmitter<any>();
   departments = [
@@ -175,7 +176,6 @@ export class SideFilterComponent implements OnInit {
   selectedRoles = [];
   paw;
   isMobile = isMobile;
-
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService) {
   }
 
