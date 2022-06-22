@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Permissions</h1>
+<div mat-dialog-content>
+  <h3>Here are the permissions which <span class="font-bold">{{data.name}}</span> have</h3>
+  <div class="col-sm-12 d-flex flex-column" *ngFor="let permission of data?.permissions">
+    <div class="col-sm-12">
+      <h4 class="p-title">{{permission?.name}}</h4>
+    </div>
+    <div class="col-sm-12 d-flex my-3 row">
+      <span class="custom-badge" *ngFor="let one of permission?.permissions">{{one}}</span>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button  mat-button class="mx-2 warn-bg" mat-dialog-close>Close</button>
+<!--  <button (click)="yes()"  color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>-->
+<!--    {{'Close' | translate}}-->
+<!--  </button>-->
+</div>

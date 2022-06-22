@@ -77,14 +77,14 @@ const MENUITEMS = [
   {
     state: 'roles-permissions',
     name: 'Roles & Permissions',
-    type: 'sub',
+    type: 'button',
     label: '',
     icon: '',
     role: '',
-    children: [
-      {state: 'view-roles', name: 'View Roles', label: '', role: '', type: 'subChild'},
-      {state: 'manage-permissions', name: 'Manage Permissions', label: '', role: '', type: 'subChild'},
-    ]
+    // children: [
+      // {state: 'view-roles', name: 'View Roles', label: '', role: '', type: 'subChild'},
+      // {state: 'manage-permissions', name: 'Manage Permissions', label: '', role: '', type: 'subChild'},
+    // ]
   },
   {
     state: 'support',

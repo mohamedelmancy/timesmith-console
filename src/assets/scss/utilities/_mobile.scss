@@ -10,6 +10,11 @@
     th.mat-header-cell input{
       width: 50% !important;
       height: 17px !important;
+      max-width: 75px;
+      font-size: 10px !important;
     }
+  }
+  .roles-permissions mat-list-option {
+    width: 50% !important;
   }
 }

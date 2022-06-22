@@ -28,6 +28,10 @@ export class DataTableContainerComponent extends DataTableComponent implements O
     this.deleteEvent.emit(e);
   }
 
+  viewPermissionFunc(e) {
+    this.viewPermission.emit(e);
+  }
+
   openDrawer() {
     if(isMobile) {
       this.drawer.toggle();

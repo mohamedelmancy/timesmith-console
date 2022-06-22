@@ -60,7 +60,7 @@ export class CreateDepartmentComponent extends AutoComplete implements OnInit {
         // employees: ['', Validators.compose([Validators.required])],
         manager: [null, Validators.compose([])],
       },
-      {validators: []}
+      {validators: [this.checkAutoComplete()]}
     );
     this.form.valueChanges.subscribe(changes => {
       console.log('changes', changes);

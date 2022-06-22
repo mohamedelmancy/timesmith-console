@@ -37,6 +37,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() viewLink;
   @Input() dataTableName;
   @Output() deleteEvent = new EventEmitter<any>();
+  @Output() viewPermission = new EventEmitter<any>();
   filteredData;
   rows = [];
   filterColumns = [];
@@ -89,6 +90,8 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
       console.log(this.viewLink)
       secureStorage.setItem('row', row);
       this.router.navigate([this.viewLink, row?.id])
+    } else if (type === 'View') {
+      this.viewPermission.emit(row);
     } else {
       const dialogRef = this.dialog.open(DeleteComponent, {
           data: row,

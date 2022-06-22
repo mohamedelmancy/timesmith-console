@@ -121,7 +121,7 @@
             </div>
 
 
-            <div class="col-sm-12 d-flex justify-content-end mt-5">
+            <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
               <button  mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/leaves']">Back</button>
               <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
                 {{data ? 'Update' : 'Create'}}

@@ -1,0 +1,9 @@
+<app-data-table-container
+  (deleteEvent)="deleteRow($event)"
+  [dataTableName]="'roles'"
+  [displayedColumns]="displayedColumns"
+  [data]="data"
+  (viewPermission)="viewPermission($event)"
+  [createLink]="'/roles-permissions/create-roles-permissions'"
+  [viewLink]="'/roles-permissions/view-roles-permissions'"
+></app-data-table-container>

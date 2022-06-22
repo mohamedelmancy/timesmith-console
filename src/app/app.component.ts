@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {DateAdapter} from "@angular/material/core";
 import {secureStorage} from "./shared/functions/secure-storage";
 import {GetLanguage} from "./shared/functions/shared-functions";
+import {BreadcrumbsService} from "@exalif/ngx-breadcrumbs";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import {GetLanguage} from "./shared/functions/shared-functions";
 })
 export class AppComponent implements OnInit{
   title = 'timeSmithConsole';
-  constructor(private translate: TranslateService, private router: Router, private dateAdapter: DateAdapter<any>, ) {
+  constructor(private translate: TranslateService, private router: Router, private dateAdapter: DateAdapter<any>, private breadcrumbsService: BreadcrumbsService) {
     // const browserLang: string = translate.getBrowserLang();
     // translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
   }
@@ -32,7 +33,9 @@ export class AppComponent implements OnInit{
     document.body.style.direction = dir;
     (window as any).primaryColor =  '#036c9c';
     (window as any).secondaryColor =  '#b1dff5';
+    (window as any).greyColor =  '#929391';
     document.documentElement.style.setProperty('--primary-color', (window as any).primaryColor);
     document.documentElement.style.setProperty('--secondary-color', (window as any).secondaryColor);
+    document.documentElement.style.setProperty('--grey-color', (window as any).greyColor);
   }
 }

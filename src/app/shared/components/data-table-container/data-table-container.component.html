@@ -1,7 +1,7 @@
 <mat-drawer-container class="example-container" autosize>
   <div class="list d-flex flex-column card-body">
-    <div class="col-sm-12 d-flex mt-2 justify-content-between justify-content-lg-end" *ngIf="showCreate">
-      <button (click)="openDrawer()" *ngIf="isMobile" tooltip="Open filters" color="primary" mat-raised-button type="button"
+    <div class="col-sm-12 d-flex mt-2 justify-content-lg-end" *ngIf="showCreate" [ngClass]="sideFilters?.length && isMobile ? 'justify-content-between' : 'justify-content-end'">
+      <button (click)="openDrawer()" *ngIf="sideFilters?.length && isMobile" tooltip="Open filters" color="primary" mat-raised-button type="button"
               class="primary-bg">
         <i class="fa fa-filter"></i>
         {{'Filters'| translate}}</button>
@@ -12,7 +12,7 @@
     </div>
     <div class="">
       <app-data-table [viewLink]="viewLink" [createLink]="createLink" [sideFilters]="sideFilters"
-                      (deleteEvent)="delete($event)" [dataTableName]="dataTableName"
+                      (deleteEvent)="delete($event)" (viewPermission)="viewPermissionFunc($event)" [dataTableName]="dataTableName"
                       [displayedColumns]="displayedColumns" [data]="data"></app-data-table>
     </div>
   </div>

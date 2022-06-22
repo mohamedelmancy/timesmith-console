@@ -1,0 +1,17 @@
+.p-title{
+  padding: 5px;
+  background: #ededed;
+  width: 25%;
+  border-radius: 5px;
+  /* color: white; */
+  text-align: center;
+  font-weight: bold;
+}
+.custom-badge{
+  background: var(--grey-color);
+  color: white;
+  border-radius: 9px;
+  padding: 2px 9px;
+  margin: 5px 10px;
+  width: unset !important;
+}

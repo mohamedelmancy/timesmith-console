@@ -36,6 +36,18 @@
               </td>
             </div>
 
+            <div *ngIf="column === 'default permissions'">
+              <th mat-header-cell *matHeaderCellDef>
+                <span class="column-label">{{'Default permissions' | translate}}</span>
+              </th>
+
+              <td mat-cell *matCellDef="let row; let i = index" style="width: 10px; flex: none; min-width: 10px">
+                <div class="">
+                  <a class="cursor-pointer mx-1" (click)="takeAction('View', row)">{{'View' | translate}}</a>
+                </div>
+              </td>
+            </div>
+
 
             <div *ngIf="column === 'color'">
               <th mat-header-cell *matHeaderCellDef>

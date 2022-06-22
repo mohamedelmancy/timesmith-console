@@ -1,0 +1,54 @@
+<div class="card-body container-fluid roles-permissions">
+  <div class="row justify-content-center">
+    <div class="col-sm-6 card d-flex flex-column p-3">
+      <div class="col-sm-12">
+        <form [formGroup]="form" class="col-sm-12 justify-content-start">
+          <div class="d-flex justify-content-center align-items-center my-4"><h2>{{data ? 'Update role' : 'Create new role'}}</h2></div>
+          <div class="d-flex row">
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>Role name</mat-label>
+                <input matInput placeholder="{{'Name' | translate}}" type="text" name="name" formControlName="name">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched"
+                class="warn-text gene-block">
+                {{'You must include name' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['name'].errors && (form.controls['name'].hasError('wrong')) && form.controls['name'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid name' | translate}}
+              </small>
+            </div>
+              <div class="col-sm-12 d-flex flex-column my-2" *ngFor="let permission of permissions; let i = index" >
+                <a data-bs-toggle="collapse" href="#collapse{{i}}" role="button"
+                   aria-expanded="true" [attr.aria-controls]="'collapse{{i}}'"
+                   class="align-items-center collapsed d-flex filter-title">
+                  <span>{{permission.name}}</span>
+                  <i class="menu-caret fa fa-chevron-down m-0 mx-2"></i>
+                </a>
+                <mat-selection-list class="collapse multi-collapse show d-flex row px-3" id="collapse{{i}}"
+                                    [ngClass]="permission?.permissions?.length > 10 ? 'scrollable' : ''" #selection
+                                    (selectionChange)="filterChanged(i, selection.selectedOptions.selected)">
+                  <mat-list-option style="width: 15%" tooltip="{{item.length > 20 ? item : ''}}" color="primary" *ngFor="let item of permission?.permissions"
+                                   [value]="item">
+                    {{item}}
+                  </mat-list-option>
+                </mat-selection-list>
+              </div>
+
+            </div>
+
+            <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
+              <button  mat-button class="mx-2 warn-bg" [routerLink]="['/roles-permissions']">Back</button>
+              <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
+                {{data ? 'Update' : 'Create'}}
+              </button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
