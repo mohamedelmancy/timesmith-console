@@ -20,6 +20,7 @@ import {DepartmentsResolver} from "../../resolvers/departments.resolver";
 import {ShiftsResolver} from "../../resolvers/shifts.resolver";
 import {LeavesResolver} from "../../resolvers/leaves.resolver";
 import {ExceptionCodesResolver} from "../../resolvers/exception-codes.resolver";
+import {BreadcrumbTranslateService} from "../../services/breadcrumb-translate.service";
 
 const routes: Routes = [
   {
@@ -33,9 +34,14 @@ const routes: Routes = [
       {
         path: 'sites',
         component: SitesComponent,
+        data: {
+          title: 'Sites',
+          breadcrumbs: '{{breadcrumb}}'
+        },
         resolve: {
-          sites: SitesResolver
-        }
+          sites: SitesResolver,
+          breadcrumb: BreadcrumbTranslateService
+        },
       },
       {
         path: 'create-site',

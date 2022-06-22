@@ -20,47 +20,74 @@ const routes: Routes = [
       {
         path: 'auth',
         // canActivate: [LandingGuard],
-        loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule)
+        loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule),
+        data: {
+          breadcrumbs: ''
+        }
       },
       {
         path: 'timeline',
         // canActivate: [AuthGuard],
-        loadChildren: () => import('./modules/timeline/timeline.module').then(m => m.TimelineModule)
+        loadChildren: () => import('./modules/timeline/timeline.module').then(m => m.TimelineModule),
+        data: {
+          breadcrumbs: 'Today'
+        }
       },
       {
         path: 'requests',
         // canActivate: [AuthGuard],
-        loadChildren: () => import('./modules/requests/requests.module').then(m => m.RequestsModule)
+        loadChildren: () => import('./modules/requests/requests.module').then(m => m.RequestsModule),
+        data: {
+          breadcrumbs: 'Requests'
+        }
       },
       {
         path: 'reports',
         // canActivate: [AuthGuard],
-        loadChildren: () => import('./modules/reports/reports.module').then(m => m.ReportsModule)
+        loadChildren: () => import('./modules/reports/reports.module').then(m => m.ReportsModule),
+        data: {
+          breadcrumbs: 'Reports'
+        }
       },
       {
         path: 'notifications',
         // canActivate: [AuthGuard],
-        loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule)
+        loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule),
+        data: {
+          breadcrumbs: 'Notifications'
+        }
       },
       {
         path: 'configurations',
         // canActivate: [AuthGuard],
-        loadChildren: () => import('./modules/configurations/configurations.module').then(m => m.ConfigurationsModule)
+        loadChildren: () => import('./modules/configurations/configurations.module').then(m => m.ConfigurationsModule),
+        data: {
+          breadcrumbs: 'Configurations'
+        }
       },
       {
         path: 'team',
         // canActivate: [AuthGuard],
-        loadChildren: () => import('./modules/team/team.module').then(m => m.TeamModule)
+        loadChildren: () => import('./modules/team/team.module').then(m => m.TeamModule),
+        data: {
+          breadcrumbs: 'Team'
+        }
       },
       {
         path: 'roles-permissions',
         // canActivate: [AuthGuard],
-        loadChildren: () => import('./modules/roles-permissions/roles-permissions.module').then(m => m.RolesPermissionsModule)
+        loadChildren: () => import('./modules/roles-permissions/roles-permissions.module').then(m => m.RolesPermissionsModule),
+        data: {
+          breadcrumbs: 'Roles and Permissions'
+        }
       },
       {
         path: 'support',
         // canActivate: [AuthGuard],
-        loadChildren: () => import('./modules/support/support.module').then(m => m.SupportModule)
+        loadChildren: () => import('./modules/support/support.module').then(m => m.SupportModule),
+        data: {
+          breadcrumbs: 'Support'
+        }
       },
       {
         path: 'change-password',

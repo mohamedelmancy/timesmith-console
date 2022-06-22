@@ -24,6 +24,7 @@ import {SiteResolver} from "../../resolvers/site.resolver";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {NgxMatTimepickerModule} from "ngx-mat-timepicker";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {BreadcrumbTranslateService} from "../../services/breadcrumb-translate.service";
 
 
 @NgModule({
@@ -54,6 +55,6 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
         NgxMatTimepickerModule,
         MatAutocompleteModule,
     ],
-  providers: [SiteResolver]
+  providers: [SiteResolver, BreadcrumbTranslateService]
 })
 export class ConfigurationsModule { }
