@@ -878,11 +878,13 @@ div.material-icon-picker input[type="text"] {
   left: unset !important;
   right: 24px;
 }
+.mat-slide-toggle .mat-slide-toggle-bar {
+  background-color: var(--grey-color);
+}
+
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
   background-color: var(--primary-color);
 }
-
-
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
   background-color: var(--secondary-color);
 }
@@ -908,8 +910,11 @@ div.material-icon-picker input[type="text"] {
     //font-size: 23px;
     padding: 0 !important;
     margin-right: 10px;
+    a{
+      color: var(--primary-color);
+    }
     span {
-      color: #000;
+      color: var(--grey-color);
       text-decoration: none;
       background-color: transparent;
       font-size: 15px;
@@ -922,7 +927,7 @@ div.material-icon-picker input[type="text"] {
   }
   li.breadcrumbs__item.active {
     background: unset !important;
-    color: #000;
+    color: var(--grey-color);
   }
   li.breadcrumbs__item:nth-child(n+2)::before {
     -webkit-font-smoothing: antialiased;
@@ -934,15 +939,43 @@ div.material-icon-picker input[type="text"] {
     line-height: 1;
     padding-left: 4px;
     padding-right: 20px;
-    font-size: 15px;
-    color: #D8D8D8;
+    font-size: 25px;
+    color: #a2a0a0;
     height: 14px;
     width: 8.24px;
     font-weight: 900;
     font-family: "Font Awesome 5 Free";
-    content: "\f054";
+    content: ".";
   }
 }
+.gene-base-container{
+  .mat-form-field-appearance-outline .mat-form-field-infix input{
+    //text-align: center;
+    padding: 2px;
+    font-size: 14px;
+    height: 28px;
+  }
+  .mat-form-field-infix{
+    padding: 3px !important;
+    border-top: 12px solid transparent;
+    border-bottom: 0px solid transparent;
+  }
+  .mat-button-wrapper{
+    svg{
+      height: 26px !important;
+    }
+    .mat-datepicker-toggle-default-icon{
+      width: 1em;
+    }
+  }
+  .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix{
+    top: -4px !important;
+  }
+  .mat-form-field-label{
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 760px) {
   .breadcrumbs__container {
     padding: 0 !important;

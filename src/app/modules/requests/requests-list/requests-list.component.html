@@ -1,1 +1,8 @@
-<p>requests-list works!</p>
+<app-data-table-container
+  [sideFilters]="['sites', 'departments', 'individuals', 'requestStatus']"
+  (deleteEvent)="deleteRow($event)"
+  [dataTableName]="'requests'"
+  (statusAction)="takeStatusAction($event)"
+  [displayedColumns]="displayedColumns"
+  [data]="data"
+></app-data-table-container>

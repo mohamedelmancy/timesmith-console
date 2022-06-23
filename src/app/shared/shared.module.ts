@@ -42,6 +42,7 @@ import {RouterModule} from "@angular/router";
 import { SideFilterComponent } from './components/side-filter/side-filter.component';
 import { DataTableContainerComponent } from './components/data-table-container/data-table-container.component';
 import {MenuToggleAnchorDirective, MenuToggleDirective, MenuToggleLinkDirective} from "../core/menu/menu-toggle";
+import {BreadcrumbTranslateService} from "../services/breadcrumb-translate.service";
 
 
 
@@ -57,7 +58,7 @@ import {MenuToggleAnchorDirective, MenuToggleDirective, MenuToggleLinkDirective}
     TooltipModule,
     DataTableComponent,
     TranslateModule,
-    DataTableContainerComponent
+    DataTableContainerComponent,
 
   ],
     imports: [
@@ -111,7 +112,8 @@ import {MenuToggleAnchorDirective, MenuToggleDirective, MenuToggleLinkDirective}
   providers: [
     MenuToggleDirective,
     MenuToggleLinkDirective,
-    MenuToggleAnchorDirective
+    MenuToggleAnchorDirective,
+    BreadcrumbTranslateService
   ]
 })
 export class SharedModule { }

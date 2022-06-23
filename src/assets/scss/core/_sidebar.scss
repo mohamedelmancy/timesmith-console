@@ -342,8 +342,10 @@ body {
       .boxed-layout-md {
          display: none;
       }
-      .gene-breadcrumbs {
-         display: none;
+      .gene-header-toolbar{
+        .gene-breadcrumbs, .menu-divider, .menu-home-icon, .menu-dot {
+          display: none !important;
+        }
       }
    }
    @media(max-width:1199px){

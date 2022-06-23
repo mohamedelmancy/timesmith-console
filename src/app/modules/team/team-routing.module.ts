@@ -4,12 +4,9 @@ import {IndividualsComponent} from "./individuals/individuals.component";
 import {CreateIndividualComponent} from "./create-individual/create-individual.component";
 import {IndividualsResolver} from "../../resolvers/individuals.resolver";
 import {IndividualResolver} from "../../resolvers/individual.resolver";
-import {CreateShiftComponent} from "../configurations/shifts/create-shift/create-shift.component";
+import {BreadcrumbTranslateService} from "../../services/breadcrumb-translate.service";
 
 const routes: Routes = [
-  {
-    path: '',
-    children: [
       {
         path: '',
         component: IndividualsComponent,
@@ -18,18 +15,28 @@ const routes: Routes = [
         }
       },
       {
-        path: 'create-team',
+        path: 'new',
         component: CreateIndividualComponent,
-      },
-      {
-        path: 'view-team/:id',
-        component: CreateIndividualComponent,
+        data: {
+          title: 'New',
+          breadcrumbs: '{{breadcrumb}}'
+        },
         resolve: {
-          team: IndividualResolver
+          breadcrumb: BreadcrumbTranslateService
         }
       },
-    ]
-  }
+      {
+        path: ':id',
+        component: CreateIndividualComponent,
+        data: {
+          title: '{{team.name}}',
+          breadcrumbs: '{{breadcrumb}}'
+        },
+        resolve: {
+          team: IndividualResolver,
+          breadcrumb: BreadcrumbTranslateService
+        }
+      },
 ];
 
 @NgModule({

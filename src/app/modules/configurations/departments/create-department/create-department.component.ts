@@ -76,7 +76,7 @@ export class CreateDepartmentComponent extends AutoComplete implements OnInit {
   fillForm() {
     this.form.controls['name'].setValue(this.data?.name);
     // this.form.controls['employees'].setValue(this.data?.employees);
-    this.form.controls['manager'].setValue(this.managers.find(x => x.id === this.data.manager.id));
+    this.form.controls['manager'].setValue(this.managers.find(x => x.id === this.data.manager?.id));
   }
   setNewAutoSetting() {
     this.dropdownSettings = {

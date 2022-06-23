@@ -62,7 +62,7 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/configurations/configurations.module').then(m => m.ConfigurationsModule),
         data: {
-          breadcrumbs: 'Configurations'
+          // breadcrumbs: 'Configurations'
         }
       },
       {

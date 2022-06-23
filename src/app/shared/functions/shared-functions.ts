@@ -94,6 +94,14 @@ export function filterTable(e, backup) {
     loopedArr = e.roles;
     data = loopOverFilter(loopedArr, 'role', data);
   }
+  if (e?.reportTypes?.length) {
+    loopedArr = e.reportTypes;
+    data = loopOverFilter(loopedArr, 'type', data);
+  }
+  if (e?.requestsStatus?.length) {
+    loopedArr = e.requestsStatus;
+    data = loopOverFilter(loopedArr, 'status', data);
+  }
   if (e?.paw) {
     data = data.filter(x => x.PAW === e.paw);
     console.log('paw', data)
@@ -105,6 +113,9 @@ function loopOverFilter(loopedArr, column, backup?) {
   let filtered = [];
   console.log('loopedArr', loopedArr)
   for (let i = 0; i < loopedArr.length; i++) {
+    if (loopedArr[i]?.name?.trim().toLowerCase() === 'all') {
+      return backup;
+    }
     let batch = backup.filter(x => x[column]?.toString().trim().toLowerCase() === loopedArr[i]?.name?.trim().toLowerCase());
     batch?.forEach(one => {
       if (filtered.findIndex(x => x === one) === -1) {

@@ -32,6 +32,10 @@ export class DataTableContainerComponent extends DataTableComponent implements O
     this.viewPermission.emit(e);
   }
 
+  takeStatusAction(e) {
+      this.statusAction.emit(e);
+    }
+
   openDrawer() {
     if(isMobile) {
       this.drawer.toggle();

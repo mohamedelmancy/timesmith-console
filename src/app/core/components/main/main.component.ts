@@ -9,6 +9,7 @@ import {AuthService} from "../../../services/auth.service";
 import {CoreService} from "../../../services/core.service";
 import {secureStorage} from "../../../shared/functions/secure-storage";
 import {environment} from "../../../../environments/environment";
+import {isMobile} from "../../../shared/variables/variables";
 
 declare var require;
 
@@ -31,7 +32,7 @@ export class MainComponent implements OnInit, OnDestroy {
   root: any = 'rtl';
   layout: any = 'rtl';
   customizerIn = false;
-  isMobile = false;
+  isMobile = isMobile;
   isFullscreen = false;
   header: string;
   dark: boolean;

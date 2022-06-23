@@ -169,11 +169,42 @@ export class SideFilterComponent implements OnInit {
     },
 
   ];
+  reportTypes = [
+    {
+      name: 'Time',
+      id: 1
+    },
+    {
+      name: 'leave',
+      id: 3
+    },
+    {
+      name: 'Exception code',
+      id: 2
+    }
+  ];
+
+  requestStatus = [
+    {
+      name: 'All',
+      id: 1
+    },
+    {
+      name: 'Pending',
+      id: 3
+    },
+    {
+      name: 'Approved',
+      id: 2
+    }
+  ];
   allFilters;
   selectedSites = [];
   selectedDepartments = [];
   selectedIndividuals = [];
   selectedRoles = [];
+  selectedReportTypes = [];
+  selectedRequestsStatus = [];
   paw;
   isMobile = isMobile;
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService) {
@@ -205,6 +236,16 @@ export class SideFilterComponent implements OnInit {
       for (let a of selected) {
         this.selectedRoles.push(a.value);
       }
+    } else if (type === 'reportTypes') {
+      this.selectedReportTypes = [];
+      for (let a of selected) {
+        this.selectedReportTypes.push(a.value);
+      }
+    } else if (type === 'requestsStatus') {
+      this.selectedRequestsStatus = [];
+      for (let a of selected) {
+        this.selectedRequestsStatus.push(a.value);
+      }
     } else if (type === 'paw') {
       this.paw = selected.value
     }
@@ -212,6 +253,8 @@ export class SideFilterComponent implements OnInit {
       sites: this.selectedSites,
       departments: this.selectedDepartments,
       individuals: this.selectedIndividuals,
+      reportTypes: this.selectedReportTypes,
+      requestsStatus: this.selectedRequestsStatus,
       roles: this.selectedRoles,
       paw: this.paw,
     };

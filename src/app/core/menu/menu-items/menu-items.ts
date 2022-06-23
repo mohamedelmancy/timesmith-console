@@ -42,14 +42,14 @@ const MENUITEMS = [
   {
     state: 'requests',
     name: 'Requests',
-    type: 'sub',
+    type: 'button',
     label: '',
     icon: '',
     role: '',
-    children: [
-      {state: 'allocations', name: 'Allocations', label: '', role: '', type: 'subChild'},
-      {state: 'time-off', name: 'Time Off', label: '', role: '', type: 'subChild'},
-    ]
+    // children: [
+    //   {state: 'allocations', name: 'Allocations', label: '', role: '', type: 'subChild'},
+    //   {state: 'time-off', name: 'Time Off', label: '', role: '', type: 'subChild'},
+    // ]
   },
   {
     state: 'configurations',
@@ -63,7 +63,7 @@ const MENUITEMS = [
       {state: 'departments', name: 'Departments', label: '', role: '', type: 'subChild'},
       {state: 'shifts', name: 'Shifts', label: '', role: '', type: 'subChild'},
       {state: 'leaves', name: 'Leaves', label: '', role: '', type: 'subChild'},
-      {state: 'exceptions-codes', name: 'Exceptions Codes', label: '', role: '', type: 'subChild'},
+      {state: 'exception-codes', name: 'Exceptions Codes', label: '', role: '', type: 'subChild'},
     ]
   },
   {

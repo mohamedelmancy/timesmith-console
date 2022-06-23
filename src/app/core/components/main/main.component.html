@@ -6,7 +6,10 @@
     <mat-toolbar class="gene-header-toolbar horizontal-toolbar-wrap">
       <div class="gene-logo mat-pad-none"><img src="{{clientLogo}}" width="120" height="27" alt="logo"></div>
       <a class="navbar-brand" *ngIf="isLoggedIn">{{header | translate}}</a>
-<!--      <breadcrumb class="gene-breadcrumbs"></breadcrumb>-->
+      <div class="menu-divider"></div>
+      <mat-icon color="primary" class="menu-home-icon" [routerLink]="['/']">home</mat-icon>
+      <div class="menu-dot"></div>
+      <!--      <breadcrumb class="gene-breadcrumbs"></breadcrumb>-->
       <lib-breadcrumbs class="gene-breadcrumbs"></lib-breadcrumbs>
       <span fxFlex></span>
       <div class="secondary-menu">
@@ -70,6 +73,13 @@
       </mat-toolbar>
     </div>
 
+    <div *ngIf="isMobile" class="mobile-breadcrumb d-flex justify-content-start align-items-center">
+      <div class="menu-divider"></div>
+      <mat-icon color="primary" class="menu-home-icon" [routerLink]="['/']">home</mat-icon>
+      <div class="menu-dot"></div>
+      <!--      <breadcrumb class="gene-breadcrumbs"></breadcrumb>-->
+      <lib-breadcrumbs class="gene-breadcrumbs"></lib-breadcrumbs>
+    </div>
 
     <div class="gene-base-container" id="gene-base-container" #scrollContainer>
       <div class="inner-container" fxLayout="row wrap">

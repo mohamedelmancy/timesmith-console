@@ -61,6 +61,7 @@ import { DeleteComponent } from './modals/delete/delete.component';
 import { ChangePasswordComponent } from './modules/authentication/change-password/change-password.component';
 import { ViewPermissionsComponent } from './modals/view-permissions/view-permissions.component';
 import {BreadcrumbsModule} from "@exalif/ngx-breadcrumbs";
+import { StatusActionComponent } from './modals/status-action/status-action.component';
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   resourceTimelinePlugin,
   dayGridPlugin,
@@ -85,6 +86,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeleteComponent,
     ChangePasswordComponent,
     ViewPermissionsComponent,
+    StatusActionComponent,
   ],
     imports: [
         BrowserModule,

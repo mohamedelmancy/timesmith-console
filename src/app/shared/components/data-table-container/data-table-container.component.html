@@ -5,14 +5,14 @@
               class="primary-bg">
         <i class="fa fa-filter"></i>
         {{'Filters'| translate}}</button>
-      <button [routerLink]="[createLink]" tooltip="Add new row" color="primary" mat-raised-button type="button"
+      <button *ngIf="createLink" [routerLink]="[createLink]" tooltip="Add new row" color="primary" mat-raised-button type="button"
               class="primary-bg m-0">
         <mat-icon>add</mat-icon>
         {{'Create'| translate}}</button>
     </div>
     <div class="">
       <app-data-table [viewLink]="viewLink" [createLink]="createLink" [sideFilters]="sideFilters"
-                      (deleteEvent)="delete($event)" (viewPermission)="viewPermissionFunc($event)" [dataTableName]="dataTableName"
+                      (deleteEvent)="delete($event)" (viewPermission)="viewPermissionFunc($event)" (statusAction)="takeStatusAction($event)" [dataTableName]="dataTableName"
                       [displayedColumns]="displayedColumns" [data]="data"></app-data-table>
     </div>
   </div>

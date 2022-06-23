@@ -6,11 +6,9 @@ import {
 } from "./create-roles-and-permissions/create-roles-and-permissions.component";
 import {RolesAndPermissionsResolver} from "../../resolvers/roles-and-permissions.resolver";
 import {RoleAndPermissionResolver} from "../../resolvers/role-and-permission.resolver";
+import {BreadcrumbTranslateService} from "../../services/breadcrumb-translate.service";
 
 const routes: Routes = [
-  {
-    path: '',
-    children: [
       {
         path: '',
         component: RolesAndPermissionsComponent,
@@ -19,18 +17,28 @@ const routes: Routes = [
         }
       },
       {
-        path: 'create-roles-permissions',
+        path: 'new',
         component: CreateRolesAndPermissionsComponent,
-      },
-      {
-        path: 'view-roles-permissions/:id',
-        component: CreateRolesAndPermissionsComponent,
+        data: {
+          title: '{{site.name}}',
+          breadcrumbs: '{{breadcrumb}}'
+        },
         resolve: {
-          roleAndPermission: RoleAndPermissionResolver
+          breadcrumb: BreadcrumbTranslateService
         }
       },
-    ]
-  }
+      {
+        path: ':id',
+        component: CreateRolesAndPermissionsComponent,
+        data: {
+          title: '{{roleAndPermission.name}}',
+          breadcrumbs: '{{breadcrumb}}'
+        },
+        resolve: {
+          roleAndPermission: RoleAndPermissionResolver,
+          breadcrumb: BreadcrumbTranslateService
+        }
+      },
 ];
 
 @NgModule({
