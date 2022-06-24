@@ -10,11 +10,12 @@ import {CoreService} from "../services/core.service";
 @Injectable({
   providedIn: 'root'
 })
-export class RequestsResolver implements Resolve<boolean> {
+export class NotificationResolver implements Resolve<boolean> {
   constructor(private coreService: CoreService) {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    // return this.coreService.getRequest(`requests`)
+    const id = route.params['id'];
+    // return this.coreService.getRequest(`notification/${id}`)
     return of(true);
   }
 }

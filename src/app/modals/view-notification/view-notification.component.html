@@ -1,0 +1,28 @@
+<h1 mat-dialog-title class="bg-light text-capitalize">{{data.title}}</h1>
+<div mat-dialog-content>
+  <div class="col-sm-12 d-flex flex-column">
+    <div class="col-sm-12">
+      <p class="text-black-50">{{data?.body}}</p>
+    </div>
+    <div class="align-items-start col-sm-12 d-flex flex-column justify-content-start my-3">
+      <a target="_blank" href="{{data?.url}}" class="my-3">{{data?.url}}</a>
+     <img src="{{data?.image}}" width="100" height="100">
+
+<!--      <ng-img-magnifier [thumbImage]='data?.image' [fullImage]='data?.image'-->
+<!--                        [top]="'0'" [right]="'0'"-->
+<!--                        [lensWidth]="'100'" [lensHeight]="'100'"-->
+<!--                        [resultWidth]="'20'" [resultHeight]="'20'"-->
+<!--                        [imgWidth]="'300'" [imgHeight]="'300'">-->
+<!--      </ng-img-magnifier>-->
+
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-end">
+  <button  mat-button class="mx-2 warn-bg" mat-dialog-close>Close</button>
+  <!--  <button (click)="yes()"  color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>-->
+  <!--    {{'Close' | translate}}-->
+  <!--  </button>-->
+</div>
+
+

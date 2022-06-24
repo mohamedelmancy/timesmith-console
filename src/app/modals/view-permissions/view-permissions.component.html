@@ -1,6 +1,5 @@
-<h1 mat-dialog-title>Permissions</h1>
+<h1 class="text-capitalize text-capitalize bg-light px-3" mat-dialog-title>{{data.name}}</h1>
 <div mat-dialog-content>
-  <h3>Here are the permissions which <span class="font-bold">{{data.name}}</span> have</h3>
   <div class="col-sm-12 d-flex flex-column" *ngFor="let permission of data?.permissions">
     <div class="col-sm-12">
       <h4 class="p-title m-0">{{permission?.name}}</h4>

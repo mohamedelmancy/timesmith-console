@@ -16,7 +16,7 @@
     </mat-selection-list>
   </div>
 
-  <mat-divider class="my-3" *ngIf="sideFilters?.includes('reportTypes')"></mat-divider>
+  <mat-divider class="my-3" *ngIf="sideFilters?.includes('requestStatus') && sideFilters?.includes('reportTypes')"></mat-divider>
   <div class="requests-type-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('requestStatus')">
     <a data-bs-toggle="collapse" href="#collapseRequests" role="button"
        aria-expanded="true" aria-controls="collapseRequests"

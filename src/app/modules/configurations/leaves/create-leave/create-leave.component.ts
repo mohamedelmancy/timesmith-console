@@ -40,7 +40,7 @@ export class CreateLeaveComponent extends AutoComplete implements OnInit {
         end: [null, Validators.compose([Validators.required])],
         color: [null, Validators.compose([Validators.required])],
       },
-      {validators: []}
+      {validators: [this.checkAutoComplete()]}
     );
     this.form.valueChanges.subscribe(changes => {
       console.log('changes', changes);
@@ -60,6 +60,21 @@ export class CreateLeaveComponent extends AutoComplete implements OnInit {
         map(name => (name ? this._filter(name, this.types) : this.types.slice())),
       );
     }
+  }
+
+  checkAutoComplete() {
+    return (formGroup: FormGroup) => {
+      const type = formGroup?.controls['type'];
+      //////////////////////////////////////////////////////////////
+      const indexType = this.types.findIndex(res => res === type.value);
+
+      if (indexType === -1  && type.value) {
+        type.setErrors({wrong: true});
+      } else {
+        type.setErrors(null);
+      }
+    }
+
   }
 
   fillForm() {

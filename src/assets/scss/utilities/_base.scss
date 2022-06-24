@@ -948,13 +948,25 @@ div.material-icon-picker input[type="text"] {
     content: ".";
   }
 }
-.gene-base-container{
+.gene-base-container, .cdk-overlay-pane{
   .mat-form-field-appearance-outline .mat-form-field-infix input{
     //text-align: center;
     padding: 2px;
     font-size: 14px;
     height: 28px;
   }
+  .mat-form-field-appearance-outline .mat-form-field-infix mat-select{
+    //text-align: center;
+    padding: 2px;
+    font-size: 14px;
+    height: 32px;
+  }
+  //.mat-form-field-appearance-outline .mat-form-field-infix textarea{
+  //  //text-align: center;
+  //  padding: 2px;
+  //  font-size: 14px;
+  //  height: 32px;
+  //}
   .mat-form-field-infix{
     padding: 3px !important;
     border-top: 12px solid transparent;
@@ -986,4 +998,7 @@ div.material-icon-picker input[type="text"] {
   .breadcrumbs__container:not(:nth-child(1)):before {
     margin: 0 !important;
   }
+}
+.image{
+  object-fit: contain;
 }

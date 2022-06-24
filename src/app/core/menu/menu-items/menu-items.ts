@@ -88,7 +88,7 @@ const MENUITEMS = [
   },
   {
     state: 'support',
-    name: 'support',
+    name: 'Support',
     type: 'button',
     label: '',
     icon: '',

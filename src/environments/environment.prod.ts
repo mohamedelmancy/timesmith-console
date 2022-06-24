@@ -9,4 +9,6 @@ export const environment = {
   headerLogo: 'assets/img/logos/PNG%20x/Asset 2@2x.png',
   secondaryLogo: 'assets/img/logos/PNG x/Asset 9@2x.png',
   favicon: 'assets/img/logos/PNG x/Asset 8@2x.png',
+  supportPhone: '01069024896',
+  supportEmail: 'support@timesmith.com'
 };
