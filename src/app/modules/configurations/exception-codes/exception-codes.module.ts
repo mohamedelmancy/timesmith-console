@@ -9,6 +9,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {MatSelectModule} from "@angular/material/select";
+import {MatIconModule} from "@angular/material/icon";
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @NgModule({
@@ -16,14 +19,17 @@ import {MatButtonModule} from "@angular/material/button";
     ExceptionCodesComponent,
     CreateExceptionCodeComponent
   ],
-  imports: [
-    CommonModule,
-    ExceptionCodesRoutingModule,
-    SharedModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule
-  ]
+    imports: [
+        CommonModule,
+        ExceptionCodesRoutingModule,
+        SharedModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatIconModule,
+        MatRadioModule
+    ]
 })
 export class ExceptionCodesModule { }

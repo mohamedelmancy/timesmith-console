@@ -726,6 +726,20 @@
     left: auto;
     right: 2px !important;
   }
+  .menu-dot{
+    margin: 8px 10px 1px -14px !important;
+  }
+
+  .breadcrumbs__container li.breadcrumbs__item:nth-child(n+2)::before {
+    padding-left: 13px !important;
+    padding-right: 0 !important;
+    }
+  .mat-drawer-content .menu-home-icon{
+    margin-right: 10px;
+  }
+  .menu-divider {
+    margin: 0 13px 0 5px !IMPORTANT;
+  }
 }
 
 

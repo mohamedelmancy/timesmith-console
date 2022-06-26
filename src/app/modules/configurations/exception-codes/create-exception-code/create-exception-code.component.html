@@ -1,36 +1,42 @@
-<div class="card-body container-fluid">
+<div class="card-body container-fluid exception-codes">
   <div class="row justify-content-center">
     <div class="col-sm-6 card d-flex flex-column p-3">
       <div class="col-sm-12">
         <form [formGroup]="form" class="col-sm-12 justify-content-start">
           <div class="d-flex justify-content-center align-items-center mb-3">
             <h2>{{data ? 'Update Exception code' : 'Create new Exception code'}}</h2></div>
+
+            <h3>You can choose one of the following symbols that represent your purpose. </h3>
+
           <div class="d-flex row">
             <div class="col-sm-12 col-md-6 ">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>Exception code</mat-label>
-                <input matInput placeholder="{{'Exception code' | translate}}" type="text" name="code"
+                <input matInput placeholder="{{'Name' | translate}}" type="text" name="code"
                        formControlName="code">
               </mat-form-field>
               <small
                 *ngIf="form.controls['code'].hasError('required') && form.controls['code'].touched"
                 class="warn-text gene-block">
-                {{'You must include code' | translate}}
+                {{'You must include code name' | translate}}
               </small>
               <small
                 *ngIf="form.controls['code'].errors && (form.controls['code'].hasError('wrong')) && form.controls['code'].touched"
                 class="warn-text gene-block">
-                {{'You must include a valid code' | translate}}
+                {{'You must include a valid code name' | translate}}
               </small>
             </div>
 
-            <div class="col-sm-12 col-md-6 ">
-              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                <mat-label>Symbol</mat-label>
-                <input matInput placeholder="{{'Symbol' | translate}}" type="text" name="symbol"
-                       formControlName="symbol">
-
-              </mat-form-field>
+            <div class="col-sm-12 col-md-6 code-symbols d-flex justify-content-end">
+              <mat-radio-group formControlName="symbol" id="" class="example-radio-group row mx-0"
+                               (change)="chooseSymbol($event.value)">
+                <ng-container *ngFor="let symbol of symbols" >
+                  <mat-radio-button tooltip="{{symbol?.name}}" [ngClass]="chosedSymbol === symbol ? 'selected' : ''"  class="example-radio-button py-2 w-25" [value]="symbol">
+<!--                    <span [ngStyle]="{color: chosedSymbol === symbol ? '#fff' : '#000'}" class="{{symbol?.symbol_name}}"></span>-->
+                    <mat-icon svgIcon="{{symbol?.symbol_name}}"></mat-icon>
+                  </mat-radio-button>
+                </ng-container>
+              </mat-radio-group>
               <small
                 *ngIf="form.controls['symbol'].hasError('required') && form.controls['symbol'].touched"
                 class="warn-text gene-block">
@@ -43,7 +49,6 @@
               </small>
             </div>
 
-
             <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
               <button mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/exception-codes']">Back</button>
               <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
@@ -51,7 +56,41 @@
                 {{data ? 'Update' : 'Create'}}
               </button>
             </div>
+
+           <div>
+             OR <a class="" data-bs-toggle="collapse"
+                   href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+             <span (click)="showSymbols = !showSymbols" *ngIf="!showSymbols">Click here to find more icons</span>
+             <span (click)="showSymbols = !showSymbols" *ngIf="showSymbols">Show less</span>
+           </a>
+           </div>
+            <div class="row">
+              <div class="col">
+                <div class="collapse multi-collapse" id="multiCollapseExample1">
+                  <div class="card card-body d-flex">
+                    <mat-form-field>
+                      <mat-icon matPrefix>search</mat-icon>
+                      <input (input)="search($event)" matInput type="search" placeholder="search here" class="search-input">
+                    </mat-form-field>
+                    <div class="col-sm-12 code-symbols">
+                      <mat-radio-group formControlName="symbol" id="2" class="example-radio-group row mx-0"
+                                       (change)="chooseSymbol($event.value)">
+                        <ng-container *ngFor="let symbol of icons" >
+                          <mat-radio-button tooltip="{{symbol}}" [ngClass]="chosedSymbol === symbol ? 'selected' : ''"  class="example-radio-button py-2 w-25" [value]="symbol">
+                            <!--                    <span [ngStyle]="{color: chosedSymbol === symbol ? '#fff' : '#000'}" class="{{symbol?.symbol_name}}"></span>-->
+                            <mat-icon svgIcon="{{symbol}}"></mat-icon>
+                          </mat-radio-button>
+                        </ng-container>
+                      </mat-radio-group>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
+
         </form>
       </div>
     </div>

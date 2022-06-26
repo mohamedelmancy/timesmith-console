@@ -30,7 +30,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              { "glob": "mdi.svg", "input": "./node_modules/@mdi/angular-material", "output": "./assets/icons/" }
             ],
             "styles": [
               "src/styles.scss",
@@ -40,7 +41,8 @@
               "node_modules/wowjs/css/libs/animate.css",
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/leaflet-geosearch/dist/geosearch.css",
-              "node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.css"
+              "node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.css",
+              "node_modules/@mdi/font/css/materialdesignicons.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

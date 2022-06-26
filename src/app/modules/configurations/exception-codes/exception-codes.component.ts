@@ -17,17 +17,35 @@ export class ExceptionCodesComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) { }
   data = [
     {
-      code: 'Assignment',
-      symbol:'fa fa-user',
+      code: 'External Assignment',
+      symbol: {
+        symbol_name: 'bike-fast',
+        type: 'icon',
+        represent_en: 'External Assignment',
+        represent_ar: 'مأمورية',
+        name: ''
+      },
       id: 1
     },{
-      code: 'Meeting',
-      symbol: 'fa fa-user',
+      code: 'Baby Hour',
+      symbol: {
+        symbol_name: 'baby-bottle-outline',
+        type: 'icon',
+        represent_en: 'Baby Hour',
+        represent_ar: 'ساعة رضاعة',
+        name: ''
+      },
       id: 2
     },
     {
-      code: 'Client visit',
-      symbol: 'fa fa-trash',
+      code: 'Meeting',
+      symbol: {
+        symbol_name: 'handshake-outline',
+        type: 'icon',
+        represent_en: 'Meeting',
+        represent_ar: 'اجتماع',
+        name: ''
+      },
       id: 3
     },
   ]
