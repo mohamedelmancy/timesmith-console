@@ -22,13 +22,16 @@ full-calendar{
   font-weight: 600;
   font-size: 15px;
 }
-.leaves .dgraggable{
+.leaves .dgraggable, .attendance .dgraggable{
   font-size: 11px;
   color: white;
   padding: 5px;
   border-radius: 3px;
   cursor: move;
   font-weight: 600;
+}
+.attendance .scrollable{
+  height: 138px;
 }
 .exception-codes .dgraggable {
   font-size: 27px;

@@ -3,6 +3,18 @@
   <div class="timeline mt-1 row">
     <div id="mydraggable" class="mydraggable" (click)="selectedEvent = null">
       <div class="d-flex flex-column">
+
+        <div class="attendance">
+          <p class="dgraggable-title">Attendance ( {{attendance?.length}} )</p>
+          <div class="scrollable">
+            <p [ngStyle]="{'background': item.color}" tooltip="{{item.title}}" class="dgraggable text-truncate" [id]="item.color" *ngFor="let item of attendance">{{item.title}}</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center mt-2">
+<!--            <button color="primary" (click)="showAll('codes')" mat-raised-button-->
+<!--                    class="primary-bg">{{'Show All'|translate}}</button>-->
+          </div>
+        </div>
+        <mat-divider class="mb-2"></mat-divider>
         <div class="exception-codes">
           <p class="dgraggable-title">Exception Codes ( {{exceptionCodes?.length}} )</p>
           <div class="scrollable">
@@ -14,12 +26,11 @@
 <!--                    class="primary-bg">{{'Show All'|translate}}</button>-->
           </div>
         </div>
-        <br>
-        <mat-divider></mat-divider>
-        <div class="leaves mt-4">
+        <mat-divider class="mb-2"></mat-divider>
+        <div class="leaves">
           <p class="dgraggable-title">Leaves ( {{leaves?.length}} )</p>
           <div class="scrollable">
-            <p [ngStyle]="{'background': item.color}" tooltip="{{item.title}}" class="dgraggable" [id]="item.color" *ngFor="let item of leaves">{{item.title}}</p>
+            <p [ngStyle]="{'background': item.color}" tooltip="{{item.title}}" class="dgraggable text-truncate" [id]="item.color" *ngFor="let item of leaves">{{item.title}}</p>
           </div>
           <div class="d-flex justify-content-center align-items-center mt-2">
             <button (click)="showAll('leaves')" color="primary" mat-raised-button

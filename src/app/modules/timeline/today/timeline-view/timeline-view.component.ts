@@ -125,6 +125,26 @@ export class TimelineViewComponent implements OnInit {
       leave: true
     }
   ]
+  attendance = [
+    {
+      title: 'Open time',
+      color: 'green',
+      overlap: true,
+      leave: true
+    },
+    {
+      title: 'Open time fro different location',
+      color: 'rgb(125 201 94)',
+      overlap: true,
+      leave: true
+    },
+    {
+      title: 'No show',
+      color: '#9b9898',
+      overlap: true,
+      leave: true
+    }
+  ]
   calendarApi: Calendar;
   selectedDate: any = today;
   constructor(private coreService: CoreService,
@@ -158,6 +178,7 @@ export class TimelineViewComponent implements OnInit {
     console.log('eventEl', eventEl.innerHTML)
     var _this = this;
       const leavesEvent = _this.leaves.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
+      const attendanceEvent = _this.attendance.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
       let isCode = false;
       let expCodeTitle = '';
       let expCodeColor = '';
@@ -173,17 +194,17 @@ export class TimelineViewComponent implements OnInit {
       })
       let e:any = {
         title:  isCode ? '' : eventEl.innerHTML,
-        duration: leavesEvent ? '04:00' : '00:15',
-        html: leavesEvent ? null : eventEl.innerHTML,
+        duration: (leavesEvent || attendanceEvent) ? '04:00' : '00:15',
+        html: (leavesEvent || attendanceEvent) ? null : eventEl.innerHTML,
         durationEditable: true,
         overlap: true,
         id: Math.random(),
-        type: leavesEvent ? 'leave' : 'code',
-        excepTitle: leavesEvent ? '' : expCodeTitle,
-        fColor: leavesEvent ? leavesEvent?.color : expCodeColor,
-        description: leavesEvent ? '' : expCodeTitle,
-        backgroundColor:  leavesEvent ? leavesEvent?.color : '#ebf8fc',
-        borderColor: leavesEvent ? leavesEvent?.color : '#ebf8fc',
+        type: leavesEvent ? 'leave' : attendanceEvent ? 'attendance' : 'code',
+        excepTitle: (leavesEvent || attendanceEvent) ? '' : expCodeTitle,
+        fColor: leavesEvent ? leavesEvent?.color : attendanceEvent ? attendanceEvent.color : expCodeColor,
+        description: (leavesEvent || attendanceEvent) ? '' : expCodeTitle,
+        backgroundColor:  leavesEvent ? leavesEvent?.color : attendanceEvent ? attendanceEvent.color : '#ebf8fc',
+        borderColor: leavesEvent ? leavesEvent?.color : attendanceEvent ? attendanceEvent.color : '#ebf8fc',
       };
       return e;
   }
@@ -477,7 +498,7 @@ export class TimelineViewComponent implements OnInit {
 
   getEvents() {
     const colors = ['#000', '#9e32a8', '#54ab98', '#becf3e', '#d95d7c', '#35e6e3', '#c414c1']
-    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-24T00:00:00Z&end=2022-06-25T00:00:00Z').subscribe(res => {
+    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-26T00:00:00Z&end=2022-06-27T00:00:00Z').subscribe(res => {
       console.log('res', this.options.events)
       res.map((event, index) => {
         event.overlap = true;
@@ -578,6 +599,26 @@ export class TimelineViewComponent implements OnInit {
         "borderColor": nextEvent?.color,
         "overlap": true,
         type: 'leave',
+        id: data.event.id,
+        fColor: nextEvent?.color,
+      };
+      this.insertUpdatesEvent(previousEvent, comingEvent);
+    } else if (data.event.extendedProps.type === 'attendance'){
+      const allEvents = [...this.attendance];
+      nextEvent = allEvents.find(ev => ev.title === data.form.type.name);
+      let previousEvent = data.event
+      console.log('nextEvent', nextEvent);
+      console.log('previousEvent', previousEvent);
+      comingEvent = {
+        start: new Date(data.start),
+        end: new Date(data.end),
+        "resourceId": data.event._def.resourceIds[0],
+        "title": data.form.type.name,
+        "color": nextEvent?.color,
+        "backgroundColor": nextEvent?.color,
+        "borderColor": nextEvent?.color,
+        "overlap": true,
+        type: 'attendance',
         id: data.event.id,
         fColor: nextEvent?.color,
       };
