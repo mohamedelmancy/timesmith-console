@@ -87,7 +87,8 @@
               </th>
               <td mat-cell *matCellDef="let row; let i = index">
                 <div class="">
-                  <span style="font-size: 30px; color: #000" tooltip="{{row?.code}}" class="{{row[column].symbol_name}}"></span>
+<!--                  <span style="font-size: 30px; color: #000" tooltip="{{row?.code}}" class="{{row[column].symbol_name}}"></span>-->
+                  <mat-icon style="font-size: 30px; color: #000" tooltip="{{row[column]?.name}}" svgIcon="{{row[column].symbol_name}}"></mat-icon>
                 </div>
               </td>
             </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import moment from "moment";
 import {dateFormat, dateTimeFormat} from "../../../shared/variables/variables";
 import {ActivatedRoute} from "@angular/router";
+import {GetLanguage} from "../../../shared/functions/shared-functions";
 
 @Component({
   selector: 'app-exception-codes',
@@ -48,11 +49,13 @@ export class ExceptionCodesComponent implements OnInit {
       },
       id: 3
     },
-  ]
+  ];
+  language = GetLanguage();
   ngOnInit(): void {
     // this.data = this.activatedRoute.snapshot.data['exceptionCode'];
     this.data.forEach(item => {
-    })
+      item.symbol['name'] = this.language === 'ar' ? item.symbol.represent_ar : item.symbol.represent_en
+    });
   }
 
   deleteRow(event) {

@@ -12,6 +12,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
 import {MatRadioModule} from "@angular/material/radio";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {MatRadioModule} from "@angular/material/radio";
         MatButtonModule,
         MatSelectModule,
         MatIconModule,
-        MatRadioModule
+        MatRadioModule,
+        MatProgressSpinnerModule
     ]
 })
 export class ExceptionCodesModule { }

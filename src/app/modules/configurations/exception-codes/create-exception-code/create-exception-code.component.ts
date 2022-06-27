@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {CoreService} from "../../../../services/core.service";
 import {secureStorage} from "../../../../shared/functions/secure-storage";
 import {GetLanguage} from "../../../../shared/functions/shared-functions";
 import {MatIconRegistry} from "@angular/material/icon";
-import {names} from '../../../../../assets/js/icon-names'
+import {DomSanitizer} from "@angular/platform-browser";
+import {GlobalService} from "../../../../services/global.service";
+
 @Component({
   selector: 'app-create-exception-code',
   templateUrl: './create-exception-code.component.html',
@@ -17,10 +19,12 @@ export class CreateExceptionCodeComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private matIconRegistry: MatIconRegistry,
+              private domSanitizer: DomSanitizer,
+              private globalService: GlobalService,
               private activatedRoute: ActivatedRoute, private coreService: CoreService) {
   }
+
   data;
-  fallbackIcon = 'fas fa-user';
   symbols = [
     {
       symbol_name: 'currency-usd',
@@ -74,12 +78,16 @@ export class CreateExceptionCodeComponent implements OnInit {
   ];
   language = GetLanguage();
   showSymbols = false;
-  icons = names;
-  iconsBackup = names;
+  icons;
+  iconsBackup;
+  counter = 0;
+  RELOAD_TOP_SCROLL_POSITION = 50;
+  @ViewChild('customIcons') customIcons: any;
+
   ngOnInit(): void {
-    this.iconsBackup = names;
     this.form = this.fb.group({
-        code: ['', Validators.compose([Validators.required])],
+        nameEn: ['', Validators.compose([Validators.required])],
+        nameAr: ['', Validators.compose([Validators.required])],
         symbol: [null, Validators.compose([Validators.required])],
       },
       {validators: []}
@@ -97,21 +105,52 @@ export class CreateExceptionCodeComponent implements OnInit {
     // console.log('matIconRegistry', this.icons);
   }
 
-  onIconPickerSelect(icon: string): void {
-    // this.iconCss.setValue(icon);
-    console.log('icon', icon)
-    this.form.controls['symbol'].setValue(icon);
+  loadIcons() {
+    if (!this.iconsBackup) {
+      this.globalService.getMatIcons().subscribe(res => {
+          console.log('res', res)
+          this.icons = res?.names.slice(0, 100);
+          this.counter++;
+          this.iconsBackup = res?.names
+        }, error => {
+
+        }, () => {
+          this.registerPanelScrollEvent();
+        }
+      )
+    }
+  }
+
+
+  registerPanelScrollEvent() {
+    const panel = this.customIcons.nativeElement;
+    panel.addEventListener('scroll', event => this.loadAllOnScroll(event));
+  }
+
+  loadAllOnScroll(event) {
+    console.log('event', event)
+    if (event.target.scrollTop > this.RELOAD_TOP_SCROLL_POSITION * this.counter) {
+      this.counter++;
+      this.icons = this.iconsBackup.slice(0, this.counter * 100);
+    }
   }
 
   fillForm() {
-    this.form.controls['code'].setValue(this.data?.name);
+    this.form.controls['nameAr'].setValue(this.data?.nameAr);
+    this.form.controls['nameEn'].setValue(this.data?.nameEn);
     this.form.controls['symbol'].setValue(this.data?.symbol);
   }
 
-  chooseSymbol(e) {
+  chooseSymbol(e, type?) {
     console.log('ee', e);
     this.chosedSymbol = e;
-    this.form.controls['code'].setValue(e.name)
+    if (type === 'default') {
+      this.form.controls['nameAr'].setValue(e.represent_ar);
+      this.form.controls['nameEn'].setValue(e.represent_en);
+    } else {
+      this.form.controls['nameAr'].reset();
+      this.form.controls['nameEn'].reset();
+    }
   }
 
   search(s) {

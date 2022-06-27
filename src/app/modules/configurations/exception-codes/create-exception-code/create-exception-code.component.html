@@ -6,33 +6,55 @@
           <div class="d-flex justify-content-center align-items-center mb-3">
             <h2>{{data ? 'Update Exception code' : 'Create new Exception code'}}</h2></div>
 
-            <h3>You can choose one of the following symbols that represent your purpose. </h3>
-
+          <h3>You can choose one of the following default symbols and type a name that represent your intention. </h3>
           <div class="d-flex row">
-            <div class="col-sm-12 col-md-6 ">
-              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                <mat-label>Exception code</mat-label>
-                <input matInput placeholder="{{'Name' | translate}}" type="text" name="code"
-                       formControlName="code">
-              </mat-form-field>
-              <small
-                *ngIf="form.controls['code'].hasError('required') && form.controls['code'].touched"
-                class="warn-text gene-block">
-                {{'You must include code name' | translate}}
-              </small>
-              <small
-                *ngIf="form.controls['code'].errors && (form.controls['code'].hasError('wrong')) && form.controls['code'].touched"
-                class="warn-text gene-block">
-                {{'You must include a valid code name' | translate}}
-              </small>
+
+            <div class="col-sm-12 col-md-6">
+              <div class="col-sm-12 ">
+                <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                  <mat-label>Name english</mat-label>
+                  <input matInput placeholder="{{'Name english' | translate}}" type="text" name="nameEn"
+                         formControlName="nameEn">
+                </mat-form-field>
+                <small
+                  *ngIf="form.controls['nameEn'].hasError('required') && form.controls['nameEn'].touched"
+                  class="warn-text gene-block">
+                  {{'You must include code name' | translate}}
+                </small>
+                <small
+                  *ngIf="form.controls['nameEn'].errors && (form.controls['nameEn'].hasError('wrong')) && form.controls['nameEn'].touched"
+                  class="warn-text gene-block">
+                  {{'You must include a valid code name' | translate}}
+                </small>
+              </div>
+
+              <div class="col-sm-12 ">
+                <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                  <mat-label>Name arabic</mat-label>
+                  <input matInput placeholder="{{'Name arabic' | translate}}" type="text" name="nameAr"
+                         formControlName="nameAr">
+                </mat-form-field>
+                <small
+                  *ngIf="form.controls['nameAr'].hasError('required') && form.controls['nameAr'].touched"
+                  class="warn-text gene-block">
+                  {{'You must include code name' | translate}}
+                </small>
+                <small
+                  *ngIf="form.controls['nameAr'].errors && (form.controls['nameAr'].hasError('wrong')) && form.controls['nameAr'].touched"
+                  class="warn-text gene-block">
+                  {{'You must include a valid code name' | translate}}
+                </small>
+              </div>
             </div>
+
 
             <div class="col-sm-12 col-md-6 code-symbols d-flex justify-content-end">
               <mat-radio-group formControlName="symbol" id="" class="example-radio-group row mx-0"
-                               (change)="chooseSymbol($event.value)">
-                <ng-container *ngFor="let symbol of symbols" >
-                  <mat-radio-button tooltip="{{symbol?.name}}" [ngClass]="chosedSymbol === symbol ? 'selected' : ''"  class="example-radio-button py-2 w-25" [value]="symbol">
-<!--                    <span [ngStyle]="{color: chosedSymbol === symbol ? '#fff' : '#000'}" class="{{symbol?.symbol_name}}"></span>-->
+                               (change)="chooseSymbol($event.value, 'default')">
+                <ng-container *ngFor="let symbol of symbols">
+                  <mat-radio-button tooltip="{{symbol?.name}}" [ngClass]="chosedSymbol === symbol ? 'selected' : ''"
+                                    class="example-radio-button py-2 w-25" [value]="symbol">
+                    <!--                    <span [ngStyle]="{color: chosedSymbol === symbol ? '#fff' : '#000'}" class="{{symbol?.symbol_name}}"></span>-->
                     <mat-icon svgIcon="{{symbol?.symbol_name}}"></mat-icon>
                   </mat-radio-button>
                 </ng-container>
@@ -49,34 +71,34 @@
               </small>
             </div>
 
-            <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
-              <button mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/exception-codes']">Back</button>
-              <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
-                      class="primary-bg" cdkFocusInitial>
-                {{data ? 'Update' : 'Create'}}
-              </button>
+            <div>
+               <a class="" >
+              <span *ngIf="!showSymbols">OR <span class="clickable" data-bs-toggle="collapse"
+                          href="#multiCollapseExample1" role="button" aria-expanded="false"
+                          aria-controls="multiCollapseExample1" (click)=" loadIcons(); showSymbols = !showSymbols;searchI.value = ''" >Click here </span><span>to find more icons</span></span>
+
+              <span class="clickable" data-bs-toggle="collapse"
+                    href="#multiCollapseExample1" role="button" aria-expanded="false"
+                    aria-controls="multiCollapseExample1"  (click)="showSymbols = !showSymbols" *ngIf="showSymbols">Show less</span>
+            </a>
+
             </div>
 
-           <div>
-             OR <a class="" data-bs-toggle="collapse"
-                   href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-             <span (click)="showSymbols = !showSymbols" *ngIf="!showSymbols">Click here to find more icons</span>
-             <span (click)="showSymbols = !showSymbols" *ngIf="showSymbols">Show less</span>
-           </a>
-           </div>
             <div class="row">
               <div class="col">
                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                   <div class="card card-body d-flex">
                     <mat-form-field>
                       <mat-icon matPrefix>search</mat-icon>
-                      <input (input)="search($event)" matInput type="search" placeholder="search here" class="search-input">
+                      <input autofocus #searchI (input)="search($event)" matInput type="search"
+                             placeholder="search here" class="search-input">
                     </mat-form-field>
-                    <div class="col-sm-12 code-symbols">
+                    <div class="col-sm-12 code-symbols" #customIcons>
                       <mat-radio-group formControlName="symbol" id="2" class="example-radio-group row mx-0"
                                        (change)="chooseSymbol($event.value)">
-                        <ng-container *ngFor="let symbol of icons" >
-                          <mat-radio-button tooltip="{{symbol}}" [ngClass]="chosedSymbol === symbol ? 'selected' : ''"  class="example-radio-button py-2 w-25" [value]="symbol">
+                        <ng-container *ngFor="let symbol of icons">
+                          <mat-radio-button tooltip="{{symbol}}" [ngClass]="chosedSymbol === symbol ? 'selected' : ''"
+                                            class="example-radio-button py-2 w-25" [value]="symbol">
                             <!--                    <span [ngStyle]="{color: chosedSymbol === symbol ? '#fff' : '#000'}" class="{{symbol?.symbol_name}}"></span>-->
                             <mat-icon svgIcon="{{symbol}}"></mat-icon>
                           </mat-radio-button>
@@ -90,7 +112,13 @@
             </div>
 
           </div>
-
+          <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
+            <button mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/exception-codes']">Back</button>
+            <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
+                    class="primary-bg" cdkFocusInitial>
+              {{data ? 'Update' : 'Create'}}
+            </button>
+          </div>
         </form>
       </div>
     </div>
