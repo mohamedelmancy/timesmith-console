@@ -20,6 +20,7 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
   @Input() selectedEvent: any;
   @Input() exceptionCodes: any;
   @Input() leaves: any;
+  @Input() attendance: any;
   @Output() emittedData = new EventEmitter<any>();
   @Output() closeDrawer = new EventEmitter<any>();
   @Output() removeEvent = new EventEmitter<any>();
@@ -88,15 +89,20 @@ export class DataViewComponent extends AutoComplete implements OnInit, OnChanges
       console.log('changes', changes);
       this.changed = true;
     })
-    console.log('data', this.data);
+    console.log('data view', this.data);
   }
 
   handleTypes() {
     this.types = [];
-    if (this.data?.extendedProps?.html) {
+    if (this.data?.extendedProps?.type === 'code') {
       this.exceptionCodes?.forEach(code => {
         code.name = code.title;
         this.types.push(code);
+      })
+    } else if (this.data?.extendedProps?.type === 'attendance') {
+      this.attendance?.forEach(one => {
+        one.name = one.title;
+        this.types.push(one);
       })
     } else {
       this.leaves?.forEach(leave => {

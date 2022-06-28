@@ -24,7 +24,7 @@
 ::ng-deep.mat-tab-header{
   max-width: 200px;
   position: absolute !important;
-  left: 50%;
+  right: 18px;
   top: -8px;
   z-index: 99999;
 }
@@ -51,4 +51,7 @@ mat-form-field{
   margin-top: 35px;
   max-height: 100vh;
   overflow: hidden;
+}
+.mat-drawer-container{
+  background-color: #ffffff !important;
 }

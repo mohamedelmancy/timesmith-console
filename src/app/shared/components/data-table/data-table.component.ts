@@ -63,7 +63,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.sideFilters?.includes('PAW')) {
      this.getPawStatistics();
     }
-    console.log('data', this.data)
+    console.log('datatable', this.data)
   }
 
 

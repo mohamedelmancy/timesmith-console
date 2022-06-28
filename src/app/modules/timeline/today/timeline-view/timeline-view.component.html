@@ -68,6 +68,6 @@
 <!--  </div>-->
 <!--</ng-template>-->
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <app-data-view class="" [leaves]="leaves" [exceptionCodes]="exceptionCodes" [selectedEvent]="selectedEvent" (closeDrawer)="closeEditEvent($event)" (emittedData)="eventViewChange($event)" (removeEvent)="removeEvent($event)"></app-data-view>
+    <app-data-view class=""  [attendance]="attendance" [leaves]="leaves" [exceptionCodes]="exceptionCodes" [selectedEvent]="selectedEvent" (closeDrawer)="closeEditEvent($event)" (emittedData)="eventViewChange($event)" (removeEvent)="removeEvent($event)"></app-data-view>
   </mat-drawer>
 </mat-drawer-container>

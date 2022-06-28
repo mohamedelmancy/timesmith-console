@@ -13,7 +13,7 @@ import {StatusActionComponent} from "../../../modals/status-action/status-action
 export class RequestsListComponent implements OnInit {
   displayedColumns = {
     labels: ['ID', 'Employee Name', 'Site', 'Department', 'request type', 'Start date', 'End date', 'Status',  'Duration', 'Balance', 'Actions'],
-    values: ['id', 'employee', 'site', 'department', 'type', 'from', 'to', 'status', 'duration', 'balance', 'statusActions']
+    values: ['id', 'employee', 'site', 'department', 'type', 'from', 'to', 'requestStatus', 'duration', 'balance', 'statusActions']
   };
   constructor(private activatedRoute: ActivatedRoute, private dialog: MatDialog) { }
   data = [
@@ -25,7 +25,7 @@ export class RequestsListComponent implements OnInit {
       type: 'timeOff',
       from: '22/10/2023',
       to: '22/10/2024',
-      status: 'Pending',
+      requestStatus: 'Pending',
       duration: '6 days',
       balance: '3'
     },
@@ -37,7 +37,7 @@ export class RequestsListComponent implements OnInit {
       type: 'Allocation',
       from: '22/10/2023',
       to: '22/10/2024',
-      status: 'Approved',
+      requestStatus: 'Approved',
       duration: '6 days',
       balance: '5'
     },

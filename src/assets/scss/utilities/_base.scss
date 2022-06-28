@@ -10,7 +10,6 @@ pre {
     background-color: $container-bg;
     padding: 15px;
 }
-
 img {
     height: auto;
     max-width: 100%;
@@ -1001,4 +1000,7 @@ div.material-icon-picker input[type="text"] {
 }
 .image{
   object-fit: contain;
+}
+html{
+  overflow-x: hidden;
 }

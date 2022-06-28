@@ -157,7 +157,9 @@ export class TimelineViewComponent implements OnInit {
   // https://codepen.io/pen?editors=0010
   // https://stackoverflow.com/questions/71299412/fullcalendar-how-to-display-non-overlapping-events-inside-same-day-cell-in-one
   ngOnInit(): void {
+    console.log('ngOnInit')
     setTimeout(() => {
+      console.log('ssss')
       this.renderCalendar();
       this.getEvents();
       // this.getResources();
@@ -194,7 +196,7 @@ export class TimelineViewComponent implements OnInit {
       })
       let e:any = {
         title:  isCode ? '' : eventEl.innerHTML,
-        duration: (leavesEvent || attendanceEvent) ? '04:00' : '00:15',
+        duration: (leavesEvent) ? '04:00' : '00:15',
         html: (leavesEvent || attendanceEvent) ? null : eventEl.innerHTML,
         durationEditable: true,
         overlap: true,
@@ -497,30 +499,33 @@ export class TimelineViewComponent implements OnInit {
   }
 
   getEvents() {
+    console.log('render')
+
     const colors = ['#000', '#9e32a8', '#54ab98', '#becf3e', '#d95d7c', '#35e6e3', '#c414c1']
-    this.coreService.getRequest('https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=2022-06-26T00:00:00Z&end=2022-06-27T00:00:00Z').subscribe(res => {
-      console.log('res', this.options.events)
+    const today = `2022-06-${new Date().getDate()}T00:00:00Z`
+    const yesterday = `2022-06-${new Date().getDate() - 1}T00:00:00Z`
+    this.coreService.getRequest(`https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=${yesterday}&end=${today}`).subscribe(res => {
       res.map((event, index) => {
         event.overlap = true;
         event.color = colors[index];
         event.id = Math.random();
       });
       this.options.events = res;
+      console.log('events res', res)
     }, error => {
 
     }, () => {
       // console.log('1', new Date('Sat Jun 04 2022 09:00:00 GMT+0200').getTime())
       // console.log('2', new Date('Sat Jun 04 2022 10:00:00 GMT+0200').getTime())
       // console.log(new Date('Sat Jun 04 2022 10:00:00 GMT+0200').getTime() - new Date('Sat Jun 04 2022 09:00:00 GMT+0200').getTime())
-      this.options.events.push({
-        "resourceId": "l",
-        "title": "Test test test ",
-        "start": "2022-06-05T02:10:00+00:00",
-        "end": "2022-06-05T15:37:00+00:00",
-        "color": 'orange',
-        "overlap": true,
-      })
-      console.log('events', this.options.events)
+      // this.options.events.push({
+      //   "resourceId": "l",
+      //   "title": "Test test test ",
+      //   "start": "2022-06-05T02:10:00+00:00",
+      //   "end": "2022-06-05T15:37:00+00:00",
+      //   "color": 'orange',
+      //   "overlap": true,
+      // })
     })
   }
 
@@ -556,7 +561,7 @@ export class TimelineViewComponent implements OnInit {
   }
 
   eventViewChange(data) {
-    console.log('data', data);
+    console.log('eventViewChange', data);
     let comingEvent;
     let previousEvent = data.event;
     let nextEvent: any;

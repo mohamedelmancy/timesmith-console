@@ -250,6 +250,13 @@ body {
       overflow-x: hidden;
       overflow-y: auto;
       position: relative;
+     background: #f3f3f3;
+     .mat-drawer-container{
+       background: #f3f3f3;
+     }
+     .timeline-list-view .mat-drawer-container{
+       background: transparent;
+     }
    }
    .inner-container{
       //padding: 0 0.5rem 0.5rem 0.5rem;

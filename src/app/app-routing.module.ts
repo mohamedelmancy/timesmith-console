@@ -4,6 +4,7 @@ import {LandingGuard} from "./core/guards/landing.guard";
 import {AuthGuard} from "./core/guards/auth.guard";
 import {MainComponent} from "./core/components/main/main.component";
 import {ChangePasswordComponent} from "./modules/authentication/change-password/change-password.component";
+import {BreadcrumbTranslateService} from "./services/breadcrumb-translate.service";
 
 const routes: Routes = [
   {
@@ -30,7 +31,11 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/timeline/timeline.module').then(m => m.TimelineModule),
         data: {
-          breadcrumbs: 'Today'
+          title: 'Today',
+          breadcrumbs: '{{breadcrumb}}'
+        },
+        resolve: {
+          breadcrumb: BreadcrumbTranslateService
         }
       },
       {
@@ -38,7 +43,11 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/requests/requests.module').then(m => m.RequestsModule),
         data: {
-          breadcrumbs: 'Requests'
+          title: 'Requests',
+          breadcrumbs: '{{breadcrumb}}'
+        },
+        resolve: {
+          breadcrumb: BreadcrumbTranslateService
         }
       },
       {
@@ -46,7 +55,11 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/reports/reports.module').then(m => m.ReportsModule),
         data: {
-          breadcrumbs: 'Reports'
+          title: 'Reports',
+          breadcrumbs: '{{breadcrumb}}'
+        },
+        resolve: {
+          breadcrumb: BreadcrumbTranslateService
         }
       },
       {
@@ -54,7 +67,11 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule),
         data: {
-          breadcrumbs: 'Notifications'
+          title: 'Notifications',
+          breadcrumbs: '{{breadcrumb}}'
+        },
+        resolve: {
+          breadcrumb: BreadcrumbTranslateService
         }
       },
       {
@@ -70,7 +87,11 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/team/team.module').then(m => m.TeamModule),
         data: {
-          breadcrumbs: 'Team'
+          title: 'Team',
+          breadcrumbs: '{{breadcrumb}}'
+        },
+        resolve: {
+          breadcrumb: BreadcrumbTranslateService
         }
       },
       {
@@ -78,7 +99,11 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/roles-permissions/roles-permissions.module').then(m => m.RolesPermissionsModule),
         data: {
-          breadcrumbs: 'Roles and Permissions'
+          title: 'Roles and Permissions',
+          breadcrumbs: '{{breadcrumb}}'
+        },
+        resolve: {
+          breadcrumb: BreadcrumbTranslateService
         }
       },
       {
@@ -86,12 +111,23 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         loadChildren: () => import('./modules/support/support.module').then(m => m.SupportModule),
         data: {
-          breadcrumbs: 'Support'
+          title: 'Support',
+          breadcrumbs: '{{breadcrumb}}'
+        },
+        resolve: {
+          breadcrumb: BreadcrumbTranslateService
         }
       },
       {
         path: 'change-password',
-        component: ChangePasswordComponent
+        component: ChangePasswordComponent,
+        data: {
+          title: 'change-password',
+          breadcrumbs: '{{breadcrumb}}'
+        },
+        resolve: {
+          breadcrumb: BreadcrumbTranslateService
+        }
       },
     ]
   },
