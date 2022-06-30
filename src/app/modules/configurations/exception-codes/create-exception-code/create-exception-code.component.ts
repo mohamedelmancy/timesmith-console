@@ -7,7 +7,9 @@ import {GetLanguage} from "../../../../shared/functions/shared-functions";
 import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
 import {GlobalService} from "../../../../services/global.service";
-
+import {debounceTime} from "rxjs";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+@UntilDestroy()
 @Component({
   selector: 'app-create-exception-code',
   templateUrl: './create-exception-code.component.html',
@@ -83,6 +85,7 @@ export class CreateExceptionCodeComponent implements OnInit {
   counter = 0;
   RELOAD_TOP_SCROLL_POSITION = 50;
   @ViewChild('customIcons') customIcons: any;
+  searchCtrl = new FormControl();
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -102,6 +105,7 @@ export class CreateExceptionCodeComponent implements OnInit {
       symbol['name'] = this.language === 'ar' ? symbol.represent_ar : symbol.represent_en
     })
     console.log('this.data', this.data);
+    this.search();
     // console.log('matIconRegistry', this.icons);
   }
 
@@ -153,10 +157,16 @@ export class CreateExceptionCodeComponent implements OnInit {
     }
   }
 
-  search(s) {
-    console.log('sss', s.target.value);
-    const filterValue = s.target.value;
-    this.icons = this.iconsBackup.filter(name => name.toLowerCase().indexOf(filterValue.trim().toLowerCase()) !== -1);
+  search() {
+    this.searchCtrl.valueChanges.pipe(
+      debounceTime(1000),
+      untilDestroyed(this)
+    ).subscribe(search =>  {
+      console.log('search', search)
+      this.icons = this.iconsBackup.filter(name => name.toLowerCase().indexOf(search.trim().toLowerCase()) !== -1);
+    });
+
+
   }
 
   save(value) {

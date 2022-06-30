@@ -31,7 +31,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              { "glob": "mdi.svg", "input": "./node_modules/@mdi/angular-material", "output": "./assets/icons/" }
+              { "glob": "mdi.svg", "input": "node_modules/@mdi/angular-material", "output": "assets/icons/" }
             ],
             "styles": [
               "src/styles.scss",
