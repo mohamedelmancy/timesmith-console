@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CoreService} from "../../../services/core.service";
+import {TranslateService} from "@ngx-translate/core";
 @Component({
   selector: 'app-create-notifications',
   templateUrl: './create-notifications.component.html',
@@ -9,15 +10,15 @@ import {CoreService} from "../../../services/core.service";
 })
 export class CreateNotificationsComponent implements OnInit {
   form: FormGroup;
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService) {
+  constructor(private fb: FormBuilder, private translateService: TranslateService, private coreService: CoreService) {
   }
   dropdownSettings = {};
-  placeholderText: string;
-  selectAllText: string = 'Select all';
-  unSelectAllText: string = 'Unselect all';
-  searchText: string = 'type name...';
+  placeholderText: string = this.translateService.instant('Select');
+  selectAllText: string = this.translateService.instant('Select all');
+  unSelectAllText: string = this.translateService.instant('Unselect all');
+  searchText: string = this.translateService.instant('type name...');
   disabled = false;
-  noDataAvailText: string = 'No data available';
+  noDataAvailText: string = this.translateService.instant('No data available');
   recipients = [];
   departments = [
     {
@@ -136,7 +137,7 @@ export class CreateNotificationsComponent implements OnInit {
             // this.avatarRequirementsError = void 0;
             return;
           } else {
-            this.form?.controls['avatar'].setErrors({invalidFile: true})
+            this.form?.controls['image'].setErrors({invalidFile: true})
           }
         }
       }

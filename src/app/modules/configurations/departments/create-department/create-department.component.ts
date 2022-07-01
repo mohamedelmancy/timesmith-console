@@ -6,6 +6,7 @@ import {secureStorage} from "../../../../shared/functions/secure-storage";
 import {map, startWith} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {AutoComplete} from "../../../../shared/auto-complete";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-create-department',
@@ -15,17 +16,17 @@ import {AutoComplete} from "../../../../shared/auto-complete";
 export class CreateDepartmentComponent extends AutoComplete implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService) {
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService, private translateService: TranslateService) {
     super()
   }
   data;
   dropdownSettings = {};
   placeholderText: string;
-  selectAllText: string = 'Select all';
-  unSelectAllText: string = 'Unselect all';
-  searchText: string = 'type name...';
+  selectAllText: string = this.translateService.instant('Select all');
+  unSelectAllText: string = this.translateService.instant('Unselect all');
+  searchText: string = this.translateService.instant('type name...');
   disabled = false;
-  noDataAvailText: string = 'No data available';
+  noDataAvailText: string = this.translateService.instant('No data available');
   managers  = [
     {
       name: 'Samy',

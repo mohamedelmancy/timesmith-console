@@ -2,7 +2,7 @@
   <form [formGroup]="form" class="row inner-cont justify-content-end">
       <div class="col-sm-12 col-md-6 col-lg-2">
         <mat-form-field class="example-form-field full-wid" appearance="outline">
-          <mat-label>Choose a date</mat-label>
+          <mat-label>{{'Choose a date' | translate}}</mat-label>
           <input readonly matInput [matDatepicker]="picker" (dateChange)="changeDate($event.target.value)" formControlName="date" placeholder="MM/DD/YYYY">
           <!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -21,11 +21,6 @@
           </mat-autocomplete>
         </mat-form-field>
         <small
-          *ngIf="form.controls['department'].hasError('required') && form.controls['department'].touched"
-          class="warn-text gene-block">
-          {{'You must include department' | translate}}
-        </small>
-        <small
           *ngIf="form.controls['department'].errors && (form.controls['department'].hasError('wrong')) && form.controls['department'].touched"
           class="warn-text gene-block">
           {{'You must include a valid department' | translate}}
@@ -43,11 +38,6 @@
           </mat-autocomplete>
         </mat-form-field>
         <small
-          *ngIf="form.controls['site'].hasError('required') && form.controls['site'].touched"
-          class="warn-text gene-block">
-          {{'You must include site' | translate}}
-        </small>
-        <small
           *ngIf="form.controls['site'].errors && (form.controls['site'].hasError('wrong')) && form.controls['site'].touched"
           class="warn-text gene-block">
           {{'You must include a valid site' | translate}}
@@ -64,11 +54,6 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-        <small
-          *ngIf="form.controls['sort'].hasError('required') && form.controls['sort'].touched"
-          class="warn-text gene-block">
-          {{'You must include sort' | translate}}
-        </small>
         <small
           *ngIf="form.controls['sort'].errors && (form.controls['sort'].hasError('wrong')) && form.controls['sort'].touched"
           class="warn-text gene-block">

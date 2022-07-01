@@ -63,7 +63,7 @@ const MENUITEMS = [
       {state: 'departments', name: 'Departments', label: '', role: '', type: 'subChild'},
       {state: 'shifts', name: 'Shifts', label: '', role: '', type: 'subChild'},
       {state: 'leaves', name: 'Leaves', label: '', role: '', type: 'subChild'},
-      {state: 'exception-codes', name: 'Exceptions Codes', label: '', role: '', type: 'subChild'},
+      {state: 'exception-codes', name: 'Exception Codes', label: '', role: '', type: 'subChild'},
     ]
   },
   {

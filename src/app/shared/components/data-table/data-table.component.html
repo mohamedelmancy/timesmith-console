@@ -42,9 +42,9 @@
               <td mat-cell *matCellDef="let row; let i = index" style="width: 10px; flex: none; min-width: 10px">
                 <div class="d-flex">
                   <a class="cursor-pointer mx-1 text-success text-truncate"
-                     (click)="takeAction('approve', row)">{{'Approve' | translate}}</a> |
+                     (click)="takeAction('Approve', row)">{{'Approve' | translate}}</a> |
                   <a class="cursor-pointer mx-1 text-danger text-truncate"
-                     (click)="takeAction('deny', row)">{{'Deny' | translate}}</a>
+                     (click)="takeAction('Deny', row)">{{'Deny' | translate}}</a>
                 </div>
               </td>
             </div>
@@ -87,8 +87,9 @@
               </th>
               <td mat-cell *matCellDef="let row; let i = index">
                 <div class="">
-<!--                  <span style="font-size: 30px; color: #000" tooltip="{{row?.code}}" class="{{row[column].symbol_name}}"></span>-->
-                  <mat-icon style="font-size: 30px; color: #000" tooltip="{{row[column]?.name}}" svgIcon="{{row[column].symbol_name}}"></mat-icon>
+                  <!--                  <span style="font-size: 30px; color: #000" tooltip="{{row?.code}}" class="{{row[column].symbol_name}}"></span>-->
+                  <mat-icon style="font-size: 30px; color: #000" tooltip="{{row[column]?.name}}"
+                            svgIcon="{{row[column].symbol_name}}"></mat-icon>
                 </div>
               </td>
             </div>

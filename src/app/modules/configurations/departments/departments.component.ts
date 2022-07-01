@@ -8,7 +8,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class DepartmentsComponent implements OnInit {
   displayedColumns = {
-    labels: ['Site name', 'Connected employees', 'Manager', 'Actions'],
+    labels: ['Department name', 'Connected employees', 'Manager', 'Actions'],
     values: ['name', 'individuals', 'manager', 'actions'],
   };
   constructor(private activatedRoute: ActivatedRoute) { }

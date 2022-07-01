@@ -7,6 +7,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CoreService} from "../../../../services/core.service";
 import {secureStorage} from "../../../../shared/functions/secure-storage";
 import 'leaflet.locatecontrol'
+import {translate} from "@angular/localize/tools";
+import {TranslateService} from "@ngx-translate/core";
 @Component({
   selector: 'app-create-site',
   templateUrl: './create-site.component.html',
@@ -15,7 +17,7 @@ import 'leaflet.locatecontrol'
 export class CreateSiteComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService) { }
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService, private translateService: TranslateService) { }
   lat = 30.0444;
   lng = 31.2357;
   map;
@@ -163,7 +165,7 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
       retainZoomLevel: true, // optional: true|false  - default false
       animateZoom: true, // optional: true|false  - default true
       autoClose: false, // optional: true|false  - default false
-      searchLabel: 'Enter address', // optional: string      - default 'Enter address'
+      searchLabel: this.translateService.instant('Enter address...'), // optional: string      - default 'Enter address'
       keepResult: true, // optional: true|false  - default false
       updateMap: true, // optional: true|false  - default true
     }).addTo(this.map);

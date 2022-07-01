@@ -1,74 +1,68 @@
 <div class="container-fluid">
-    <form [formGroup]="form" (ngSubmit)="save(form?.value)" class="row">
-          <div class="col-sm-12 col-md-6 col-lg-3">
-            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-              <mat-label>{{'Type' | translate}}</mat-label>
-              <input [readonly]="(data?.extendedProps?.type !== 'code' && data?.extendedProps?.type !== 'leave')" type="text" matInput formControlName="type" [matAutocomplete]="auto1">
-              <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
-                                (opened)="handlerAutocomplete('type')">
-                <mat-option *ngFor="let option of typesFilteredOptions | async" [value]="option">
-                  {{option.name}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-<!--            <small-->
-<!--              *ngIf="form.controls['type'].hasError('required') && form.controls['type'].touched"-->
-<!--              class="warn-text gene-block">-->
-<!--              {{'You must include type' | translate}}-->
-<!--            </small>-->
-<!--            <small-->
-<!--              *ngIf="form.controls['type'].errors && !(form.controls['type'].hasError('required')) && form.controls['type'].touched"-->
-<!--              class="warn-text gene-block">-->
-<!--              {{'You must include a valid type' | translate}}-->
-<!--            </small>-->
-          </div>
-          <div class="col-sm-12 col-md-6 col-lg-2">
-<!--             https://www.thecodehubs.com/how-to-implement-material-datepicker-and-timepicker-in-angular/-->
-            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-              <mat-label>From</mat-label>
-              <input matInput
-                     name="selected_time_A"
-                     formControlName="dateFrom"
-                     [ngxMatTimepicker]="pickerA"
-                     placeholder="HH:MM"
-                     [disableClick]="!data"
-                     [min]="'09:00 AM'"
-                     [max]="'06:00 PM'"
-                     [disabled]="!data"
-                     [format]=24
-                     readonly />
-              <mat-icon matSuffix [ngClass]="{'low-opacity': !data}"
-                        (click)="data ? pickerA.open() : null">
-                watch_later
-              </mat-icon>
-            </mat-form-field>
-            <ngx-mat-timepicker #pickerA></ngx-mat-timepicker>
-          </div>
-          <div class="col-sm-12 col-md-6 col-lg-2">
-            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-              <mat-label>To</mat-label>
-              <input matInput
-                     name="selected_time_B"
-                     formControlName="dateTo"
-                     [ngxMatTimepicker]="pickerB"
-                     placeholder="HH:MM"
-                     [min]="'09:00 AM'"
-                     [max]="'06:00 PM'"
-                     [disableClick]="!data"
-                     [disabled]="!data"
-                     [format]=24
-                     readonly />
-              <mat-icon matSuffix [ngClass]="{'low-opacity': !data}"
-                        (click)="data ? pickerB.open() : null">
-                watch_later
-              </mat-icon>
-            </mat-form-field>
-            <ngx-mat-timepicker #pickerB></ngx-mat-timepicker>
-          </div>
-          <div class="col-sm-12 col-md-6 col-lg-3 d-flex align-items-center" style="height: 50px">
-            <button color="primary" mat-raised-button [disabled]= "!changed" type="submit" class="primary-bg">{{'Apply'|translate}}</button>
-            <button color="warn" type="button" (click)="remove($event)" mat-raised-button [disabled]= "!data" class="warn-bg">{{'Remove'|translate}}</button>
-            <button type="button" color="warn" (click)="close($event)" mat-raised-button class="bg-black back-btn">{{'Back'|translate}}</button>
-          </div>
-    </form>
+  <form [formGroup]="form" (ngSubmit)="save(form?.value)" class="row">
+    <div class="col-sm-12 col-md-6 col-lg-3">
+      <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+        <mat-label>{{'Type' | translate}}</mat-label>
+        <input [readonly]="(data?.extendedProps?.type !== 'code' && data?.extendedProps?.type !== 'leave')" type="text"
+               matInput formControlName="type" [matAutocomplete]="auto1">
+        <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
+                          (opened)="handlerAutocomplete('type')">
+          <mat-option *ngFor="let option of typesFilteredOptions | async" [value]="option">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-2">
+      <!--             https://www.thecodehubs.com/how-to-implement-material-datepicker-and-timepicker-in-angular/-->
+      <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+        <mat-label>{{'From' | translate}}</mat-label>
+        <input matInput
+               name="selected_time_A"
+               formControlName="dateFrom"
+               [ngxMatTimepicker]="pickerA"
+               placeholder="HH:MM"
+               [disableClick]="!data"
+               [min]="'09:00 AM'"
+               [max]="'06:00 PM'"
+               [disabled]="!data"
+               [format]=24
+               readonly/>
+        <mat-icon matSuffix [ngClass]="{'low-opacity': !data}"
+                  (click)="data ? pickerA.open() : null">
+          watch_later
+        </mat-icon>
+      </mat-form-field>
+      <ngx-mat-timepicker #pickerA></ngx-mat-timepicker>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-2">
+      <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+        <mat-label>{{'To' | translate}}</mat-label>
+        <input matInput
+               name="selected_time_B"
+               formControlName="dateTo"
+               [ngxMatTimepicker]="pickerB"
+               placeholder="HH:MM"
+               [min]="'09:00 AM'"
+               [max]="'06:00 PM'"
+               [disableClick]="!data"
+               [disabled]="!data"
+               [format]=24
+               readonly/>
+        <mat-icon matSuffix [ngClass]="{'low-opacity': !data}"
+                  (click)="data ? pickerB.open() : null">
+          watch_later
+        </mat-icon>
+      </mat-form-field>
+      <ngx-mat-timepicker #pickerB></ngx-mat-timepicker>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-3 d-flex align-items-center" style="height: 50px">
+      <button color="primary" mat-raised-button [disabled]="!changed" type="submit"
+              class="primary-bg">{{'Apply'|translate}}</button>
+      <button color="warn" type="button" (click)="remove($event)" mat-raised-button [disabled]="!data"
+              class="warn-bg">{{'Remove'|translate}}</button>
+      <button type="button" color="warn" (click)="close($event)" mat-raised-button
+              class="bg-black back-btn">{{'Back'|translate}}</button>
+    </div>
+  </form>
 </div>

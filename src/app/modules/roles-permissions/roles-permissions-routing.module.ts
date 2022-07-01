@@ -20,7 +20,7 @@ const routes: Routes = [
         path: 'new',
         component: CreateRolesAndPermissionsComponent,
         data: {
-          title: '{{site.name}}',
+          title: 'New',
           breadcrumbs: '{{breadcrumb}}'
         },
         resolve: {

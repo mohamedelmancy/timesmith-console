@@ -50,7 +50,7 @@
           </div>
           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
             <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-              <mat-label>From</mat-label>
+              <mat-label>{{'From' | translate}}</mat-label>
               <input readonly matInput [ngxMatDatetimePicker]="picker" placeholder="MM/DD/YYYY, h:mm a" formControlName="dateFrom"
                      [disabled]="false">
               <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
@@ -64,7 +64,7 @@
           </div>
           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
             <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-              <mat-label>To</mat-label>
+              <mat-label>{{'To' | translate}}</mat-label>
               <input readonly matInput [ngxMatDatetimePicker]="picker2" placeholder="MM/DD/YYYY, h:mm a" formControlName="dateTo"
                      [disabled]="false">
               <mat-datepicker-toggle matSuffix [for]="$any(picker2)"></mat-datepicker-toggle>
@@ -80,7 +80,7 @@
     </form>
   </div>
   <div mat-dialog-actions class="d-flex justify-content-end">
-    <button  mat-button class="mx-2 warn-bg" (click)="onNoClick()">Cancel</button>
+    <button  mat-button class="mx-2 warn-bg" (click)="onNoClick()">{{'Cancel' | translate}}</button>
     <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
       {{data?.event?.title ? 'Update' : 'Create' | translate}}
     </button>

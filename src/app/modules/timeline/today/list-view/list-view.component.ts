@@ -9,7 +9,7 @@ import {dateFormat, dateTimeFormat} from "../../../../shared/variables/variables
 })
 export class ListViewComponent implements OnInit {
   displayedColumns = {
-    labels: ['Department', 'Site', 'Employee ID', 'Employee name', 'Check In', 'Check Out', 'Duration', 'Status',],
+    labels: ['Department', 'Site', 'Employee ID', 'Employee name', 'Check In', 'Check Out', 'Duration', 'Status'],
     values: ['department', 'site', 'id', 'name', 'check_in', 'check_out', 'duration', 'status'],
   };
   constructor() { }

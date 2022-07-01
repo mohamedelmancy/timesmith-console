@@ -4,7 +4,7 @@
     <a data-bs-toggle="collapse" href="#collapseReports" role="button"
        aria-expanded="true" aria-controls="collapseReports"
        class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>Report types ( {{reportTypes?.length}} )</span>
+      <span>{{'Report types' | translate}} ( {{reportTypes?.length}} )</span>
       <i class="menu-caret fa fa-chevron-down m-0"></i>
     </a>
     <mat-selection-list class="collapse multi-collapse show" id="collapseReports" #reportsSelection
@@ -16,12 +16,13 @@
     </mat-selection-list>
   </div>
 
-  <mat-divider class="my-3" *ngIf="sideFilters?.includes('requestStatus') && sideFilters?.includes('reportTypes')"></mat-divider>
+  <mat-divider class="my-3"
+               *ngIf="sideFilters?.includes('requestStatus') && sideFilters?.includes('reportTypes')"></mat-divider>
   <div class="requests-type-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('requestStatus')">
     <a data-bs-toggle="collapse" href="#collapseRequests" role="button"
        aria-expanded="true" aria-controls="collapseRequests"
        class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>Request status ( {{requestStatus?.length}} )</span>
+      <span>{{'Request status' | translate}} ( {{requestStatus?.length}} )</span>
       <i class="menu-caret fa fa-chevron-down m-0"></i>
     </a>
     <mat-selection-list class="collapse multi-collapse show" id="collapseRequests" #requestsSelection
@@ -38,7 +39,7 @@
     <a data-bs-toggle="collapse" href="#collapseSites" role="button"
        aria-expanded="true" aria-controls="collapseSites"
        class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>Sites ( {{sites?.length}} )</span>
+      <span>{{'Sites' | translate}} ( {{sites?.length}} )</span>
       <i class="menu-caret fa fa-chevron-down m-0"></i>
     </a>
     <mat-selection-list class="collapse multi-collapse show" id="collapseSites"
@@ -56,7 +57,7 @@
     <a data-bs-toggle="collapse" href="#collapseDeps" role="button"
        aria-expanded="false" aria-controls="collapseDeps"
        class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>Departments ( {{sites?.length}} )</span>
+      <span>{{'Departments' | translate}} ( {{sites?.length}} )</span>
       <i class="menu-caret fa fa-chevron-down m-0"></i>
     </a>
     <mat-selection-list class="collapse multi-collapse" id="collapseDeps"
@@ -74,7 +75,7 @@
     <a data-bs-toggle="collapse" href="#collapseIndivid" role="button"
        aria-expanded="false" aria-controls="collapseIndivid"
        class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>Individuals ( {{individuals?.length}} )</span>
+      <span>{{'Individuals' | translate}} ( {{individuals?.length}} )</span>
       <i class="menu-caret fa fa-chevron-down m-0"></i>
     </a>
     <mat-selection-list class="collapse multi-collapse" id="collapseIndivid" #individualSelection
@@ -91,7 +92,7 @@
     <a data-bs-toggle="collapse" href="#collapseRoles" role="button"
        aria-expanded="true" aria-controls="collapseRoles"
        class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>Roles ( {{roles?.length}} )</span>
+      <span>{{'Roles' | translate}} ( {{roles?.length}} )</span>
       <i class="menu-caret fa fa-chevron-down m-0"></i>
     </a>
     <mat-selection-list class="collapse multi-collapse show" id="collapseRoles" #rolesSelection
@@ -103,19 +104,21 @@
     </mat-selection-list>
   </div>
 
-  <mat-divider class="my-3"  *ngIf="sideFilters?.includes('PAW')"></mat-divider>
+  <mat-divider class="my-3" *ngIf="sideFilters?.includes('PAW')"></mat-divider>
   <div class="paw-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('PAW')">
     <a data-bs-toggle="collapse" href="#collapsePAW" role="button"
        aria-expanded="true" aria-controls="collapsePAW"
        class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>Punch anywhere</span>
+      <span>{{'Punch anywhere' | translate}}</span>
       <i class="menu-caret fa fa-chevron-down m-0"></i>
     </a>
     <mat-radio-group id="collapsePAW"
                      class="collapse multi-collapse show example-radio-group row"
                      (change)="filterChanged('paw', $event)">
-      <mat-radio-button class="example-radio-button py-2" [value]="'yes'"><span>Yes</span><span>( {{pawStatistics?.yes}} )</span></mat-radio-button>
-      <mat-radio-button class="example-radio-button" [value]="'no'"><span>No</span><span>( {{pawStatistics?.no}} )</span></mat-radio-button>
+      <mat-radio-button class="example-radio-button py-2" [value]="'yes'"><span>{{'Yes' | translate}}</span><span>( {{pawStatistics?.yes}}
+        )</span></mat-radio-button>
+      <mat-radio-button class="example-radio-button" [value]="'no'"><span>{{'No' | translate}}</span><span>( {{pawStatistics?.no}}
+        )</span></mat-radio-button>
     </mat-radio-group>
   </div>
   <button (click)="apply()" *ngIf="isMobile" tooltip="Apply filter" color="primary" mat-raised-button type="button"

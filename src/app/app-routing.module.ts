@@ -122,7 +122,7 @@ const routes: Routes = [
         path: 'change-password',
         component: ChangePasswordComponent,
         data: {
-          title: 'change-password',
+          title: 'Change password',
           breadcrumbs: '{{breadcrumb}}'
         },
         resolve: {
@@ -131,10 +131,10 @@ const routes: Routes = [
       },
     ]
   },
-  // {
-  //   path: '**',
-  //   redirectTo: 'auth/login'
-  // }
+  {
+    path: '**',
+    redirectTo: 'auth/login'
+  }
 ];
 
 @NgModule({

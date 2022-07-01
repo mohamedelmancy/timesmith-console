@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CoreService} from "../../../../services/core.service";
 import {secureStorage} from "../../../../shared/functions/secure-storage";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-create-shift',
@@ -12,15 +13,15 @@ import {secureStorage} from "../../../../shared/functions/secure-storage";
 export class CreateShiftComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService) { }
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService, private translateService: TranslateService) { }
   data;
   dropdownSettings = {};
   placeholderText: string;
-  selectAllText: string = 'Select all';
-  unSelectAllText: string = 'Unselect all';
-  searchText: string = 'type name...';
+  selectAllText: string = this.translateService.instant('Select all');
+  unSelectAllText: string = this.translateService.instant('Unselect all');
+  searchText: string = this.translateService.instant('type name...');
   disabled = false;
-  noDataAvailText: string = 'No data available';
+  noDataAvailText: string = this.translateService.instant('No data available');
   // employees = [
   //   {
   //     name: 'ahmed',

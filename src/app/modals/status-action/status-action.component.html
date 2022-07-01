@@ -1,7 +1,7 @@
-<h1 class="align-items-center d-flex" mat-dialog-title><mat-icon class="text-danger">warning</mat-icon><span class="mx-2">Confirm</span></h1>
-<div mat-dialog-content>Are you sure you want to <span [ngClass]="data.action === 'approve' ? 'text-success' : 'text-danger'" class="font-bold text-capitalize">{{data.action}}</span> this request</div>
+<h1 class="align-items-center d-flex" mat-dialog-title><mat-icon class="text-danger">warning</mat-icon><span class="mx-2">{{'Confirm' | translate}}</span></h1>
+<div mat-dialog-content>{{'Are you sure you want to' | translate}} <span [ngClass]="data.action === 'approve' ? 'text-success' : 'text-danger'" class="font-bold text-capitalize">{{data.action | translate}}</span> {{'this request' | translate}}</div>
 <div mat-dialog-actions class="d-flex justify-content-end">
-  <button  mat-button class="mx-2 warn-bg" mat-dialog-close>No</button>
+  <button  mat-button class="mx-2 warn-bg" mat-dialog-close>{{'No' | translate}}</button>
   <button (click)="yes()"  color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
     {{'Yes' | translate}}
   </button>

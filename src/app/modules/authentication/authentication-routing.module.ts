@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
+import {BreadcrumbTranslateService} from "../../services/breadcrumb-translate.service";
 
 const routes: Routes = [
   {
@@ -15,7 +16,14 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        data: {
+          title: 'Sign in',
+          breadcrumbs: '{{breadcrumb}}'
+        },
+        resolve: {
+          breadcrumb: BreadcrumbTranslateService
+        }
       },
       {
         path: 'register',
@@ -27,7 +35,14 @@ const routes: Routes = [
       // },
       {
         path: 'forgot-password',
-        component: ForgotPasswordComponent
+        component: ForgotPasswordComponent,
+        data: {
+          title: 'Forget password',
+          breadcrumbs: '{{breadcrumb}}'
+        },
+        resolve: {
+          breadcrumb: BreadcrumbTranslateService
+        }
       },
       // {
       //   path: 'confirm-otp',

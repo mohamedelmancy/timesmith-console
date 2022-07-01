@@ -93,7 +93,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
       this.router.navigate([this.viewLink, row?.id])
     } else if (type === 'View') {
       this.viewPermission.emit(row);
-    } else if (type === 'approve' || type === 'deny') {
+    } else if (type === 'Approve' || type === 'Deny') {
       this.statusAction.emit({row, action: type});
     } else {
       const dialogRef = this.dialog.open(DeleteComponent, {

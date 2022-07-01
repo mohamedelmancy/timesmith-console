@@ -4,45 +4,45 @@
       <div class="col-sm-12">
         <form [formGroup]="form" class="col-sm-12 justify-content-start">
           <div class="d-flex justify-content-center align-items-center mb-3">
-            <h2>{{data ? 'Update Exception code' : 'Create new Exception code'}}</h2></div>
+            <h2>{{data ? ('Update Exception code' | translate) : ('Create new Exception code' | translate)}}</h2></div>
 
-          <h3>You can choose one of the following default symbols that represent your intention. </h3>
+          <h3>{{'You can choose one of the following default symbols that represent your intention.' | translate}} </h3>
           <div class="d-flex row">
 
             <div class="col-sm-12 col-md-6">
               <div class="col-sm-12 ">
                 <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                  <mat-label>Name english</mat-label>
-                  <input matInput placeholder="{{'Name english' | translate}}" type="text" name="nameEn"
+                  <mat-label>{{'English name' | translate}}</mat-label>
+                  <input matInput placeholder="{{'English name' | translate}}" type="text" name="nameEn"
                          formControlName="nameEn">
                 </mat-form-field>
                 <small
                   *ngIf="form.controls['nameEn'].hasError('required') && form.controls['nameEn'].touched"
                   class="warn-text gene-block">
-                  {{'You must include code name' | translate}}
+                  {{'You must include english code name' | translate}}
                 </small>
                 <small
                   *ngIf="form.controls['nameEn'].errors && (form.controls['nameEn'].hasError('wrong')) && form.controls['nameEn'].touched"
                   class="warn-text gene-block">
-                  {{'You must include a valid code name' | translate}}
+                  {{'You must include a valid english code name' | translate}}
                 </small>
               </div>
 
               <div class="col-sm-12 ">
                 <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                  <mat-label>Name arabic</mat-label>
-                  <input matInput placeholder="{{'Name arabic' | translate}}" type="text" name="nameAr"
+                  <mat-label>{{'Arabic name' | translate}}</mat-label>
+                  <input matInput placeholder="{{'Arabic name' | translate}}" type="text" name="nameAr"
                          formControlName="nameAr">
                 </mat-form-field>
                 <small
                   *ngIf="form.controls['nameAr'].hasError('required') && form.controls['nameAr'].touched"
                   class="warn-text gene-block">
-                  {{'You must include code name' | translate}}
+                  {{'You must include arabic code name' | translate}}
                 </small>
                 <small
                   *ngIf="form.controls['nameAr'].errors && (form.controls['nameAr'].hasError('wrong')) && form.controls['nameAr'].touched"
                   class="warn-text gene-block">
-                  {{'You must include a valid code name' | translate}}
+                  {{'You must include a valid arabic code name' | translate}}
                 </small>
               </div>
             </div>
@@ -72,15 +72,18 @@
             </div>
 
             <div>
-               <a class="" >
-              <span *ngIf="!showSymbols">OR <span class="clickable" data-bs-toggle="collapse"
-                          href="#multiCollapseExample1" role="button" aria-expanded="false"
-                          aria-controls="multiCollapseExample1" (click)=" loadIcons(); showSymbols = !showSymbols;searchI.value = ''" >Click here </span><span>to find more icons</span></span>
+              <a class="">
+              <span *ngIf="!showSymbols">{{'OR' | translate}} <span class="clickable" data-bs-toggle="collapse"
+                                                                    href="#multiCollapseExample1" role="button"
+                                                                    aria-expanded="false"
+                                                                    aria-controls="multiCollapseExample1"
+                                                                    (click)=" loadIcons(); showSymbols = !showSymbols;searchI.value = ''">{{'Click here' | translate}} </span><span>{{'to find more icons' | translate}}</span></span>
 
-              <span class="clickable" data-bs-toggle="collapse"
-                    href="#multiCollapseExample1" role="button" aria-expanded="false"
-                    aria-controls="multiCollapseExample1"  (click)="showSymbols = !showSymbols" *ngIf="showSymbols">Show less</span>
-            </a>
+                <span class="clickable" data-bs-toggle="collapse"
+                      href="#multiCollapseExample1" role="button" aria-expanded="false"
+                      aria-controls="multiCollapseExample1" (click)="showSymbols = !showSymbols"
+                      *ngIf="showSymbols">{{'Show less' | translate}}</span>
+              </a>
 
             </div>
 
@@ -90,8 +93,8 @@
                   <div class="card card-body d-flex">
                     <mat-form-field class="w-50" appearance="outline">
                       <mat-icon matPrefix>search</mat-icon>
-                      <input autofocus #searchI  [formControl]="searchCtrl" matInput type="search"
-                             placeholder="Search icons" class="search-input">
+                      <input autofocus #searchI [formControl]="searchCtrl" matInput type="search"
+                             placeholder="{{'Search icons' | translate}}" class="search-input">
                     </mat-form-field>
                     <div class="col-sm-12 code-symbols" #customIcons>
                       <mat-radio-group formControlName="symbol" id="2" class="example-radio-group row mx-0"
@@ -113,10 +116,10 @@
 
           </div>
           <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
-            <button mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/exception-codes']">Back</button>
+            <button mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/exception-codes']">{{'Back' | translate}}</button>
             <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
                     class="primary-bg" cdkFocusInitial>
-              {{data ? 'Update' : 'Create'}}
+              {{data ? ('Update' | translate): ('Create' | translate)}}
             </button>
           </div>
         </form>

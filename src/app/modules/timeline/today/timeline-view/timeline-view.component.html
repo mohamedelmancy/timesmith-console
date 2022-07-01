@@ -5,7 +5,7 @@
       <div class="d-flex flex-column">
 
         <div class="attendance">
-          <p class="dgraggable-title">Attendance ( {{attendance?.length}} )</p>
+          <p class="dgraggable-title">{{'Attendance' | translate}} ( {{attendance?.length}} )</p>
           <div class="scrollable">
             <p [ngStyle]="{'background': item.color}" tooltip="{{item.title}}" class="dgraggable text-truncate" [id]="item.color" *ngFor="let item of attendance">{{item.title}}</p>
           </div>
@@ -16,7 +16,7 @@
         </div>
         <mat-divider class="mb-2"></mat-divider>
         <div class="exception-codes">
-          <p class="dgraggable-title">Exception Codes ( {{exceptionCodes?.length}} )</p>
+          <p class="dgraggable-title">{{'Exception Codes' | translate}} ( {{exceptionCodes?.length}} )</p>
           <div class="scrollable">
             <span [ngStyle]="{'background': ''}" tooltip="{{item.title}}" [id]="'code-' + i" class="my-2 dgraggable {{'title-' + item.title.replaceAll(' ', '_' )}} {{'color-' + item.color}}"
                *ngFor="let item of exceptionCodes; let i = index"><i style="margin-right: 0" [ngStyle]="{'color': item.color, 'font-size': '25px','width': '32px','height': '27px'}" class="fa {{item.icon}}"></i></span>
@@ -28,7 +28,7 @@
         </div>
         <mat-divider class="mb-2"></mat-divider>
         <div class="leaves">
-          <p class="dgraggable-title">Leaves ( {{leaves?.length}} )</p>
+          <p class="dgraggable-title">{{'Leaves' | translate}} ( {{leaves?.length}} )</p>
           <div class="scrollable">
             <p [ngStyle]="{'background': item.color}" tooltip="{{item.title}}" class="dgraggable text-truncate" [id]="item.color" *ngFor="let item of leaves">{{item.title}}</p>
           </div>

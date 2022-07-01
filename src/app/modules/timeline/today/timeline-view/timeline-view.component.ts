@@ -332,7 +332,7 @@ export class TimelineViewComponent implements OnInit {
       resourceAreaColumns: [
         {
           field: 'title',
-          headerContent: 'Employee name',
+          headerContent: this.translateService.instant('Employee name'),
           width: '100%',
           cellClassNames: 'resource-cell'
         }
@@ -345,7 +345,7 @@ export class TimelineViewComponent implements OnInit {
       // eventOverlap: true,
       // dayMaxEventRows: true,
       // dayMaxEvents: 3,
-      resourceAreaHeaderContent: 'Staff',
+      resourceAreaHeaderContent: this.translateService.instant('Staff'),
       // resources: "https://fullcalendar.io/api/demo-feeds/resources.json?with-nesting&with-colors",
       resources: [{"id": "5", "title": "Taha abd Elsalam"}, {
         "id": "l",

@@ -12,7 +12,7 @@ import {StatusActionComponent} from "../../../modals/status-action/status-action
 })
 export class RequestsListComponent implements OnInit {
   displayedColumns = {
-    labels: ['ID', 'Employee Name', 'Site', 'Department', 'request type', 'Start date', 'End date', 'Status',  'Duration', 'Balance', 'Actions'],
+    labels: ['ID', 'Employee name', 'Site', 'Department', 'Request type', 'Start date', 'End date', 'Status',  'Duration', 'Balance', 'Actions'],
     values: ['id', 'employee', 'site', 'department', 'type', 'from', 'to', 'requestStatus', 'duration', 'balance', 'statusActions']
   };
   constructor(private activatedRoute: ActivatedRoute, private dialog: MatDialog) { }
