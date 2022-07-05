@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12 d-flex p-0">
-      <div *ngIf="sideFilters?.length && !isMobile" class="side-filters-container">
+      <div *ngIf="sideFilters?.length && !isMobile" class="side-filters-container pt-0">
         <app-side-filter (emittedData)="sideFilter($event)" [pawStatistics]="pawStatistics"
                          [sideFilters]="sideFilters"></app-side-filter>
       </div>

@@ -1,6 +1,6 @@
 <mat-drawer-container class="example-container" autosize>
   <div class="list d-flex flex-column card-body">
-    <div class="col-sm-12 d-flex mt-2 justify-content-lg-end" *ngIf="showCreate" [ngClass]="sideFilters?.length && isMobile ? 'justify-content-between' : 'justify-content-end'">
+    <div class="col-sm-12 d-flex mt-2 justify-content-lg-end page-actions" *ngIf="showCreate" [ngClass]="sideFilters?.length && isMobile ? 'justify-content-between' : 'justify-content-end'">
       <button (click)="openDrawer()" *ngIf="sideFilters?.length && isMobile" tooltip="Open filters" color="primary" mat-raised-button type="button"
               class="primary-bg">
         <i class="fa fa-filter"></i>

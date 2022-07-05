@@ -34,7 +34,7 @@
     </mat-selection-list>
   </div>
 
-  <mat-divider class="my-3" *ngIf="sideFilters?.includes('sites')"></mat-divider>
+  <mat-divider class="my-3" *ngIf="sideFilters?.includes('sites') && sideFilters?.includes('requestStatus')"></mat-divider>
   <div class="sites-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('sites')">
     <a data-bs-toggle="collapse" href="#collapseSites" role="button"
        aria-expanded="true" aria-controls="collapseSites"
