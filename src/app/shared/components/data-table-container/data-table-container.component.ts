@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {isMobile} from "../../variables/variables";
 import {filterTable} from "../../functions/shared-functions";
+import {ObservablesService} from "../../../services/observables.service";
 
 @Component({
   selector: 'app-data-table-container',
@@ -17,8 +18,11 @@ export class DataTableContainerComponent extends DataTableComponent implements O
   constructor(private pt: PageTitleService,
               private cdr2: ChangeDetectorRef,
               private rt: Router,
-              private dialog1: MatDialog) {
-    super(pt, cdr2, rt, dialog1)
+              private dialog1: MatDialog,
+              private os?: ObservablesService,
+
+  ) {
+    super(pt, cdr2, rt, dialog1, os)
   }
 
   override ngOnInit(): void {

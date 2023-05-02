@@ -19,7 +19,11 @@ import {filterTable, GetLanguage, searchInAllTableColumns} from "../../functions
 import {secureStorage} from "../../functions/secure-storage";
 import {DeleteComponent} from "../../../modals/delete/delete.component";
 import {isMobile} from "../../variables/variables";
+import {ObservablesService} from "../../../services/observables.service";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import { map } from 'rxjs/operators';
 
+@UntilDestroy()
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
@@ -42,7 +46,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   filteredData;
   rows = [];
   filterColumns = [];
-  isMobile = isMobile;
+  isMobile$ = this.observablesService.isMobile$.pipe(untilDestroyed(this), map(res => res));
   gradeValidation = [];
   finalGrade: number;
   backup = [];
@@ -53,7 +57,10 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   constructor(private pageTitleService: PageTitleService,
               private cdr: ChangeDetectorRef,
               private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private observablesService?: ObservablesService,
+
+  ) {
   }
 
   ngOnChanges() {
