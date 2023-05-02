@@ -1,6 +1,7 @@
 th.mat-sort-header-sorted {
   color: black;
 }
+
 table {
   width: 100%;
 }
@@ -13,15 +14,18 @@ table {
 td {
   text-align: center;
 }
+
 .mat-sort-header-container {
   justify-content: center;
 }
+
 th.mat-header-cell .mat-sort-header-container .mat-sort-header-content {
   text-align: start !important;
   display: flex !important;;
   align-items: flex-start !important;;
   flex-direction: column !important;;
 }
+
 th.mat-header-cell .mat-sort-header-container .mat-sort-header-arrow {
   height: 12px;
   width: 12px;
@@ -33,7 +37,8 @@ th.mat-header-cell .mat-sort-header-container .mat-sort-header-arrow {
   top: 10%;
   right: var(--arrow-right);
 }
-th.mat-header-cell input{
+
+th.mat-header-cell input {
   border: 1px solid;
   margin-top: 1px;
   border-radius: 3px;
@@ -54,6 +59,7 @@ th.mat-header-cell input{
 th.mat-header-cell {
   text-align: center !important;
 }
+
 .mat-menu-panel {
   min-height: auto;
 }
@@ -61,6 +67,7 @@ th.mat-header-cell {
 .animated-bg {
   animation: animate 50s forwards ease;
 }
+
 @keyframes animate {
   0% {
     background-color: greenyellow;
@@ -69,17 +76,20 @@ th.mat-header-cell {
     background-color: #fff;
   }
 }
-.side-filters-container{
-  width: 12%;
+
+.side-filters-container {
+  //width: 12%;
   background: #fff;
   padding: 10px;
   margin: 16px 15px 0 0;
   border-radius: 5px;
 }
-.table-with-filters{
+
+.table-with-filters {
   width: 88% !important;
 }
-.status-text{
+
+.status-text {
   padding: 3px 10px;
   border-radius: 11px;
 }

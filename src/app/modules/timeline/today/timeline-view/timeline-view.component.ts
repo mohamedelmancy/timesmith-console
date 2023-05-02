@@ -67,7 +67,7 @@ export class TimelineViewComponent implements OnInit {
       color: 'grey',
       icon: 'fa-leaf',
       code: true
-    },{
+    }, {
       title: 'Open time',
       color: 'orange',
       icon: 'fa-reddit',
@@ -147,6 +147,7 @@ export class TimelineViewComponent implements OnInit {
   ]
   calendarApi: Calendar;
   selectedDate: any = today;
+
   constructor(private coreService: CoreService,
               private translateService: TranslateService,
               public dialog: MatDialog,
@@ -179,36 +180,36 @@ export class TimelineViewComponent implements OnInit {
   addNewEvent(eventEl) {
     console.log('eventEl', eventEl.innerHTML)
     var _this = this;
-      const leavesEvent = _this.leaves.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
-      const attendanceEvent = _this.attendance.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
-      let isCode = false;
-      let expCodeTitle = '';
-      let expCodeColor = '';
-      eventEl.classList.forEach(x=> {
-        if (x.includes('title')) { // Example title-Permission
-          isCode = true;
-          expCodeTitle = x.split('-')[1].replaceAll('_', ' ');
-        }
-        if (x.includes('color')) { // Example color-green
-          isCode = true;
-          expCodeColor = x.split('-')[1];
-        }
-      })
-      let e:any = {
-        title:  isCode ? '' : eventEl.innerHTML,
-        duration: (leavesEvent) ? '04:00' : '00:15',
-        html: (leavesEvent || attendanceEvent) ? null : eventEl.innerHTML,
-        durationEditable: true,
-        overlap: true,
-        id: Math.random(),
-        type: leavesEvent ? 'leave' : attendanceEvent ? 'attendance' : 'code',
-        excepTitle: (leavesEvent || attendanceEvent) ? '' : expCodeTitle,
-        fColor: leavesEvent ? leavesEvent?.color : attendanceEvent ? attendanceEvent.color : expCodeColor,
-        description: (leavesEvent || attendanceEvent) ? '' : expCodeTitle,
-        backgroundColor:  leavesEvent ? leavesEvent?.color : attendanceEvent ? attendanceEvent.color : '#ebf8fc',
-        borderColor: leavesEvent ? leavesEvent?.color : attendanceEvent ? attendanceEvent.color : '#ebf8fc',
-      };
-      return e;
+    const leavesEvent = _this.leaves.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
+    const attendanceEvent = _this.attendance.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
+    let isCode = false;
+    let expCodeTitle = '';
+    let expCodeColor = '';
+    eventEl.classList.forEach(x => {
+      if (x.includes('title')) { // Example title-Permission
+        isCode = true;
+        expCodeTitle = x.split('-')[1].replaceAll('_', ' ');
+      }
+      if (x.includes('color')) { // Example color-green
+        isCode = true;
+        expCodeColor = x.split('-')[1];
+      }
+    })
+    let e: any = {
+      title: isCode ? '' : eventEl.innerHTML,
+      duration: (leavesEvent) ? '04:00' : '00:15',
+      html: (leavesEvent || attendanceEvent) ? null : eventEl.innerHTML,
+      durationEditable: true,
+      overlap: true,
+      id: Math.random(),
+      type: leavesEvent ? 'leave' : attendanceEvent ? 'attendance' : 'code',
+      excepTitle: (leavesEvent || attendanceEvent) ? '' : expCodeTitle,
+      fColor: leavesEvent ? leavesEvent?.color : attendanceEvent ? attendanceEvent.color : expCodeColor,
+      description: (leavesEvent || attendanceEvent) ? '' : expCodeTitle,
+      backgroundColor: leavesEvent ? leavesEvent?.color : attendanceEvent ? attendanceEvent.color : '#ebf8fc',
+      borderColor: leavesEvent ? leavesEvent?.color : attendanceEvent ? attendanceEvent.color : '#ebf8fc',
+    };
+    return e;
   }
 
   ngAfterViewChecked() {
@@ -251,10 +252,9 @@ export class TimelineViewComponent implements OnInit {
           }
         },
       },
-      resourceLabelContent: function (arg)
-      {
+      resourceLabelContent: function (arg) {
         // return { html: `<i class="fa ${arg.resource.extendedProps.icon}"></i> ${arg.resource.title}` };
-        return { html: `<i class="fa fa-user-circle"></i> ${arg.resource.title}` };
+        return {html: `<i class="fa fa-user-circle"></i> ${arg.resource.title}`};
       },
       initialDate: this.selectedDate, // will be parsed as local
       eventDrop: function (info) {
@@ -289,7 +289,7 @@ export class TimelineViewComponent implements OnInit {
       eventClick: (info) => {
         console.log('eventClicked ', info.event);
         // _this.openDialog(info.event);
-        if(isMobile) {
+        if (isMobile) {
           this.open(this.editEvent);
         }
         _this.selectedEvent = info.event;
@@ -396,7 +396,7 @@ export class TimelineViewComponent implements OnInit {
         if (this.resizedEvent.id === info.event.id) {
           console.log('yessssss ');
           icons = info.event.extendedProps.html;
-          for (let i = 0; i < data - 1; i ++) {
+          for (let i = 0; i < data - 1; i++) {
             // icons = icons + ((info.event.extendedProps.html).slice(0, 3) + `style="margin-right: 0 !Important; width: 32px;height: 27px;margin-left: 0px; color: ${info.event.extendedProps.fColor}; font-size: 25px "` + (info.event.extendedProps.html).slice(3));
             icons = icons + info.event.extendedProps.html;
           }
@@ -409,23 +409,23 @@ export class TimelineViewComponent implements OnInit {
   }
 
   addTooltip(info) {
-   setTimeout(() => {
-     const header = (info.event.title || info.event.extendedProps.description)
-     const content = `From ( ${moment(info.event.star).format(dateTimeFormat)} )To ( ${moment(info.event.end).format(dateTimeFormat)}) `
-     // $(info.el).tooltip({
-     //   title: info.event.title || info.event.extendedProps.description,
-     //   placement: "top",
-     //   trigger: "hover",
-     //   container: "body"
-     // });
-     // $(info.el).popover({
-     //   title: header.slice(0, 1).toUpperCase() + header.slice(1),
-     //   placement: "top",
-     //   trigger: "hover",
-     //   container: "body",
-     //   content: content,
-     // });
-   }, 200)
+    setTimeout(() => {
+      const header = (info.event.title || info.event.extendedProps.description)
+      const content = `From ( ${moment(info.event.star).format(dateTimeFormat)} )To ( ${moment(info.event.end).format(dateTimeFormat)}) `
+      // $(info.el).tooltip({
+      //   title: info.event.title || info.event.extendedProps.description,
+      //   placement: "top",
+      //   trigger: "hover",
+      //   container: "body"
+      // });
+      // $(info.el).popover({
+      //   title: header.slice(0, 1).toUpperCase() + header.slice(1),
+      //   placement: "top",
+      //   trigger: "hover",
+      //   container: "body",
+      //   content: content,
+      // });
+    }, 200)
   }
 
   checkOverlapping(stillEvent, movingEvent) {
@@ -585,10 +585,10 @@ export class TimelineViewComponent implements OnInit {
         description: nextEvent?.title,
         type: 'code',
         excepTitle: nextEvent?.title,
-        html: `<i style="margin-right: 0; color: ${nextEvent?.color}; font-size: 25px; width: 32px; height: 27px" class="fa ${nextEvent?.icon}"></i>`
+        html: `<i style="margin-right: 0; color: ${nextEvent?.color}; font-size: 23px; width: 29px; height: 27px" class="fa ${nextEvent?.icon}"></i>`
       };
       this.insertUpdatesEvent(previousEvent, comingEvent);
-    } else if (data.event.extendedProps.type === 'leave'){
+    } else if (data.event.extendedProps.type === 'leave') {
       const allEvents = [...this.leaves];
       nextEvent = allEvents.find(ev => ev.title === data.form.type.name);
       let previousEvent = data.event
@@ -608,7 +608,7 @@ export class TimelineViewComponent implements OnInit {
         fColor: nextEvent?.color,
       };
       this.insertUpdatesEvent(previousEvent, comingEvent);
-    } else if (data.event.extendedProps.type === 'attendance'){
+    } else if (data.event.extendedProps.type === 'attendance') {
       const allEvents = [...this.attendance];
       nextEvent = allEvents.find(ev => ev.title === data.form.type.name);
       let previousEvent = data.event
@@ -646,7 +646,7 @@ export class TimelineViewComponent implements OnInit {
     this.toastr.success('Event updated successfully!')
   }
 
-   createElementFromHTML(htmlString) {
+  createElementFromHTML(htmlString) {
     var div = document.createElement('div');
     div.innerHTML = htmlString.trim();
     // Change this to div.childNodes to support multiple top-level nodes.

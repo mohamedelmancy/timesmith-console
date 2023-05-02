@@ -34,7 +34,9 @@
     </mat-selection-list>
   </div>
 
-  <mat-divider class="my-3" *ngIf="sideFilters?.includes('sites') && sideFilters?.includes('requestStatus')"></mat-divider>
+  <mat-divider class="my-3"
+               *ngIf="sideFilters?.includes('sites') && sideFilters?.includes('requestStatus')
+                || (sideFilters?.includes('sites') && sideFilters?.includes('reportTypes'))"></mat-divider>
   <div class="sites-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('sites')">
     <a data-bs-toggle="collapse" href="#collapseSites" role="button"
        aria-expanded="true" aria-controls="collapseSites"
@@ -115,9 +117,11 @@
     <mat-radio-group id="collapsePAW"
                      class="collapse multi-collapse show example-radio-group row"
                      (change)="filterChanged('paw', $event)">
-      <mat-radio-button class="example-radio-button py-2" [value]="'yes'"><span>{{'Yes' | translate}}</span><span>( {{pawStatistics?.yes}}
+      <mat-radio-button class="example-radio-button py-2" [value]="'yes'">
+        <span>{{'Yes' | translate}}</span><span>( {{pawStatistics?.yes}}
         )</span></mat-radio-button>
-      <mat-radio-button class="example-radio-button" [value]="'no'"><span>{{'No' | translate}}</span><span>( {{pawStatistics?.no}}
+      <mat-radio-button class="example-radio-button" [value]="'no'">
+        <span>{{'No' | translate}}</span><span>( {{pawStatistics?.no}}
         )</span></mat-radio-button>
     </mat-radio-group>
   </div>
