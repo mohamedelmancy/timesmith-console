@@ -28,7 +28,10 @@
       "dom",
       "ES2021.String"
     ],
-    "types": ["node"]
+    "types": [
+      "node",
+      "googlemaps"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

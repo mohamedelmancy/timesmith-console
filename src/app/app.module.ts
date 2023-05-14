@@ -18,21 +18,20 @@ import {SideBarComponent} from './core/components/side-bar/side-bar.component';
 import {FooterComponent} from './core/components/footer/footer.component';
 import {LanguageDropDownComponent} from './core/components/language-drop-down/language-drop-down.component';
 import {MatListModule} from "@angular/material/list";
-import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from "ngx-perfect-scrollbar";
+// import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from "ngx-perfect-scrollbar";
 import {MatCardModule} from "@angular/material/card";
 import {ExtendedModule, FlexModule} from "@angular/flex-layout";
 import {MatButtonModule} from "@angular/material/button";
 import {MenuItems} from "./core/menu/menu-items/menu-items";
 import {PageTitleService} from "./core/page-title/page-title.service";
-import {FullCalendarModule} from "@fullcalendar/angular";
 import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
 import {AuthService} from "./services/auth.service";
 import {AuthGuard} from "./core/guards/auth.guard";
 import {LandingGuard} from "./core/guards/landing.guard";
 
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
+// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+//   suppressScrollX: true
+// };
 import {AuthInterceptor} from "./services/interceptor";
 import {ToastrModule} from "ngx-toastr";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
@@ -64,13 +63,13 @@ import {ViewPermissionsComponent} from './modals/view-permissions/view-permissio
 import {BreadcrumbsModule} from "@exalif/ngx-breadcrumbs";
 import {StatusActionComponent} from './modals/status-action/status-action.component';
 import {ViewNotificationComponent} from './modals/view-notification/view-notification.component';
-import {ImgMagnifier} from "ng-img-magnifier";
+import {FullCalendarModule} from "@fullcalendar/angular";
 
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
-  resourceTimelinePlugin,
-  dayGridPlugin,
-  interactionPlugin,
-]);
+// FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+//   resourceTimelinePlugin,
+//   dayGridPlugin,
+//   interactionPlugin,
+// ]);
 
 export const MyDefaultTooltipOptions: TooltipOptions = {
   'show-delay': 0,
@@ -113,7 +112,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    PerfectScrollbarModule,
+    // PerfectScrollbarModule,
     MatCardModule,
     FlexModule,
     MatButtonModule,
@@ -147,16 +146,15 @@ export function HttpLoaderFactory(http: HttpClient) {
       postProcess: null,
       applyDistinctOn: 'text',
     }),
-    ImgMagnifier,
   ],
   providers: [
     MenuItems, PageTitleService,
     PageTitleService,
     AuthService,
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    },
+    // {
+    //   provide: PERFECT_SCROLLBAR_CONFIG,
+    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    // },
     AuthGuard,
     LandingGuard,
     {
@@ -169,8 +167,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()},
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CreateTimelineComponent, DeleteComponent, ViewPermissionsComponent, ViewNotificationComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  // entryComponents: [CreateTimelineComponent, DeleteComponent, ViewPermissionsComponent, ViewNotificationComponent]
 })
 export class AppModule {
 }

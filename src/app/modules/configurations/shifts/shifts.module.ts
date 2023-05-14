@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ShiftsRoutingModule } from './shifts-routing.module';
@@ -9,9 +9,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
-import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {NgxMatTimepickerModule} from "ngx-mat-timepicker";
 import {MatIconModule} from "@angular/material/icon";
+// import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
 
 @NgModule({
@@ -27,9 +27,10 @@ import {MatIconModule} from "@angular/material/icon";
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    NgMultiSelectDropDownModule,
     NgxMatTimepickerModule,
-    MatIconModule
-  ]
+    MatIconModule,
+    // NgMultiSelectDropDownModule
+  ],
+  schemas: [NO_ERRORS_SCHEMA],
 })
 export class ShiftsModule { }

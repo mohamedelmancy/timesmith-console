@@ -4,7 +4,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import {TooltipModule} from "ng2-tooltip-directive";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
+// import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
@@ -68,7 +68,7 @@ import {BreadcrumbTranslateService} from "../services/breadcrumb-translate.servi
         ReactiveFormsModule,
         HttpClientModule,
         FlexLayoutModule,
-        PerfectScrollbarModule,
+        // PerfectScrollbarModule,
         MenuToggleModule,
         HttpClientModule,
         MatSlideToggleModule,

@@ -11,11 +11,12 @@ import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateTimelineComponent} from "../../../../modals/create-timeline/create-timeline.component";
 import {dateTimeFormat, isMobile, today} from "../../../../shared/variables/variables";
-import {EventApi, FullCalendarComponent} from "@fullcalendar/angular";
+import {FullCalendarComponent} from "@fullcalendar/angular";
 import {first, Subject, Subscription} from "rxjs";
 import {take} from "rxjs/operators";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToastrService} from "ngx-toastr";
+import dayGridPlugin from "@fullcalendar/daygrid";
 
 declare var $: any;
 
@@ -23,7 +24,7 @@ declare var $: any;
   selector: 'app-timeline-view',
   templateUrl: './timeline-view.component.html',
   styleUrls: ['./timeline-view.component.scss'],
-  providers: [CalendarApi]
+  // providers: [CalendarApi]
 })
 export class TimelineViewComponent implements OnInit {
   @ViewChild("fullcalendar", {static: false}) calendarComponent: FullCalendarComponent;
@@ -221,7 +222,9 @@ export class TimelineViewComponent implements OnInit {
     // https://fullcalendar.io/docs/upgrading-from-v4#current-date
     this.options = {
       timeZone: 'local',
-      plugins: [resourceTimelinePlugin],
+      plugins: [resourceTimelinePlugin,
+        dayGridPlugin,
+        interactionPlugin,],
       height: '70vh',
       headerToolbar: {
         // left: 'prev today next',

@@ -147,5 +147,8 @@
       }
     }
   },
-  "defaultProject": "timeSmithConsole"
+  "defaultProject": "timeSmithConsole",
+  "cli": {
+    "analytics": "47684275-5fd5-42c0-9f6c-f59ae1f296ab"
+  }
 }

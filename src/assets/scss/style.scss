@@ -53,6 +53,8 @@
    6.5 Spaces
 
 */
+@use '@angular/material' as mat;
+@import "@angular/material/theming";
 
 @import "material.variables";
 @import "mixins/bi-app/bi-app-ltr";
