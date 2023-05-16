@@ -5,10 +5,10 @@
    margin-right: 1rem;
 }
 .gene-header-toolbar{
-   &.mat-toolbar-row, &.mat-toolbar-single-row{
+   &.mat-mdc-toolbar-row, &.mat-mdc-toolbar-single-row{
       height:50px;
    }
-    .mat-button, .mat-icon-button, .mat-raised-button,.mat-input-element{
+    .mat-mdc-button, .mat-mdc-icon-button, .mat-mdc-raised-button,.mat-mdc-input-element{
         color: $header-font-color;
     }
 }
@@ -25,7 +25,7 @@ mat-sidenav.sidebar-panel .sub-menu {
 mat-sidenav.sidebar-panel .sub-menu a {
     margin-left: 30px;
 }
-mat-sidenav .sidebar-panel .navigation .open>.mat-list-item-content>.sub-menu {
+mat-sidenav .sidebar-panel .navigation .open>.mat-mdc-list-item-content>.sub-menu {
     max-height: 5000px;
 }
 .sub-menu {
@@ -42,14 +42,14 @@ mat-sidenav .sidebar-panel .navigation .open>.mat-list-item-content>.sub-menu {
 .relative {
     position: relative;
 }
-body .gene-header-toolbar.mat-toolbar {
+body .gene-header-toolbar.mat-mdc-toolbar {
     background: $header-bg-color;
 }
 //
 .app-dark {
-   .gene-header-toolbar.mat-toolbar {
+   .gene-header-toolbar.mat-mdc-toolbar {
       background: rgba(54, 54, 54, 1);
-      .mat-button, .mat-icon-button, .mat-raised-button,.mat-input-element{
+      .mat-mdc-button, .mat-mdc-icon-button, .mat-mdc-raised-button,.mat-mdc-input-element{
          color: white;
       }
    }
@@ -81,10 +81,10 @@ body .gene-header-toolbar.mat-toolbar {
          transform: translateY(0);
       }
    }
-   .mat-card{
+   .mat-mdc-card{
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
    }
-   .mat-tab-body-wrapper{
+   .mat-mdc-tab-body-wrapper{
       height: 100%;
    }
    .chat-people-list mat-list{
@@ -102,14 +102,14 @@ body .gene-header-toolbar.mat-toolbar {
       width:330px;
       margin: 0;
       border-radius: 0;
-      .mat-tab-label{
+      .mat-mdc-tab-label{
          min-width: 0;
       }
-      .mat-list-base .mat-list-item .mat-list-item-content{
+      .mat-mdc-list-base .mat-mdc-list-item .mat-mdc-list-item-content{
          padding: 0;
       }
    }
-   .mat-list-base .mat-list-item, .mat-list-base .mat-list-option{
+   .mat-mdc-list-base .mat-mdc-list-item, .mat-mdc-list-base .mat-mdc-list-option{
       height: auto;
    }
    .show-status{
@@ -183,7 +183,7 @@ body .gene-header-toolbar.mat-toolbar {
       max-height: 300px;
       overflow: auto;
       .cart-item-wrap:last-child{
-         .mat-divider{
+         .mat-mdc-divider{
             display:none;
          }
       }

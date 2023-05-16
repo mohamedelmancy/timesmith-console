@@ -33,6 +33,9 @@ export class LoginComponent implements OnInit {
   // when email and password is correct, user logged in.
   login(value) {
     // console.log('value', value);
+    localStorage.setItem('remember', JSON.stringify(this.remember));
+    this.authService.setToken('res.token');
+    this.authService.setLocalUserProfile('res.user');
     const body = {
       cred: value.mobile,
       password: value.password,
@@ -40,16 +43,16 @@ export class LoginComponent implements OnInit {
     this.coreService.postRequest('User/LogIn', body).subscribe(
       res => {
         localStorage.setItem('remember', JSON.stringify(this.remember));
-          this.authService.setToken(res.token);
-          this.authService.setLocalUserProfile(res.user);
-          this.translate.get('Successfully logged in!').subscribe(word => {
-            this.toastr.success(word);
-          });
-          if (this.returnedUrl) {
-            this.router.navigate([this.returnedUrl]);
-          } else {
-            this.router.navigate(['/timeline']);
-          }
+        this.authService.setToken(res.token);
+        this.authService.setLocalUserProfile(res.user);
+        this.translate.get('Successfully logged in!').subscribe(word => {
+          this.toastr.success(word);
+        });
+        if (this.returnedUrl) {
+          this.router.navigate([this.returnedUrl]);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       }, error => {
         // console.log('err', error)
         // this.toastr.error(HandleResponseError(error));
@@ -58,6 +61,3 @@ export class LoginComponent implements OnInit {
   }
 
 }
-
-
-

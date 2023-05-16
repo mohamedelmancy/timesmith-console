@@ -339,7 +339,7 @@
     margin-left: 15px;
   }
 
-  button.mat-raised-button {
+  button.mat-mdc-raised-button {
     margin-right: 0rem;
     margin-left: 0.3125rem;
   }
@@ -356,13 +356,13 @@
 
   //Crypto
 
-  .crypto-input-prefix .mat-form-field-appearance-outline .mat-form-field-prefix {
+  .crypto-input-prefix .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-prefix {
     margin-left: 10px;
     margin-right: -0.75em;
   }
 
   .crypto-table {
-    .mat-header-cell {
+    .mat-mdc-header-cell {
       position: relative !important;
     }
   }
@@ -371,15 +371,15 @@
     text-align: left;
   }
 
-  .crypto-table td.mat-cell, .crypto-table td.mat-footer-cell, .crypto-table th.mat-header-cell {
+  .crypto-table td.mat-mdc-cell, .crypto-table td.mat-mdc-footer-cell, .crypto-table th.mat-mdc-header-cell {
     text-align: center;
   }
 
-  .crypto-table td.mat-cell:first-of-type, .crypto-table td.mat-footer-cell:first-of-type, .crypto-table th.mat-header-cell:first-of-type {
+  .crypto-table td.mat-mdc-cell:first-of-type, .crypto-table td.mat-mdc-footer-cell:first-of-type, .crypto-table th.mat-mdc-header-cell:first-of-type {
     text-align: right;
   }
 
-  .crypto-table td.mat-cell:last-of-type, .crypto-table td.mat-footer-cell:last-of-type, .crypto-table th.mat-header-cell:last-of-type {
+  .crypto-table td.mat-mdc-cell:last-of-type, .crypto-table td.mat-mdc-footer-cell:last-of-type, .crypto-table th.mat-mdc-header-cell:last-of-type {
     text-align: left;
   }
 
@@ -419,13 +419,13 @@
   }
 
   //sidenav{
-  &.side-panel-opened .mat-sidenav-content {
+  &.side-panel-opened .mat-mdc-sidenav-content {
     margin-left: unset !important;
     margin-right: 16.06rem !important;
   }
 
   &.side-panel-close {
-    .mat-sidenav-content {
+    .mat-mdc-sidenav-content {
       margin-right: 0 !important;
       margin-left: unset !important;
     }
@@ -521,7 +521,7 @@
 
   //Dragula
   .gene-dragula {
-    .mat-checkbox-inner-container {
+    .mat-mdc-checkbox-inner-container {
       margin-left: 1.25rem;
       margin-right: 0rem;
     }
@@ -532,7 +532,7 @@
     margin-left: 8px;
   }
 
-  .gene-sorted-drag-drop .mat-icon {
+  .gene-sorted-drag-drop .mat-mdc-icon {
     margin-right: 0;
     margin-left: 1rem;
   }
@@ -688,7 +688,7 @@
     left: unset !important;
   }
 
-  .mat-tab-header {
+  .mat-mdc-tab-header {
     right: unset !important;;
     left: 18px
   }
@@ -706,41 +706,46 @@
     direction: ltr !important;
   }
 
-  .mat-list-text {
+  .mat-mdc-list-text {
     text-align: right !important;
     direction: rtl !important;
     padding-right: 12px !important;
     padding-left: 0 !important;
   }
 
-  .mat-radio-label-content {
+  .mat-mdc-radio-label-content {
     span:nth-child(3) {
       float: left !important;
     }
   }
 
-  .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb-container {
+  .mat-mdc-slide-toggle.mat-mdc-checked:not(.mat-mdc-disabled) .mat-mdc-slide-toggle-thumb-container {
     right: 16px !important;
   }
-  .mat-slide-toggle-thumb-container {
+
+  .mat-mdc-slide-toggle-thumb-container {
     left: auto;
     right: 2px !important;
   }
-  .menu-dot{
+
+  .menu-dot {
     margin: 8px 10px 1px -14px !important;
   }
 
   .breadcrumbs__container li.breadcrumbs__item:nth-child(n+2)::before {
     padding-left: 13px !important;
     padding-right: 0 !important;
-    }
-  .mat-drawer-content .menu-home-icon{
+  }
+
+  .mat-mdc-drawer-content .menu-home-icon {
     margin-right: 10px;
   }
+
   .menu-divider {
     margin: 0 13px 0 5px !IMPORTANT;
   }
-  .page-actions{
+
+  .page-actions {
     padding-left: 13px !important;
   }
 }

@@ -1,8 +1,14 @@
 <app-data-table-container
-  (deleteEvent)="deleteRow($event)"
+  (openRow)="openRow($event)" (deleteData)="delete($event)" (createRow)="openRow($event)"
   [dataTableName]="'sites'"
-  [displayedColumns]="displayedColumns"
-  [data]="data"
+  [columns]="displayedColumns"
+  [data]="tableData"
+  [showSearch]="true"
+  [hasDelete]="true"
+  [hasModify]="true"
+  [hasAdd]="true"
+  (fireGetServerData)="getServerData($event)"
+  (getData)="getServerData($event)"
   [createLink]="'/configurations/sites/new'"
   [viewLink]="'/configurations/sites'"
 ></app-data-table-container>

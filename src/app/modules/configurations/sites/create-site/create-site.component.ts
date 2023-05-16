@@ -1,14 +1,18 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import GeoSearchControl from 'leaflet-geosearch/lib/SearchControl';
+import OpenStreetMapProvider from 'leaflet-geosearch/lib/providers/openStreetMapProvider';
 declare var require: any;
-var L  = require('leaflet')
-import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+var L = require('leaflet')
+// import {GeoSearchControl, OpenStreetMapProvider} from 'leaflet-geosearch';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CoreService} from "../../../../services/core.service";
 import {secureStorage} from "../../../../shared/functions/secure-storage";
 import 'leaflet.locatecontrol'
-import {translate} from "@angular/localize/tools";
 import {TranslateService} from "@ngx-translate/core";
+
+
+const provider = new OpenStreetMapProvider();
 @Component({
   selector: 'app-create-site',
   templateUrl: './create-site.component.html',
@@ -17,7 +21,12 @@ import {TranslateService} from "@ngx-translate/core";
 export class CreateSiteComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService, private translateService: TranslateService) { }
+  constructor(private fb: FormBuilder,
+              private activatedRoute: ActivatedRoute,
+              private coreService: CoreService,
+              private translateService: TranslateService) {
+  }
+
   lat = 30.0444;
   lng = 31.2357;
   map;
@@ -32,6 +41,7 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
     popupAnchor: [0, -60],
     shadowUrl: '../../../../../assets/img/map/marker-shadow.png'
   });
+
   ngOnInit(): void {
     this.form = this.fb.group({
         name: ['', Validators.compose([Validators.required])],
@@ -54,12 +64,12 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
       const _this = this;
       this.map.on('click', function (e) {
         console.log('eee', e);
-       _this.fillMapFields(e);
+        _this.fillMapFields(e);
       });
       L.control.locate().addTo(this.map);
       this.addSearchBox();
       this.initialize();
-      this.map?.on('locationfound', function(ev){
+      this.map?.on('locationfound', function (ev) {
         console.log('locationfound', ev);
         _this.onLocationFound(ev);
       })
@@ -110,7 +120,11 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
   addMarker(ev) {
     var radius = this.form.value.tolerance || 30;
     if (!this.marker) {
-      this.marker = L.marker([ev.latlng.lat, ev.latlng.lng], {icon: this.customIcon, draggable: true, id: Math.random()}).addTo(this.map)
+      this.marker = L.marker([ev.latlng.lat, ev.latlng.lng], {
+        icon: this.customIcon,
+        draggable: true,
+        id: Math.random()
+      }).addTo(this.map)
         .bindPopup("You are within " + radius + " meters from this point").closePopup();
     } else {
       this.marker.setLatLng(ev.latlng)
@@ -123,7 +137,7 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
     // console.log('locate', locate)
 
     const _this = this;
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition(function (position) {
       console.log('position', position)
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
@@ -140,7 +154,6 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
   }
 
   async addSearchBox() {
-    const provider = new OpenStreetMapProvider();
     // @ts-ignore
     const searchControl = new GeoSearchControl({
       provider: provider,
@@ -154,10 +167,10 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
         icon: this.customIcon,
         draggable: true,
       },
-      popupFormat: ({ query, result }) => {
+      popupFormat: ({query, result}) => {
         return result.label
       }, // optional: function    - default returns result label,
-      resultFormat: ({ result }) => {
+      resultFormat: ({result}) => {
         // console.log('result.label', result.label);
         return result.label;
       }, // optional: function    - default returns result label
@@ -170,6 +183,7 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
       updateMap: true, // optional: true|false  - default true
     }).addTo(this.map);
   }
+
   mapClicked(event) {
   }
 

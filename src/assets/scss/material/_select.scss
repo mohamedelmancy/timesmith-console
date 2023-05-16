@@ -1,19 +1,19 @@
 body {
-  .mat-select-panel {
+  .mat-mdc-select-panel {
     background-color: mat-color($background, card);
   }
-  .mat-select-trigger, .mat-option {
+  .mat-mdc-select-trigger, .mat-mdc-option {
     font-size: $font-size-base;
   }
-  .mat-select-trigger {
+  .mat-mdc-select-trigger {
     height: 22px;
     margin: 1em 0;
     padding-bottom: 6px;
   }
-  .mat-select-placeholder {
+  .mat-mdc-select-placeholder {
     padding-left: 0;
   }
-  .app-dark .mat-select-panel {
+  .app-dark .mat-mdc-select-panel {
     background-color: mat-color($dark-background, card);
   }
 }

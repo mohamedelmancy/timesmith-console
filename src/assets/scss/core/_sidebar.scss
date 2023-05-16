@@ -1,18 +1,18 @@
 /*=============|Sidebar|============*/
 
-.mat-drawer-transition .mat-drawer-content{
+.mat-mdc-drawer-transition .mat-mdc-drawer-content{
    transition: margin 0.4s ease 0s !important;
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
    body{
-      mat-sidenav .sidebar-panel .sub-menu, .mat-list-item .menu-caret{
+      mat-sidenav .sidebar-panel .sub-menu, .mat-mdc-list-item .menu-caret{
          transition: 0 !important;
       } /* IE11 */
    }
 }
 @supports (-ms-ime-align:auto) {
    body{
-      mat-sidenav .sidebar-panel .sub-menu, .mat-list-item .menu-caret{
+      mat-sidenav .sidebar-panel .sub-menu, .mat-mdc-list-item .menu-caret{
          transition: 0 !important;
       } /* Edge */
    }
@@ -28,7 +28,7 @@ $sidebar-logo-padding:1rem 0 0.5rem;
 $sidebar-icons:1.2rem;
 $user-name-font-size:1rem;
 body {
-   .sidebar-logo.mat-toolbar {
+   .sidebar-logo.mat-mdc-toolbar {
       align-items: center;
       background: transparent none repeat scroll 0 0;
       justify-content: center;
@@ -38,7 +38,7 @@ body {
       height: 100%;
       overflow: hidden;
    }
-   .mat-sidenav {
+   .mat-mdc-sidenav {
       overflow-x: hidden;
       overflow-y: hidden;
       min-width: 4rem;
@@ -50,7 +50,7 @@ body {
          margin: 0 1rem;
       }
    }
-   mat-sidenav .sidebar-panel .mat-nav-list a {
+   mat-sidenav .sidebar-panel .mat-mdc-nav-list a {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -58,7 +58,7 @@ body {
       padding: 0 1.5rem;
       font-weight: 500;
    }
-   mat-sidenav .sidebar-panel .mat-nav-list a,
+   mat-sidenav .sidebar-panel .mat-mdc-nav-list a,
    .gene-user-name {
       color: $sidebar-text-color;
       outline: none;
@@ -79,14 +79,14 @@ body {
          padding-bottom: 0.25rem;
          font-size: 13px;
       }
-      // .mat-list-item-content {
+      // .mat-mdc-list-item-content {
       // 	margin-bottom: 0 !important;
       // }
    }
    .gene-container {
       height: 100%;
    }
-   .mat-sidenav-content {
+   .mat-mdc-sidenav-content {
       background-color: $container-bg;
       height: 100%;
       overflow: hidden;
@@ -101,7 +101,7 @@ body {
       width: $sidebar-width;
       height: 100%;
    }
-   .sidebar-container .mat-nav-list .mat-list-item .mat-list-item-content {
+   .sidebar-container .mat-mdc-nav-list .mat-mdc-list-item .mat-mdc-list-item-content {
       height: auto;
       display: block;
       margin-bottom: 0;
@@ -111,33 +111,33 @@ body {
       margin-top: 1rem;
       font-size: $user-name-font-size;
    }
-   .mat-nav-list .mat-list-item-content:hover,
-   .mat-nav-list .mat-list-item-content.mat-list-item-focus,
+   .mat-mdc-nav-list .mat-mdc-list-item-content:hover,
+   .mat-mdc-nav-list .mat-mdc-list-item-content.mat-mdc-list-item-focus,
    .active-link {
       background-color: $mat-list-hover-bg-color;
    }
    .sidebar-panel .material-icons {
       font-size: $sidebar-icons;
    }
-   .mat-list-item .menu-caret {
+   .mat-mdc-list-item .menu-caret {
       transition: all 0.4s ease 0s;
       margin-right: 0 !important;
    }
-   .mat-list-item.open .menu-caret {
+   .mat-mdc-list-item.open .menu-caret {
       transform: rotate(90deg);
    }
    .gene-user-thumb {
       padding: 0.9375rem 0;
    }
-   .mat-icon-button,
-   .mat-mini-fab {
+   .mat-mdc-icon-button,
+   .mat-mdc-mini-fab {
       height: 3.125rem;
       width: 3.125rem;
    }
    .search-bar {
       flex: 0 0 auto !important;
    }
-   .mat-input-container {
+   .mat-mdc-input-container {
       font-size: 0.875rem;
    } //Breadcrumbs
    .gene-breadcrumbs {
@@ -175,13 +175,13 @@ body {
       }
    }
    .sidebar-panel {
-      .mat-fab.mat-primary,
-      .mat-mini-fab.mat-primary {
+      .mat-mdc-fab.mat-mdc-primary,
+      .mat-mdc-mini-fab.mat-mdc-primary {
          background-color: $highlight-icons;
          color: $highlight-icon-color;
       }
    }
-   .mat-card {
+   .mat-mdc-card {
       margin: 1rem;
       border-radius: $border-radius-base;
       padding: $mat-card-padding-top-bottom $mat-card-padding-left-right;
@@ -191,18 +191,18 @@ body {
          box-shadow: $mat-card-hover-effect;
       }
    }
-   .mat-mini-fab .mat-icon,
-   .mat-mini-fab i {
+   .mat-mdc-mini-fab .mat-mdc-icon,
+   .mat-mdc-mini-fab i {
       padding: 0;
       line-height: 3.3rem;
    }
-   .mat-mini-fab i {
+   .mat-mdc-mini-fab i {
       padding: 0.8125rem 0;
    }
-   .mat-button {
+   .mat-mdc-button {
       font-size: 1rem;
    }
-   .mat-icon {
+   .mat-mdc-icon {
       height: auto;
    }
    .gene-header-toolbar .secondary-menu {
@@ -218,8 +218,8 @@ body {
       width: 50px;
       padding: 0;
    }
-   .mat-menu-content {
-      .mat-menu-item {
+   .mat-mdc-menu-content {
+      .mat-mdc-menu-item {
          font-size: 14px !important;
          height: 38px !important;
          line-height: 38px !important;
@@ -227,13 +227,13 @@ body {
    }
    }
    .app-dark {
-      .mat-sidenav-content {
+      .mat-mdc-sidenav-content {
          background: rgba(54, 54, 54, 1);
       }
       .gene-breadcrumbs {
          color: mat-color($dark-foreground, base);
       }
-      .sidebar-area.mat-sidenav {
+      .sidebar-area.mat-mdc-sidenav {
          background: mat-color($dark-background, card);
       }
    }
@@ -251,10 +251,10 @@ body {
       overflow-y: auto;
       position: relative;
      background: #f9f9f9;
-     .mat-drawer-container{
+     .mat-mdc-drawer-container{
        background: #f9f9f9;
      }
-     .timeline-list-view .mat-drawer-container{
+     .timeline-list-view .mat-mdc-drawer-container{
        background: transparent;
      }
    }
@@ -267,7 +267,7 @@ body {
       align-self: flex-end;
    }
 
-   .sidebar-area.mat-sidenav {
+   .sidebar-area.mat-mdc-sidenav {
       background-color: $sidebar-bg-color;
       height: 100%;
    }
@@ -276,25 +276,25 @@ body {
       height: calc(100% - 64px);
    }
 
-   .mat-sidenav-container .mat-nav-list .mat-list-item {
+   .mat-mdc-sidenav-container .mat-mdc-nav-list .mat-mdc-list-item {
       height: auto;
    }
 
    body {
-      .mat-form-field-appearance-legacy .mat-form-field-label,
-      .mat-form-field-appearance-legacy .mat-hint {
+      .mat-mdc-form-field-appearance-legacy .mat-mdc-form-field-label,
+      .mat-mdc-form-field-appearance-legacy .mat-mdc-hint {
          color: rgba(0, 0, 0, .38) !important;
       }
-      .mat-form-field-appearance-legacy .mat-form-field-underline {
+      .mat-mdc-form-field-appearance-legacy .mat-mdc-form-field-underline {
          background-color: rgba(0, 0, 0, 0.12);
       }
-      .mat-form-field-appearance-legacy .mat-form-field-infix {
+      .mat-mdc-form-field-appearance-legacy .mat-mdc-form-field-infix {
          font-size: 0.875rem;
       }
-      .mat-form-field.mat-focused .mat-form-field-ripple {
+      .mat-mdc-form-field.mat-mdc-focused .mat-mdc-form-field-ripple {
          background-color: #1565c0;
       }
-      .mat-mini-fab .mat-button-wrapper {
+      .mat-mdc-mini-fab .mat-mdc-button-wrapper {
          display: inline;
       }
    }
@@ -311,12 +311,12 @@ body {
             margin-left: 19px;
             margin-right: 0;
          }
-         .mat-list-item .menu-caret {
+         .mat-mdc-list-item .menu-caret {
             transition: all 0.4s ease 0s;
             margin-left: 0 !important;
             transform: rotate(180deg) !important;
          }
-         .mat-list-item.open .menu-caret {
+         .mat-mdc-list-item.open .menu-caret {
             transform: rotate(90deg) !important;
          }
          mat-sidenav .sidebar-panel .sub-menu {
@@ -340,8 +340,8 @@ body {
    }
 
    @media(max-width:1525px) {
-      .gene-mail-wrapper .mat-list .mat-list-item .mat-list-item-content,
-      .gene-mail-wrapper .mat-nav-list .mat-list-item .mat-list-item-content {
+      .gene-mail-wrapper .mat-mdc-list .mat-mdc-list-item .mat-mdc-list-item-content,
+      .gene-mail-wrapper .mat-mdc-nav-list .mat-mdc-list-item .mat-mdc-list-item-content {
          height: 30px;
       }
    }
@@ -363,14 +363,14 @@ body {
    @media(max-width:959px) {
       .gene-header-toolbar {
          .search-bar,
-         .mat-icon-button {
+         .mat-mdc-icon-button {
             display: none;
          }
       }
    }
    @media(max-width:959px) {
       body {
-         .mat-drawer-container {
+         .mat-mdc-drawer-container {
                   -webkit-overflow-scrolling:auto !important;
          }
          .sidebar-container {
@@ -399,7 +399,7 @@ body {
             font-size: 22px;
          }
       }
-      .gene-header-toolbar.mat-toolbar-row, .gene-header-toolbar.mat-toolbar-single-row {
+      .gene-header-toolbar.mat-mdc-toolbar-row, .gene-header-toolbar.mat-mdc-toolbar-single-row {
          height: auto;
          min-height: 56px;
          .navbar-brand{

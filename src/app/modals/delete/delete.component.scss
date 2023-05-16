@@ -1,0 +1,34 @@
+.mat-mdc-dialog-title {
+  margin-bottom: 10px;
+}
+
+.badge {
+  background-color: #e4e4f6;
+  border-radius: 5px;
+  padding: 10px 5px;
+  color: #000;
+  height: 30px;
+  width: auto;
+  font-size: 15px;
+  position: relative;
+  min-width: 80px;
+  justify-content: center;
+  font-weight: 600;
+
+  .close {
+    display: inline-block;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: -7px;
+    right: 0;
+    color: black;
+    background: white;
+    border-radius: 50%;
+  }
+}
+
+.mat-mdc-dialog-content {
+  overflow: hidden;
+}

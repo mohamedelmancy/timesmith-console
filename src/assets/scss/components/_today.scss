@@ -10,7 +10,7 @@
 .resource-cell{
   background-color: #FFFFFF;
 }
-.mat-tab-label-active{
+.mat-mdc-tab-label-active{
   background: mat-color($primary) !important;
   text-align: center;
   color: white!important;
@@ -26,7 +26,7 @@
 .fc-datagrid-body tr{
   //text-align: center !important;
 }
-.mat-tab-body-wrapper{
+.mat-mdc-tab-body-wrapper{
   margin-top: 10px;
 }
 .fc-agenda-slots td div { height: 10px !important; }
@@ -180,7 +180,7 @@ mat-drawer{
   .fc-datagrid-cell-main, .fc-timeline-slot-cushion, .fc-event-title{
     font-size: 12px !important;
   }
-  .mat-tab-header{
+  .mat-mdc-tab-header{
     left: 45% !important;
   }
 }

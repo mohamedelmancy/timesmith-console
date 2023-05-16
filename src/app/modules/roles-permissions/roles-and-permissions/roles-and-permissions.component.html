@@ -1,7 +1,7 @@
 <app-data-table-container
   (deleteEvent)="deleteRow($event)"
   [dataTableName]="'roles'"
-  [displayedColumns]="displayedColumns"
+  [columns]="displayedColumns"
   [data]="data"
   (viewPermission)="viewPermission($event)"
   [createLink]="'/roles-permissions/new'"

@@ -2,7 +2,7 @@
   [sideFilters]="['sites', 'departments', 'individuals']"
   (deleteEvent)="deleteRow($event)"
   [dataTableName]="'notifications'"
-  [displayedColumns]="displayedColumns"
+  [columns]="displayedColumns"
   [data]="data"
   (viewPermission)="viewPermission($event)"
   [createLink]="'/notifications/new'"

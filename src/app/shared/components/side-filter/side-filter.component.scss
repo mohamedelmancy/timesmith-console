@@ -1,28 +1,49 @@
-.filter-title{
+.filter-title {
   color: #4d4d4d;
   font-size: 16px;
   font-weight: 500;
 }
-mat-list-option{
+
+mat-list-option {
   height: 30px !important;
   direction: rtl;
 }
+
+::ng-deep.mat-mdc-select-panel {
+  min-width: calc(100% + 20px) !important;
+
+  mat-option {
+    //width: 100px !important;
+    //margin: 0 !important;
+    .mat-mdc-option-text {
+      width: 19px !important;
+    }
+  }
+}
+
 ::ng-deep .side-filters {
-  .mat-radio-label-content{
+  .mdc-form-field {
     width: 100%;
-    span:nth-child(3){
+  }
+
+  .mat-mdc-radio-label-content, .mdc-label {
+    width: 100%;
+
+    span:nth-child(3) {
       float: right;
       color: #999;
       font-size: 14px;
     }
   }
-  .mat-list-item-content {
+
+  .mat-mdc-list-item-content {
     max-height: 20px;
     /* padding: 0; */
     text-overflow: ellipsis;
     width: 100%;
   }
-  .mat-list-text {
+
+  .mat-mdc-list-text, .mat-mdc-radio-label-content, .mdc-label {
     text-overflow: ellipsis;
     overflow: hidden;
     display: block !important;
@@ -32,26 +53,89 @@ mat-list-option{
     text-align: left;
     direction: ltr;
     padding-left: 12px !important;
+  }
+
+  .mat-mdc-list-text {
     width: 40px;
   }
-  .mat-list-item-content{
+
+  .mat-mdc-list-item-content {
     padding: 0 !important;
   }
 }
-mat-selection-list{
+
+mat-selection-list {
   max-height: 220px;
   //overflow-y: auto;
 }
-.scrollable{
+
+.scrollable {
   overflow-y: auto;
 }
-.fa{
+
+.fa {
   color: #b3b3b3;
   font-size: 12px;
   transition: all 0.4s ease 0s;
 }
-.collapsed[aria-expanded = false]{
-  .fa{
+
+.collapsed[aria-expanded = false] {
+  .fa {
     transform: rotate(180deg);
+  }
+}
+
+.filter-select {
+  width: 55% !important;
+  //margin: 0 25px;
+  float: right;
+  height: 40px !important;
+}
+
+.period-filter ::ng-deep.mat-mdc-radio-container {
+  //display: none;
+}
+
+.period-filter .custom-date-radio::ng-deep.mat-mdc-radio-label-content, .custom-date-radio::ng-deep.mdc-label {
+  display: flex !important;
+  justify-content: space-between;
+}
+
+.period-filter ::ng-deep.mat-mdc-select-value-text {
+  font-size: 14px;
+  color: #333333;
+  font-weight: 400 !important;
+}
+
+.custom-date {
+  float: right;
+  padding: 0;
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  margin: 0;
+}
+
+.fa-calendar {
+  margin: 0 4px;
+}
+
+.custom {
+  min-width: 60% !important;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+}
+
+.mat-mdc-list-item {
+  padding: 0;
+
+  ::ng-deep.mdc-list-item__end {
+    margin: 0 !important;
+  }
+
+  ::ng-deep.mdc-list-item__content {
+    display: flex;
+    justify-content: end;
   }
 }

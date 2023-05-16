@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core'
-import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core'
 import {GetLanguage} from "../../../shared/functions/shared-functions";
 import {secureStorage} from "../../../shared/functions/secure-storage";
 
@@ -10,43 +9,26 @@ import {secureStorage} from "../../../shared/functions/secure-storage";
   styleUrls: ['./language-drop-down.component.scss']
 })
 export class LanguageDropDownComponent implements OnInit {
+  selectedLanguage;
+  languageList = [];
 
-  selectImage = '';
-
-  langArray: any [] = [
-    {
-      img: 'assets/img/en.png',
-      name: 'English',
-      value	: 'en'
-    },
-    {
-      img: 'assets/img/ar.png',
-      name: 'Arabic',
-      value: 'ar'
-    },
-
-  ];
-
-  constructor(public translate: TranslateService, private router: Router) { }
-
-  ngOnInit() {
-    this.selectImage = this.langArray.find(lang => lang.value === GetLanguage()).img;
+  constructor(public translate: TranslateService) {
   }
 
-  // setLang method is used to set the language into template.
-  setLang(lang) {
-    for (const data of this.langArray) {
-      if (data.value == lang) {
-        this.selectImage = data.img;
-        break;
-      }
-    }
+  ngOnInit() {
+    this.languageList = [
+      {code: 'en', label: 'English', img: '../../../../assets/img/en.png'},
+      {code: 'ar', label: 'Arabic', img: '../../../../assets/img/ar.png'},
+    ];
+    this.selectedLanguage = this.languageList.find(x => x.code === GetLanguage()) || this.languageList[0];
+  }
+
+  changeSiteLanguage(localeCode: string): void {
     const current = GetLanguage();
-    if (current !== lang) {
-      secureStorage.setItem('lang', lang);
-      // ReloadCurrentComponent(this.router);
+    this.selectedLanguage = this.languageList.find(x => x.code === localeCode);
+    if (current !== localeCode) {
+      secureStorage.setItem('lang', localeCode);
       window.location.reload();
-      this.translate.use(lang);
     }
   }
 }

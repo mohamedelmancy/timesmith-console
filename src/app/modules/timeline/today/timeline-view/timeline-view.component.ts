@@ -13,8 +13,7 @@ import {CreateTimelineComponent} from "../../../../modals/create-timeline/create
 import {dateTimeFormat, isMobile, today} from "../../../../shared/variables/variables";
 import {FullCalendarComponent} from "@fullcalendar/angular";
 import {first, Subject, Subscription} from "rxjs";
-import {take} from "rxjs/operators";
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToastrService} from "ngx-toastr";
 import dayGridPlugin from "@fullcalendar/daygrid";
 

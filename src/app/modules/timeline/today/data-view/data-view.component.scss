@@ -3,29 +3,29 @@
 }
 ::ng-deep{
   .view-event {
-    .mat-form-field-appearance-outline .mat-form-field-infix input{
+    .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-infix input{
       //text-align: center;
       padding: 2px;
       font-size: 14px;
       height: 28px;
     }
-    .mat-form-field-infix{
+    .mat-mdc-form-field-infix{
       padding: 3px !important;
       border-top: 12px solid transparent;
       border-bottom: 0px solid transparent;
     }
-    .mat-button-wrapper{
+    .mat-mdc-button-wrapper{
       svg{
         height: 26px !important;
       }
-      .mat-datepicker-toggle-default-icon{
+      .mat-mdc-datepicker-toggle-default-icon{
         width: 1em;
       }
     }
-    .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix{
+    .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-prefix, .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-suffix{
       top: -4px !important;
     }
-    .mat-form-field-label{
+    .mat-mdc-form-field-label{
       font-size: 14px;
     }
   }

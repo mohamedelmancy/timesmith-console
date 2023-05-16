@@ -3,7 +3,8 @@
     <div class="col-sm-6 card d-flex flex-column p-3">
       <div class="col-sm-12">
         <form [formGroup]="form" class="col-sm-12 justify-content-start">
-          <div class="d-flex justify-content-center align-items-center mb-3"><h2>{{data ? ('Update shift' | translate) : ('Create new shift' | translate)}}</h2></div>
+          <div class="d-flex justify-content-center align-items-center mb-3">
+            <h2>{{data ? ('Update shift' | translate) : ('Create new shift' | translate)}}</h2></div>
           <div class="d-flex row">
             <div class="col-sm-12 col-md-6 ">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
@@ -32,7 +33,7 @@
                        [disableClick]="!data"
                        [disabled]="!data"
                        [format]=24
-                       readonly />
+                       readonly/>
                 <mat-icon matSuffix [ngClass]="{'low-opacity': !data}"
                           (click)="data ? pickerA.open() : null">
                   watch_later
@@ -51,7 +52,7 @@
                        [disableClick]="!data"
                        [disabled]="!data"
                        [format]=24
-                       readonly />
+                       readonly/>
                 <mat-icon matSuffix [ngClass]="{'low-opacity': !data}"
                           (click)="data ? pickerB.open() : null">
                   watch_later
@@ -61,14 +62,21 @@
             </div>
             <div class="col-sm-12 col-md-6 ">
               <mat-label>{{'Weekends' | translate}}</mat-label>
-              <ng-multiselect-dropdown
-                [placeholder]="placeholderText"
-                [settings]="dropdownSettings"
-                [data]="weekends"
-                formControlName="weekends"
-                [disabled]="disabled"
-              >
-              </ng-multiselect-dropdown>
+              <!--              <ng-multiselect-dropdown-->
+              <!--                [placeholder]="placeholderText"-->
+              <!--                [settings]="dropdownSettings"-->
+              <!--                [data]="weekends"-->
+              <!--                formControlName="weekends"-->
+              <!--                [disabled]="disabled"-->
+              <!--              >-->
+              <!--              </ng-multiselect-dropdown>-->
+              <angular2-multiselect [data]="weekends" [(ngModel)]="selectedItems"
+                                    [settings]="dropdownSettings"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)" formControlName="weekends">
+              </angular2-multiselect>
               <small
                 *ngIf="form.controls['weekends'].hasError('required') && form.controls['weekends'].touched"
                 class="warn-text gene-block">
@@ -81,9 +89,11 @@
               </small>
             </div>
             <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
-              <button  mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/shifts']">{{'Back' | translate}}</button>
-              <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
-                {{data ? ('Update' | translate): ('Create' | translate)}}
+              <button mat-button class="mx-2 warn-bg"
+                      [routerLink]="['/configurations/shifts']">{{'Back' | translate}}</button>
+              <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
+                      class="primary-bg" cdkFocusInitial>
+                {{data ? ('Update' | translate) : ('Create' | translate)}}
               </button>
             </div>
           </div>

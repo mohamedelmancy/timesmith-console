@@ -86,13 +86,13 @@ full-calendar{
   .timeline-view{
     width: 100%;
   }
-  ::ng-deep .timeline .mat-form-field-appearance-outline {
+  ::ng-deep .timeline .mat-mdc-form-field-appearance-outline {
     margin-bottom: 0 !important;
-    .mat-form-field-wrapper {
+    .mat-mdc-form-field-wrapper {
       padding-bottom: 0 !important;
     }
   }
 }
-.mat-drawer-container{
+.mat-mdc-drawer-container{
   background-color: #ffffff;
 }

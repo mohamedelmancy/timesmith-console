@@ -12,22 +12,26 @@
           <form #form="ngForm" (ngSubmit)="login(form.value)">
             <div fxLayout="column" fxLayoutAlign="start stretch">
               <mat-form-field class="full-wid mrgn-b-md">
-                <input matInput placeholder="{{'Mobile/Email' | translate}}" type="text" name="mobile" required [(ngModel)]="mobile">
+                <input matInput placeholder="{{'Mobile/Email' | translate}}" type="text" name="mobile" required
+                       [(ngModel)]="mobile">
               </mat-form-field>
               <mat-form-field class="full-wid mrgn-b-md ">
-                <input matInput placeholder="{{'Password' | translate}}" type="password" name="password" required [(ngModel)]="password">
+                <input matInput placeholder="{{'Password' | translate}}" type="password" name="password" required
+                       [(ngModel)]="password">
               </mat-form-field>
               <div fxLayout="row" fxLayoutAlign="start center">
                 <div fxLayout="column">
-                  <mat-checkbox class="remember-me" color="primary" name="remember" [checked]="remember" [(ngModel)]="remember">{{'Remember Me' | translate}}</mat-checkbox>
+                  <mat-checkbox class="remember-me" color="primary" name="remember" [checked]="remember"
+                                [(ngModel)]="remember">{{'Remember Me' | translate}}</mat-checkbox>
                 </div>
                 <span fxFlex></span>
               </div>
               <div class="d-flex justify-content-center align-items-center mt-3">
-                <button class="primary-bg btn btn-primary btn-sm primary-bg w-50" mat-raised-button [disabled]="!form.valid">{{'Sign in' | translate}}</button>
+                <button class="primary-bg btn btn-primary btn-sm primary-bg w-50" mat-raised-button
+                        [disabled]="!form.valid">{{'Sign in' | translate}}</button>
               </div>
-              <div  class="d-flex justify-content-between align-items-center mt-2">
-                <a [routerLink]="['/auth/register']">{{'Dont have an account?' | translate}}</a>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <!--                <a [routerLink]="['/auth/register']">{{'Dont have an account?' | translate}}</a>-->
                 <a [routerLink]="['/auth/forgot-password']">{{'Forgot Password?' | translate}}</a>
               </div>
             </div>

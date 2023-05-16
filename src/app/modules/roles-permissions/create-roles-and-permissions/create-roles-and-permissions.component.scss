@@ -10,7 +10,7 @@ mat-list-option{
   text-overflow: ellipsis;
 }
 ::ng-deep .roles-permissions {
-  .mat-radio-label-content{
+  .mat-mdc-radio-label-content{
     width: 100%;
     span:nth-child(3){
       float: right;
@@ -18,13 +18,13 @@ mat-list-option{
       font-size: 14px;
     }
   }
-  .mat-list-item-content {
+  .mat-mdc-list-item-content {
     max-height: 20px;
     /* padding: 0; */
     text-overflow: ellipsis;
     width: 100%;
   }
-  .mat-list-text {
+  .mat-mdc-list-text {
     text-overflow: ellipsis;
     overflow: hidden;
     display: block !important;
@@ -36,7 +36,7 @@ mat-list-option{
     padding-left: 12px !important;
     //width: 40px;
   }
-  .mat-list-item-content{
+  .mat-mdc-list-item-content{
     padding: 0 !important;
   }
 }

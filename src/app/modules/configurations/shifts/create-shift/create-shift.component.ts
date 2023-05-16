@@ -15,6 +15,7 @@ export class CreateShiftComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService, private translateService: TranslateService) { }
   data;
+  selectedItems = [];
   dropdownSettings = {};
   placeholderText: string;
   selectAllText: string = this.translateService.instant('Select all');
@@ -42,27 +43,27 @@ export class CreateShiftComponent implements OnInit {
 
   weekends = [
     {
-      name: 'Saturday',
+      itemName: 'Saturday',
       id: 1
     },
     {
-      name: 'Sunday',
+      itemName: 'Sunday',
       id: 2
     },
     {
-      name: 'Monday',
+      itemName: 'Monday',
       id: 3
     },{
-      name: 'Tuesday',
+      itemName: 'Tuesday',
       id: 4
     },{
-      name: 'Wednesday',
+      itemName: 'Wednesday',
       id: 5
     },{
-      name: 'Thursday',
+      itemName: 'Thursday',
       id: 6
     },{
-      name: 'Friday',
+      itemName: 'Friday',
       id: 7
     },
   ]
@@ -107,6 +108,21 @@ export class CreateShiftComponent implements OnInit {
       'itemsShowLimit': 'All',
       'allowSearchFilter': true
     };
+  }
+
+  onItemSelect(item:any){
+    console.log(item);
+    console.log(this.selectedItems);
+  }
+  OnItemDeSelect(item:any){
+    console.log(item);
+    console.log(this.selectedItems);
+  }
+  onSelectAll(items: any){
+    console.log(items);
+  }
+  onDeSelectAll(items: any){
+    console.log(items);
   }
 
   save(value) {

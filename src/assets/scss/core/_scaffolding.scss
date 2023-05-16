@@ -48,28 +48,28 @@ body {
     }
 }
 
-body .mat-card {
+body .mat-mdc-card {
     font-family: $mat-font-family;
     background-color: $mat-card-bg-color;
 }
 
-body .mat-list .mat-list-item .mat-list-item-content,
-.mat-nav-list .mat-list-item .mat-list-item-content,
-.mat-toolbar,
-.mat-button,
-.mat-fab,
-.mat-icon-button,
-.mat-mini-fab,
-.mat-raised-button,
-.mat-checkbox,
-.mat-input-element,
-.mat-input-container,
-.mat-tab-labels,
-.mat-tab-label,
-.mat-toolbar,
-.mat-menu-item,
-.mat-simple-snackbar,
-.mat-select-content {
+body .mat-mdc-list .mat-mdc-list-item .mat-mdc-list-item-content,
+.mat-mdc-nav-list .mat-mdc-list-item .mat-mdc-list-item-content,
+.mat-mdc-toolbar,
+.mat-mdc-button,
+.mat-mdc-fab,
+.mat-mdc-icon-button,
+.mat-mdc-mini-fab,
+.mat-mdc-raised-button,
+.mat-mdc-checkbox,
+.mat-mdc-input-element,
+.mat-mdc-input-container,
+.mat-mdc-tab-labels,
+.mat-mdc-tab-label,
+.mat-mdc-toolbar,
+.mat-mdc-menu-item,
+.mat-mdc-simple-snackbar,
+.mat-mdc-select-content {
     font-family: $mat-font-family !important;
 }
 
@@ -102,7 +102,7 @@ bdo[dir=ltr] {
     unicode-bidi: bidi-override;
 }
 
-.mat-card.settings-panel {
+.mat-mdc-card.settings-panel {
     position: fixed;
     bottom: 6px;
     right: 6px;
@@ -110,7 +110,7 @@ bdo[dir=ltr] {
     z-index: 9;
 }
 
-body .mat-card {
+body .mat-mdc-card {
     color: $font-color;
 }
 

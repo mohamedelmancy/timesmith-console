@@ -85,15 +85,15 @@
 .text-inverse{
     color: $light-color !important;
 }
-.mat-white {
+.mat-mdc-white {
     background: $light-color;
 }
-@include text-emphasis-variant('.mat-text-muted', mat-color($foreground, secondary-text));
-@include text-emphasis-variant('.mat-text-default', mat-color($foreground, base));
-@include text-emphasis-variant('.mat-text-primary', mat-color($primary));
-@include text-emphasis-variant('.mat-text-warn', mat-color($warn));
-@include text-emphasis-variant('.mat-text-accent', mat-color($accent));
+@include text-emphasis-variant('.mat-mdc-text-muted', mat-color($foreground, secondary-text));
+@include text-emphasis-variant('.mat-mdc-text-default', mat-color($foreground, base));
+@include text-emphasis-variant('.mat-mdc-text-primary', mat-color($primary));
+@include text-emphasis-variant('.mat-mdc-text-warn', mat-color($warn));
+@include text-emphasis-variant('.mat-mdc-text-accent', mat-color($accent));
 .app-dark {
-    @include text-emphasis-variant('.mat-text-muted', mat-color($dark-foreground, secondary-text));
-    @include text-emphasis-variant('.mat-text-default', mat-color($dark-foreground, base));
+    @include text-emphasis-variant('.mat-mdc-text-muted', mat-color($dark-foreground, secondary-text));
+    @include text-emphasis-variant('.mat-mdc-text-default', mat-color($dark-foreground, base));
 }

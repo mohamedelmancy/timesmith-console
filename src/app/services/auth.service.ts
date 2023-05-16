@@ -2,16 +2,15 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Subject, throwError} from 'rxjs';
+import {BehaviorSubject, Subject, throwError} from 'rxjs';
 import {secureStorage} from "../shared/functions/secure-storage";
-import {GetLanguage} from "../shared/functions/shared-functions";
+import {GetCurrentUser, GetLanguage} from "../shared/functions/shared-functions";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  loggedIn: Subject<boolean> = new Subject();
+  loggedIn: BehaviorSubject<any> = new BehaviorSubject(true);
   userData: any;
   isLoggedIn = false;
 
@@ -19,15 +18,15 @@ export class AuthService {
   }
 
   getLocalStorageUser() {
-    this.userData = secureStorage.getItem('userProfile');
+    this.userData = GetCurrentUser();
     if (this.userData) {
       this.isLoggedIn = true;
-      // this.loggedIn.next(true);
-      return true;
+      this.loggedIn.next(true);
+      return this.userData;
     } else {
       this.isLoggedIn = false;
-      // this.loggedIn.next(false)
-      return false;
+      this.loggedIn.next(false)
+      return null;
     }
   }
 
@@ -45,10 +44,8 @@ export class AuthService {
   }
 
   setLocalUserProfile(value) {
-    secureStorage.setItem('userProfile', value)
+    secureStorage.setItem('userProfile', value);
     this.getLocalStorageUser();
-    this.isLoggedIn = true;
-    this.loggedIn.next(true);
   }
 
   setToken(token) {

@@ -1,4 +1,4 @@
-th.mat-sort-header-sorted {
+th.mat-mdc-sort-header-sorted {
   color: black;
 }
 
@@ -6,7 +6,7 @@ table {
   width: 100%;
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   font-size: 14px;
   width: 100%;
 }
@@ -15,18 +15,18 @@ td {
   text-align: center;
 }
 
-.mat-sort-header-container {
+.mat-mdc-sort-header-container {
   justify-content: center;
 }
 
-th.mat-header-cell .mat-sort-header-container .mat-sort-header-content {
+th.mat-mdc-header-cell .mat-mdc-sort-header-container .mat-mdc-sort-header-content {
   text-align: start !important;
   display: flex !important;;
   align-items: flex-start !important;;
   flex-direction: column !important;;
 }
 
-th.mat-header-cell .mat-sort-header-container .mat-sort-header-arrow {
+th.mat-mdc-header-cell .mat-mdc-sort-header-container .mat-mdc-sort-header-arrow {
   height: 12px;
   width: 12px;
   min-width: 12px;
@@ -38,29 +38,31 @@ th.mat-header-cell .mat-sort-header-container .mat-sort-header-arrow {
   right: var(--arrow-right);
 }
 
-th.mat-header-cell input {
+th.mat-mdc-header-cell input {
   border: 1px solid;
   margin-top: 1px;
   border-radius: 3px;
   width: 75%;
   max-width: 100px;
-  height: 15px;
+  height: 20px;
+  margin-bottom: 5px;
 }
 
-.mat-success {
+.mat-mdc-success {
   background-color: #28a745;
   color: #fff;
 }
 
-.mat-form-field-wrapper {
+.mat-mdc-form-field-wrapper {
   padding: 1.34375em .1em;
 }
 
-th.mat-header-cell {
+th.mat-mdc-header-cell {
   text-align: center !important;
+  padding: 0 !important;
 }
 
-.mat-menu-panel {
+.mat-mdc-menu-panel {
   min-height: auto;
 }
 
@@ -92,4 +94,8 @@ th.mat-header-cell {
 .status-text {
   padding: 3px 10px;
   border-radius: 11px;
+}
+
+.table-with-filters {
+  box-shadow: none !important;
 }

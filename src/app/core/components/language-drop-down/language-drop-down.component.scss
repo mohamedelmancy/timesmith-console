@@ -1,9 +1,16 @@
-mat-card{
+mat-card {
   width: 70px;
-  a{
+
+  a {
     display: flex !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+}
+
+.language-dropdown-wrap {
+  button {
+    padding: 0;
   }
 }

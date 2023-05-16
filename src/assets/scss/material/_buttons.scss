@@ -24,7 +24,7 @@ $mat-fab-padding: 16px !default;
 }
 
 @mixin mat-fab-position($spot, $top: auto, $right: auto, $bottom: auto, $left: auto) {
-  [mat-fab].mat-fab-#{$spot} {
+  [mat-fab].mat-mdc-fab-#{$spot} {
     top: $top;
     right: $right;
     bottom: $bottom;

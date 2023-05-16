@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import moment from "moment";
-import {dateTimeFormat} from "../../../shared/variables/variables";
-import {ActivatedRoute} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {DeleteComponent} from "../../../modals/delete/delete.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {CoreService} from "../../../services/core.service";
+import {GlobalService} from "../../../services/global.service";
+import {ToastrService} from "ngx-toastr";
+import {HandleResponseError} from "../../../shared/functions/shared-functions";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 
+@UntilDestroy()
 @Component({
   selector: 'app-sites',
   templateUrl: './sites.component.html',
@@ -13,8 +19,16 @@ export class SitesComponent implements OnInit {
     labels: ['Site name', 'Latitude', 'Longitude', 'Tolerance', 'Individuals', 'Actions'],
     values: ['name', 'latitude', 'longitude', 'tolerance', 'individuals', 'actions'],
   };
-  constructor(private activatedRoute: ActivatedRoute) { }
-  data = [
+
+  constructor(private dialog: MatDialog,
+              private coreService: CoreService,
+              private globalService: GlobalService,
+              private router: Router,
+              private toastr: ToastrService,
+              private activatedRoute: ActivatedRoute) {
+  }
+
+  tableData = [
     {
       name: 'Abbas el Akkad',
       latitude: 29.98833754091559,
@@ -44,19 +58,69 @@ export class SitesComponent implements OnInit {
       tolerance: 12,
       individuals: 5
     },
-  ]
+  ];
+  paginationEvent = {
+    pageIndex: 1,
+    pageSize: 20,
+    previousPageIndex: 0
+  };
+  queryParams;
+  total;
+  next_page;
+
   ngOnInit(): void {
     // this.data = this.activatedRoute.snapshot.data['sites'];
-    this.data.forEach(item => {
+    this.tableData.forEach(item => {
 
     })
   }
 
-  deleteRow(event) {
-    console.log('e', event)
-    const i = this.data.findIndex(x => x?.id === event.id);
-    console.log('i', i)
-    this.data = this.data.filter(x =>  x.id !== event?.id);
+  getServerData(event?) {
+    let pagination = '';
+    let searchKeyword = '';
+    if (event?.pageIndex) {
+      this.paginationEvent = {...event}
+    } else if (event) {
+      searchKeyword = `&${event.param}=${event.searchValue}`;
+    }
+    pagination = `limit=${this.paginationEvent.pageSize}&page=${this.paginationEvent.pageIndex}`;
+    this.coreService.getRequest(`admin/customers?${pagination}${searchKeyword}${this.queryParams ? this.queryParams : ''}`)
+      .pipe(untilDestroyed(this)).subscribe(
+      res => {
+        this.tableData = [...res?.data];
+        this.handleData();
+      }, error => {
+        this.toastr.error(HandleResponseError(error));
+      }
+    )
   }
 
+  handleData() {
+    this.tableData?.forEach((item: any) => {
+      // item.main_category = item.main_categories?.name;
+    });
+  }
+
+  openRow(row?: any) {
+    if (row?.id) {
+      this.router.navigate([`/customers/${row.id}`], {})
+    } else {
+      this.router.navigate(['/customers/new'], {})
+    }
+  }
+
+  delete(rows) {
+    let dialogRef: MatDialogRef<any>;
+    dialogRef = this.dialog.open(DeleteComponent, {
+      data: {rows: rows || '', api: 'admin/customers'},
+      width: '600px'
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      const ids = res?.deleted?.map(item => item.id);
+      this.tableData = this.tableData.filter(x => !ids?.includes(x.id));
+    })
+  }
+
+  ngOnDestroy() {
+  }
 }

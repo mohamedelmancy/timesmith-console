@@ -1,4 +1,4 @@
-.fa, .mat-chat {
+.fa, .mat-mdc-chat {
   font-size: 120px;
   cursor: pointer;
   width: 100%;
@@ -9,7 +9,7 @@
   &.fa-phone {
     color: #348ceb;
   }
-  &.mat-chat {
+  &.mat-mdc-chat {
     color: #1e9603;
   }
   &.fa-inbox {

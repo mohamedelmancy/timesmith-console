@@ -3,11 +3,11 @@
     font-size: 12px;
   }
   table {
-    .mat-cell, .mat-header-cell span{
+    .mat-mdc-cell, .mat-mdc-header-cell span{
       font-size: 11px !important;
     }
 
-    th.mat-header-cell input{
+    th.mat-mdc-header-cell input{
       width: 50% !important;
       height: 17px !important;
       max-width: 75px;

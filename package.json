@@ -8,8 +8,7 @@
     "test": "ng test",
     "start": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve",
     "build-prod": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --configuration production --output-hashing=all --build-optimizer",
-    "build-stag": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --configuration staging --output-hashing=all --build-optimizer",
-    "postinstall": "ngcc"
+    "build-stag": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --configuration staging --output-hashing=all --build-optimizer"
   },
   "private": true,
   "dependencies": {
@@ -47,6 +46,7 @@
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "@popperjs/core": "^2.11.7",
+    "angular2-multiselect-dropdown": "^5.0.4",
     "bootstrap": "^5.2.3",
     "card": "^2.5.4",
     "classlist.js": "^1.1.20150312",
@@ -82,7 +82,7 @@
     "@angular-devkit/build-angular": "~16.0.1",
     "@angular/cli": "~16.0.1",
     "@angular/compiler-cli": "~16.0.1",
-    "@types/googlemaps": "^3.43.3",
+    "@types/google.maps": "^3.53.1",
     "@types/jasmine": "~4.3.1",
     "@types/leaflet": "^1.9.3",
     "@types/node": "^20.1.4",

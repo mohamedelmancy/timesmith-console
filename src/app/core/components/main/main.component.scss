@@ -5,31 +5,37 @@
   align-items: center;
   justify-content: center;
 }
-.cart-item{
-  .content-wrap{
+
+.cart-item {
+  .content-wrap {
     font-size: 0.85rem;
   }
 }
-.hr-menu-wrap{
+
+.hr-menu-wrap {
   padding: 0 0 0 0.5rem !important;
 }
-.menu-divider{
+
+.menu-divider {
   height: 50%;
   width: 1px;
   background: #d7d7d7;
-  margin: 0 13px 0 5px;
+  margin: 0 13px 0 15px;
 }
-.menu-dot{
+
+.menu-dot {
   height: 0.25rem;
   width: 0.25rem;
   background: #a2a0a0;
   margin: 8px -3px 0 11px;
   border-radius: 9999px;
 }
-.menu-home-icon{
+
+.menu-home-icon {
   cursor: pointer;
   color: var(--primary-color);
 }
-.mobile-breadcrumb{
+
+.mobile-breadcrumb {
   padding: 15px 0 15px 0px;
 }

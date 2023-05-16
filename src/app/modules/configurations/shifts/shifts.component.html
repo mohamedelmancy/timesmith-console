@@ -1,7 +1,7 @@
 <app-data-table-container
   (deleteEvent)="deleteRow($event)"
   [dataTableName]="'shifts'"
-  [displayedColumns]="displayedColumns"
+  [columns]="displayedColumns"
   [data]="data"
   [createLink]="'/configurations/shifts/new'"
   [viewLink]="'/configurations/shifts'"
