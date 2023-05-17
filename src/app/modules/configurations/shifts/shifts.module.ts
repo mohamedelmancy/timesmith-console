@@ -11,7 +11,6 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {NgxMatTimepickerModule} from "ngx-mat-timepicker";
 import {MatIconModule} from "@angular/material/icon";
-import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
 
 
 @NgModule({
@@ -29,7 +28,6 @@ import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
         MatButtonModule,
         NgxMatTimepickerModule,
         MatIconModule,
-        AngularMultiSelectModule
     ],
   schemas: [NO_ERRORS_SCHEMA],
 })

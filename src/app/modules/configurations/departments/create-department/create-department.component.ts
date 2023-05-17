@@ -20,13 +20,6 @@ export class CreateDepartmentComponent extends AutoComplete implements OnInit {
     super()
   }
   data;
-  dropdownSettings = {};
-  placeholderText: string;
-  selectAllText: string = this.translateService.instant('Select all');
-  unSelectAllText: string = this.translateService.instant('Unselect all');
-  searchText: string = this.translateService.instant('type name...');
-  disabled = false;
-  noDataAvailText: string = this.translateService.instant('No data available');
   managers  = [
     {
       name: 'Samy',
@@ -57,7 +50,8 @@ export class CreateDepartmentComponent extends AutoComplete implements OnInit {
   // ]
   ngOnInit(): void {
     this.form = this.fb.group({
-        name: ['', Validators.compose([Validators.required])],
+        name_en: ['', Validators.compose([Validators.required])],
+        name_ar: ['', Validators.compose([Validators.required])],
         // employees: ['', Validators.compose([Validators.required])],
         manager: [null, Validators.compose([])],
       },
@@ -66,7 +60,6 @@ export class CreateDepartmentComponent extends AutoComplete implements OnInit {
     this.form.valueChanges.subscribe(changes => {
       console.log('changes', changes);
     });
-    this.setNewAutoSetting();
     this.handlerAutocomplete('manager')
     this.data = this.activatedRoute.snapshot.data['department'];
     this.data = secureStorage.getItem('row');
@@ -78,21 +71,6 @@ export class CreateDepartmentComponent extends AutoComplete implements OnInit {
     this.form.controls['name'].setValue(this.data?.name);
     // this.form.controls['employees'].setValue(this.data?.employees);
     this.form.controls['manager'].setValue(this.managers.find(x => x.id === this.data.manager?.id));
-  }
-  setNewAutoSetting() {
-    this.dropdownSettings = {
-      'singleSelection': false,
-      'defaultOpen': false,
-      'idField': 'id',
-      'textField': 'name',
-      'selectAllText': this.selectAllText,
-      'unSelectAllText': this.unSelectAllText,
-      'searchPlaceholderText': this.searchText,
-      'noDataAvailablePlaceholderText': this.noDataAvailText,
-      'enableCheckAll': true,
-      'itemsShowLimit': 'All',
-      'allowSearchFilter': true
-    };
   }
 
   handlerAutocomplete(type) {

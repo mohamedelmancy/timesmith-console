@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import GeoSearchControl from 'leaflet-geosearch/lib/SearchControl';
 import OpenStreetMapProvider from 'leaflet-geosearch/lib/providers/openStreetMapProvider';
+
 declare var require: any;
 var L = require('leaflet')
 // import {GeoSearchControl, OpenStreetMapProvider} from 'leaflet-geosearch';
@@ -13,6 +14,7 @@ import {TranslateService} from "@ngx-translate/core";
 
 
 const provider = new OpenStreetMapProvider();
+
 @Component({
   selector: 'app-create-site',
   templateUrl: './create-site.component.html',
@@ -44,7 +46,8 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-        name: ['', Validators.compose([Validators.required])],
+        name_en: ['', Validators.compose([Validators.required])],
+        name_ar: ['', Validators.compose([Validators.required])],
         latitude: ['', Validators.compose([Validators.required])],
         longitude: [null, Validators.compose([Validators.required])],
         tolerance: [null, Validators.compose([Validators.required])],
@@ -146,7 +149,8 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
   }
 
   fillForm() {
-    this.form.controls['name'].setValue(this.data?.name);
+    this.form.controls['name_ar'].setValue(this.data?.name_ar);
+    this.form.controls['name_en'].setValue(this.data?.name_en);
     this.form.controls['latitude'].setValue(this.data?.latitude);
     this.form.controls['longitude'].setValue(this.data?.longitude);
     this.form.controls['tolerance'].setValue(this.data?.tolerance);

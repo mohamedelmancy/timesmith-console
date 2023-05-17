@@ -16,8 +16,8 @@ import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 })
 export class SitesComponent implements OnInit {
   displayedColumns = {
-    labels: ['Site name', 'Latitude', 'Longitude', 'Tolerance', 'Individuals', 'Actions'],
-    values: ['name', 'latitude', 'longitude', 'tolerance', 'individuals', 'actions'],
+    labels: ['Site name', 'Tolerance', 'Individuals', 'Actions'],
+    values: ['name', 'tolerance', 'individuals', 'actions'],
   };
 
   constructor(private dialog: MatDialog,

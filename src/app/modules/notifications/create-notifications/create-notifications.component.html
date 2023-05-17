@@ -83,14 +83,17 @@
 
               <div class="col-sm-12 ">
                 <mat-label>{{'Recipients' | translate}}</mat-label>
-                <ng-multiselect-dropdown
-                  [placeholder]="placeholderText"
-                  [settings]="dropdownSettings"
-                  [data]="recipients"
-                  formControlName="recipients"
-                  [disabled]="disabled"
-                >
-                </ng-multiselect-dropdown>
+                <!--                <ng-multiselect-dropdown-->
+                <!--                  [placeholder]="placeholderText"-->
+                <!--                  [settings]="dropdownSettings"-->
+                <!--                  [data]="recipients"-->
+                <!--                  formControlName="recipients"-->
+                <!--                  [disabled]="disabled"-->
+                <!--                >-->
+                <!--                </ng-multiselect-dropdown>-->
+                <select name="cars" id="weekends" multiple multiselect-search="true" multiselect-select-all="true" formControlName="recipients">
+                  <option value="{{option?.id}}" *ngFor="let option of recipients">{{option?.name}}</option>
+                </select>
                 <small
                   *ngIf="form.controls['recipients'].hasError('required') && form.controls['recipients'].touched"
                   class="warn-text gene-block">

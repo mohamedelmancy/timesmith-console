@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CoreService} from "../../../services/core.service";
 import {TranslateService} from "@ngx-translate/core";
+import {MultiselectDropdown} from "../../../../assets/js/multiselect-dropdown";
+
 @Component({
   selector: 'app-create-notifications',
   templateUrl: './create-notifications.component.html',
@@ -10,16 +12,18 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class CreateNotificationsComponent implements OnInit {
   form: FormGroup;
-  constructor(private fb: FormBuilder, private translateService: TranslateService, private coreService: CoreService) {
+
+  constructor(private fb: FormBuilder,
+              private translateService: TranslateService,
+              private coreService: CoreService) {
   }
-  dropdownSettings = {};
-  placeholderText: string = this.translateService.instant('Select');
-  selectAllText: string = this.translateService.instant('Select all');
-  unSelectAllText: string = this.translateService.instant('Unselect all');
-  searchText: string = this.translateService.instant('type name...');
-  disabled = false;
-  noDataAvailText: string = this.translateService.instant('No data available');
-  recipients = [];
+
+  recipients = [
+    {
+      name: 'Marketing',
+      id: 1
+    },
+  ];
   departments = [
     {
       name: 'Marketing',
@@ -57,7 +61,7 @@ export class CreateNotificationsComponent implements OnInit {
     {
       name: 'Ola',
       id: 3
-    },{
+    }, {
       name: 'Sama',
       id: 4
     },
@@ -72,7 +76,9 @@ export class CreateNotificationsComponent implements OnInit {
   ];
   imageSrc: any;
   imageFile;
+
   ngOnInit(): void {
+    MultiselectDropdown({});
     this.form = this.fb.group({
         title: ['', Validators.compose([Validators.required])],
         body: ['', Validators.compose([Validators.required])],
@@ -83,7 +89,6 @@ export class CreateNotificationsComponent implements OnInit {
       },
       {validators: []}
     );
-    this.setNewAutoSetting();
     this.form.valueChanges.subscribe(changes => {
       console.log('changes', changes);
     });
@@ -102,38 +107,21 @@ export class CreateNotificationsComponent implements OnInit {
     console.log('recipients', this.recipients);
   }
 
-  setNewAutoSetting() {
-    this.dropdownSettings = {
-      'singleSelection': false,
-      'defaultOpen': false,
-      'idField': 'id',
-      'textField': 'name',
-      'selectAllText': this.selectAllText,
-      'unSelectAllText': this.unSelectAllText,
-      'searchPlaceholderText': this.searchText,
-      'noDataAvailablePlaceholderText': this.noDataAvailText,
-      'enableCheckAll': true,
-      'itemsShowLimit': 'All',
-      'allowSearchFilter': true
-    };
-  }
-
-
   onSelectImage(event) {
     event.preventDefault();
     // this.removeAvatar();
     if (event.target.files[0]) {
       for (let type of this.acceptedAvatarFileTypes) {
-        if (event.target.files[0].type === type) {                        // check if file type is acceptable
-          if (event.target.files[0].size <= 2097152) {                    // check if file size is acceptable
-            this.imageFile = event.target.files[0];                      // update file variable
-            this.imageSrc = void 0;                                      // clear current previewed image src
-            const reader = new FileReader();                              // a built-in object to let the application read the contents of an avatarFile
-            const _this = this;                                 // add a reference to the component to be called inside the reader functions
-            reader.addEventListener('load', function () {   // update previewed image source on reader reload
+        if (event.target.files[0].type === type) {
+          if (event.target.files[0].size <= 2097152) {
+            this.imageFile = event.target.files[0];
+            this.imageSrc = void 0;
+            const reader = new FileReader();
+            const _this = this;
+            reader.addEventListener('load', function () {
               _this.imageSrc = reader.result;
             }, false);
-            reader.readAsDataURL(this.imageFile);                        // reload reader with a new file
+            reader.readAsDataURL(this.imageFile);
             // this.avatarRequirementsError = void 0;
             return;
           } else {
@@ -145,8 +133,8 @@ export class CreateNotificationsComponent implements OnInit {
   }
 
   removeImage() {
-    this.imageFile = void 0;                      // clear locally uploaded file
-    this.imageSrc= void 0;                       // clear previewed image source
+    this.imageFile = void 0;
+    this.imageSrc = void 0;
   }
 
   save(value) {

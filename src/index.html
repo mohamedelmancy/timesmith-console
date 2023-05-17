@@ -9,37 +9,38 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.76.1/dist/L.Control.Locate.min.css" />
-<!--  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css">-->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.76.1/dist/L.Control.Locate.min.css"/>
+  <!--  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css">-->
 
 
 </head>
 <body class="mat-typography">
-  <app-root></app-root>
-  <script type="text/javascript">
-    (function (window) {
-      // Polyfills DOM4 MouseEvent only on IE11
-      // Fixes ngx-charts line-chart hover
-      // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/MouseEvent#Polyfill
-      if (!!window.MSInputMethodContext && !!document.documentMode || document.documentMode === 10) {
-        function MouseEvent(eventType, params) {
-          params = params || { bubbles: false, cancelable: false };
-          var mouseEvent = document.createEvent('MouseEvent');
-          mouseEvent.initMouseEvent(eventType, params.bubbles, params.cancelable, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-          return mouseEvent;
-        }
-        MouseEvent.prototype = Event.prototype;
-        window.MouseEvent = MouseEvent;
+<app-root></app-root>
+<script type="text/javascript">
+  (function (window) {
+    // Polyfills DOM4 MouseEvent only on IE11
+    // Fixes ngx-charts line-chart hover
+    // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/MouseEvent#Polyfill
+    if (!!window.MSInputMethodContext && !!document.documentMode || document.documentMode === 10) {
+      function MouseEvent(eventType, params) {
+        params = params || {bubbles: false, cancelable: false};
+        var mouseEvent = document.createEvent('MouseEvent');
+        mouseEvent.initMouseEvent(eventType, params.bubbles, params.cancelable, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        return mouseEvent;
       }
-    })(window);
 
-    if (global === undefined) {
-      var global = window;
+      MouseEvent.prototype = Event.prototype;
+      window.MouseEvent = MouseEvent;
     }
-  </script>
-  <script src="https://cdn.polyfill.io/v2/polyfill.js?features=Intl.~locale.en"></script>
-  <script src="https://unpkg.com/card@2.3.0/dist/card.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.76.1/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+  })(window);
+
+  if (global === undefined) {
+    var global = window;
+  }
+</script>
+<script src="https://cdn.polyfill.io/v2/polyfill.js?features=Intl.~locale.en"></script>
+<script src="https://unpkg.com/card@2.3.0/dist/card.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script>
 </body>
 </html>

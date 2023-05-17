@@ -50,7 +50,8 @@
               "node_modules/wowjs/dist/wow.js",
               "node_modules/leaflet/dist/leaflet.js",
               "node_modules/leaflet-geosearch/dist/geosearch.js",
-              "node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.js"
+              "node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.js",
+              "src/assets/js/multiselect-dropdown.js"
             ]
           },
           "configurations": {

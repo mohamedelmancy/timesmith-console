@@ -8,21 +8,39 @@
           <div class="d-flex row">
             <div class="col-sm-12 col-md-6 ">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                <mat-label>{{'Shift name' | translate}}</mat-label>
-                <input matInput placeholder="{{'Name' | translate}}" type="text" name="name" formControlName="name">
+                <mat-label>{{'Shift english name' | translate}}</mat-label>
+                <input matInput placeholder="{{'Shift english name' | translate}}" type="text" name="name_en"
+                       formControlName="name_en">
               </mat-form-field>
               <small
-                *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched"
+                *ngIf="form.controls['name_en'].hasError('required') && form.controls['name_en'].touched"
                 class="warn-text gene-block">
-                {{'You must include name' | translate}}
+                {{'You must include english name' | translate}}
               </small>
               <small
-                *ngIf="form.controls['name'].errors && (form.controls['name'].hasError('wrong')) && form.controls['name'].touched"
+                *ngIf="form.controls['name_en'].errors && (form.controls['name_en'].hasError('wrong')) && form.controls['name_en'].touched"
                 class="warn-text gene-block">
-                {{'You must include a valid name' | translate}}
+                {{'You must include a valid english name' | translate}}
               </small>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Shift arabic name' | translate}}</mat-label>
+                <input matInput placeholder="{{'Shift arabic name' | translate}}" type="text" name="name_ar"
+                       formControlName="name_ar">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['name_ar'].hasError('required') && form.controls['name_ar'].touched"
+                class="warn-text gene-block">
+                {{'You must include arabic name' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['name_ar'].errors && (form.controls['name_ar'].hasError('wrong')) && form.controls['name_ar'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid arabic name' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>{{'From'| translate}}</mat-label>
                 <input matInput
@@ -41,7 +59,7 @@
               </mat-form-field>
               <ngx-mat-timepicker #pickerA></ngx-mat-timepicker>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="col-sm-12 col-md-6">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>{{'To' | translate}}</mat-label>
                 <input matInput
@@ -70,13 +88,10 @@
               <!--                [disabled]="disabled"-->
               <!--              >-->
               <!--              </ng-multiselect-dropdown>-->
-              <angular2-multiselect [data]="weekends" [(ngModel)]="selectedItems"
-                                    [settings]="dropdownSettings"
-                                    (onSelect)="onItemSelect($event)"
-                                    (onDeSelect)="OnItemDeSelect($event)"
-                                    (onSelectAll)="onSelectAll($event)"
-                                    (onDeSelectAll)="onDeSelectAll($event)" formControlName="weekends">
-              </angular2-multiselect>
+              <select name="cars" id="weekends" multiple multiselect-search="true" multiselect-select-all="true"
+                      formControlName="weekends">
+                <option value="{{option?.id}}" *ngFor="let option of weekends">{{option?.name}}</option>
+              </select>
               <small
                 *ngIf="form.controls['weekends'].hasError('required') && form.controls['weekends'].touched"
                 class="warn-text gene-block">

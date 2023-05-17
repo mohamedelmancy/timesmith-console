@@ -30,7 +30,8 @@
     ],
     "types": [
       "node",
-    ]
+    ],
+    "allowJs": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

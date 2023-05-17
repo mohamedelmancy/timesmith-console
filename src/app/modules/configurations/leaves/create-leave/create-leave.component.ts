@@ -33,7 +33,8 @@ export class CreateLeaveComponent extends AutoComplete implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-        name: ['', Validators.compose([Validators.required])],
+        name_en: ['', Validators.compose([Validators.required])],
+        name_ar: ['', Validators.compose([Validators.required])],
         type: ['', Validators.compose([Validators.required])],
         balance: ['', Validators.compose([])],
         start: [null, Validators.compose([Validators.required])],
@@ -78,7 +79,8 @@ export class CreateLeaveComponent extends AutoComplete implements OnInit {
   }
 
   fillForm() {
-    this.form.controls['name'].setValue(this.data?.name);
+    this.form.controls['name_ar'].setValue(this.data?.name_ar);
+    this.form.controls['name_en'].setValue(this.data?.name_en);
     this.form.controls['type'].setValue(this.types.find(x => x.name === this.data?.type));
     this.form.controls['balance'].setValue(this.data?.balance);
     this.form.controls['start'].setValue(new Date(this.data?.start));

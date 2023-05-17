@@ -8,47 +8,43 @@
 
           <h3>{{'You can choose one of the following default symbols that represent your intention.' | translate}} </h3>
           <div class="d-flex row">
-
-            <div class="col-sm-12 col-md-6">
-              <div class="col-sm-12 ">
-                <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                  <mat-label>{{'English name' | translate}}</mat-label>
-                  <input matInput placeholder="{{'English name' | translate}}" type="text" name="nameEn"
-                         formControlName="nameEn">
-                </mat-form-field>
-                <small
-                  *ngIf="form.controls['nameEn'].hasError('required') && form.controls['nameEn'].touched"
-                  class="warn-text gene-block">
-                  {{'You must include english code name' | translate}}
-                </small>
-                <small
-                  *ngIf="form.controls['nameEn'].errors && (form.controls['nameEn'].hasError('wrong')) && form.controls['nameEn'].touched"
-                  class="warn-text gene-block">
-                  {{'You must include a valid english code name' | translate}}
-                </small>
-              </div>
-
-              <div class="col-sm-12 ">
-                <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                  <mat-label>{{'Arabic name' | translate}}</mat-label>
-                  <input matInput placeholder="{{'Arabic name' | translate}}" type="text" name="nameAr"
-                         formControlName="nameAr">
-                </mat-form-field>
-                <small
-                  *ngIf="form.controls['nameAr'].hasError('required') && form.controls['nameAr'].touched"
-                  class="warn-text gene-block">
-                  {{'You must include arabic code name' | translate}}
-                </small>
-                <small
-                  *ngIf="form.controls['nameAr'].errors && (form.controls['nameAr'].hasError('wrong')) && form.controls['nameAr'].touched"
-                  class="warn-text gene-block">
-                  {{'You must include a valid arabic code name' | translate}}
-                </small>
-              </div>
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Code english name' | translate}}</mat-label>
+                <input matInput placeholder="{{'Code english name' | translate}}" type="text" name="name_en"
+                       formControlName="name_en">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['name_en'].hasError('required') && form.controls['name_en'].touched"
+                class="warn-text gene-block">
+                {{'You must include english code name' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['name_en'].errors && (form.controls['name_en'].hasError('wrong')) && form.controls['name_en'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid english code name' | translate}}
+              </small>
             </div>
 
+            <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Code arabic name' | translate}}</mat-label>
+                <input matInput placeholder="{{'Code arabic name' | translate}}" type="text" name="name_ar"
+                       formControlName="name_ar">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['name_ar'].hasError('required') && form.controls['name_ar'].touched"
+                class="warn-text gene-block">
+                {{'You must include arabic code name' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['name_ar'].errors && (form.controls['name_ar'].hasError('wrong')) && form.controls['name_ar'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid arabic code name' | translate}}
+              </small>
+            </div>
 
-            <div class="col-sm-12 col-md-6 code-symbols d-flex justify-content-end">
+            <div class="col-sm-12 col-md-6 code-symbols d-flex">
               <mat-radio-group formControlName="symbol" id="" class="example-radio-group row mx-0"
                                (change)="chooseSymbol($event.value, 'default')">
                 <ng-container *ngFor="let symbol of symbols">
@@ -71,25 +67,23 @@
               </small>
             </div>
 
-            <div>
+            <div class="mt-4">
               <a class="">
               <span *ngIf="!showSymbols">{{'OR' | translate}} <span class="clickable" data-bs-toggle="collapse"
-                                                                    href="#multiCollapseExample1" role="button"
+                                                                    href="#customIcons" role="button"
                                                                     aria-expanded="false"
-                                                                    aria-controls="multiCollapseExample1"
-                                                                    (click)=" loadIcons(); showSymbols = !showSymbols;searchI.value = ''">{{'Click here' | translate}} </span><span>{{'to find more icons' | translate}}</span></span>
-
+                                                                    aria-controls="customIcons"
+                                                                    (click)=" loadIcons(); showSymbols = !showSymbols;searchI.value = ''">{{'Click here' | translate}}
+              </span><span>{{'to find more icons' | translate}}</span></span>
                 <span class="clickable" data-bs-toggle="collapse"
-                      href="#multiCollapseExample1" role="button" aria-expanded="false"
-                      aria-controls="multiCollapseExample1" (click)="showSymbols = !showSymbols"
+                      href="#customIcons" role="button" aria-expanded="false"
+                      aria-controls="customIcons" (click)="showSymbols = !showSymbols"
                       *ngIf="showSymbols">{{'Show less' | translate}}</span>
               </a>
-
             </div>
-
             <div class="row">
               <div class="col">
-                <div class="collapse multi-collapse" id="multiCollapseExample1">
+                <div class="collapse" id="customIcons">
                   <div class="card card-body d-flex">
                     <mat-form-field class="w-50" appearance="outline">
                       <mat-icon matPrefix>search</mat-icon>
@@ -108,18 +102,17 @@
                         </ng-container>
                       </mat-radio-group>
                     </div>
-
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
           <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
-            <button mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/exception-codes']">{{'Back' | translate}}</button>
+            <button mat-button class="mx-2 warn-bg"
+                    [routerLink]="['/configurations/exception-codes']">{{'Back' | translate}}</button>
             <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
                     class="primary-bg" cdkFocusInitial>
-              {{data ? ('Update' | translate): ('Create' | translate)}}
+              {{data ? ('Update' | translate) : ('Create' | translate)}}
             </button>
           </div>
         </form>

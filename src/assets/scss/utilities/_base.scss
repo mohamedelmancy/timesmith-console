@@ -1120,3 +1120,39 @@ button .mdc-button__label .mat-button-wrapper {
   justify-content: center !important;
   align-items: center !important;
 }
+
+.multiselect-dropdown {
+  width: 100% !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  overflow: hidden !important;
+}
+
+.multiselect-dropdown span.optext .optdel:before {
+  content: "\f00d" !important;
+  font: normal normal normal 14px/1 FontAwesome;
+}
+
+.multiselect-dropdown span.optext .optdel {
+  float: right !important;
+  margin: 0 -6px 1px 5px !important;
+  font-size: 0 !important;
+  cursor: pointer !important;
+  color: #666 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-top: 0 !important;
+}
+
+.multiselect-dropdown .placeholder {
+  background-color: unset !important;
+  opacity: 1 !important;
+  color: #6f6e6e !important;
+}
+
+.multiselect-dropdown-list {
+  max-height: 15rem !important;
+  height: unset !important;
+}

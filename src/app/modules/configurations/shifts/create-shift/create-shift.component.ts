@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CoreService} from "../../../../services/core.service";
 import {secureStorage} from "../../../../shared/functions/secure-storage";
 import {TranslateService} from "@ngx-translate/core";
+import {MultiselectDropdown} from "../../../../../assets/js/multiselect-dropdown";
+
 
 @Component({
   selector: 'app-create-shift',
@@ -13,14 +15,10 @@ import {TranslateService} from "@ngx-translate/core";
 export class CreateShiftComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService, private translateService: TranslateService) { }
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService, private translateService: TranslateService) {
+  }
+
   data;
-  selectedItems = [];
-  dropdownSettings = {};
-  placeholderText: string;
-  selectAllText: string = this.translateService.instant('Select all');
-  unSelectAllText: string = this.translateService.instant('Unselect all');
-  searchText: string = this.translateService.instant('type name...');
   disabled = false;
   noDataAvailText: string = this.translateService.instant('No data available');
   // employees = [
@@ -43,33 +41,36 @@ export class CreateShiftComponent implements OnInit {
 
   weekends = [
     {
-      itemName: 'Saturday',
+      name: 'Saturday',
       id: 1
     },
     {
-      itemName: 'Sunday',
+      name: 'Sunday',
       id: 2
     },
     {
-      itemName: 'Monday',
+      name: 'Monday',
       id: 3
-    },{
-      itemName: 'Tuesday',
+    }, {
+      name: 'Tuesday',
       id: 4
-    },{
-      itemName: 'Wednesday',
+    }, {
+      name: 'Wednesday',
       id: 5
-    },{
-      itemName: 'Thursday',
+    }, {
+      name: 'Thursday',
       id: 6
-    },{
-      itemName: 'Friday',
+    }, {
+      name: 'Friday',
       id: 7
     },
   ]
+
   ngOnInit(): void {
+    MultiselectDropdown({});
     this.form = this.fb.group({
-        name: ['', Validators.compose([Validators.required])],
+        name_en: ['', Validators.compose([Validators.required])],
+        name_ar: ['', Validators.compose([Validators.required])],
         // employees: ['', Validators.compose([Validators.required])],
         weekends: ['', Validators.compose([Validators.required])],
         from: [null, Validators.compose([Validators.required])],
@@ -80,7 +81,6 @@ export class CreateShiftComponent implements OnInit {
     this.form.valueChanges.subscribe(changes => {
       console.log('changes', changes);
     });
-    this.setNewAutoSetting();
     this.data = this.activatedRoute.snapshot.data['shift'];
     this.data = secureStorage.getItem('row');
     this.fillForm();
@@ -88,41 +88,12 @@ export class CreateShiftComponent implements OnInit {
   }
 
   fillForm() {
-    this.form.controls['name'].setValue(this.data?.name);
+    this.form.controls['name_ar'].setValue(this.data?.name_ar);
+    this.form.controls['name_en'].setValue(this.data?.name_en);
     // this.form.controls['employees'].setValue(this.data?.employees);
     this.form.controls['weekends'].setValue(this.data?.weekends);
     this.form.controls['from'].setValue(this.data?.from);
     this.form.controls['to'].setValue(this.data?.to);
-  }
-  setNewAutoSetting() {
-    this.dropdownSettings = {
-      'singleSelection': false,
-      'defaultOpen': false,
-      'idField': 'id',
-      'textField': 'name',
-      'selectAllText': this.selectAllText,
-      'unSelectAllText': this.unSelectAllText,
-      'searchPlaceholderText': this.searchText,
-      'noDataAvailablePlaceholderText': this.noDataAvailText,
-      'enableCheckAll': true,
-      'itemsShowLimit': 'All',
-      'allowSearchFilter': true
-    };
-  }
-
-  onItemSelect(item:any){
-    console.log(item);
-    console.log(this.selectedItems);
-  }
-  OnItemDeSelect(item:any){
-    console.log(item);
-    console.log(this.selectedItems);
-  }
-  onSelectAll(items: any){
-    console.log(items);
-  }
-  onDeSelectAll(items: any){
-    console.log(items);
   }
 
   save(value) {

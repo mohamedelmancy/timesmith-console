@@ -9,6 +9,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {GlobalService} from "../../../../services/global.service";
 import {debounceTime} from "rxjs";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+
 @UntilDestroy()
 @Component({
   selector: 'app-create-exception-code',
@@ -89,8 +90,8 @@ export class CreateExceptionCodeComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-        nameEn: ['', Validators.compose([Validators.required])],
-        nameAr: ['', Validators.compose([Validators.required])],
+        name_en: ['', Validators.compose([Validators.required])],
+        name_ar: ['', Validators.compose([Validators.required])],
         symbol: [null, Validators.compose([Validators.required])],
       },
       {validators: []}
@@ -140,8 +141,8 @@ export class CreateExceptionCodeComponent implements OnInit {
   }
 
   fillForm() {
-    this.form.controls['nameAr'].setValue(this.data?.nameAr);
-    this.form.controls['nameEn'].setValue(this.data?.nameEn);
+    this.form.controls['name_ar'].setValue(this.data?.name_ar);
+    this.form.controls['name_en'].setValue(this.data?.name_en);
     this.form.controls['symbol'].setValue(this.data?.symbol);
   }
 
@@ -149,11 +150,11 @@ export class CreateExceptionCodeComponent implements OnInit {
     console.log('ee', e);
     this.chosedSymbol = e;
     if (type === 'default') {
-      this.form.controls['nameAr'].setValue(e.represent_ar);
-      this.form.controls['nameEn'].setValue(e.represent_en);
+      this.form.controls['name_ar'].setValue(e.represent_ar);
+      this.form.controls['name_en'].setValue(e.represent_en);
     } else {
-      this.form.controls['nameAr'].reset();
-      this.form.controls['nameEn'].reset();
+      this.form.controls['name_ar'].reset();
+      this.form.controls['name_en'].reset();
     }
   }
 
@@ -161,7 +162,7 @@ export class CreateExceptionCodeComponent implements OnInit {
     this.searchCtrl.valueChanges.pipe(
       debounceTime(1000),
       untilDestroyed(this)
-    ).subscribe(search =>  {
+    ).subscribe(search => {
       console.log('search', search)
       this.icons = this.iconsBackup.filter(name => name.toLowerCase().indexOf(search.trim().toLowerCase()) !== -1);
     });
