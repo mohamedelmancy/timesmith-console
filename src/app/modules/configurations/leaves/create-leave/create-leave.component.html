@@ -133,7 +133,7 @@
 
             <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
               <button  mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/leaves']">{{'Back' | translate}}</button>
-              <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
+              <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="" cdkFocusInitial>
                 {{data ? ('Update' | translate): ('Create' | translate)}}
               </button>
             </div>

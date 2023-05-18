@@ -107,7 +107,7 @@
               <button mat-button class="mx-2 warn-bg"
                       [routerLink]="['/configurations/shifts']">{{'Back' | translate}}</button>
               <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
-                      class="primary-bg" cdkFocusInitial>
+                      class="" cdkFocusInitial>
                 {{data ? ('Update' | translate) : ('Create' | translate)}}
               </button>
             </div>

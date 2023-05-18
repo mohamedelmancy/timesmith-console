@@ -68,6 +68,7 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
       this.map.on('click', function (e) {
         console.log('eee', e);
         _this.fillMapFields(e);
+        _this.addCircle(e)
       });
       L.control.locate().addTo(this.map);
       this.addSearchBox();
@@ -88,11 +89,15 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
   }
 
   addCircle(e) {
-    var radius = (e.accuracy / 2) || (this.form.value.tolerance) || 30;
+    var radius = this.form.value.tolerance ? this.form.value.tolerance : ((e.accuracy / 2) || 30);
+    console.log('radius', radius);
     if (!this.circle) {
+      console.log('noooooo', radius);
       this.circle = L.circle(e.latlng, radius).addTo(this.map);
     } else {
-      this.circle.setLatLng(e.latlng)
+      console.log('yeeesssss', radius);
+      this.circle.setLatLng(e.latlng);
+      this.circle.setRadius(radius)
     }
   }
 

@@ -4,7 +4,7 @@
          [ngClass]="sideFilters?.length && (isMobile$ | async) ? 'justify-content-between' : 'justify-content-end'">
       <button (click)="openDrawer()" *ngIf="sideFilters?.length && (isMobile$ | async)" tooltip="Open filters"
               color="primary" mat-raised-button type="button"
-              class="primary-bg">
+              class="">
         <i class="fa fa-filter"></i>
         {{'Filters'| translate}}</button>
       <button *ngIf="createLink" [routerLink]="[createLink]" tooltip="{{'Add new row' | translate}}" color="primary"

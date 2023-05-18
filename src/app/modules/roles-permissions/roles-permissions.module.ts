@@ -10,6 +10,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatListModule} from "@angular/material/list";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -17,15 +18,16 @@ import {MatButtonModule} from "@angular/material/button";
     RolesAndPermissionsComponent,
     CreateRolesAndPermissionsComponent
   ],
-  imports: [
-    CommonModule,
-    RolesPermissionsRoutingModule,
-    SharedModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatListModule,
-    MatInputModule,
-    MatButtonModule
-  ]
+    imports: [
+        CommonModule,
+        RolesPermissionsRoutingModule,
+        SharedModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatListModule,
+        MatInputModule,
+        MatButtonModule,
+        MatExpansionModule
+    ]
 })
 export class RolesPermissionsModule { }

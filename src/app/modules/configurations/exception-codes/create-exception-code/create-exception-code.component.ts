@@ -160,11 +160,15 @@ export class CreateExceptionCodeComponent implements OnInit {
 
   search() {
     this.searchCtrl.valueChanges.pipe(
-      debounceTime(1000),
+      debounceTime(100),
       untilDestroyed(this)
     ).subscribe(search => {
       console.log('search', search)
-      this.icons = this.iconsBackup.filter(name => name.toLowerCase().indexOf(search.trim().toLowerCase()) !== -1);
+      if (search?.length) {
+        this.icons = this.iconsBackup.filter(name => name.toLowerCase().indexOf(search.trim().toLowerCase()) !== -1);
+      } else {
+        this.icons = this.iconsBackup;
+      }
     });
 
 

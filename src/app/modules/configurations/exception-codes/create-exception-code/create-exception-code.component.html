@@ -67,51 +67,89 @@
               </small>
             </div>
 
-            <div class="mt-4">
-              <a class="">
-              <span *ngIf="!showSymbols">{{'OR' | translate}} <span class="clickable" data-bs-toggle="collapse"
-                                                                    href="#customIcons" role="button"
-                                                                    aria-expanded="false"
-                                                                    aria-controls="customIcons"
-                                                                    (click)=" loadIcons(); showSymbols = !showSymbols;searchI.value = ''">{{'Click here' | translate}}
-              </span><span>{{'to find more icons' | translate}}</span></span>
-                <span class="clickable" data-bs-toggle="collapse"
-                      href="#customIcons" role="button" aria-expanded="false"
-                      aria-controls="customIcons" (click)="showSymbols = !showSymbols"
-                      *ngIf="showSymbols">{{'Show less' | translate}}</span>
-              </a>
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="collapse" id="customIcons">
-                  <div class="card card-body d-flex">
-                    <mat-form-field class="w-50" appearance="outline">
-                      <mat-icon matPrefix>search</mat-icon>
-                      <input autofocus #searchI [formControl]="searchCtrl" matInput type="search"
-                             placeholder="{{'Search icons' | translate}}" class="search-input">
-                    </mat-form-field>
-                    <div class="col-sm-12 code-symbols" #customIcons>
-                      <mat-radio-group formControlName="symbol" id="2" class="example-radio-group row mx-0"
-                                       (change)="chooseSymbol($event.value)">
-                        <ng-container *ngFor="let symbol of icons">
-                          <mat-radio-button tooltip="{{symbol}}" [ngClass]="chosedSymbol === symbol ? 'selected' : ''"
-                                            class="example-radio-button py-2 w-25" [value]="symbol">
-                            <!--                    <span [ngStyle]="{color: chosedSymbol === symbol ? '#fff' : '#000'}" class="{{symbol?.symbol_name}}"></span>-->
-                            <mat-icon svgIcon="{{symbol}}"></mat-icon>
-                          </mat-radio-button>
-                        </ng-container>
-                      </mat-radio-group>
-                    </div>
+            <!--            <div class="mt-4">-->
+            <!--              <a class="">-->
+            <!--              <span *ngIf="!showSymbols">{{'OR' | translate}} <span class="clickable"-->
+            <!--                                                                    (click)=" loadIcons(); showSymbols = !showSymbols;searchI.value = ''">{{'Click here' | translate}}-->
+            <!--              </span><span>{{'to find more icons' | translate}}</span></span>-->
+            <!--                <span class="clickable" (click)="showSymbols = !showSymbols"-->
+            <!--                      *ngIf="showSymbols">{{'Show less' | translate}}</span>-->
+            <!--              </a>-->
+            <!--            </div>-->
+            <!--            <div class="row customIcons" [ngClass]="{'show': showSymbols}">-->
+            <!--              <div class="col">-->
+            <!--                <div>-->
+            <!--                  <div class="card card-body d-flex">-->
+            <!--                    <mat-form-field class="w-50" appearance="outline">-->
+            <!--                      <mat-icon matPrefix>search</mat-icon>-->
+            <!--                      <input autofocus #searchI [formControl]="searchCtrl" matInput type="search"-->
+            <!--                             placeholder="{{'Search icons' | translate}}" class="search-input">-->
+            <!--                    </mat-form-field>-->
+            <!--                    <div class="col-sm-12 code-symbols" #customIcons>-->
+            <!--                      <mat-radio-group formControlName="symbol" id="2" class="example-radio-group row mx-0"-->
+            <!--                                       (change)="chooseSymbol($event.value)">-->
+            <!--                        <ng-container *ngFor="let symbol of icons">-->
+            <!--                          <mat-radio-button tooltip="{{symbol}}" [ngClass]="chosedSymbol === symbol ? 'selected' : ''"-->
+            <!--                                            class="example-radio-button py-2 w-25" [value]="symbol">-->
+            <!--                            &lt;!&ndash;                    <span [ngStyle]="{color: chosedSymbol === symbol ? '#fff' : '#000'}" class="{{symbol?.symbol_name}}"></span>&ndash;&gt;-->
+            <!--                            <mat-icon svgIcon="{{symbol}}"></mat-icon>-->
+            <!--                          </mat-radio-button>-->
+            <!--                        </ng-container>-->
+            <!--                      </mat-radio-group>-->
+            <!--                    </div>-->
+            <!--                  </div>-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </div>-->
+
+
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <a class="">
+                      <span *ngIf="!showSymbols">
+<!--                        {{'OR' | translate}}-->
+                        <span class="clickable"
+                              (click)=" loadIcons(); showSymbols = !showSymbols;searchI.value = ''">{{'Load more icons ...' | translate}}
+                      </span>
+                        <!--                      <span>{{'to find more icons' | translate}}</span>-->
+                      </span>
+                      <span class="clickable" (click)="showSymbols = !showSymbols"
+                            *ngIf="showSymbols">{{'Show less' | translate}}
+                      </span>
+                    </a>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="card card-body d-flex">
+                  <mat-form-field class="w-50" appearance="outline">
+                    <mat-icon matPrefix>search</mat-icon>
+                    <input autofocus #searchI [formControl]="searchCtrl" matInput type="search"
+                           placeholder="{{'Search icons' | translate}}" class="search-input">
+                  </mat-form-field>
+                  <div class="col-sm-12 code-symbols" #customIcons>
+                    <mat-radio-group formControlName="symbol" id="2" class="example-radio-group row mx-0"
+                                     (change)="chooseSymbol($event.value)">
+                      <ng-container *ngFor="let symbol of icons">
+                        <mat-radio-button tooltip="{{symbol}}" [ngClass]="chosedSymbol === symbol ? 'selected' : ''"
+                                          class="example-radio-button py-2 w-25" [value]="symbol">
+                          <!--                    <span [ngStyle]="{color: chosedSymbol === symbol ? '#fff' : '#000'}" class="{{symbol?.symbol_name}}"></span>-->
+                          <mat-icon svgIcon="{{symbol}}"></mat-icon>
+                        </mat-radio-button>
+                      </ng-container>
+                    </mat-radio-group>
                   </div>
                 </div>
-              </div>
-            </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+
+
           </div>
           <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
             <button mat-button class="mx-2 warn-bg"
                     [routerLink]="['/configurations/exception-codes']">{{'Back' | translate}}</button>
             <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
-                    class="primary-bg" cdkFocusInitial>
+                    class="" cdkFocusInitial>
               {{data ? ('Update' | translate) : ('Create' | translate)}}
             </button>
           </div>

@@ -81,7 +81,7 @@
   </div>
   <div mat-dialog-actions class="d-flex justify-content-end">
     <button  mat-button class="mx-2 warn-bg" (click)="onNoClick()">{{'Cancel' | translate}}</button>
-    <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="primary-bg" cdkFocusInitial>
+    <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="" cdkFocusInitial>
       {{data?.event?.title ? 'Update' : 'Create' | translate}}
     </button>
   </div>

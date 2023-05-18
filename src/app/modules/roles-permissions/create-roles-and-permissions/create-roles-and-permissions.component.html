@@ -22,32 +22,51 @@
                 {{'You must include a valid name' | translate}}
               </small>
             </div>
-            <div class="col-sm-12 d-flex flex-column my-2" *ngFor="let permission of permissions; let i = index">
-              <a data-bs-toggle="collapse" href="#collapse{{i}}" role="button"
-                 aria-expanded="true" [attr.aria-controls]="'collapse{{i}}'"
-                 class="align-items-center collapsed d-flex filter-title">
-                <span>{{permission.name}}</span>
-                <i class="menu-caret fa fa-chevron-down m-0 mx-2"></i>
-              </a>
-              <mat-selection-list class="collapse multi-collapse show d-flex row px-3" id="collapse{{i}}"
-                                  [ngClass]="permission?.permissions?.length > 10 ? 'scrollable' : ''" #selection
-                                  (selectionChange)="filterChanged(i, selection.selectedOptions.selected)">
-                <mat-list-option style="width: 15%" tooltip="{{item.length > 20 ? item : ''}}" color="primary"
-                                 *ngFor="let item of permission?.permissions"
-                                 [value]="item">
-                  {{item}}
-                </mat-list-option>
-              </mat-selection-list>
-              <mat-divider class="my-3"></mat-divider>
-            </div>
+            <!--            <div class="col-sm-12 d-flex flex-column my-2" *ngFor="let permission of permissions; let i = index">-->
+            <!--              <a data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" role="button"-->
+            <!--                 aria-expanded="true" [attr.aria-controls]="'collapse' + i"-->
+            <!--                 class="align-items-center btn collapsed d-flex filter-title">-->
+            <!--                <span>{{permission.name}}</span>-->
+            <!--                <i class="menu-caret fa fa-chevron-down m-0 mx-2"></i>-->
+            <!--              </a>-->
+            <!--              <mat-selection-list class="collapse multi-collapse d-flex row px-3" id="collapse{{i}}"-->
+            <!--                                  [ngClass]="permission?.permissions?.length > 10 ? 'scrollable' : ''" #selection-->
+            <!--                                  (selectionChange)="filterChanged(i, selection.selectedOptions.selected)">-->
+            <!--                <mat-list-option style="width: 15%" tooltip="{{item.length > 20 ? item : ''}}" color="primary"-->
+            <!--                                 *ngFor="let item of permission?.permissions"-->
+            <!--                                 [value]="item">-->
+            <!--                  {{item}}-->
+            <!--                </mat-list-option>-->
+            <!--              </mat-selection-list>-->
+            <!--              <mat-divider class="my-3"></mat-divider>-->
+            <!--            </div>-->
 
+            <mat-accordion>
+              <mat-expansion-panel *ngFor="let permission of permissions; let i = index">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{permission.name}}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-selection-list class="collapse multi-collapse d-flex row px-3" id="collapse{{i}}"
+                                    [ngClass]="permission?.permissions?.length > 10 ? 'scrollable' : ''" #selection
+                                    (selectionChange)="filterChanged(i, selection.selectedOptions.selected)">
+                  <mat-list-option style="width: 15%" tooltip="{{item.length > 20 ? item : ''}}" color="primary"
+                                   *ngFor="let item of permission?.permissions"
+                                   [value]="item">
+                    {{item}}
+                  </mat-list-option>
+                </mat-selection-list>
+              </mat-expansion-panel>
+            </mat-accordion>
           </div>
 
           <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
-            <button mat-button class="mx-2 warn-bg" [routerLink]="['/roles-permissions']">{{'Back' | translate}}</button>
+            <button mat-button class="mx-2 warn-bg"
+                    [routerLink]="['/roles-permissions']">{{'Back' | translate}}</button>
             <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
-                    class="primary-bg" cdkFocusInitial>
-              {{data ? ('Update' | translate): ('Create' | translate)}}
+                    class="" cdkFocusInitial>
+              {{data ? ('Update' | translate) : ('Create' | translate)}}
             </button>
           </div>
         </form>
