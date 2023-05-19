@@ -6,9 +6,9 @@
           {{filter?.name | titlecase}}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <mat-selection-list class="" id="" #reportsSelection
+      <mat-selection-list class="" id="" #selection
                           *ngIf="filter?.name !== 'PAW'; else paw"
-                          (selectionChange)="filterChanged('reports', reportsSelection.selectedOptions.selected)">
+                          (selectionChange)="filterChanged(filter?.name, selection.selectedOptions.selected)">
         <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"
                          *ngFor="let item of filter?.filters" [value]="item">
           {{item.name | titlecase}}

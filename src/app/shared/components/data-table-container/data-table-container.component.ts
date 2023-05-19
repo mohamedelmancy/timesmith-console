@@ -273,7 +273,7 @@ export class DataTableContainerComponent implements OnInit, AfterViewInit, OnCha
   }
 
   openDrawer() {
-    if (isMobile) {
+    if (this.isMobile$) {
       this.drawer.toggle();
     }
   }

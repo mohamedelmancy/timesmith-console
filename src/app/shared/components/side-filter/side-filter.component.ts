@@ -1,9 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ConfirmedValidator} from "../../functions/shared-functions";
+import {FormBuilder} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {CoreService} from "../../../services/core.service";
-import {isMobile} from "../../variables/variables";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {map} from "rxjs/operators";
 import {ObservablesService} from "../../../services/observables.service";
