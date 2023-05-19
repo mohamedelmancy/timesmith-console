@@ -10,11 +10,15 @@ import {CoreService} from "../../../services/core.service";
 import {secureStorage} from "../../../shared/functions/secure-storage";
 import {environment} from "../../../../environments/environment";
 import {isMobile} from "../../../shared/variables/variables";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {map} from "rxjs/operators";
+import {ObservablesService} from "../../../services/observables.service";
 
 declare var require;
 
 const screenfull = require('screenfull');
 
+@UntilDestroy()
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -32,7 +36,7 @@ export class MainComponent implements OnInit, OnDestroy {
   root: any = 'rtl';
   layout: any = 'rtl';
   customizerIn = false;
-  isMobile = isMobile;
+  isMobile$ = this.observablesService.isMobile$.pipe(untilDestroyed(this), map(res => res));
   isFullscreen = false;
   header: string;
   dark: boolean;
@@ -101,7 +105,9 @@ export class MainComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               public coreService: CoreService,
               private routes: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private observablesService?: ObservablesService
+  ) {
     if (window.innerWidth > 1199) {
       // this.tourService.start();
     }
@@ -109,7 +115,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._routerEventsSubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd && this.isMobile) {
+      if (event instanceof NavigationEnd && this.isMobile$) {
         this.horizontalSideNav.close();
       }
     });

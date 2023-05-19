@@ -4,18 +4,23 @@ import {ConfirmedValidator} from "../../functions/shared-functions";
 import {ActivatedRoute} from "@angular/router";
 import {CoreService} from "../../../services/core.service";
 import {isMobile} from "../../variables/variables";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {map} from "rxjs/operators";
+import {ObservablesService} from "../../../services/observables.service";
 
+@UntilDestroy()
 @Component({
   selector: 'app-side-filter',
   templateUrl: './side-filter.component.html',
   styleUrls: ['./side-filter.component.scss']
 })
 export class SideFilterComponent implements OnInit {
-  @Input() sideFilters;
+  @Input() filtersNames: any;
   @Input() fromContainer = false;
-  @Input() pawStatistics: {yes, no};
+  @Input() pawStatistics: { yes, no };
   @Output() emittedData = new EventEmitter<any>();
   @Output() closeDrawer = new EventEmitter<any>();
+  sideFilters = [];
   departments = [
     {
       name: 'Marketing',
@@ -169,7 +174,7 @@ export class SideFilterComponent implements OnInit {
     },
 
   ];
-  reportTypes = [
+  report_types = [
     {
       name: 'Time',
       id: 1
@@ -183,8 +188,7 @@ export class SideFilterComponent implements OnInit {
       id: 2
     }
   ];
-
-  requestStatus = [
+  request_status = [
     {
       name: 'All',
       id: 1
@@ -206,11 +210,30 @@ export class SideFilterComponent implements OnInit {
   selectedReportTypes = [];
   selectedRequestsStatus = [];
   paw;
-  isMobile = isMobile;
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private coreService: CoreService) {
+  isMobile$ = this.observablesService.isMobile$.pipe(untilDestroyed(this), map(res => res));
+
+  constructor(private fb: FormBuilder,
+              private activatedRoute: ActivatedRoute,
+              private coreService: CoreService,
+              private observablesService?: ObservablesService
+  ) {
   }
 
   ngOnInit(): void {
+    console.log('ff', this.filtersNames)
+    this.prepareFilters();
+  }
+
+  prepareFilters() {
+    this.filtersNames?.map((type: any) => {
+      console.log('type', type)
+      const obj = {
+        name: type.replaceAll('_', ' '),
+        filters: this[`${type}`]
+      }
+      this.sideFilters.push(obj);
+    });
+    console.log('ff', this.sideFilters)
   }
 
 
@@ -236,12 +259,12 @@ export class SideFilterComponent implements OnInit {
       for (let a of selected) {
         this.selectedRoles.push(a.value);
       }
-    } else if (type === 'reportTypes') {
+    } else if (type === 'report_types') {
       this.selectedReportTypes = [];
       for (let a of selected) {
         this.selectedReportTypes.push(a.value);
       }
-    } else if (type === 'requestsStatus') {
+    } else if (type === 'requests_status') {
       this.selectedRequestsStatus = [];
       for (let a of selected) {
         this.selectedRequestsStatus.push(a.value);
@@ -260,7 +283,7 @@ export class SideFilterComponent implements OnInit {
     };
     console.log('allFilters', this.allFilters)
     // if (!this.fromContainer) {
-      this.emittedData.emit(this.allFilters);
+    this.emittedData.emit(this.allFilters);
     // }
   }
 

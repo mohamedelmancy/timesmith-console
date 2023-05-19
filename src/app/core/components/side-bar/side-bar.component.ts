@@ -14,6 +14,7 @@ export class SideBarComponent implements OnInit {
   @Input() menuList: any;
   @Input() verticalMenuStatus: boolean;
   secondaryLogo = environment.secondaryLogo;
+
   constructor(public translate: TranslateService,
               private router: Router,
               public coreService: CoreService,

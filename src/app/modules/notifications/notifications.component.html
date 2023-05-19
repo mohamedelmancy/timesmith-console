@@ -1,5 +1,5 @@
 <app-data-table-container
-  [sideFilters]="['sites', 'departments', 'individuals']"
+  [filtersNames]="['sites', 'departments', 'individuals']"
   (deleteEvent)="deleteRow($event)"
   [dataTableName]="'notifications'"
   [columns]="displayedColumns"

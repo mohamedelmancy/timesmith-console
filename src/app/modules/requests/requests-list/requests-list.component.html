@@ -1,5 +1,5 @@
 <app-data-table-container
-  [sideFilters]="['sites', 'departments', 'individuals', 'requestStatus']"
+  [filtersNames]="['sites', 'departments', 'individuals', 'request_status']"
   (deleteEvent)="deleteRow($event)"
   [dataTableName]="'requests'"
   (statusAction)="takeStatusAction($event)"

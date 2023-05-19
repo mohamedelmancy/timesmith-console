@@ -1,131 +1,164 @@
 <div class="col-sm-12 d-flex flex-column side-filters px-2 py-3">
+  <mat-accordion *ngIf="sideFilters?.length">
+    <mat-expansion-panel *ngFor="let filter of sideFilters; let i = index">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{filter?.name | titlecase}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-selection-list class="" id="" #reportsSelection
+                          *ngIf="filter?.name !== 'PAW'; else paw"
+                          (selectionChange)="filterChanged('reports', reportsSelection.selectedOptions.selected)">
+        <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"
+                         *ngFor="let item of filter?.filters" [value]="item">
+          {{item.name | titlecase}}
+        </mat-list-option>
+      </mat-selection-list>
+      <ng-template #paw>
+        <mat-radio-group id="collapsePAW"
+                         class="collapse multi-collapse show example-radio-group row"
+                         (change)="filterChanged('paw', $event)">
+          <mat-radio-button class="example-radio-button py-2" [value]="'yes'">
+            <span>{{'Yes' | translate}}</span><span>( {{pawStatistics?.yes}}
+            )</span></mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'no'">
+            <span>{{'No' | translate}}</span><span>( {{pawStatistics?.no}}
+            )</span></mat-radio-button>
+        </mat-radio-group>
+      </ng-template>
+      <mat-divider class="my-3"></mat-divider>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <!--  <mat-divider class="my-3"-->
+  <!--               *ngIf="sideFilters?.includes('requestStatus') && sideFilters?.includes('reportTypes')"></mat-divider>-->
 
-  <div class="reports-type-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('reportTypes')">
-    <a data-bs-toggle="collapse" href="#collapseReports" role="button"
-       aria-expanded="true" aria-controls="collapseReports"
-       class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>{{'Report types' | translate}} ( {{reportTypes?.length}} )</span>
-      <i class="menu-caret fa fa-chevron-down m-0"></i>
-    </a>
-    <mat-selection-list class="collapse multi-collapse show" id="collapseReports" #reportsSelection
-                        (selectionChange)="filterChanged('reports', reportsSelection.selectedOptions.selected)">
-      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"
-                       *ngFor="let item of reportTypes" [value]="item">
-        {{item.name}}
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
+  <!--  <div class="reports-type-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('reportTypes')">-->
+  <!--    <a data-bs-toggle="collapse" href="#collapseReports" role="button"-->
+  <!--       aria-expanded="true" aria-controls="collapseReports"-->
+  <!--       class="align-items-center collapsed d-flex filter-title justify-content-between">-->
+  <!--      <span>{{'Report types' | translate}} ( {{reportTypes?.length}} )</span>-->
+  <!--      <i class="menu-caret fa fa-chevron-down m-0"></i>-->
+  <!--    </a>-->
+  <!--    <mat-selection-list class="collapse multi-collapse show" id="collapseReports" #reportsSelection-->
+  <!--                        (selectionChange)="filterChanged('reports', reportsSelection.selectedOptions.selected)">-->
+  <!--      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"-->
+  <!--                       *ngFor="let item of reportTypes" [value]="item">-->
+  <!--        {{item.name}}-->
+  <!--      </mat-list-option>-->
+  <!--    </mat-selection-list>-->
+  <!--  </div>-->
 
-  <mat-divider class="my-3"
-               *ngIf="sideFilters?.includes('requestStatus') && sideFilters?.includes('reportTypes')"></mat-divider>
-  <div class="requests-type-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('requestStatus')">
-    <a data-bs-toggle="collapse" href="#collapseRequests" role="button"
-       aria-expanded="true" aria-controls="collapseRequests"
-       class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>{{'Request status' | translate}} ( {{requestStatus?.length}} )</span>
-      <i class="menu-caret fa fa-chevron-down m-0"></i>
-    </a>
-    <mat-selection-list class="collapse multi-collapse show" id="collapseRequests" #requestsSelection
-                        (selectionChange)="filterChanged('requestsStatus', requestsSelection.selectedOptions.selected)">
-      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"
-                       *ngFor="let item of requestStatus" [value]="item">
-        {{item.name}}
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
+  <!--  <mat-divider class="my-3"-->
+  <!--               *ngIf="sideFilters?.includes('requestStatus') && sideFilters?.includes('reportTypes')"></mat-divider>-->
+  <!--  <div class="requests-type-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('requestStatus')">-->
+  <!--    <a data-bs-toggle="collapse" href="#collapseRequests" role="button"-->
+  <!--       aria-expanded="true" aria-controls="collapseRequests"-->
+  <!--       class="align-items-center collapsed d-flex filter-title justify-content-between">-->
+  <!--      <span>{{'Request status' | translate}} ( {{requestStatus?.length}} )</span>-->
+  <!--      <i class="menu-caret fa fa-chevron-down m-0"></i>-->
+  <!--    </a>-->
+  <!--    <mat-selection-list class="collapse multi-collapse show" id="collapseRequests" #requestsSelection-->
+  <!--                        (selectionChange)="filterChanged('requestsStatus', requestsSelection.selectedOptions.selected)">-->
+  <!--      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"-->
+  <!--                       *ngFor="let item of requestStatus" [value]="item">-->
+  <!--        {{item.name}}-->
+  <!--      </mat-list-option>-->
+  <!--    </mat-selection-list>-->
+  <!--  </div>-->
 
-  <mat-divider class="my-3"
-               *ngIf="sideFilters?.includes('sites') && sideFilters?.includes('requestStatus')
-                || (sideFilters?.includes('sites') && sideFilters?.includes('reportTypes'))"></mat-divider>
-  <div class="sites-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('sites')">
-    <a data-bs-toggle="collapse" href="#collapseSites" role="button"
-       aria-expanded="true" aria-controls="collapseSites"
-       class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>{{'Sites' | translate}} ( {{sites?.length}} )</span>
-      <i class="menu-caret fa fa-chevron-down m-0"></i>
-    </a>
-    <mat-selection-list class="collapse multi-collapse show" id="collapseSites"
-                        [ngClass]="sites?.length > 7 ? 'scrollable' : ''" #siteSelection
-                        (selectionChange)="filterChanged('sites', siteSelection.selectedOptions.selected)">
-      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary" *ngFor="let item of sites"
-                       [value]="item">
-        {{item.name}}
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
+  <!--  <mat-divider class="my-3"-->
+  <!--               *ngIf="sideFilters?.includes('sites') && sideFilters?.includes('requestStatus')-->
+  <!--                || (sideFilters?.includes('sites') && sideFilters?.includes('reportTypes'))"></mat-divider>-->
+  <!--  <div class="sites-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('sites')">-->
+  <!--    <a data-bs-toggle="collapse" href="#collapseSites" role="button"-->
+  <!--       aria-expanded="true" aria-controls="collapseSites"-->
+  <!--       class="align-items-center collapsed d-flex filter-title justify-content-between">-->
+  <!--      <span>{{'Sites' | translate}} ( {{sites?.length}} )</span>-->
+  <!--      <i class="menu-caret fa fa-chevron-down m-0"></i>-->
+  <!--    </a>-->
+  <!--    <mat-selection-list class="collapse multi-collapse show" id="collapseSites"-->
+  <!--                        [ngClass]="sites?.length > 7 ? 'scrollable' : ''" #siteSelection-->
+  <!--                        (selectionChange)="filterChanged('sites', siteSelection.selectedOptions.selected)">-->
+  <!--      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary" *ngFor="let item of sites"-->
+  <!--                       [value]="item">-->
+  <!--        {{item.name}}-->
+  <!--      </mat-list-option>-->
+  <!--    </mat-selection-list>-->
+  <!--  </div>-->
 
-  <mat-divider class="my-3" *ngIf="sideFilters?.includes('departments')"></mat-divider>
-  <div class="departments-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('departments')">
-    <a data-bs-toggle="collapse" href="#collapseDeps" role="button"
-       aria-expanded="false" aria-controls="collapseDeps"
-       class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>{{'Departments' | translate}} ( {{sites?.length}} )</span>
-      <i class="menu-caret fa fa-chevron-down m-0"></i>
-    </a>
-    <mat-selection-list class="collapse multi-collapse" id="collapseDeps"
-                        [ngClass]="departments?.length > 7 ? 'scrollable' : ''" #departmentSelection
-                        (selectionChange)="filterChanged('departments', departmentSelection.selectedOptions.selected)">
-      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"
-                       *ngFor="let item of departments" [value]="item">
-        {{item.name}}
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
+  <!--  <mat-divider class="my-3" *ngIf="sideFilters?.includes('departments')"></mat-divider>-->
+  <!--  <div class="departments-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('departments')">-->
+  <!--    <a data-bs-toggle="collapse" href="#collapseDeps" role="button"-->
+  <!--       aria-expanded="false" aria-controls="collapseDeps"-->
+  <!--       class="align-items-center collapsed d-flex filter-title justify-content-between">-->
+  <!--      <span>{{'Departments' | translate}} ( {{sites?.length}} )</span>-->
+  <!--      <i class="menu-caret fa fa-chevron-down m-0"></i>-->
+  <!--    </a>-->
+  <!--    <mat-selection-list class="collapse multi-collapse" id="collapseDeps"-->
+  <!--                        [ngClass]="departments?.length > 7 ? 'scrollable' : ''" #departmentSelection-->
+  <!--                        (selectionChange)="filterChanged('departments', departmentSelection.selectedOptions.selected)">-->
+  <!--      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"-->
+  <!--                       *ngFor="let item of departments" [value]="item">-->
+  <!--        {{item.name}}-->
+  <!--      </mat-list-option>-->
+  <!--    </mat-selection-list>-->
+  <!--  </div>-->
 
-  <mat-divider class="my-3" *ngIf="sideFilters?.includes('individuals')"></mat-divider>
-  <div class="individuals-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('individuals')">
-    <a data-bs-toggle="collapse" href="#collapseIndivid" role="button"
-       aria-expanded="false" aria-controls="collapseIndivid"
-       class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>{{'Individuals' | translate}} ( {{individuals?.length}} )</span>
-      <i class="menu-caret fa fa-chevron-down m-0"></i>
-    </a>
-    <mat-selection-list class="collapse multi-collapse" id="collapseIndivid" #individualSelection
-                        (selectionChange)="filterChanged('individuals', individualSelection.selectedOptions.selected)">
-      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"
-                       *ngFor="let item of individuals" [value]="item">
-        {{item.name}}
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
+  <!--  <mat-divider class="my-3" *ngIf="sideFilters?.includes('individuals')"></mat-divider>-->
+  <!--  <div class="individuals-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('individuals')">-->
+  <!--    <a data-bs-toggle="collapse" href="#collapseIndivid" role="button"-->
+  <!--       aria-expanded="false" aria-controls="collapseIndivid"-->
+  <!--       class="align-items-center collapsed d-flex filter-title justify-content-between">-->
+  <!--      <span>{{'Individuals' | translate}} ( {{individuals?.length}} )</span>-->
+  <!--      <i class="menu-caret fa fa-chevron-down m-0"></i>-->
+  <!--    </a>-->
+  <!--    <mat-selection-list class="collapse multi-collapse" id="collapseIndivid" #individualSelection-->
+  <!--                        (selectionChange)="filterChanged('individuals', individualSelection.selectedOptions.selected)">-->
+  <!--      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"-->
+  <!--                       *ngFor="let item of individuals" [value]="item">-->
+  <!--        {{item.name}}-->
+  <!--      </mat-list-option>-->
+  <!--    </mat-selection-list>-->
+  <!--  </div>-->
 
-  <mat-divider class="my-3" *ngIf="sideFilters?.includes('roles')"></mat-divider>
-  <div class="roles-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('roles')">
-    <a data-bs-toggle="collapse" href="#collapseRoles" role="button"
-       aria-expanded="true" aria-controls="collapseRoles"
-       class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>{{'Roles' | translate}} ( {{roles?.length}} )</span>
-      <i class="menu-caret fa fa-chevron-down m-0"></i>
-    </a>
-    <mat-selection-list class="collapse multi-collapse show" id="collapseRoles" #rolesSelection
-                        (selectionChange)="filterChanged('roles', rolesSelection.selectedOptions.selected)">
-      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"
-                       *ngFor="let item of roles" [value]="item">
-        {{item.name}}
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
+  <!--  <mat-divider class="my-3" *ngIf="sideFilters?.includes('roles')"></mat-divider>-->
+  <!--  <div class="roles-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('roles')">-->
+  <!--    <a data-bs-toggle="collapse" href="#collapseRoles" role="button"-->
+  <!--       aria-expanded="true" aria-controls="collapseRoles"-->
+  <!--       class="align-items-center collapsed d-flex filter-title justify-content-between">-->
+  <!--      <span>{{'Roles' | translate}} ( {{roles?.length}} )</span>-->
+  <!--      <i class="menu-caret fa fa-chevron-down m-0"></i>-->
+  <!--    </a>-->
+  <!--    <mat-selection-list class="collapse multi-collapse show" id="collapseRoles" #rolesSelection-->
+  <!--                        (selectionChange)="filterChanged('roles', rolesSelection.selectedOptions.selected)">-->
+  <!--      <mat-list-option tooltip="{{item.name?.length > 20 ? item.name : ''}}" color="primary"-->
+  <!--                       *ngFor="let item of roles" [value]="item">-->
+  <!--        {{item.name}}-->
+  <!--      </mat-list-option>-->
+  <!--    </mat-selection-list>-->
+  <!--  </div>-->
 
-  <mat-divider class="my-3" *ngIf="sideFilters?.includes('PAW')"></mat-divider>
-  <div class="paw-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('PAW')">
-    <a data-bs-toggle="collapse" href="#collapsePAW" role="button"
-       aria-expanded="true" aria-controls="collapsePAW"
-       class="align-items-center collapsed d-flex filter-title justify-content-between">
-      <span>{{'Punch anywhere' | translate}}</span>
-      <i class="menu-caret fa fa-chevron-down m-0"></i>
-    </a>
-    <mat-radio-group id="collapsePAW"
-                     class="collapse multi-collapse show example-radio-group row"
-                     (change)="filterChanged('paw', $event)">
-      <mat-radio-button class="example-radio-button py-2" [value]="'yes'">
-        <span>{{'Yes' | translate}}</span><span>( {{pawStatistics?.yes}}
-        )</span></mat-radio-button>
-      <mat-radio-button class="example-radio-button" [value]="'no'">
-        <span>{{'No' | translate}}</span><span>( {{pawStatistics?.no}}
-        )</span></mat-radio-button>
-    </mat-radio-group>
-  </div>
-  <button (click)="apply()" *ngIf="isMobile" tooltip="Apply filter" color="primary" mat-raised-button type="button"
+  <!--  <mat-divider class="my-3" *ngIf="sideFilters?.includes('PAW')"></mat-divider>-->
+  <!--  <div class="paw-filter col-sm-12 d-flex flex-column" *ngIf="sideFilters?.includes('PAW')">-->
+  <!--    <a data-bs-toggle="collapse" href="#collapsePAW" role="button"-->
+  <!--       aria-expanded="true" aria-controls="collapsePAW"-->
+  <!--       class="align-items-center collapsed d-flex filter-title justify-content-between">-->
+  <!--      <span>{{'Punch anywhere' | translate}}</span>-->
+  <!--      <i class="menu-caret fa fa-chevron-down m-0"></i>-->
+  <!--    </a>-->
+  <!--      <mat-radio-group id="collapsePAW"-->
+  <!--                       class="collapse multi-collapse show example-radio-group row"-->
+  <!--                       (change)="filterChanged('paw', $event)">-->
+  <!--        <mat-radio-button class="example-radio-button py-2" [value]="'yes'">-->
+  <!--          <span>{{'Yes' | translate}}</span><span>( {{pawStatistics?.yes}}-->
+  <!--          )</span></mat-radio-button>-->
+  <!--        <mat-radio-button class="example-radio-button" [value]="'no'">-->
+  <!--          <span>{{'No' | translate}}</span><span>( {{pawStatistics?.no}}-->
+  <!--          )</span></mat-radio-button>-->
+  <!--      </mat-radio-group>-->
+  <!--  </div>-->
+  <button (click)="apply()" *ngIf="(isMobile$ | async)" tooltip="Apply filter" color="primary" mat-raised-button
+          type="button"
           class="primary-bg my-4">
     <mat-icon>check</mat-icon>
     {{'Apply'| translate}}</button>

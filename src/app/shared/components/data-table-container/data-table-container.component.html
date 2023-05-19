@@ -1,8 +1,8 @@
 <mat-drawer-container class="example-container" autosize>
   <div class="list d-flex flex-column card-body">
-    <div class="col-sm-12 d-flex mt-2 justify-content-lg-end page-actions" *ngIf="showCreate"
-         [ngClass]="sideFilters?.length && (isMobile$ | async) ? 'justify-content-between' : 'justify-content-end'">
-      <button (click)="openDrawer()" *ngIf="sideFilters?.length && (isMobile$ | async)" tooltip="Open filters"
+    <div class="col-sm-12 d-flex my-2 justify-content-lg-end page-actions" *ngIf="showCreate"
+         [ngClass]="filtersNames?.length && (isMobile$ | async) ? 'justify-content-between' : 'justify-content-end'">
+      <button (click)="openDrawer()" *ngIf="filtersNames?.length && (isMobile$ | async)" tooltip="Open filters"
               color="primary" mat-raised-button type="button"
               class="">
         <i class="fa fa-filter"></i>
@@ -17,12 +17,12 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-12 d-flex p-0">
-            <div *ngIf="sideFilters?.length && !(isMobile$ | async)" class="side-filters-container pt-0 col-sm-2">
+            <div *ngIf="filtersNames?.length && !(isMobile$ | async)" class="side-filters-container pt-0 col-sm-2">
               <app-side-filter (emittedData)="sideFilter($event)" [pawStatistics]="pawStatistics"
-                               [sideFilters]="sideFilters"></app-side-filter>
+                               [filtersNames]="filtersNames"></app-side-filter>
             </div>
             <div class="mat-elevation-z8 py-3 w-100"
-                 [ngClass]="{'table-with-filters': sideFilters?.length && !(isMobile$ | async)}">
+                 [ngClass]="{'table-with-filters': filtersNames?.length && !(isMobile$ | async)}">
               <table #table id="htmlData" mat-table [dataSource]="dataSource">
                 <ng-container *ngFor="let column of columns?.values; let i = index" [matColumnDef]="column">
 
@@ -194,6 +194,6 @@
   </div>
   <mat-drawer #drawer2 class="example-sidenav" mode="side">
     <app-side-filter class="" [pawStatistics]="pawStatistics" [fromContainer]="true" (emittedData)="sideFilter($event)"
-                     [sideFilters]="sideFilters" (closeDrawer)="closeDrawer($event)"></app-side-filter>
+                     [filtersNames]="filtersNames" (closeDrawer)="closeDrawer($event)"></app-side-filter>
   </mat-drawer>
 </mat-drawer-container>

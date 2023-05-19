@@ -1,7 +1,8 @@
-<div id = "main-app" class="app sidebar-color-dark header-color-dark" [dir]="layout" [ngClass]="{'app-dark': dark, 'compact-sidebar': compactSidebar, 'customizer-in': customizerIn}">
-  <mat-sidenav-container class="gene-container" >
+<div id="main-app" class="app sidebar-color-dark header-color-dark" [dir]="layout"
+     [ngClass]="{'app-dark': dark, 'compact-sidebar': compactSidebar, 'customizer-in': customizerIn}">
+  <mat-sidenav-container class="gene-container">
     <mat-sidenav #horizontalSideNav [(opened)]="coreService.horizontalSideNavOpen" class="sidebar-area">
-      <app-side-bar [menuList]="menuItems" [verticalMenuStatus] = false></app-side-bar>
+      <app-side-bar [menuList]="menuItems" [verticalMenuStatus]=false></app-side-bar>
     </mat-sidenav>
     <mat-toolbar class="gene-header-toolbar horizontal-toolbar-wrap">
       <div class="gene-logo mat-pad-none"><img src="{{clientLogo}}" width="120" height="27" alt="logo"></div>
@@ -13,17 +14,20 @@
       <lib-breadcrumbs class="gene-breadcrumbs"></lib-breadcrumbs>
       <span fxFlex></span>
       <div class="secondary-menu">
-        <button *ngIf="isLoggedIn" class="user-button" mat-button [matMenuTriggerFor]="menu" style="width: fit-content; margin-top: 1px;">
+        <button *ngIf="isLoggedIn" class="user-button" mat-button [matMenuTriggerFor]="menu"
+                style="width: fit-content; margin-top: 1px;">
           <div fxLayout="row" fxLayoutAlign="center center">
             <mat-icon>account_circle</mat-icon>
             <p class="mb-0 mx-2 username" tooltip="{{userName?.length > 20 ? userName : ''}}">{{userName}}</p>
           </div>
         </button>
         <app-language-drop-down></app-language-drop-down>
-        <button  mat-icon-button class="overflow-visible" tooltip="{{'Dark mode' | translate}}" (click)="addClassOnBody($event)">
+        <button mat-icon-button class="overflow-visible" tooltip="{{'Dark mode' | translate}}"
+                (click)="addClassOnBody($event)">
           <mat-icon>chrome_reader_mode</mat-icon>
         </button>
-        <button fxHide="true" fxHide.gt-sm="false" tooltip="{{'full screen' | translate}}" mat-button class="fullscreen-toggle" (click)="toggleFullscreen()">
+        <button fxHide="true" fxHide.gt-sm="false" tooltip="{{'full screen' | translate}}" mat-button
+                class="fullscreen-toggle" (click)="toggleFullscreen()">
           <mat-icon *ngIf="!isFullscreen">fullscreen</mat-icon>
           <mat-icon *ngIf="isFullscreen">fullscreen_exit</mat-icon>
         </button>
@@ -41,28 +45,30 @@
               </button>
             </div>
             <ul class="hr-primary-menu" fxHide.lt-md="true">
-              <li *ngFor="let menuItem of menuItems.getAll()" class="child-menu" [ngClass]="{'menu-item-has-child':menuItem.children}">
+              <li *ngFor="let menuItem of menuItems.getAll()" class="child-menu"
+                  [ngClass]="{'menu-item-has-child':menuItem.children}">
                 <ng-container *ngIf="menuItem.type == 'button'; else menu">
                   <a [routerLink]="[menuItem.state]">{{menuItem.name|translate}}</a>
                 </ng-container>
                 <ng-template #menu>
-<!--                  [routerLink]="[menuItem.state]"-->
-                  <a >{{menuItem.name|translate}}</a>
+                  <!--                  [routerLink]="[menuItem.state]"-->
+                  <a>{{menuItem.name|translate}}</a>
                 </ng-template>
                 <ul class="hr-sub-menu" *ngIf="menuItem.type != 'button'">
-                  <li *ngFor = "let childItem of menuItem.children" class="child-menu">
+                  <li *ngFor="let childItem of menuItem.children" class="child-menu">
                     <div class="header-icon-wrap">
-                      <a [routerLink]="['/'+menuItem.state+'/'+childItem.state]" routerLinkActive="active-link" mat-ripple >
-<!--                        <mat-icon>{{ childItem.icon }}</mat-icon>-->
+                      <a [routerLink]="['/'+menuItem.state+'/'+childItem.state]" routerLinkActive="active-link"
+                         mat-ripple>
+                        <!--                        <mat-icon>{{ childItem.icon }}</mat-icon>-->
                         {{childItem.name|translate}}
                       </a>
                     </div>
-<!--                    <div *ngIf="childItem.type==='subChild'" class="header-icon-wrap">-->
-<!--                      <a routerLinkActive="active-link" mat-ripple >-->
-<!--                        <mat-icon>{{ childItem.icon }}</mat-icon>-->
-<!--                        {{childItem.name|translate}}-->
-<!--                      </a>-->
-<!--                    </div>-->
+                    <!--                    <div *ngIf="childItem.type==='subChild'" class="header-icon-wrap">-->
+                    <!--                      <a routerLinkActive="active-link" mat-ripple >-->
+                    <!--                        <mat-icon>{{ childItem.icon }}</mat-icon>-->
+                    <!--                        {{childItem.name|translate}}-->
+                    <!--                      </a>-->
+                    <!--                    </div>-->
 
                   </li>
                 </ul>
@@ -73,7 +79,7 @@
       </mat-toolbar>
     </div>
 
-    <div *ngIf="isMobile" class="mobile-breadcrumb d-flex justify-content-start align-items-center">
+    <div *ngIf="(isMobile$ | async)" class="mobile-breadcrumb d-flex justify-content-start align-items-center">
       <div class="menu-divider"></div>
       <mat-icon color="primary" class="menu-home-icon" [routerLink]="['/']">home</mat-icon>
       <div class="menu-dot"></div>

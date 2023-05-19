@@ -1,6 +1,6 @@
 <div class="card-body container-fluid">
   <div class="row justify-content-center">
-    <div class="col-sm-6 card d-flex flex-column p-3">
+    <div class="col-sm-6 card d-flex flex-column p-3 my-4">
       <div class="col-sm-12">
         <form [formGroup]="form" class="col-sm-12 justify-content-start">
           <div class="d-flex justify-content-center align-items-center mb-3">
@@ -178,8 +178,8 @@
             <div class="col-sm-12 col-md-6">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>{{'Manager' | translate}}</mat-label>
-                <input type="text" matInput formControlName="manager" [matAutocomplete]="auto1">
-                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
+                <input type="text" matInput formControlName="manager" [matAutocomplete]="manager">
+                <mat-autocomplete #manager="matAutocomplete" [displayWith]="displayFn"
                                   (opened)="handlerAutocomplete('manager')">
                   <mat-option *ngFor="let option of managersFilteredOptions | async" [value]="option">
                     {{option.name}}
@@ -240,36 +240,31 @@
             <div class="col-sm-12 col-md-4">
               <mat-checkbox color="primary"
                             formControlName="punchAnyWhere">{{'Can Punch Anywhere' | translate}}</mat-checkbox>
-              <small
-                *ngIf="(form.controls['punchAnyWhere'].hasError('requiredTrue')) && !form.controls['punchAnyWhere'].pristine "
-                class="warn-text gene-block m-0">
-                {{'You must choose one' | translate}}
-              </small>
             </div>
 
             <div class="col-sm-12 col-md-4">
               <mat-checkbox color="primary" formControlName="autoPunch">{{'Auto Punch' | translate}}</mat-checkbox>
-              <small
-                *ngIf="(form.controls['autoPunch'].hasError('requiredTrue')) && !form.controls['autoPunch'].pristine "
-                class="warn-text gene-block m-0">
-                {{'You must choose one' | translate}}
-              </small>
             </div>
 
-            <div class="col-sm-12 col-md-4 my-3 my-lg-0" [ngClass]="{'hidden': !data}">
-              <mat-slide-toggle
-                class="example-margin"
-                formControlName="connected"
-                [color]="primaryColor"
-                [checked]="false"
-                [disabled]="false">
-                {{'Connected' | translate}}
-              </mat-slide-toggle>
-              <small *ngIf="(form.controls['connected'].hasError('required')) && !form.controls['connected'].pristine "
-                     class="warn-text gene-block m-0">
-                {{'You must choose' | translate}}
-              </small>
+
+            <div class="col-sm-12 col-md-4">
+              <mat-checkbox color="primary" formControlName="connected">{{'Connected' | translate}}</mat-checkbox>
             </div>
+
+            <!--            <div class="col-sm-12 col-md-4 my-3 my-lg-0" [ngClass]="{'hidden': !data}">-->
+            <!--              <mat-slide-toggle-->
+            <!--                class="example-margin"-->
+            <!--                formControlName="connected"-->
+            <!--                [color]="primaryColor"-->
+            <!--                [checked]="false"-->
+            <!--                [disabled]="false">-->
+            <!--                {{'Connected' | translate}}-->
+            <!--              </mat-slide-toggle>-->
+            <!--              <small *ngIf="(form.controls['connected'].hasError('required')) && !form.controls['connected'].pristine "-->
+            <!--                     class="warn-text gene-block m-0">-->
+            <!--                {{'You must choose' | translate}}-->
+            <!--              </small>-->
+            <!--            </div>-->
 
             <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
               <button mat-button class="mx-2 warn-bg" [routerLink]="['/team']">{{'Back' | translate}}</button>

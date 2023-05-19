@@ -39,3 +39,14 @@
 .mobile-breadcrumb {
   padding: 15px 0 15px 0px;
 }
+
+mat-sidenav {
+  background: var(--primary-color) !important;
+
+  mat-toolbar {
+    background: var(--primary-color) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

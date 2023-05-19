@@ -42,7 +42,7 @@ export class DataTableContainerComponent implements OnInit, AfterViewInit, OnCha
   @Input() total;
   @Input() showSearch;
   @Input() showCreate = true;
-  @Input() sideFilters;
+  @Input() filtersNames;
   @Input() data;
   @Input() createLink;
   @Input() viewLink;
@@ -132,10 +132,10 @@ export class DataTableContainerComponent implements OnInit, AfterViewInit, OnCha
       this.dataSource.data = this.data;
       this.backup = [...this.dataSource.data];
     }
-    if (this.sideFilters?.includes('PAW')) {
+    if (this.filtersNames?.includes('PAW')) {
       this.getPawStatistics();
     }
-    if (this.sideFilters?.includes('status')) {
+    if (this.filtersNames?.includes('status')) {
       this.getStatus();
     }
     // console.log('datatable', this.data)
