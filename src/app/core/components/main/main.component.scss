@@ -50,3 +50,18 @@ mat-sidenav {
     align-items: center;
   }
 }
+
+.mat-mdc-icon-button .mat-icon {
+  font-size: 24px !important;
+  height: unset !important;
+  width: unset !important;
+}
+
+.mat-mdc-icon-button img {
+  height: 14px !important;
+  width: 24px !important;
+}
+
+.gene-header-toolbar {
+  height: 55px !important;
+}

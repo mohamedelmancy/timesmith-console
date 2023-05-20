@@ -6,7 +6,7 @@
     </mat-sidenav>
     <mat-toolbar class="gene-header-toolbar horizontal-toolbar-wrap">
       <div class="gene-logo mat-pad-none"><img src="{{clientLogo}}" width="120" height="27" alt="logo"></div>
-      <a class="navbar-brand" *ngIf="isLoggedIn">{{header | translate}}</a>
+      <a class="navbar-brand" *ngIf="(loggedIn$ | async)">{{header | translate}}</a>
       <div class="menu-divider"></div>
       <mat-icon color="primary" class="menu-home-icon" [routerLink]="['/']">home</mat-icon>
       <div class="menu-dot"></div>
@@ -14,7 +14,7 @@
       <lib-breadcrumbs class="gene-breadcrumbs"></lib-breadcrumbs>
       <span fxFlex></span>
       <div class="secondary-menu">
-        <button *ngIf="isLoggedIn" class="user-button" mat-button [matMenuTriggerFor]="menu"
+        <button *ngIf="loggedIn$ | async" class="user-button" mat-icon-button [matMenuTriggerFor]="menu"
                 style="width: fit-content; margin-top: 1px;">
           <div fxLayout="row" fxLayoutAlign="center center">
             <mat-icon>account_circle</mat-icon>
@@ -26,7 +26,7 @@
                 (click)="addClassOnBody($event)">
           <mat-icon>chrome_reader_mode</mat-icon>
         </button>
-        <button fxHide="true" fxHide.gt-sm="false" tooltip="{{'full screen' | translate}}" mat-button
+        <button fxHide="true" fxHide.gt-sm="false" tooltip="{{'full screen' | translate}}" mat-icon-button
                 class="fullscreen-toggle" (click)="toggleFullscreen()">
           <mat-icon *ngIf="!isFullscreen">fullscreen</mat-icon>
           <mat-icon *ngIf="isFullscreen">fullscreen_exit</mat-icon>
@@ -35,8 +35,8 @@
     </mat-toolbar>
 
 
-    <div class="horizontal-toolbar-wrap">
-      <mat-toolbar color="primary">
+    <div class="horizontal-toolbar-wrap" *ngIf="(loggedIn$ | async)">
+      <mat-toolbar color="primary" class="d-flex justify-content-center">
         <mat-toolbar-row class="hr-menu-wrap">
           <div class="horizontal-menu">
             <div class="gene-ham-icon" fxShow.lt-md="true" fxHide="true">
@@ -87,12 +87,12 @@
       <lib-breadcrumbs class="gene-breadcrumbs"></lib-breadcrumbs>
     </div>
 
-    <div class="gene-base-container" id="gene-base-container" #scrollContainer>
+    <div class="gene-base-container" id="gene-base-container" #scrollContainer [ngClass]="{'gene-base-container-no-navbar': !(loggedIn$ | async)}">
       <div class="inner-container" fxLayout="row wrap">
-        <div class="full-wid" style="min-height: 100%;">
+        <div class="full-wid project-content">
           <router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
         </div>
-        <div class="footer-wrap pad-t-none full-wid" fxFLex="100">
+        <div class="pad-t-none full-wid" fxFLex="100">
           <app-footer></app-footer>
         </div>
       </div>

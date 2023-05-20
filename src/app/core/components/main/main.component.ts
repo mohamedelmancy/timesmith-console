@@ -30,9 +30,8 @@ const screenfull = require('screenfull');
 })
 
 export class MainComponent implements OnInit, OnDestroy {
-
+  loggedIn$ = this.authService.loggedIn.pipe(untilDestroyed(this), map(res => res));
   userName: string;
-  isLoggedIn = true;
   root: any = 'rtl';
   layout: any = 'rtl';
   customizerIn = false;
@@ -147,7 +146,6 @@ export class MainComponent implements OnInit, OnDestroy {
         this.setUserInfo();
       } else {
         this.userName = '';
-        this.isLoggedIn = false;
       }
     }, err => {
 
@@ -158,9 +156,7 @@ export class MainComponent implements OnInit, OnDestroy {
     const userInfo = GetCurrentUser();
     if (userInfo?.firstName) {
       this.userName = userInfo?.firstName?.trim() + ' ' + userInfo?.socondName?.trim();
-      this.isLoggedIn = true;
     } else {
-      this.isLoggedIn = false;
     }
 
   }

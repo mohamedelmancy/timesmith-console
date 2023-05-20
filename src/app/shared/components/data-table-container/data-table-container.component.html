@@ -1,6 +1,6 @@
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer-container class="example-container" autosize [ngClass]="{'mat-drawer-container-mobile': (isMobile$ | async)}">
   <div class="list d-flex flex-column card-body">
-    <div class="col-sm-12 d-flex my-2 justify-content-lg-end page-actions" *ngIf="showCreate"
+    <div class="col-sm-12 d-flex my-2 justify-content-lg-end page-actions mx-2" *ngIf="showCreate"
          [ngClass]="filtersNames?.length && (isMobile$ | async) ? 'justify-content-between' : 'justify-content-end'">
       <button (click)="openDrawer()" *ngIf="filtersNames?.length && (isMobile$ | async)" tooltip="Open filters"
               color="primary" mat-raised-button type="button"
