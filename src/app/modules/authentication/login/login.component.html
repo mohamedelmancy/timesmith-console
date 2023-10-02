@@ -12,8 +12,8 @@
           <form #form="ngForm" (ngSubmit)="login(form.value)">
             <div fxLayout="column" fxLayoutAlign="start stretch">
               <mat-form-field class="full-wid mrgn-b-md">
-                <input matInput placeholder="{{'Mobile/Email' | translate}}" type="text" name="mobile" required
-                       [(ngModel)]="mobile">
+                <input matInput placeholder="{{'Username' | translate}}" type="text" name="username" required
+                       [(ngModel)]="username">
               </mat-form-field>
               <mat-form-field class="full-wid mrgn-b-md ">
                 <input matInput placeholder="{{'Password' | translate}}" type="password" name="password" required

@@ -1162,3 +1162,12 @@ button .mdc-button__label .mat-button-wrapper {
 //  height: 27px !important;
 //  width: 26px !important;
 //}
+.mat-drawer-content {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+.fa {
+  font: 14px/1 FontAwesome !important;
+}
+

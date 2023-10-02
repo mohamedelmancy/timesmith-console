@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: '',
+  apiUrl: 'https://api.thesmithandco.com/api/v1/',
   webUrl: '',
   captchaSiteKey: '',
   captchaSecretKey: '',

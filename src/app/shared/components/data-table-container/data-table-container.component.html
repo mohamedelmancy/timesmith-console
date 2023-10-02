@@ -1,6 +1,6 @@
 <mat-drawer-container class="example-container" autosize [ngClass]="{'mat-drawer-container-mobile': (isMobile$ | async)}">
   <div class="list d-flex flex-column card-body">
-    <div class="col-sm-12 d-flex my-2 justify-content-lg-end page-actions mx-2" *ngIf="showCreate"
+    <div class="col-sm-12 d-flex my-2 justify-content-lg-end page-actions" *ngIf="showCreate"
          [ngClass]="filtersNames?.length && (isMobile$ | async) ? 'justify-content-between' : 'justify-content-end'">
       <button (click)="openDrawer()" *ngIf="filtersNames?.length && (isMobile$ | async)" tooltip="Open filters"
               color="primary" mat-raised-button type="button"
@@ -33,8 +33,8 @@
 
                     <td mat-cell *matCellDef="let row; let i = index" style="width: 10px; flex: none; min-width: 10px">
                       <div class="d-flex">
-                        <a class="cursor-pointer mx-1" (click)="takeAction('Update', row)">{{'Edit' | translate}}</a> |
-                        <a class="cursor-pointer mx-1" (click)="takeAction('Delete', row)">{{'Delete' | translate}}</a>
+                        <a class="cursor-pointer mx-1 fa fa-edit d-flex justify-content-center align-items-center " (click)="takeAction('Update', row)"></a> |
+                        <a class="cursor-pointer mx-1 fa fa-trash d-flex justify-content-center align-items-center " (click)="takeAction('Delete', row)"></a>
                       </div>
                     </td>
                   </div>

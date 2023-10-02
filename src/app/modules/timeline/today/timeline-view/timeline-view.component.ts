@@ -163,7 +163,7 @@ export class TimelineViewComponent implements OnInit {
       console.log('ssss')
       this.renderCalendar();
       this.getEvents();
-      // this.getResources();
+      this.getResources();
       this.handleDragging();
     });
   }
@@ -504,15 +504,16 @@ export class TimelineViewComponent implements OnInit {
     console.log('render')
 
     const colors = ['#000', '#9e32a8', '#54ab98', '#becf3e', '#d95d7c', '#35e6e3', '#c414c1']
-    const today = `2022-06-${new Date().getDate()}T00:00:00Z`
-    const yesterday = `2022-06-${new Date().getDate() - 1}T00:00:00Z`
+    const today = `2023-09-${new Date().getDate()}T00:00:00Z`
+    const yesterday = `2023-09-${new Date().getDate() - 1}T00:00:00Z`
     this.coreService.getRequest(`https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline=&start=${yesterday}&end=${today}`).subscribe(res => {
-      res.map((event, index) => {
-        event.overlap = true;
-        event.color = colors[index];
-        event.id = Math.random();
-      });
-      this.options.events = res;
+      console.log('apis res', res)
+      // res.map((event, index) => {
+      //   event.overlap = true;
+      //   event.color = colors[index];
+      //   event.id = Math.random();
+      // });
+      // this.options.events = res;
       console.log('events res', res)
     }, error => {
 

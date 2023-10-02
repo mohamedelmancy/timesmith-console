@@ -12,7 +12,7 @@ import {CoreService} from "../../../services/core.service";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  mobile: string;
+  username: string;
   password: string;
   returnedUrl: string;
   remember = true;
@@ -36,11 +36,10 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('remember', JSON.stringify(this.remember));
     this.authService.setToken('res.token');
     this.authService.setLocalUserProfile('res.user');
-    const body = {
-      cred: value.mobile,
-      password: value.password,
-    }
-    this.coreService.postRequest('User/LogIn', body).subscribe(
+    var data = new FormData();
+    data.append("username", value?.username);
+    data.append("password", value?.password);
+    this.coreService.postRequest('console/login', data).subscribe(
       res => {
         localStorage.setItem('remember', JSON.stringify(this.remember));
         this.authService.setToken(res.token);
