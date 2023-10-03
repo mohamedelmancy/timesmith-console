@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   Router, Resolve,
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {CoreService} from "../services/core.service";
 
 @Injectable({
@@ -13,9 +13,10 @@ import {CoreService} from "../services/core.service";
 export class ExceptionCodeResolver implements Resolve<boolean> {
   constructor(private coreService: CoreService) {
   }
+
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const id = route.params['id'];
-    // return this.coreService.getRequest(`codes/${id}`)
-    return of(true);
+    return this.coreService.getRequest(`console/exceptions_codes/${id}`)
+    // return of(true);
   }
 }

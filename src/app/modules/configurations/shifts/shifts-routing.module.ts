@@ -29,12 +29,11 @@ const routes: Routes = [
     path: ':id',
     component: CreateShiftComponent,
     data: {
-      title: '{{shift.name}}',
-      breadcrumbs: '{{breadcrumb}}'
+      title: 'Update shift',
+      breadcrumbs: '{{shift.data.name}}'
     },
     resolve: {
       shift: ShiftResolver,
-      breadcrumb: BreadcrumbTranslateService
     }
   },
 

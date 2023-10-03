@@ -1,157 +1,93 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import moment from "moment";
-import {dateTimeFormat} from "../../../shared/variables/variables";
 import {ActivatedRoute} from "@angular/router";
+import {UntilDestroy} from "@ngneat/until-destroy";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {DeleteComponent} from "../../../modals/delete/delete.component";
 
+@UntilDestroy()
 @Component({
   selector: 'app-shifts',
   templateUrl: './shifts.component.html',
   styleUrls: ['./shifts.component.scss']
 })
 export class ShiftsComponent implements OnInit {
-
-  displayedColumns = {
-    labels: ['Site name', 'From', 'To', 'Duration', 'Weekends', 'Employees', 'Actions'],
-    values: ['name', 'from', 'to', 'duration', 'weekends', 'individuals', 'actions'],
-  };
-  constructor(private activatedRoute: ActivatedRoute) { }
-  data = [
+  weekends = [
     {
-      name: 'Shift1',
-      employees: [
-        {
-          name: 'Noha',
-          id: 20
-        },
-      ],
-      id: 1,
-      from: '2022-06-05T09:00:00Z',
-      to: '2022-06-05T05:00:00Z',
-      duration: 8,
-      weekends: [
-        {
-          name: 'Saturday',
-          id: 1
-        },
-        {
-          name: 'Friday',
-          id: 2
-        },
-      ],
-      individuals: 3
+      name: 'Saturday',
+      id: 1
     },
     {
-      name: 'Shift1',
-      employees: [
-        {
-          name: 'Noha',
-          id: 20
-        },
-      ],
-      id: 2,
-      from: '2022-06-05T09:00:00Z',
-      to: '2022-06-05T05:00:00Z',
-      duration: 8,
-      weekends: [
-        {
-          name: 'Saturday',
-          id: 1
-        },
-        {
-          name: 'Friday',
-          id: 2
-        },
-      ],
-      individuals: 3
-    },{
-      name: 'Shift1',
-      employees: [
-        {
-          name: 'Noha',
-          id: 20
-        },
-      ],
-      id: 89,
-      from: '2022-06-05T09:00:00Z',
-      to: '2022-06-05T05:00:00Z',
-      duration: 8,
-      weekends: [
-        {
-          name: 'Saturday',
-          id: 1
-        },
-        {
-          name: 'Friday',
-          id: 2
-        },
-      ],
-      individuals: 3
-    },{
-      name: 'Shift1',
-      employees: [
-        {
-          name: 'Noha',
-          id: 20
-        },
-      ],
-      id: 3,
-      from: '2022-06-05T09:00:00Z',
-      to: '2022-06-05T05:00:00Z',
-      duration: 8,
-      weekends: [
-        {
-          name: 'Saturday',
-          id: 1
-        },
-        {
-          name: 'Friday',
-          id: 2
-        },
-      ],
-      individuals: 3
-    },{
-      name: 'Shift1',
-      employees: [
-        {
-          name: 'Noha',
-          id: 20
-        },
-      ],
-      id: 6,
-      from: '2022-06-05T09:00:00Z',
-      to: '2022-06-05T05:00:00Z',
-      duration: 8,
-      weekends: [
-        {
-          name: 'Saturday',
-          id: 1
-        },
-        {
-          name: 'Friday',
-          id: 2
-        },
-      ],
-      individuals: 3
-    }
-
-
-
-
+      name: 'Sunday',
+      id: 2
+    },
+    {
+      name: 'Monday',
+      id: 3
+    }, {
+      name: 'Tuesday',
+      id: 4
+    }, {
+      name: 'Wednesday',
+      id: 5
+    }, {
+      name: 'Thursday',
+      id: 6
+    }, {
+      name: 'Friday',
+      id: 7
+    },
   ]
+  displayedColumns = {
+    labels: ['English name', 'Arabic name', 'From', 'To', 'Weekends', 'Actions'],
+    values: ['name_en', 'name_ar', 'from', 'to', 'weekdays', 'actions'],
+  };
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private dialog: MatDialog,
+  ) {
+  }
+
+  tableData = []
+
   ngOnInit(): void {
-    // this.data = this.activatedRoute.snapshot.data['shifts'];
-    this.data.forEach(item => {
-      item.from = moment(item.from).format('hh:mm A');
-      item.to = moment(item.to).format('hh:mm A');
+    this.tableData = this.activatedRoute.snapshot.data['shifts']?.data;
+    this.tableData.forEach(item => {
+      if (item.from < 10) {
+        item.from = `0${item?.from}`
+      }
+      if (item.to < 10) {
+        item.to = `0${item?.to}`
+      }
+      item.from = `${item?.from}:00`;
+      item.to = `${item?.to}:00`;
       item['employeesCount'] = item.employees?.length;
+      item.weekdays = '';
+      console.log('ddd', item)
+      const days = item.days.split(',');
+      days.map((day, index) => {
+        item.weekdays += this.handleDays(this.weekends.find(x => x.id === +day)?.name);
+        if (index < days?.length - 1) {
+          item.weekdays += ', ';
+        }
+      });
     })
   }
 
-  deleteRow(event) {
-    console.log('e', event)
-    const i = this.data.findIndex(x => x?.id === event.id);
-    console.log('i', i)
-    this.data = this.data.filter(x =>  x.id !== event?.id);
+  handleDays(day) {
+    return day?.slice(0, 1).toUpperCase() + day?.slice(1, 3);
+  }
+
+  delete(rows) {
+    let dialogRef: MatDialogRef<any>;
+    dialogRef = this.dialog.open(DeleteComponent, {
+      data: {rows: rows || '', api: 'console/customers_shifts'},
+      width: '600px'
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      const ids = res?.deleted?.map(item => item.id);
+      this.tableData = this.tableData.filter(x => !ids?.includes(x.id));
+    })
   }
 
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import moment from "moment";
-import {dateFormat, dateTimeFormat} from "../../../shared/variables/variables";
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GetLanguage} from "../../../shared/functions/shared-functions";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {DeleteComponent} from "../../../modals/delete/delete.component";
 
 @Component({
   selector: 'app-exception-codes',
@@ -12,57 +12,36 @@ import {GetLanguage} from "../../../shared/functions/shared-functions";
 export class ExceptionCodesComponent implements OnInit {
 
   displayedColumns = {
-    labels: ['Exception code', 'Symbol', 'Actions'],
-    values: ['code', 'symbol', 'actions'],
+    labels: ['English name', 'Arabic name', 'Symbol', 'Actions'],
+    values: ['name_en', 'name_ar', 'symbol', 'actions'],
   };
-  constructor(private activatedRoute: ActivatedRoute) { }
-  data = [
-    {
-      code: 'External Assignment',
-      symbol: {
-        symbol_name: 'bike-fast',
-        type: 'icon',
-        represent_en: 'External Assignment',
-        represent_ar: 'مأمورية',
-        name: ''
-      },
-      id: 1
-    },{
-      code: 'Baby Hour',
-      symbol: {
-        symbol_name: 'baby-bottle-outline',
-        type: 'icon',
-        represent_en: 'Baby Hour',
-        represent_ar: 'ساعة رضاعة',
-        name: ''
-      },
-      id: 2
-    },
-    {
-      code: 'Meeting',
-      symbol: {
-        symbol_name: 'handshake-outline',
-        type: 'icon',
-        represent_en: 'Meeting',
-        represent_ar: 'اجتماع',
-        name: ''
-      },
-      id: 3
-    },
-  ];
-  language = GetLanguage();
-  ngOnInit(): void {
-    // this.data = this.activatedRoute.snapshot.data['exceptionCode'];
-    this.data.forEach(item => {
-      item.symbol['name'] = this.language === 'ar' ? item.symbol.represent_ar : item.symbol.represent_en
-    });
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private dialog: MatDialog,
+  ) {
   }
 
-  deleteRow(event) {
-    console.log('e', event)
-    const i = this.data.findIndex(x => x?.id === event.id);
-    console.log('i', i)
-    this.data = this.data.filter(x =>  x.id !== event?.id);
+  tableData = [];
+  language = GetLanguage();
+
+  ngOnInit(): void {
+    this.tableData = this.activatedRoute.snapshot.data['exceptionCodes']?.data;
+    this.tableData.forEach(item => {
+      item.symbol = item?.icon;
+    });
+    console.log('s', this.tableData)
+  }
+
+  delete(rows) {
+    let dialogRef: MatDialogRef<any>;
+    dialogRef = this.dialog.open(DeleteComponent, {
+      data: {rows: rows || '', api: 'console/exceptions_codes'},
+      width: '600px'
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      const ids = res?.deleted?.map(item => item.id);
+      this.tableData = this.tableData.filter(x => !ids?.includes(x.id));
+    })
   }
 
 }

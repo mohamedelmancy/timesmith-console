@@ -4,7 +4,7 @@
       <div class="col-sm-12">
         <form [formGroup]="form" class="col-sm-12 justify-content-start">
           <div class="d-flex justify-content-center align-items-center mb-3">
-            <h2>{{data ? ('Update department' | translate) : ('Create new department' | translate)}}</h2></div>
+            <h2>{{department ? ('Update department' | translate) : ('Create new department' | translate)}}</h2></div>
           <div class="d-flex row">
             <div class="col-sm-12 col-md-6 ">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
@@ -64,9 +64,9 @@
             </div>
             <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex ">
               <button mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/departments']">{{'Back' | translate}}</button>
-              <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
+              <button (click)="save(form?.value)" color="primary" mat-raised-button
                       class="" cdkFocusInitial>
-                {{data ? ('Update' | translate): ('Create' | translate)}}
+                {{department ? ('Update' | translate): ('Create' | translate)}}
               </button>
             </div>
           </div>

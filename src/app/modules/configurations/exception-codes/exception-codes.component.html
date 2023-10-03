@@ -1,8 +1,8 @@
 <app-data-table-container
-  (deleteEvent)="deleteRow($event)"
+  (deleteEvent)="delete($event)"
   [dataTableName]="'exception-codes'"
   [columns]="displayedColumns"
-  [data]="data"
+  [data]="tableData"
   [createLink]="'/configurations/exception-codes/new'"
   [viewLink]="'/configurations/exception-codes'"
 ></app-data-table-container>

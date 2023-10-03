@@ -1,9 +1,9 @@
 <app-data-table-container
   [filtersNames]="['sites', 'departments', 'individuals', 'PAW', 'roles']"
-  (deleteEvent)="deleteRow($event)"
+  (deleteEvent)="delete($event)"
   [dataTableName]="'team'"
   [columns]="displayedColumns"
-  [data]="data"
+  [data]="tableData"
   [createLink]="'/team/new'"
   [viewLink]="'/team'"
 ></app-data-table-container>

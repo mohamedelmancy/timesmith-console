@@ -1,6 +1,6 @@
 <div class="col-sm-12 d-flex flex-column side-filters px-2 py-3">
   <mat-accordion *ngIf="sideFilters?.length">
-    <mat-expansion-panel *ngFor="let filter of sideFilters; let i = index">
+    <mat-expansion-panel *ngFor="let filter of sideFilters; let i = index" class="px-1">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{filter?.name | titlecase}}

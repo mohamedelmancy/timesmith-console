@@ -20,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: 'auth',
-        // canActivate: [LandingGuard],
+        canActivate: [LandingGuard],
         loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule),
         data: {
           breadcrumbs: ''
@@ -28,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'timeline',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () => import('./modules/timeline/timeline.module').then(m => m.TimelineModule),
         data: {
           title: 'Today',
@@ -40,7 +40,7 @@ const routes: Routes = [
       },
       {
         path: 'requests',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () => import('./modules/requests/requests.module').then(m => m.RequestsModule),
         data: {
           title: 'Requests',
@@ -52,7 +52,7 @@ const routes: Routes = [
       },
       {
         path: 'reports',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () => import('./modules/reports/reports.module').then(m => m.ReportsModule),
         data: {
           title: 'Reports',
@@ -64,7 +64,7 @@ const routes: Routes = [
       },
       {
         path: 'notifications',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule),
         data: {
           title: 'Notifications',
@@ -76,7 +76,7 @@ const routes: Routes = [
       },
       {
         path: 'configurations',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () => import('./modules/configurations/configurations.module').then(m => m.ConfigurationsModule),
         data: {
           // breadcrumbs: 'Configurations'
@@ -84,7 +84,7 @@ const routes: Routes = [
       },
       {
         path: 'team',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () => import('./modules/team/team.module').then(m => m.TeamModule),
         data: {
           title: 'Team',
@@ -96,7 +96,7 @@ const routes: Routes = [
       },
       {
         path: 'roles-permissions',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () => import('./modules/roles-permissions/roles-permissions.module').then(m => m.RolesPermissionsModule),
         data: {
           title: 'Roles and Permissions',
@@ -108,7 +108,7 @@ const routes: Routes = [
       },
       {
         path: 'support',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () => import('./modules/support/support.module').then(m => m.SupportModule),
         data: {
           title: 'Support',

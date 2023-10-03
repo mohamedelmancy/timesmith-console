@@ -4,29 +4,13 @@
       <div class="col-sm-12">
         <form [formGroup]="form" class="col-sm-12 justify-content-start">
           <div class="d-flex justify-content-center align-items-center mb-3">
-            <h2>{{data ? 'Update team member' : 'Create new team member'}}</h2></div>
+            <h2>{{team ? 'Update team member' : 'Create new team member'}}</h2></div>
           <div class="d-flex row">
-            <div class="col-sm-12 col-md-6 ">
-              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                <mat-label>{{'Name' | translate}}</mat-label>
-                <input matInput placeholder="{{'Name' | translate}}" type="text" name="name" formControlName="name">
-              </mat-form-field>
-              <small
-                *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched"
-                class="warn-text gene-block">
-                {{'You must include name' | translate}}
-              </small>
-              <small
-                *ngIf="form.controls['name'].errors && (form.controls['name'].hasError('wrong')) && form.controls['name'].touched"
-                class="warn-text gene-block">
-                {{'You must include a valid name' | translate}}
-              </small>
-            </div>
-            <div class="col-sm-12 col-md-6 ">
-              <div class="mb-2 text-center d-flex justify-content-start">
-                <mat-label>{{'Personal Avatar' | translate}}</mat-label>
-                <div class="d-flex justify-content-center align-items-center col-sm-8">
-                  <div class="col-sm-6">
+            <div class="col-sm-12 mb-2 align-items-center col-sm-12 d-flex flex-column justify-content-center ">
+              <div class="col-sm-12 mb-2 text-center d-flex justify-content-start flex-column">
+                <div class="d-flex col-sm-12 justify-content-center align-items-center col-sm-8">
+                  <div class="col-sm-6 flex-column justify-content-center align-items-center">
+                    <mat-label class="d-block">{{'Personal Avatar' | translate}}</mat-label>
                     <label class="avatar" for="avatar">
                       <input name="name" type="file" formControlName="avatar" accept="image/*" style="display: none"
                              id="avatar" (change)="onAvatarSelect($event)"/>
@@ -67,8 +51,41 @@
               </small>
             </div>
 
-
             <div class="col-sm-12 col-md-6 ">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Name' | translate}}</mat-label>
+                <input matInput placeholder="{{'Name' | translate}}" type="text" name="name" formControlName="name">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched"
+                class="warn-text gene-block">
+                {{'You must include name' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['name'].errors && (form.controls['name'].hasError('wrong')) && form.controls['name'].touched"
+                class="warn-text gene-block">
+                {{'You must include a valid name' | translate}}
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+                <mat-label>{{'Username' | translate}}</mat-label>
+                <input matInput placeholder="{{'Username' | translate}}" formControlName="username"
+                       type="text">
+              </mat-form-field>
+              <small
+                *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched"
+                class="warn-text gene-block">
+                {{'You must include username' | translate}}
+              </small>
+              <small
+                *ngIf="form.controls['username'].errors && !(form.controls['username'].hasError('required')) && form.controls['username'].touched "
+                class="warn-text gene-block">
+                {{'You must include a valid username' | translate}}
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-6" *ngIf="!team_id">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>{{'Password' | translate}}</mat-label>
                 <input matInput placeholder="{{'Password' | translate}}" [type]="hidePass ? 'password' : 'text'"
@@ -88,7 +105,7 @@
                 {{'You must include a valid password' | translate}}
               </small>
             </div>
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-6"  *ngIf="!team_id">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>{{'Confirm Password' | translate}}</mat-label>
                 <input matInput placeholder="{{'Confirm Password' | translate}}" formControlName="confirmPassword"
@@ -107,7 +124,6 @@
                 {{'Passwords do not match' | translate}}
               </small>
             </div>
-
 
             <div class="col-sm-12 col-md-6">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
@@ -177,26 +193,27 @@
             </div>
             <div class="col-sm-12 col-md-6">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                <mat-label>{{'Manager' | translate}}</mat-label>
-                <input type="text" matInput formControlName="manager" [matAutocomplete]="manager">
-                <mat-autocomplete #manager="matAutocomplete" [displayWith]="displayFn"
-                                  (opened)="handlerAutocomplete('manager')">
-                  <mat-option *ngFor="let option of managersFilteredOptions | async" [value]="option">
+                <mat-label>{{'Organization' | translate}}</mat-label>
+                <input type="text" matInput formControlName="organization" [matAutocomplete]="organization">
+                <mat-autocomplete #organization="matAutocomplete" [displayWith]="displayFn"
+                                  (opened)="handlerAutocomplete('organization')">
+                  <mat-option *ngFor="let option of organizationFilteredOptions | async" [value]="option">
                     {{option.name}}
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
               <small
-                *ngIf="form.controls['manager'].hasError('required') && form.controls['manager'].touched"
+                *ngIf="form.controls['organization'].hasError('required') && form.controls['organization'].touched"
                 class="warn-text gene-block">
-                {{'You must include manager' | translate}}
+                {{'You must include organization name' | translate}}
               </small>
               <small
-                *ngIf="form.controls['manager'].errors && (form.controls['manager'].hasError('wrong')) && form.controls['manager'].touched"
+                *ngIf="form.controls['organization'].errors && (form.controls['organization'].hasError('wrong')) && form.controls['organization'].touched"
                 class="warn-text gene-block">
-                {{'You must include a valid manager' | translate}}
+                {{'You must include a valid organization name' | translate}}
               </small>
             </div>
+
             <div class="col-sm-12 col-md-6">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>{{'Role' | translate}}</mat-label>
@@ -220,11 +237,10 @@
               </small>
             </div>
             <div class="col-sm-12 col-md-6">
-              <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                <mat-label>{{'Mobile number' | translate}}</mat-label>
-                <input matInput placeholder="{{'Mobile number' | translate}}" formControlName="mobile"
-                       type="text">
-              </mat-form-field>
+              <div class="wrapper custom-phone flex-auto mb-3" style="flex: 1.45;">
+                <app-phone-with-country (phoneValue)="changedPhone($event)" [full_mobile_number]="team?.full_mobile_number" [value]="team?.mobile"
+                                        [countryCode]="team?.calling_code"></app-phone-with-country>
+              </div>
               <small
                 *ngIf="form.controls['mobile'].hasError('required') && form.controls['mobile'].touched"
                 class="warn-text gene-block">
@@ -251,26 +267,11 @@
               <mat-checkbox color="primary" formControlName="connected">{{'Connected' | translate}}</mat-checkbox>
             </div>
 
-            <!--            <div class="col-sm-12 col-md-4 my-3 my-lg-0" [ngClass]="{'hidden': !data}">-->
-            <!--              <mat-slide-toggle-->
-            <!--                class="example-margin"-->
-            <!--                formControlName="connected"-->
-            <!--                [color]="primaryColor"-->
-            <!--                [checked]="false"-->
-            <!--                [disabled]="false">-->
-            <!--                {{'Connected' | translate}}-->
-            <!--              </mat-slide-toggle>-->
-            <!--              <small *ngIf="(form.controls['connected'].hasError('required')) && !form.controls['connected'].pristine "-->
-            <!--                     class="warn-text gene-block m-0">-->
-            <!--                {{'You must choose' | translate}}-->
-            <!--              </small>-->
-            <!--            </div>-->
-
             <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
               <button mat-button class="mx-2 warn-bg" [routerLink]="['/team']">{{'Back' | translate}}</button>
-              <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
+              <button (click)="save(form?.value)"  color="primary" mat-raised-button
                       class="" cdkFocusInitial>
-                {{data ? ('Update' | translate) : ('Create' | translate)}}
+                {{team ? ('Update' | translate) : ('Create' | translate)}}
               </button>
             </div>
           </div>

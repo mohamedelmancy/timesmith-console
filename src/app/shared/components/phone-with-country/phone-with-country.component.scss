@@ -1,0 +1,22 @@
+intl-telephone-input {
+  width: 100%;
+
+  ::ng-deep {
+    .phoneInput {
+      border: none !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .input-container {
+      border-radius: 5px;
+      border-color: rgba(0, 0, 0, 0.38);
+      border-width: 1px;
+      height: 56px !important;
+    }
+
+    .iti--allow-dropdown {
+      width: 100%;
+    }
+  }
+}

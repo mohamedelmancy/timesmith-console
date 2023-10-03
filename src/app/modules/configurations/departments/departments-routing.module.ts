@@ -5,6 +5,7 @@ import {DepartmentsResolver} from "../../../resolvers/departments.resolver";
 import {BreadcrumbTranslateService} from "../../../services/breadcrumb-translate.service";
 import {CreateDepartmentComponent} from "./create-department/create-department.component";
 import {DepartmentResolver} from "../../../resolvers/department.resolver";
+import {IndividualsResolver} from "../../../resolvers/individuals.resolver";
 
 const routes: Routes = [
   {
@@ -22,19 +23,20 @@ const routes: Routes = [
       breadcrumbs: '{{breadcrumb}}'
     },
     resolve: {
-      breadcrumb: BreadcrumbTranslateService
+      breadcrumb: BreadcrumbTranslateService,
+      users: IndividualsResolver,
     }
   },
   {
     path: ':id',
     component: CreateDepartmentComponent,
     data: {
-      title: '{{department.name}}',
-      breadcrumbs: '{{breadcrumb}}'
+      title: 'Update department',
+      breadcrumbs: '{{department.data.name}}'
     },
     resolve: {
       department: DepartmentResolver,
-      breadcrumb: BreadcrumbTranslateService
+      users: IndividualsResolver,
     }
   },];
 

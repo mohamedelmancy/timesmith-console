@@ -3,7 +3,7 @@
     <div class="col-sm-6 card d-flex flex-column p-3 my-4">
       <div class="col-sm-12">
         <form [formGroup]="form" class="col-sm-12 justify-content-start">
-          <div class="d-flex justify-content-center align-items-center mb-3"><h2>{{data ? ('Update site' | translate) : ('Create new site' | translate)}}</h2></div>
+          <div class="d-flex justify-content-center align-items-center mb-3"><h2>{{site ? ('Update site' | translate) : ('Create new site' | translate)}}</h2></div>
           <div class="d-flex row">
             <div class="col-sm-12 col-md-6 ">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
@@ -42,7 +42,7 @@
             <div class="col-sm-12 col-md-6 ">
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>{{'Tolerance' | translate}}</mat-label>
-                <input matInput placeholder="{{'Tolerance' | translate}}" type="text" name="tolerance"
+                <input matInput placeholder="{{'Tolerance' | translate}}" type="number" name="tolerance"
                        formControlName="tolerance">
               </mat-form-field>
               <small
@@ -51,7 +51,7 @@
                 {{'You must include tolerance' | translate}}
               </small>
               <small
-                *ngIf="form.controls['tolerance'].errors && (form.controls['tolerance'].hasError('wrong')) && form.controls['tolerance'].touched"
+                *ngIf="form.controls['tolerance'].errors && (form.controls['tolerance'].hasError('pattern')) && form.controls['tolerance'].touched"
                 class="warn-text gene-block">
                 {{'You must include a valid tolerance' | translate}}
               </small>
@@ -99,8 +99,8 @@
       </div>
       <div class="col-sm-12 d-flex justify-content-center my-3 justify-content-lg-end d-flex align-items-center">
         <button  mat-button class="mx-2 warn-bg" [routerLink]="['/configurations/sites']">{{'Back' | translate}}</button>
-        <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="" cdkFocusInitial>
-          {{data ? ('Update' | translate): ('Create' | translate)}}
+        <button (click)="save(form?.value)" color="primary" mat-raised-button class="" cdkFocusInitial>
+          {{site ? ('Update' | translate): ('Create' | translate)}}
         </button>
       </div>
     </div>

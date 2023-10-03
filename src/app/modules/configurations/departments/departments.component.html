@@ -1,8 +1,8 @@
 <app-data-table-container
-  (deleteEvent)="deleteRow($event)"
+  (deleteEvent)="delete($event)"
   [dataTableName]="'departments'"
   [columns]="displayedColumns"
-  [data]="data"
+  [data]="tableData"
   [createLink]="'/configurations/departments/new'"
   [viewLink]="'/configurations/departments'"
 ></app-data-table-container>

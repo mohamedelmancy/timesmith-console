@@ -26,9 +26,14 @@ export class DeleteComponent implements OnInit {
     if (this.rows && !Array.isArray(this.rows) ) {
       this.rows = [this.rows];
     }
-    this.rows?.length && this.rows?.forEach(item => item.name = GetLanguage() === 'ar' ?
-      item?.name_ar || item?.title_ar || item?.text_ar || item?.question_ar || (item?.first_name + ' ' + item?.last_name) :
-      item?.name_en || item?.title_en || item?.text_en || item?.question_en || (item?.first_name + ' ' + item?.last_name));
+    console.log('row', this.rows)
+    this.rows?.length && this.rows?.forEach(item => {
+      if (!item?.name) {
+        item.name = GetLanguage() === 'ar' ?
+          item?.name_ar || item?.title_ar || item?.text_ar || item?.question_ar || (item?.first_name + ' ' + item?.last_name) :
+          item?.name_en || item?.title_en || item?.text_en || item?.question_en || (item?.first_name + ' ' + item?.last_name)
+      }
+    })
   }
 
   remove(item) {

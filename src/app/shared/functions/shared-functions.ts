@@ -12,26 +12,14 @@ export function GetCurrentUser() {
   return secureStorage.getItem('userProfile');
 }
 
+
+export function HandleListName(list) {
+  list?.forEach(item => item.name = GetLanguage() === 'ar' ? item.name_ar : item.name_en)
+  return list;
+}
+
 export function HandleResponseError(error) {
-  if (error?.error?.messageArEng) {
-    if (GetLanguage() === 'ar') {
-      return error.error.messageArEng[1]
-    } else {
-      return error.error.messageArEng[0]
-    }
-  } else if (error?.messageArEng) {
-    if (GetLanguage() === 'ar') {
-      return error.messageArEng[1]
-    } else {
-      return error.messageArEng[0]
-    }
-  } else {
-    if (GetLanguage() === 'ar') {
-      return error?.error?.messageAr
-    } else {
-      return error?.error?.messageEng
-    }
-  }
+  return (error?.error?.error ? error?.error?.error : error?.error?.message);
 }
 
 export function ConfirmedValidator(controlName: string, matchingControlName: string) {

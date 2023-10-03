@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LoaderComponent } from './components/loader/loader.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {LoaderComponent} from './components/loader/loader.component';
 import {TooltipModule} from "ng2-tooltip-directive";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-// import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
@@ -36,14 +35,15 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MenuToggleModule} from "../core/menu/menu-toggle.module";
-import { DataTableComponent } from './components/data-table/data-table.component';
+import {DataTableComponent} from './components/data-table/data-table.component';
 import {TranslateModule} from "@ngx-translate/core";
 import {RouterModule} from "@angular/router";
-import { SideFilterComponent } from './components/side-filter/side-filter.component';
-import { DataTableContainerComponent } from './components/data-table-container/data-table-container.component';
+import {SideFilterComponent} from './components/side-filter/side-filter.component';
+import {DataTableContainerComponent} from './components/data-table-container/data-table-container.component';
 import {MenuToggleAnchorDirective, MenuToggleDirective, MenuToggleLinkDirective} from "../core/menu/menu-toggle";
 import {BreadcrumbTranslateService} from "../services/breadcrumb-translate.service";
-
+import {PhoneWithCountryComponent} from "./components/phone-with-country/phone-with-country.component";
+import {NgxIntlTelephoneInputModule} from "ngx-intl-telephone-input";
 
 
 @NgModule({
@@ -51,7 +51,8 @@ import {BreadcrumbTranslateService} from "../services/breadcrumb-translate.servi
     LoaderComponent,
     DataTableComponent,
     SideFilterComponent,
-    DataTableContainerComponent
+    DataTableContainerComponent,
+    PhoneWithCountryComponent
   ],
   exports: [
     LoaderComponent,
@@ -59,56 +60,56 @@ import {BreadcrumbTranslateService} from "../services/breadcrumb-translate.servi
     DataTableComponent,
     TranslateModule,
     DataTableContainerComponent,
-
+    PhoneWithCountryComponent
   ],
-    imports: [
-        CommonModule,
-        TooltipModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        FlexLayoutModule,
-        // PerfectScrollbarModule,
-        MenuToggleModule,
-        HttpClientModule,
-        MatSlideToggleModule,
-        MatButtonModule,
-        MatCardModule,
-        MatMenuModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatBadgeModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatProgressSpinnerModule,
-        MatTableModule,
-        MatExpansionModule,
-        MatSelectModule,
-        MatSnackBarModule,
-        MatTooltipModule,
-        MatChipsModule,
-        MatListModule,
-        MatSidenavModule,
-        MatTabsModule,
-        MatProgressBarModule,
-        MatCheckboxModule,
-        MatSliderModule,
-        MatRadioModule,
-        MatDialogModule,
-        MatGridListModule,
-        ToastrModule.forRoot(
-            {
-                // maxOpened: 1,
-                positionClass: 'toast-custom-position'
-            }
-        ),
-        MatAutocompleteModule,
-        MatPaginatorModule,
-        TranslateModule,
-        RouterModule,
-        MatRippleModule,
-    ],
+  imports: [
+    CommonModule,
+    TooltipModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FlexLayoutModule,
+    MenuToggleModule,
+    HttpClientModule,
+    MatSlideToggleModule,
+    MatButtonModule,
+    MatCardModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatBadgeModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatExpansionModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatTooltipModule,
+    MatChipsModule,
+    MatListModule,
+    MatSidenavModule,
+    MatTabsModule,
+    MatProgressBarModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    MatRadioModule,
+    MatDialogModule,
+    MatGridListModule,
+    ToastrModule.forRoot(
+      {
+        // maxOpened: 1,
+        positionClass: 'toast-custom-position'
+      }
+    ),
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    TranslateModule,
+    RouterModule,
+    MatRippleModule,
+    NgxIntlTelephoneInputModule,
+  ],
   providers: [
     MenuToggleDirective,
     MenuToggleLinkDirective,
@@ -116,4 +117,5 @@ import {BreadcrumbTranslateService} from "../services/breadcrumb-translate.servi
     BreadcrumbTranslateService
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

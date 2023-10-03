@@ -1,14 +1,15 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CoreService} from "../../../../services/core.service";
-import {secureStorage} from "../../../../shared/functions/secure-storage";
-import {GetLanguage} from "../../../../shared/functions/shared-functions";
+import {GetLanguage, HandleResponseError} from "../../../../shared/functions/shared-functions";
 import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
 import {GlobalService} from "../../../../services/global.service";
 import {debounceTime} from "rxjs";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {ToastrService} from "ngx-toastr";
+import {TranslateService} from "@ngx-translate/core";
 
 @UntilDestroy()
 @Component({
@@ -24,10 +25,15 @@ export class CreateExceptionCodeComponent implements OnInit {
               private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer,
               private globalService: GlobalService,
-              private activatedRoute: ActivatedRoute, private coreService: CoreService) {
+              private activatedRoute: ActivatedRoute,
+              private toastr: ToastrService,
+              private router: Router,
+              private coreService: CoreService,
+              private translateService: TranslateService) {
   }
 
-  data;
+  exception_code;
+  exception_code_id;
   symbols = [
     {
       symbol_name: 'currency-usd',
@@ -89,6 +95,7 @@ export class CreateExceptionCodeComponent implements OnInit {
   searchCtrl = new FormControl();
 
   ngOnInit(): void {
+    this.exception_code = this.activatedRoute.snapshot.data['exceptionCode']?.data;
     this.form = this.fb.group({
         name_en: ['', Validators.compose([Validators.required])],
         name_ar: ['', Validators.compose([Validators.required])],
@@ -96,16 +103,17 @@ export class CreateExceptionCodeComponent implements OnInit {
       },
       {validators: []}
     );
+    this.exception_code_id = this.activatedRoute.snapshot.data['exceptionCode']?.data?.id;
     this.form.valueChanges.subscribe(changes => {
       console.log('changes', changes);
     });
-    this.data = this.activatedRoute.snapshot.data['leave'];
-    this.data = secureStorage.getItem('row');
-    this.fillForm();
+    if (this.exception_code_id) {
+      this.fillForm();
+    }
     this.symbols.forEach(symbol => {
       symbol['name'] = this.language === 'ar' ? symbol.represent_ar : symbol.represent_en
     })
-    console.log('this.data', this.data);
+    console.log('this.data', this.exception_code);
     this.search();
     // console.log('matIconRegistry', this.icons);
   }
@@ -141,9 +149,10 @@ export class CreateExceptionCodeComponent implements OnInit {
   }
 
   fillForm() {
-    this.form.controls['name_ar'].setValue(this.data?.name_ar);
-    this.form.controls['name_en'].setValue(this.data?.name_en);
-    this.form.controls['symbol'].setValue(this.data?.symbol);
+    this.form.controls['name_ar'].setValue(this.exception_code?.name_ar);
+    this.form.controls['name_en'].setValue(this.exception_code?.name_en);
+    this.form.controls['symbol'].setValue(this.symbols.find(x => x.symbol_name === this.exception_code?.icon));
+    this.chooseSymbol(this.symbols.find(x => x.symbol_name === this.exception_code?.icon), 'default');
   }
 
   chooseSymbol(e, type?) {
@@ -175,7 +184,38 @@ export class CreateExceptionCodeComponent implements OnInit {
   }
 
   save(value) {
+    if (!this.form.valid) {
+      this.form?.markAllAsTouched();
+    } else {
+      var data = new FormData();
+      data.append("name_en", this.form.value.name_en);
+      data.append("name_ar", this.form.value.name_ar);
+      data.append("icon", this.form.value.symbol?.symbol_name);
 
+      console.log('body', data)
+      if (!this.exception_code_id) {
+        this.coreService.postRequest('console/exceptions_codes', data).pipe(untilDestroyed(this)).subscribe(res => {
+          this.form.reset();
+          this.form.markAsUntouched();
+          this.form.markAsPristine();
+          this.form.setErrors(null);
+          this.toastr.success(res?.message)
+        }, error => {
+          this.toastr.error(HandleResponseError(error));
+        }, () => {
+          this.router.navigate(['/configurations/exception-codes']);
+        })
+      } else {
+        this.coreService.postRequest(`console/exceptions_codes/${this.exception_code_id}`, data).pipe(untilDestroyed(this)).subscribe(res => {
+          this.toastr.success(res?.message)
+        }, error => {
+          this.toastr.error(HandleResponseError(error));
+        }, () => {
+          this.router.navigate(['/configurations/exception-codes']);
+        })
+      }
+    }
   }
+
 
 }

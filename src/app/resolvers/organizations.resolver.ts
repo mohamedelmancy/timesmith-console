@@ -10,12 +10,12 @@ import {CoreService} from "../services/core.service";
 @Injectable({
   providedIn: 'root'
 })
-export class LeavesResolver implements Resolve<boolean> {
+export class OrganizationsResolver implements Resolve<boolean> {
   constructor(private coreService: CoreService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.coreService.getRequest(`console/customers_leaves`)
+    return this.coreService.getRequest(`admin/organizations`)
     // return of(true);
   }
 }

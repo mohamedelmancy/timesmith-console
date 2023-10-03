@@ -15,7 +15,7 @@ export class SitesResolver implements Resolve<boolean> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.coreService.getRequest(`sites`)
+    return this.coreService.getRequest(`console/customers_sites`)
     // return of(true);
   }
 }

@@ -15,7 +15,7 @@ export class DepartmentResolver implements Resolve<boolean> {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const id = route.params['id'];
-    // return this.coreService.getRequest(`departments/${id}`)
-    return of(true);
+    return this.coreService.getRequest(`console/customers_departments/${id}`)
+    // return of(true);
   }
 }

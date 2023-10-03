@@ -14,7 +14,7 @@ export class DepartmentsResolver implements Resolve<boolean> {
   constructor(private coreService: CoreService) {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    // return this.coreService.getRequest(`departments`)
-    return of(true);
+    return this.coreService.getRequest(`console/customers_departments`)
+    // return of(true);
   }
 }

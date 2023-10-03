@@ -189,20 +189,8 @@ export class DataTableContainerComponent implements OnInit, AfterViewInit, OnCha
       window.open('https://thesmithandco.com/')
     } else if (type === 'Approve' || type === 'Deny') {
       this.statusAction.emit({row, action: type});
-    } else {
-      const dialogRef = this.dialog.open(DeleteComponent, {
-          data: row,
-          direction: GetLanguage() === 'ar' ? 'rtl' : 'ltr',
-          minHeight: '50%',
-          width: window.innerWidth > 1199 ? '35%' : '90%'
-        }
-      );
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('res', result);
-        if (result === 'yes') {
-          this.deleteEvent.emit(row);
-        }
-      })
+    } else if (type === 'Delete') {
+      this.deleteEvent.emit(row);
     }
   }
 

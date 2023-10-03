@@ -4,7 +4,7 @@
       <div class="col-sm-12">
         <form [formGroup]="form" class="col-sm-12 justify-content-start">
           <div class="d-flex justify-content-center align-items-center mb-3">
-            <h2>{{data ? ('Update Exception code' | translate) : ('Create new Exception code' | translate)}}</h2></div>
+            <h2>{{exception_code ? ('Update Exception code' | translate) : ('Create new Exception code' | translate)}}</h2></div>
 
           <h3>{{'You can choose one of the following default symbols that represent your intention.' | translate}} </h3>
           <div class="d-flex row">
@@ -148,9 +148,9 @@
           <div class="col-sm-12 justify-content-center my-3 justify-content-lg-end d-flex">
             <button mat-button class="mx-2 warn-bg"
                     [routerLink]="['/configurations/exception-codes']">{{'Back' | translate}}</button>
-            <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button
+            <button (click)="save(form?.value)" color="primary" mat-raised-button
                     class="" cdkFocusInitial>
-              {{data ? ('Update' | translate) : ('Create' | translate)}}
+              {{exception_code ? ('Update' | translate) : ('Create' | translate)}}
             </button>
           </div>
         </form>

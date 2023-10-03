@@ -29,12 +29,11 @@ const routes: Routes = [
     path: ':id',
     component: CreateLeaveComponent,
     data: {
-      title: '{{leave.name}}',
-      breadcrumbs: '{{breadcrumb}}'
+      title: 'Update leave',
+      breadcrumbs: '{{leave.data.name}}'
     },
     resolve: {
       leave: LeaveResolver,
-      breadcrumb: BreadcrumbTranslateService
     }
   },
 ];

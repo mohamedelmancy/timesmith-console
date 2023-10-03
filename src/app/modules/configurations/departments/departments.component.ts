@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {DeleteComponent} from "../../../modals/delete/delete.component";
+import {UntilDestroy} from "@ngneat/until-destroy";
+import {GetLanguage} from "../../../shared/functions/shared-functions";
 
+@UntilDestroy()
 @Component({
   selector: 'app-departments',
   templateUrl: './departments.component.html',
@@ -8,11 +13,16 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class DepartmentsComponent implements OnInit {
   displayedColumns = {
-    labels: ['Department name', 'Connected employees', 'Manager', 'Actions'],
-    values: ['name', 'individuals', 'manager', 'actions'],
+    labels: ['English name', 'Arabic name', 'Manager', 'Actions'],
+    values: ['name_en', 'name_ar', 'manager', 'actions'],
   };
-  constructor(private activatedRoute: ActivatedRoute) { }
-  data = [
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private dialog: MatDialog,
+  ) {
+  }
+
+  tableData = [
     {
       name: 'Sales',
       id: 1,
@@ -55,17 +65,25 @@ export class DepartmentsComponent implements OnInit {
       manager: 'Dahi'
     },
   ]
+
   ngOnInit(): void {
-    // this.data = this.activatedRoute.snapshot.data['departments'];
-    this.data.forEach(item => {
-        item['individuals'] = item.employees?.length;
+    this.tableData = this.activatedRoute.snapshot.data['departments']?.data;
+    this.tableData.forEach((item: any) => {
+      item['individuals'] = item.employees?.length;
+      item.name = GetLanguage() === 'ar' ? item?.name_ar : item?.name_en;
     })
   }
 
-  deleteRow(event) {
-    console.log('e', event)
-    const i = this.data.findIndex(x => x?.id === event.id);
-    console.log('i', i)
-    this.data = this.data.filter(x =>  x.id !== event?.id);
+  delete(rows) {
+    let dialogRef: MatDialogRef<any>;
+    dialogRef = this.dialog.open(DeleteComponent, {
+      data: {rows: rows || '', api: 'console/customers_departments'},
+      width: '600px'
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      const ids = res?.deleted?.map(item => item.id);
+      this.tableData = this.tableData.filter(x => !ids?.includes(x.id));
+    })
   }
+
 }

@@ -1,9 +1,11 @@
 <app-data-table-container
-  (openRow)="openRow($event)" (deleteData)="delete($event)" (createRow)="openRow($event)"
+  (openRow)="openRow($event)"
+  (deleteEvent)="delete($event)"
+  (createRow)="openRow($event)"
   [dataTableName]="'sites'"
   [columns]="displayedColumns"
   [data]="tableData"
-  [showSearch]="true"
+  [showSearch]="false"
   [hasDelete]="true"
   [hasModify]="true"
   [hasAdd]="true"

@@ -1,8 +1,8 @@
 <app-data-table-container
-  (deleteEvent)="deleteRow($event)"
+  (deleteEvent)="delete($event)"
   [dataTableName]="'leaves'"
   [columns]="displayedColumns"
-  [data]="data"
+  [data]="tableData"
   [createLink]="'/configurations/leaves/new'"
   [viewLink]="'/configurations/leaves'"
 ></app-data-table-container>

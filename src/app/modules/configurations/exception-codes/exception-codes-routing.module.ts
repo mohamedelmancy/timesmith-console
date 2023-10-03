@@ -29,12 +29,11 @@ const routes: Routes = [
     path: ':id',
     component: CreateExceptionCodeComponent,
     data: {
-      title: '{{exceptionCode.name}}',
-      breadcrumbs: '{{breadcrumb}}'
+      title: 'Update Exception code',
+      breadcrumbs: '{{exceptionCode.data.name}}'
     },
     resolve: {
-      exceptionCode: ExceptionCodeResolver,
-      breadcrumb: BreadcrumbTranslateService
+      exceptionCode: ExceptionCodeResolver
     }
   },
 ];

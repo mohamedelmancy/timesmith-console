@@ -11,10 +11,14 @@ import {CoreService} from "../../../../services/core.service";
 import {secureStorage} from "../../../../shared/functions/secure-storage";
 import 'leaflet.locatecontrol'
 import {TranslateService} from "@ngx-translate/core";
+import {ToastrService} from "ngx-toastr";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {HandleResponseError} from "../../../../shared/functions/shared-functions";
+import {numberRegex} from "../../../../shared/variables/variables";
 
 
 const provider = new OpenStreetMapProvider();
-
+@UntilDestroy()
 @Component({
   selector: 'app-create-site',
   templateUrl: './create-site.component.html',
@@ -25,6 +29,8 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormBuilder,
               private activatedRoute: ActivatedRoute,
+              private toastr: ToastrService,
+              private router: Router,
               private coreService: CoreService,
               private translateService: TranslateService) {
   }
@@ -32,7 +38,8 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
   lat = 30.0444;
   lng = 31.2357;
   map;
-  data;
+  site;
+  site_id;
   marker;
   circle;
   defaultIcon = new L.Icon.Default();
@@ -45,16 +52,18 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
   });
 
   ngOnInit(): void {
+    this.site = this.activatedRoute.snapshot.data['site']?.data;
     this.form = this.fb.group({
         name_en: ['', Validators.compose([Validators.required])],
         name_ar: ['', Validators.compose([Validators.required])],
         latitude: ['', Validators.compose([Validators.required])],
         longitude: [null, Validators.compose([Validators.required])],
-        tolerance: [null, Validators.compose([Validators.required])],
+        tolerance: [null, Validators.compose([Validators.required, Validators.pattern(numberRegex)])],
         // individuals: [null, Validators.compose([Validators.required])],
       },
       {validators: []}
     );
+    this.site_id = this.activatedRoute.snapshot.data['site']?.data?.id;
     setTimeout(() => {
       this.map = L.map('map', {
         center: [this.lat, this.lng],
@@ -111,9 +120,7 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
   }
 
   initialize() {
-    this.data = this.activatedRoute.snapshot.data['site'];
-    this.data = secureStorage.getItem('row');
-    console.log('this.data', this.data);
+    console.log('this.data', this.site);
     this.form.valueChanges.subscribe(changes => {
       if (changes.latitude && changes?.longitude) {
         console.log('changes', changes);
@@ -154,11 +161,11 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
   }
 
   fillForm() {
-    this.form.controls['name_ar'].setValue(this.data?.name_ar);
-    this.form.controls['name_en'].setValue(this.data?.name_en);
-    this.form.controls['latitude'].setValue(this.data?.latitude);
-    this.form.controls['longitude'].setValue(this.data?.longitude);
-    this.form.controls['tolerance'].setValue(this.data?.tolerance);
+    this.form.controls['name_ar'].setValue(this.site?.name_ar);
+    this.form.controls['name_en'].setValue(this.site?.name_en);
+    this.form.controls['latitude'].setValue(this.site?.latitude);
+    this.form.controls['longitude'].setValue(this.site?.longitude);
+    this.form.controls['tolerance'].setValue(this.site?.tolerance);
     // this.form.controls['individuals'].setValue(this.data?.individuals);
   }
 
@@ -197,7 +204,38 @@ export class CreateSiteComponent implements OnInit, AfterViewInit {
   }
 
   save(value) {
-
+    if (!this.form.valid) {
+      this.form?.markAllAsTouched();
+    } else {
+      var data = new FormData();
+      data.append("name_en", this.form.value.name_en);
+      data.append("name_ar", this.form.value.name_ar);
+      data.append("tolerance", this.form.value.tolerance);
+      data.append("latitude", this.form.value.latitude);
+      data.append("longitude", this.form.value.longitude);
+      console.log('body', data)
+      if (!this.site_id) {
+        this.coreService.postRequest('console/customers_sites', data).pipe(untilDestroyed(this)).subscribe(res => {
+          this.form.reset();
+          this.form.markAsUntouched();
+          this.form.markAsPristine();
+          this.form.setErrors(null);
+          this.toastr.success(res?.message)
+        }, error => {
+          this.toastr.error(HandleResponseError(error));
+        }, () => {
+          this.router.navigate(['/configurations/sites']);
+        })
+      } else {
+        this.coreService.postRequest(`console/customers_sites/${this.site_id}`, data).pipe(untilDestroyed(this)).subscribe(res => {
+          this.toastr.success(res?.message)
+        }, error => {
+          this.toastr.error(HandleResponseError(error));
+        }, () => {
+          this.router.navigate(['/configurations/sites']);
+        })
+      }
+    }
   }
 
 }

@@ -1,0 +1,18 @@
+<intl-telephone-input
+  [cssClass]="'custom'"
+  [preferredCountries]="preferredCountries"
+  [enablePlaceholder]="true"
+  [searchCountryFlag]="true"
+  [separateDialCode]="true"
+  [enableAutoCountrySelect]="true"
+  [selectedCountryISO]="selectedCountryISO"
+  [searchCountryField]="SearchCountryField.Name"
+  [phoneValidation]="true"
+  [numberFormat]="PhoneNumberFormat.National"
+  [inputId]="'phone'"
+  [searchCountryPlaceholder]="'Search country' | translate"
+  (onChange)="onInputChange($event)"
+>
+</intl-telephone-input>
+
+<mat-error *ngIf="error_msg">{{'Please enter a valid phone number' | translate}}</mat-error>

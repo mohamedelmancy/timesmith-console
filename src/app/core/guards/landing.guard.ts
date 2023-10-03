@@ -17,7 +17,7 @@ export class LandingGuard implements CanActivate {
         }
 
         // logged in so redirect to dashboard with the return url
-        this.router.navigate(['/reception']);
+        this.router.navigate(['/timeline']);
         return false;
     }
 }
