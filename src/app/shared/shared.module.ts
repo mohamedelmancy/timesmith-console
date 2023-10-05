@@ -35,7 +35,6 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MenuToggleModule} from "../core/menu/menu-toggle.module";
-import {DataTableComponent} from './components/data-table/data-table.component';
 import {TranslateModule} from "@ngx-translate/core";
 import {RouterModule} from "@angular/router";
 import {SideFilterComponent} from './components/side-filter/side-filter.component';
@@ -49,7 +48,6 @@ import {NgxIntlTelephoneInputModule} from "ngx-intl-telephone-input";
 @NgModule({
   declarations: [
     LoaderComponent,
-    DataTableComponent,
     SideFilterComponent,
     DataTableContainerComponent,
     PhoneWithCountryComponent
@@ -57,7 +55,6 @@ import {NgxIntlTelephoneInputModule} from "ngx-intl-telephone-input";
   exports: [
     LoaderComponent,
     TooltipModule,
-    DataTableComponent,
     TranslateModule,
     DataTableContainerComponent,
     PhoneWithCountryComponent

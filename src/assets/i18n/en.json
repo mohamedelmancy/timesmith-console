@@ -170,7 +170,7 @@
   "Attendance": "Attendance",
   "Leaves": "Leaves",
   "Exception Codes": "Exception Codes",
-  "Show All": "Show All",
+  "Show more": "Show more",
   "Search": "Search",
   "Report types": "Report types",
   "Request status": "Request status",
@@ -219,5 +219,9 @@
   "Enter address...": "Enter address...",
   "Support Center": "Support Center",
   "Arabic": "العربية",
-  "English": "English"
+  "English": "English",
+  "Action Panel": "Action Panel",
+  "Add schedule": "Add schedule",
+  "Previous day": "Previous day",
+  "Next day": "Next day"
 }

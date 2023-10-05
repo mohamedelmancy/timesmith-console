@@ -176,7 +176,7 @@
   "Attendance": "الحضور",
   "Leaves": "الاجازات",
   "Exception Codes": "رموز الاستثناء",
-  "Show All": "عرض الكل",
+  "Show more": "عرض المزيد",
   "Search": "ابحث",
   "Report types": "أنواع التقارير",
   "Request status": "حالة الطلب",
@@ -219,5 +219,9 @@
   "Enter address...": "ابحث عن عنوان...",
   "Support Center": "قسم الدعم الفني",
   "Arabic": "العربيه",
-  "English": "English"
+  "English": "English",
+  "Action Panel": "لوحة الإجراءات",
+  "Add schedule": "إضافة جدوله جديده",
+  "Previous day": "اليوم السابق",
+  "Next day": "اليوم القادم"
 }

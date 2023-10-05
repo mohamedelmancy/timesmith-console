@@ -1,73 +1,81 @@
 <mat-drawer-container class="example-container" autosize>
-<div class="container-fluid">
-  <div class="timeline mt-1 row">
-    <div id="mydraggable" class="mydraggable" (click)="selectedEvent = null">
-      <div class="d-flex flex-column">
-
-        <div class="attendance">
-          <p class="dgraggable-title">{{'Attendance' | translate}} ( {{attendance?.length}} )</p>
-          <div class="scrollable">
-            <p [ngStyle]="{'background': item.color}" tooltip="{{item.title}}" class="dgraggable text-truncate" [id]="item.color" *ngFor="let item of attendance">{{item.title}}</p>
+  <div class="container-fluid">
+    <div class="timeline mt-1 row">
+      <div class="mydraggable col-sm-12 col-md-2" id="mydraggable" (click)="selectedEvent = null">
+        <h3 class="font-bold">{{'Action Panel' | translate}}</h3>
+        <div class="d-flex flex-column dgraggable-content">
+          <div class="attendance">
+            <p class="dgraggable-title">{{'Attendance' | translate}} ( {{attendance?.length}} )</p>
+            <div class="scrollable justify-content-center align-items-center d-flex gap-4">
+              <p [ngStyle]="{'background': item.color}" tooltip="{{item.title}}" class="dgraggable text-truncate"
+                 [id]="item.color" *ngFor="let item of attendance">{{item.title}}</p>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mt-2">
+              <!--            <button color="primary" (click)="showAll('codes')" mat-raised-button-->
+              <!--                    class="primary-bg">{{'Show All'|translate}}</button>-->
+            </div>
           </div>
-          <div class="d-flex justify-content-center align-items-center mt-2">
-<!--            <button color="primary" (click)="showAll('codes')" mat-raised-button-->
-<!--                    class="primary-bg">{{'Show All'|translate}}</button>-->
+          <mat-divider class="mb-2"></mat-divider>
+          <div class="exception-codes">
+            <p class="dgraggable-title">{{'Exception Codes' | translate}} ( {{exceptionCodes?.length}} )</p>
+            <div class="scrollable flex-wrap d-flex justify-content-center align-items-center ">
+            <span [ngStyle]="{'background': ''}" tooltip="{{item.title}}" [id]="'code-' + i"
+                  class="d-flex align-items-center justify-content-center col-sm-3 dgraggable {{'title-' + item.title.replaceAll(' ', '_' )}} {{'color-' + item.color}}"
+                  *ngFor="let item of exceptionCodes; let i = index"><i style="margin-right: 0"
+                                                                        [ngStyle]="{'color': item.color, 'font-size': '23px','width': '29px','height': '27px', 'text-align': 'center'}"
+                                                                        class="fa {{item.icon}}"></i></span>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mt-2">
+              <div (click)="showAll('codes')" class="show-more">{{'Show more' | translate}}</div>
+            </div>
           </div>
-        </div>
-        <mat-divider class="mb-2"></mat-divider>
-        <div class="exception-codes">
-          <p class="dgraggable-title">{{'Exception Codes' | translate}} ( {{exceptionCodes?.length}} )</p>
-          <div class="scrollable">
-            <span [ngStyle]="{'background': ''}" tooltip="{{item.title}}" [id]="'code-' + i" class="my-2 dgraggable {{'title-' + item.title.replaceAll(' ', '_' )}} {{'color-' + item.color}}"
-               *ngFor="let item of exceptionCodes; let i = index"><i style="margin-right: 0" [ngStyle]="{'color': item.color, 'font-size': '23px','width': '29px','height': '27px'}" class="fa {{item.icon}}"></i></span>
-          </div>
-          <div class="d-flex justify-content-center align-items-center mt-2">
-<!--            <button color="primary" (click)="showAll('codes')" mat-raised-button-->
-<!--                    class="primary-bg">{{'Show All'|translate}}</button>-->
-          </div>
-        </div>
-        <mat-divider class="mb-2"></mat-divider>
-        <div class="leaves">
-          <p class="dgraggable-title">{{'Leaves' | translate}} ( {{leaves?.length}} )</p>
-          <div class="scrollable">
-            <p [ngStyle]="{'background': item.color}" tooltip="{{item.title}}" class="dgraggable text-truncate" [id]="item.color" *ngFor="let item of leaves">{{item.title}}</p>
-          </div>
-          <div class="d-flex justify-content-center align-items-center mt-2">
-            <button (click)="showAll('leaves')" color="primary" mat-raised-button
-                    class="primary-bg">{{'Show All'|translate}}</button>
+          <mat-divider class="mb-2"></mat-divider>
+          <div class="leaves">
+            <p class="dgraggable-title">{{'Leaves' | translate}} ( {{leaves?.length}} )</p>
+            <div class="scrollable flex-wrap d-flex justify-content-center align-items-center gap-3">
+              <p [ngStyle]="{'background': item.color}" tooltip="{{item.title}}"
+                 class="dgraggable m-0 d-flex align-items-center justify-content-center col-sm-3 text-truncate"
+                 [id]="item.color" *ngFor="let item of leaves">{{item.title}}</p>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mt-2">
+              <div (click)="showAll('leaves')" class="show-more">{{'Show more' | translate}}</div>
+            </div>
           </div>
         </div>
       </div>
-
+      <div class="timeline-view col-sm-12 col-md-10 d-flex flex-column row">
+        <div class="col-sm-12">
+          <app-filters (click)="selectedEvent = null" (chosenDate)="chooseDate($event)"></app-filters>
+        </div>
+        <div class="mt-4 calendar-container col-sm-12">
+          <div class="event-info">
+            <app-data-view class="edit-event" [leaves]="leaves" [exceptionCodes]="exceptionCodes"
+                           [selectedEvent]="selectedEvent" (emittedData)="eventViewChange($event)"
+                           (removeEvent)="removeEvent($event)"></app-data-view>
+          </div>
+          <full-calendar #fullcalendar id="calendar" *ngIf="options" [options]="options"></full-calendar>
+        </div>
+      </div>
     </div>
-    <div class="timeline-view d-flex flex-column row">
-      <div class="col-sm-12">
-        <app-filters (click)="selectedEvent = null" (chosenDate)="chooseDate($event)"></app-filters>
-      </div>
-      <div class="mt-4 calendar-container col-sm-12">
-        <div class="event-info">
-          <app-data-view class="edit-event" [leaves]="leaves" [exceptionCodes]="exceptionCodes" [selectedEvent]="selectedEvent" (emittedData)="eventViewChange($event)" (removeEvent)="removeEvent($event)"></app-data-view>
-        </div>
-        <full-calendar #fullcalendar id="calendar" *ngIf="options" [options]="options"></full-calendar>
-      </div>
-    </div>
+
   </div>
 
-</div>
-
-<!--<ng-template #editEvent let-modal>-->
-<!--  <div class="modal-header">-->
-<!--    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>-->
-<!--    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>-->
-<!--  </div>-->
-<!--  <div class="modal-body">-->
-<!--    <app-data-view class="" [leaves]="leaves" [exceptionCodes]="exceptionCodes" [selectedEvent]="selectedEvent" (emittedData)="eventViewChange($event)" (removeEvent)="removeEvent($event)"></app-data-view>-->
-<!--  </div>-->
-<!--  <div class="modal-footer">-->
-<!--    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>-->
-<!--  </div>-->
-<!--</ng-template>-->
+  <!--<ng-template #editEvent let-modal>-->
+  <!--  <div class="modal-header">-->
+  <!--    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>-->
+  <!--    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>-->
+  <!--  </div>-->
+  <!--  <div class="modal-body">-->
+  <!--    <app-data-view class="" [leaves]="leaves" [exceptionCodes]="exceptionCodes" [selectedEvent]="selectedEvent" (emittedData)="eventViewChange($event)" (removeEvent)="removeEvent($event)"></app-data-view>-->
+  <!--  </div>-->
+  <!--  <div class="modal-footer">-->
+  <!--    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>-->
+  <!--  </div>-->
+  <!--</ng-template>-->
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <app-data-view class=""  [attendance]="attendance" [leaves]="leaves" [exceptionCodes]="exceptionCodes" [selectedEvent]="selectedEvent" (closeDrawer)="closeEditEvent($event)" (emittedData)="eventViewChange($event)" (removeEvent)="removeEvent($event)"></app-data-view>
+    <app-data-view class="" [attendance]="attendance" [leaves]="leaves" [exceptionCodes]="exceptionCodes"
+                   [selectedEvent]="selectedEvent" (closeDrawer)="closeEditEvent($event)"
+                   (emittedData)="eventViewChange($event)" (removeEvent)="removeEvent($event)"></app-data-view>
   </mat-drawer>
 </mat-drawer-container>
+

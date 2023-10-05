@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Calendar, CalendarApi} from '@fullcalendar/core';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import {CoreService} from "../../../../services/core.service";
@@ -18,6 +18,7 @@ import {ToastrService} from "ngx-toastr";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
 declare var $: any;
+declare var jQuery: any;
 
 @Component({
   selector: 'app-timeline-view',
@@ -25,7 +26,7 @@ declare var $: any;
   styleUrls: ['./timeline-view.component.scss'],
   // providers: [CalendarApi]
 })
-export class TimelineViewComponent implements OnInit {
+export class TimelineViewComponent implements OnInit, AfterViewInit {
   @ViewChild("fullcalendar", {static: false}) calendarComponent: FullCalendarComponent;
   options;
   eventDidMounted = false;
@@ -67,7 +68,8 @@ export class TimelineViewComponent implements OnInit {
       color: 'grey',
       icon: 'fa-leaf',
       code: true
-    }, {
+    },
+    {
       title: 'Open time',
       color: 'orange',
       icon: 'fa-reddit',
@@ -96,8 +98,19 @@ export class TimelineViewComponent implements OnInit {
       color: 'grey',
       icon: 'fa-leaf',
       code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
+    },
+    {
+      title: 'Open time Off Campus',
+      color: 'grey',
+      icon: 'fa-leaf',
+      code: true
     }
-
   ]
   leaves = [
     {
@@ -123,7 +136,55 @@ export class TimelineViewComponent implements OnInit {
       color: 'grey',
       overlap: true,
       leave: true
-    }
+    },
+    {
+      title: 'Public Holiday',
+      color: 'grey',
+      overlap: true,
+      leave: true
+    },
+    {
+      title: 'Public Holiday',
+      color: 'grey',
+      overlap: true,
+      leave: true
+    },
+    {
+      title: 'Public Holiday',
+      color: 'grey',
+      overlap: true,
+      leave: true
+    },
+    {
+      title: 'Public Holiday',
+      color: 'grey',
+      overlap: true,
+      leave: true
+    },
+    {
+      title: 'Public Holiday',
+      color: 'grey',
+      overlap: true,
+      leave: true
+    },
+    {
+      title: 'Public Holiday',
+      color: 'grey',
+      overlap: true,
+      leave: true
+    },
+    {
+      title: 'Public Holiday',
+      color: 'grey',
+      overlap: true,
+      leave: true
+    },
+    {
+      title: 'Public Holiday',
+      color: 'grey',
+      overlap: true,
+      leave: true
+    },
   ]
   attendance = [
     {
@@ -140,13 +201,29 @@ export class TimelineViewComponent implements OnInit {
     },
     {
       title: 'No show',
-      color: '#9b9898',
+      color: 'red',
       overlap: true,
       leave: true
     }
   ]
   calendarApi: Calendar;
   selectedDate: any = today;
+  tipso_options = {
+    maxWidth: '',
+    hideDelay: 0,
+    background: '#000',
+    size: 'small',
+    tooltipHover: true,
+    speed: 400,
+    delay: 0,
+    titleBackground: '',
+    color: '#ffffff',
+    titleColor: '',
+    showArrow: true,
+    position: 'top',
+    useTitle: false,
+    titleContent: '',
+  }
 
   constructor(private coreService: CoreService,
               private translateService: TranslateService,
@@ -166,6 +243,39 @@ export class TimelineViewComponent implements OnInit {
       this.getResources();
       this.handleDragging();
     });
+
+  }
+
+  ngAfterViewInit() {
+    this.addAllToolTip();
+    this.addCustomIcon();
+  }
+
+  addCustomIcon() {
+    setTimeout(() => {
+      jQuery(".fc-date-button").html('<i class="fa fa-calendar"></i>');
+    });
+  }
+
+  addAllToolTip() {
+    setTimeout(() => {
+      const add_btn = jQuery('.fc-create-button');
+      const prev_btn = jQuery('.fc-prev-button');
+      const next_btn = jQuery('.fc-next-button');
+      const today_btn = jQuery('.fc-today-button');
+      this.AddTipso(add_btn, this.translateService.instant('Add schedule'), 100);
+      this.AddTipso(prev_btn, this.translateService.instant('Previous day'), 100);
+      this.AddTipso(next_btn, this.translateService.instant('Next day'), 100);
+      this.AddTipso(today_btn, this.translateService.instant('Today'), 100);
+    }, 500);
+  }
+
+  AddTipso(element, content, width) {
+    element.tipso({
+      ...this.tipso_options,
+      width: width,
+      content: content,
+    });
   }
 
   handleDragging() {
@@ -178,7 +288,7 @@ export class TimelineViewComponent implements OnInit {
   }
 
   addNewEvent(eventEl) {
-    console.log('eventEl', eventEl.innerHTML)
+    console.log('eventEl', eventEl)
     var _this = this;
     const leavesEvent = _this.leaves.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
     const attendanceEvent = _this.attendance.find(element => element.title.toLowerCase() === eventEl.innerText.toLowerCase())
@@ -227,14 +337,15 @@ export class TimelineViewComponent implements OnInit {
       height: '70vh',
       headerToolbar: {
         // left: 'prev today next',
-        left: GetLanguage() === 'en' ? 'create prev today next' : '',
+        left: GetLanguage() === 'en' ? 'create prev today next date' : '',
         // center: 'title',
         // right: 'resourceTimelineDay,resourceTimelineWeek'
-        right: GetLanguage() === 'ar' ? 'create prev today next' : ''
+        right: GetLanguage() === 'ar' ? 'create prev today next date' : ''
       },
       customButtons: {
         create: {
-          text: `+ ${this.translateService.instant('Add')}`,
+          icon: 'fc-icon fc-icon-plus-square',
+          hint: `${this.translateService.instant('Add')}`,
           click: this.openDialog.bind(this), // bind is important!
         },
         today: {
@@ -253,6 +364,32 @@ export class TimelineViewComponent implements OnInit {
             _this.resetEditEvent();
           }
         },
+        date: {
+          icon: 'fc-icon fc-icon-calendar',
+          // bootstrapFontAwesome: 'close',
+          click: function () {
+            // https://www.eyecon.ro/datepicker/#implement
+            // https://stackoverflow.com/questions/38062449/adding-a-datepicker-in-fullcalendar-custom-button-click
+            var $btnCustom = $('.fc-date-button'); // name of custom  button in the generated code
+            $btnCustom.after('<input type="hidden" id="hiddenDate" class="datepicker"/>');
+            $(".hiddenDate").datepicker();
+            $("#hiddenDate").datepicker({
+              showOn: "button",
+              dateFormat: "yy-mm-dd",
+              onSelect: function (dateText, inst) {
+                // $('#calendar').fullCalendar('gotoDate', dateText);
+                console.log('chosed date', dateText)
+              },
+            });
+            // var $btnDatepicker = $(".ui-datepicker-trigger"); // name of the generated datepicker UI
+            // //Below are required for manipulating dynamically created datepicker on custom button click
+            // $("#hiddenDate").show().focus().hide();
+            // $btnDatepicker.trigger("click"); //dynamically generated button for datepicker when clicked on input textbox
+            // $btnDatepicker.hide();
+            // $btnDatepicker.remove();
+            // $("input.datepicker").not(":first").remove();//dynamically appended every time on custom button click
+          }
+        },
       },
       resourceLabelContent: function (arg) {
         // return { html: `<i class="fa ${arg.resource.extendedProps.icon}"></i> ${arg.resource.title}` };
@@ -260,16 +397,16 @@ export class TimelineViewComponent implements OnInit {
       },
       initialDate: this.selectedDate, // will be parsed as local
       eventDrop: function (info) {
-        console.log('eventDropped ', info);
+        console.log('eventDropped and overlapped ', info);
         _this.handleOverlapping(_this.stillEvent, _this.movingEvent, info);
       },
       drop: function (info) {
-        console.log('drop ', info);
+        console.log('dropping******************************** ', info);
         console.log('resource ', info.resource._resource);
       },
       eventReceive: function (info) {
         console.log('eventReceive ', info);
-        console.log('calendarApi events ', _this.calendarApi.getEvents());
+        console.log('calendarApi events', _this.calendarApi.getEvents());
       },
       eventWillUnmount: function (info) {
         console.log('eventWillUnmount ', info);
@@ -367,6 +504,16 @@ export class TimelineViewComponent implements OnInit {
       this.calendarApi.addResource({"id": "m", "title": "Yousef Essam"}, true)
 
     }, 2000)
+  }
+
+  openDatePicker() {
+    jQuery('.fc-icon-calendar').DatePicker({
+      flat: true,
+      date: '2008-07-31',
+      current: '2008-07-31',
+      calendars: 1,
+      starts: 1
+    });
   }
 
   eventResized(event) {
@@ -495,7 +642,7 @@ export class TimelineViewComponent implements OnInit {
         "end": new Date(result?.data?.dateTo),
         "color": event ? result?.event.backgroundColor : 'green'
       });
-      console.log('calendarApi events', this.calendarApi.getEvents())
+      console.log('calendarApi events after dialog', this.calendarApi.getEvents())
       console.log('events', this.options.events)
     });
   }

@@ -9,12 +9,11 @@ import {
   Output, SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {DataTableComponent} from "../data-table/data-table.component";
 import {PageTitleService} from "../../../core/page-title/page-title.service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
-import {dateFormat, isMobile} from "../../variables/variables";
-import {filterTable, GetLanguage, searchInAllTableColumns} from "../../functions/shared-functions";
+import {dateFormat} from "../../variables/variables";
+import {filterTable, searchInAllTableColumns} from "../../functions/shared-functions";
 import {ObservablesService} from "../../../services/observables.service";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {MatTableDataSource} from "@angular/material/table";
@@ -25,7 +24,6 @@ import {debounceTime, map} from "rxjs/operators";
 import {FormControl} from "@angular/forms";
 import {LoaderService} from "../../../services/loader.service";
 import {secureStorage} from "../../functions/secure-storage";
-import {DeleteComponent} from "../../../modals/delete/delete.component";
 import moment from "moment";
 
 @UntilDestroy()
