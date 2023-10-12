@@ -1,35 +1,54 @@
-.inner-cont{
+.inner-cont {
   max-height: 40px;
 }
-::ng-deep{
+
+::ng-deep {
   .view-event {
-    .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-infix input{
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+
+    .mat-mdc-form-field-infix {
+      min-height: 48px;
+
+      input {
+        //height: 42px !important;
+      }
+    }
+
+    .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-infix input {
       //text-align: center;
       padding: 2px;
       font-size: 14px;
       height: 28px;
     }
-    .mat-mdc-form-field-infix{
+
+    .mat-mdc-form-field-infix {
       padding: 3px !important;
       border-top: 12px solid transparent;
       border-bottom: 0px solid transparent;
     }
-    .mat-mdc-button-wrapper{
-      svg{
+
+    .mat-mdc-button-wrapper {
+      svg {
         height: 26px !important;
       }
-      .mat-mdc-datepicker-toggle-default-icon{
+
+      .mat-mdc-datepicker-toggle-default-icon {
         width: 1em;
       }
     }
-    .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-prefix, .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-suffix{
+
+    .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-prefix, .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-suffix {
       top: -4px !important;
     }
-    .mat-mdc-form-field-label{
+
+    .mat-mdc-form-field-label {
       font-size: 14px;
     }
   }
 }
+
 @media (min-width: 1200px) {
   .back-btn {
     display: none !important;

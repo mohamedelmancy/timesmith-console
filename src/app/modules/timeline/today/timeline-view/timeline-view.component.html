@@ -1,6 +1,11 @@
 <mat-drawer-container class="example-container" autosize>
   <div class="container-fluid">
     <div class="timeline mt-1 row">
+      <div class="event-info">
+        <app-data-view class="edit-event" [leaves]="leaves" [exceptionCodes]="exceptionCodes"
+                       [selectedEvent]="selectedEvent" (emittedData)="eventViewChange($event)"
+                       (removeEvent)="removeEvent($event)"></app-data-view>
+      </div>
       <div class="mydraggable col-sm-12 col-md-2" id="mydraggable" (click)="selectedEvent = null">
         <h3 class="font-bold">{{'Action Panel' | translate}}</h3>
         <div class="d-flex flex-column dgraggable-content">
@@ -48,12 +53,11 @@
           <app-filters (click)="selectedEvent = null" (chosenDate)="chooseDate($event)"></app-filters>
         </div>
         <div class="mt-4 calendar-container col-sm-12">
-          <div class="event-info">
-            <app-data-view class="edit-event" [leaves]="leaves" [exceptionCodes]="exceptionCodes"
-                           [selectedEvent]="selectedEvent" (emittedData)="eventViewChange($event)"
-                           (removeEvent)="removeEvent($event)"></app-data-view>
-          </div>
           <full-calendar #fullcalendar id="calendar" *ngIf="options" [options]="options"></full-calendar>
+          <div class="custom-date" *ngIf="showDatePicker">
+            <bs-datepicker-inline #datePicker (bsValueChange)="chooseDate($event)"
+                                  [bsConfig]="bsConfig"></bs-datepicker-inline>
+          </div>
         </div>
       </div>
     </div>
@@ -78,4 +82,3 @@
                    (emittedData)="eventViewChange($event)" (removeEvent)="removeEvent($event)"></app-data-view>
   </mat-drawer>
 </mat-drawer-container>
-

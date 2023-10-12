@@ -45,17 +45,17 @@ $custom-typography: mat-typography-config(
 // Default colors
 
 $my-app-primary: mat-palette($custom-primary, 700, 100, 800);
-$my-app-accent:  mat-palette($mat-teal, 700, 100, 800);
+$my-app-accent: mat-palette($mat-teal, 700, 100, 800);
 
 $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent);
 @include angular-material-theme($my-app-theme);
 
 // Dark theme
 $dark-primary: mat-palette($mat-blue-grey);
-$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
-$dark-warn:    mat-palette($mat-deep-orange);
+$dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$dark-warn: mat-palette($mat-deep-orange);
 
-$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 .dark-theme {
   @include angular-material-theme($dark-theme);
@@ -70,4 +70,8 @@ $light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
 
 .light-theme {
   @include angular-material-theme($light-theme)
+}
+
+.theme-default .bs-datepicker-body table td span.selected, .theme-default .bs-datepicker-body table td.selected span, .theme-default .bs-datepicker-body table td span[class*="select-"]:after, .theme-default .bs-datepicker-body table td[class*="select-"] span:after, .theme-default .bs-datepicker-head {
+  background-color: mat.get-color-from-palette($primary) !important;
 }

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Calendar, CalendarApi} from '@fullcalendar/core';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import {CoreService} from "../../../../services/core.service";
@@ -30,6 +30,7 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
   @ViewChild("fullcalendar", {static: false}) calendarComponent: FullCalendarComponent;
   options;
   eventDidMounted = false;
+  showDatePicker = false;
   @ViewChild('drawer', {static: true}) editEvent;
   resizeCounter: Subject<any> = new Subject();
   subscription: Subscription
@@ -224,6 +225,7 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
     useTitle: false,
     titleContent: '',
   }
+  bsConfig;
 
   constructor(private coreService: CoreService,
               private translateService: TranslateService,
@@ -235,7 +237,10 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
   // https://codepen.io/pen?editors=0010
   // https://stackoverflow.com/questions/71299412/fullcalendar-how-to-display-non-overlapping-events-inside-same-day-cell-in-one
   ngOnInit(): void {
-    console.log('ngOnInit')
+    this.bsConfig = Object.assign({}, {
+      showWeekNumbers: false,
+      containerClass: 'theme-default'
+    });
     setTimeout(() => {
       console.log('ssss')
       this.renderCalendar();
@@ -365,29 +370,10 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
           }
         },
         date: {
-          icon: 'fc-icon fc-icon-calendar',
+          // icon: 'fc-icon fc-icon-calendar',
           // bootstrapFontAwesome: 'close',
           click: function () {
-            // https://www.eyecon.ro/datepicker/#implement
-            // https://stackoverflow.com/questions/38062449/adding-a-datepicker-in-fullcalendar-custom-button-click
-            var $btnCustom = $('.fc-date-button'); // name of custom  button in the generated code
-            $btnCustom.after('<input type="hidden" id="hiddenDate" class="datepicker"/>');
-            $(".hiddenDate").datepicker();
-            $("#hiddenDate").datepicker({
-              showOn: "button",
-              dateFormat: "yy-mm-dd",
-              onSelect: function (dateText, inst) {
-                // $('#calendar').fullCalendar('gotoDate', dateText);
-                console.log('chosed date', dateText)
-              },
-            });
-            // var $btnDatepicker = $(".ui-datepicker-trigger"); // name of the generated datepicker UI
-            // //Below are required for manipulating dynamically created datepicker on custom button click
-            // $("#hiddenDate").show().focus().hide();
-            // $btnDatepicker.trigger("click"); //dynamically generated button for datepicker when clicked on input textbox
-            // $btnDatepicker.hide();
-            // $btnDatepicker.remove();
-            // $("input.datepicker").not(":first").remove();//dynamically appended every time on custom button click
+            _this.showDatePicker = !_this.showDatePicker;
           }
         },
       },
@@ -705,7 +691,6 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
   }
 
   chooseDate(ev) {
-    console.log('ev', ev);
     this.selectedDate = ev;
     this.calendarApi.gotoDate(new Date(ev));
   }
@@ -813,7 +798,6 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
     console.log('ssssss')
     this.editEvent.toggle();
   }
-
 
   open(content) {
     this.editEvent.toggle();

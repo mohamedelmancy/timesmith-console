@@ -30,6 +30,7 @@ import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from "@angular/mater
 import {dateFormat} from "../../shared/variables/variables";
 import {GetLanguage} from "../../shared/functions/shared-functions";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 export const MY_FORMATS = {
   parse: {
     dateInput: dateFormat,
@@ -50,30 +51,31 @@ export const MY_FORMATS = {
     FiltersComponent,
     DataViewComponent
   ],
-  imports: [
-    CommonModule,
-    TimelineRoutingModule,
-    FullCalendarModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatTabsModule,
-    MatIconModule,
-    FontAwesomeModule,
-    ReactiveFormsModule,
-    SharedModule,
-    FlexModule,
-    MatAutocompleteModule,
-    TranslateModule,
-    TooltipModule,
-    MatButtonModule,
-    MatDividerModule,
-    NgxMatDatetimePickerModule,
-    NgxMatTimepickerModule,
-    ClickOutsideModule,
-    MatSidenavModule
-  ],
+    imports: [
+        CommonModule,
+        TimelineRoutingModule,
+        FullCalendarModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatTabsModule,
+        MatIconModule,
+        FontAwesomeModule,
+        ReactiveFormsModule,
+        SharedModule,
+        FlexModule,
+        MatAutocompleteModule,
+        TranslateModule,
+        TooltipModule,
+        MatButtonModule,
+        MatDividerModule,
+        NgxMatDatetimePickerModule,
+        NgxMatTimepickerModule,
+        ClickOutsideModule,
+        MatSidenavModule,
+        BsDatepickerModule
+    ],
   providers: [
     {
       provide: DateAdapter,

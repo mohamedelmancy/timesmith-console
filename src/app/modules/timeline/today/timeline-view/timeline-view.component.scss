@@ -13,12 +13,6 @@ full-calendar {
   display: none !important;
 }
 
-.custom-date {
-  position: absolute;
-  top: -6px;
-  left: 32%
-}
-
 .timeline {
   position: relative;
 }
@@ -83,13 +77,6 @@ full-calendar {
   position: relative;
 }
 
-.event-info {
-  //width: 585px;
-  position: absolute;
-  top: 7px;
-  left: 317px;
-}
-
 @media (max-width: 1200px) {
   .event-info {
     top: 60px !important;
@@ -138,4 +125,17 @@ full-calendar {
   font-size: 21px;
   margin: 0;
   width: 23px;
+}
+
+.custom-date {
+  position: absolute;
+  top: 10%;
+  z-index: 9;
+}
+
+.event-info {
+  position: absolute !important;
+  //left: 317px;
+  top: -85px;
+  z-index: 99999;
 }
