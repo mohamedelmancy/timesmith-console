@@ -312,7 +312,7 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
     })
     let e: any = {
       title: isCode ? '' : eventEl.innerHTML,
-      duration: (leavesEvent) ? '04:00' : '00:15',
+      duration: (leavesEvent) ? '08:00' : '00:15',
       html: (leavesEvent || attendanceEvent) ? null : eventEl.innerHTML,
       durationEditable: true,
       overlap: true,
@@ -392,7 +392,8 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
       },
       eventReceive: function (info) {
         console.log('eventReceive ', info);
-        console.log('calendarApi events', _this.calendarApi.getEvents());
+        console.log('calendarApi events rec', _this.calendarApi.getEvents());
+        _this.addTooltip(info);
       },
       eventWillUnmount: function (info) {
         console.log('eventWillUnmount ', info);
@@ -409,7 +410,7 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
       },
       eventResize: function (info) {
         console.log('eventResize ', info.event);
-        _this.eventResized(info.event);
+        _this.eventResized(info.event, info);
       },
       eventClick: (info) => {
         console.log('eventClicked ', info.event);
@@ -502,10 +503,11 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
     });
   }
 
-  eventResized(event) {
+  eventResized(event, info?) {
     this.resizedEvent = event;
     this.calcIconsCounter(event);
     this.subscription?.unsubscribe();
+    this.addTooltip(info);
   }
 
   calcIconsCounter(event) {
@@ -545,22 +547,37 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
 
   addTooltip(info) {
     setTimeout(() => {
-      const header = (info.event.title || info.event.extendedProps.description)
-      const content = `From ( ${moment(info.event.star).format(dateTimeFormat)} )To ( ${moment(info.event.end).format(dateTimeFormat)}) `
-      // $(info.el).tooltip({
-      //   title: info.event.title || info.event.extendedProps.description,
-      //   placement: "top",
-      //   trigger: "hover",
-      //   container: "body"
-      // });
-      // $(info.el).popover({
-      //   title: header.slice(0, 1).toUpperCase() + header.slice(1),
-      //   placement: "top",
-      //   trigger: "hover",
-      //   container: "body",
-      //   content: content,
-      // });
-    }, 200)
+      let element = void 0 || null;
+      console.log('tooltip', info)
+      let hours_start: any = new Date(info.event?.start).getHours();
+      let hours_end: any = new Date(info.event?.end).getHours();
+      let minutes_start: any = new Date(info.event?.start).getMinutes();
+      let minutes_end: any = new Date(info.event?.end).getMinutes();
+      var start_me = hours_start >= 12 ? 'PM' : 'AM';
+      var end_me = hours_end >= 12 ? 'PM' : 'AM';
+      hours_start = hours_start % 12;
+      hours_start = hours_start ? hours_start : 12; // the hour '0' should be '12'
+      hours_end = hours_end % 12;
+      hours_end = hours_end ? hours_end : 12; // the hour '0' should be '12'
+      if (hours_start < 10) {
+        hours_start = `0${hours_start}`;
+      }
+      if (hours_end < 10) {
+        hours_end = `0${hours_end}`;
+      }
+      if (minutes_start < 10) {
+        minutes_start = `0${minutes_start}`;
+      }
+      if (minutes_end < 10) {
+        minutes_end = `0${minutes_end}`;
+      }
+      let header = (info.event?.title || info.event?.extendedProps?.description)
+      let duration = `From ( ${hours_start + ':' + minutes_start + ' ' + start_me} ) To ( ${hours_end + ':' + minutes_end + ' ' + end_me}) `
+      let content = `${header}<br>${duration}`
+      element = jQuery(info.el);
+      console.log('cont', content)
+      this.AddTipso(element, content, 'auto');
+    }, 500)
   }
 
   checkOverlapping(stillEvent, movingEvent) {
@@ -587,7 +604,7 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
     }
     console.log('calendarApi events ', this.calendarApi.getEvents());
     // to rerender event HTML after dropping in case of exception code
-    this.eventResized(info.event);
+    this.eventResized(info.event, info);
   }
 
   todayClick() {

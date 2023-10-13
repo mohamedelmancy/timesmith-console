@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import moment from "moment";
 import {dateFormat, dateTimeFormat} from "../../../../shared/variables/variables";
 
@@ -9,10 +9,13 @@ import {dateFormat, dateTimeFormat} from "../../../../shared/variables/variables
 })
 export class ListViewComponent implements OnInit {
   displayedColumns = {
-    labels: ['Department', 'Site', 'Employee ID', 'Employee name', 'Check In', 'Check Out', 'Duration', 'Status'],
-    values: ['department', 'site', 'id', 'name', 'check_in', 'check_out', 'duration', 'status'],
+    labels: ['ID', 'Name', 'Status', 'From', 'To', 'Total duration', 'Punched in duration'],
+    values: ['id', 'name', 'status', 'from', 'to', 'duration', 'punch_duration'],
   };
-  constructor() { }
+
+  constructor() {
+  }
+
   data = [
     {
       department: 'Marketing',
@@ -35,6 +38,7 @@ export class ListViewComponent implements OnInit {
       status: 'NO'
     },
   ]
+
   ngOnInit(): void {
     this.data.forEach(item => {
       item.check_in = moment(item.check_in).format(dateTimeFormat);

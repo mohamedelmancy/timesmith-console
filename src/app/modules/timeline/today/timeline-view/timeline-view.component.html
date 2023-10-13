@@ -6,12 +6,12 @@
                        [selectedEvent]="selectedEvent" (emittedData)="eventViewChange($event)"
                        (removeEvent)="removeEvent($event)"></app-data-view>
       </div>
-      <div class="mydraggable col-sm-12 col-md-2" id="mydraggable" (click)="selectedEvent = null">
-        <h3 class="font-bold">{{'Action Panel' | translate}}</h3>
+      <div class="mydraggable pt-2 col-sm-12 col-md-2" id="mydraggable" (click)="selectedEvent = null">
+        <h3 class="font-bold mb-1 px-1">{{'Action Panel' | translate}}</h3>
         <div class="d-flex flex-column dgraggable-content">
           <div class="attendance">
-            <p class="dgraggable-title">{{'Attendance' | translate}} ( {{attendance?.length}} )</p>
-            <div class="scrollable justify-content-center align-items-center d-flex gap-4">
+            <p class="dgraggable-title mb-1">{{'Attendance' | translate}} ( {{attendance?.length}} )</p>
+            <div class="scrollable justify-content-start align-items-center d-flex gap-3">
               <p [ngStyle]="{'background': item.color}" tooltip="{{item.title}}" class="dgraggable text-truncate"
                  [id]="item.color" *ngFor="let item of attendance">{{item.title}}</p>
             </div>
@@ -20,10 +20,10 @@
               <!--                    class="primary-bg">{{'Show All'|translate}}</button>-->
             </div>
           </div>
-          <mat-divider class="mb-2"></mat-divider>
+          <mat-divider class="mb-1"></mat-divider>
           <div class="exception-codes">
-            <p class="dgraggable-title">{{'Exception Codes' | translate}} ( {{exceptionCodes?.length}} )</p>
-            <div class="scrollable flex-wrap d-flex justify-content-center align-items-center ">
+            <p class="dgraggable-title mb-1">{{'Exception Codes' | translate}} ( {{exceptionCodes?.length}} )</p>
+            <div class="scrollable flex-wrap d-flex justify-content-start align-items-center gap-3">
             <span [ngStyle]="{'background': ''}" tooltip="{{item.title}}" [id]="'code-' + i"
                   class="d-flex align-items-center justify-content-center col-sm-3 dgraggable {{'title-' + item.title.replaceAll(' ', '_' )}} {{'color-' + item.color}}"
                   *ngFor="let item of exceptionCodes; let i = index"><i style="margin-right: 0"
@@ -34,10 +34,10 @@
               <div (click)="showAll('codes')" class="show-more">{{'Show more' | translate}}</div>
             </div>
           </div>
-          <mat-divider class="mb-2"></mat-divider>
+          <mat-divider class="mb-1"></mat-divider>
           <div class="leaves">
-            <p class="dgraggable-title">{{'Leaves' | translate}} ( {{leaves?.length}} )</p>
-            <div class="scrollable flex-wrap d-flex justify-content-center align-items-center gap-3">
+            <p class="dgraggable-title mb-1">{{'Leaves' | translate}} ( {{leaves?.length}} )</p>
+            <div class="scrollable flex-wrap d-flex justify-content-start align-items-center gap-3">
               <p [ngStyle]="{'background': item.color}" tooltip="{{item.title}}"
                  class="dgraggable m-0 d-flex align-items-center justify-content-center col-sm-3 text-truncate"
                  [id]="item.color" *ngFor="let item of leaves">{{item.title}}</p>
@@ -49,10 +49,10 @@
         </div>
       </div>
       <div class="timeline-view col-sm-12 col-md-10 d-flex flex-column row">
-        <div class="col-sm-12">
+        <div class="col-sm-12 timeline-filters p-0">
           <app-filters (click)="selectedEvent = null" (chosenDate)="chooseDate($event)"></app-filters>
         </div>
-        <div class="mt-4 calendar-container col-sm-12">
+        <div class="calendar-container col-sm-12">
           <full-calendar #fullcalendar id="calendar" *ngIf="options" [options]="options"></full-calendar>
           <div class="custom-date" *ngIf="showDatePicker">
             <bs-datepicker-inline #datePicker (bsValueChange)="chooseDate($event)"

@@ -1,4 +1,4 @@
-<div class="container-fluid view-event">
+<div class="container-fluid view-event" *ngIf="selectedEvent">
   <form [formGroup]="form" (ngSubmit)="save(form?.value)" class="row">
     <div class="col-sm-12 col-md-6 col-lg-3">
       <mat-form-field class="full-wid mrgn-b-md" appearance="outline">

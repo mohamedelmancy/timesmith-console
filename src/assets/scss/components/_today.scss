@@ -1,59 +1,80 @@
-.fc .fc-button{
+.fc .fc-button {
   background-color: mat-color($primary) !important;
 }
-.fc-event{
+
+.fc-event {
   //height: 100px !important;
 }
-.fc-cell{
+
+.fc-cell {
   width: 50px;
 }
-.resource-cell{
+
+.resource-cell {
   background-color: #FFFFFF;
 }
-.mat-mdc-tab-label-active{
+
+.mat-mdc-tab-label-active {
   background: mat-color($primary) !important;
   text-align: center;
-  color: white!important;
+  color: white !important;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 1 !important;
 }
-.fc-scroller{
+
+.fc-scroller {
   //overflow: visible !important;
 }
-.fc-datagrid-body tr{
+
+.fc-datagrid-body tr {
   //text-align: center !important;
 }
-.mat-mdc-tab-body-wrapper{
+
+.mat-mdc-tab-body-wrapper {
   margin-top: 10px;
 }
-.fc-agenda-slots td div { height: 10px !important; }
-.fc .fc-datagrid-cell-cushion{
+
+.fc-agenda-slots td div {
+  height: 10px !important;
+}
+
+.fc .fc-datagrid-cell-cushion {
   //padding: 3px !important;
 }
-.fc-datagrid-cell-frame{
+
+.fc-datagrid-cell-frame {
   //height: 33px !important;
 }
-.fc-resource-timeline table tbody tr .fc-datagrid-cell div { height: 33px !important; }
-.fc .fc-timeline-overlap-enabled .fc-timeline-lane-frame .fc-timeline-events{
+
+.fc-resource-timeline table tbody tr .fc-datagrid-cell div {
+  height: 33px !important;
+}
+
+.fc .fc-timeline-overlap-enabled .fc-timeline-lane-frame .fc-timeline-events {
   padding-bottom: 0 !important;
   height: 33px !important;
 }
-.fc-timeline-event{
+
+.fc-timeline-event {
   padding: 4px 1px !important;
 }
-.fc-timeline-event-harness{
+
+.fc-timeline-event-harness {
   top: 0 !important;
 }
+
 .fc .fa:before {
   padding: 0px 0px;
   //font-size: 27px;
 }
-.fc .fc-event-title li{
+
+.fc .fc-event-title li {
   margin-right: 0 !important;
 }
+
 //.popper,
 //.tooltip {
 //  position: absolute;
@@ -153,37 +174,54 @@
 
 
 // prevent resource area from scrolling
-.fc-scrollgrid-section td:first-child .fc-scroller-harness .fc-scroller{
+.fc-scrollgrid-section td:first-child .fc-scroller-harness .fc-scroller {
   overflow: visible !important;
 }
+
 .fc-event-draggable {
   border-left: 1px dotted #ddd !important;
 }
-.fc{
-  .fc-toolbar.fc-header-toolbar{
+
+.fc {
+  .fc-toolbar.fc-header-toolbar {
     max-width: 310px;
+    margin-bottom: 10px;
   }
-  .fc-toolbar-chunk{
+
+  .fc-toolbar-chunk {
     z-index: 9999 !important;
   }
 }
-.low-opacity{
+
+.low-opacity {
   opacity: 0.3 !important;
 }
-mat-drawer{
+
+mat-drawer {
   width: 100%;
 }
+
 @media (max-width: 1200px) {
-  .mydraggable{
+  .mydraggable {
     //display: none !important;
   }
-  .fc-datagrid-cell-main, .fc-timeline-slot-cushion, .fc-event-title{
+  .fc-datagrid-cell-main, .fc-timeline-slot-cushion, .fc-event-title {
     font-size: 12px !important;
   }
-  .mat-mdc-tab-header{
+  .mat-mdc-tab-header {
     left: 45% !important;
   }
 }
-.ngx-mat-timepicker-dialog{
+
+.ngx-mat-timepicker-dialog {
   z-index: 999999999999;
+}
+
+.fc-timeline-event .fc-event-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.timeline-event .fc-event-title {
+  padding: 0 !important;
 }

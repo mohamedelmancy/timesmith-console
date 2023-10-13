@@ -31,7 +31,7 @@
   max-width: 200px;
   position: absolute !important;
   right: 18px;
-  top: -13px;
+  top: 0px;
   z-index: 99999;
 }
 
@@ -59,7 +59,7 @@ mat-form-field {
 .tabs {
   background-color: #FFFFFF;
   border-radius: 3px;
-  margin-top: 75px;
+  margin-top: 50px;
   max-height: 100vh;
   overflow: visible;
 }
@@ -69,7 +69,7 @@ mat-form-field {
 }
 
 ::ng-deep {
-  .mat-mdc-tab-body-wrapper, .mat-mdc-tab-body, .mat-mdc-tab-body-content, .mat-drawer-content, .mat-drawer-container  {
+  .mat-mdc-tab-body-wrapper, .mat-mdc-tab-body, .mat-mdc-tab-body-content, .mat-drawer-content, .mat-drawer-container {
     overflow: visible !important;
   }
 }

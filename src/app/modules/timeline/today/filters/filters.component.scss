@@ -1,11 +1,72 @@
-.inner-cont{
+.inner-cont {
   max-height: 40px;
 }
+
 @media (max-width: 1024px) {
-  .inner-cont{
+  .inner-cont {
     max-height: unset !important;
   }
-  .container-fluid{
+  .container-fluid {
     padding: 0 !important;
+  }
+}
+
+::ng-deep {
+  .FILTER {
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+
+    .mat-mdc-form-field-flex {
+      height: 40px;
+
+      .mdc-notched-outline:not(.mdc-notched-outline--notched) {
+        .mdc-notched-outline__notch {
+          display: flex;
+          justify-content: center;
+        }
+      }
+
+    }
+
+    .mat-mdc-form-field-infix {
+      min-height: 40px;
+      border-top: 6px solid transparent !important;
+
+      input {
+        //height: 42px !important;
+      }
+    }
+
+    .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-infix input {
+      //text-align: center;
+      padding: 2px;
+      font-size: 14px;
+      height: 28px;
+    }
+
+    .mat-mdc-form-field-infix {
+      padding: 3px !important;
+      border-top: 12px solid transparent;
+      border-bottom: 0px solid transparent;
+    }
+
+    .mat-mdc-button-wrapper {
+      svg {
+        height: 26px !important;
+      }
+
+      .mat-mdc-datepicker-toggle-default-icon {
+        width: 1em;
+      }
+    }
+
+    .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-prefix, .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-suffix {
+      top: -4px !important;
+    }
+
+    .mat-mdc-form-field-label {
+      font-size: 14px;
+    }
   }
 }

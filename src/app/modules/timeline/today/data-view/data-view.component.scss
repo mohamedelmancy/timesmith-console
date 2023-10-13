@@ -8,8 +8,20 @@
       display: none;
     }
 
+    .mat-mdc-form-field-flex {
+      height: 40px;
+
+      .mdc-notched-outline:not(.mdc-notched-outline--notched) {
+        .mdc-notched-outline__notch {
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+
     .mat-mdc-form-field-infix {
-      min-height: 48px;
+      min-height: 40px;
+      border-top: 6px solid transparent !important;
 
       input {
         //height: 42px !important;
