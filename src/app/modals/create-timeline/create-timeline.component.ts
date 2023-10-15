@@ -5,8 +5,11 @@ import {CoreService} from "../../services/core.service";
 import {Observable} from "rxjs";
 import {map, startWith} from "rxjs/operators";
 import {AutoComplete} from "../../shared/auto-complete";
-import moment from "moment";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {GetLanguage} from "../../shared/functions/shared-functions";
+import {MultiselectDropdown} from "../../../assets/js/multiselect-dropdown";
 
+@UntilDestroy()
 @Component({
   selector: 'app-create-timeline',
   templateUrl: './create-timeline.component.html',
@@ -16,14 +19,16 @@ export class CreateTimelineComponent extends AutoComplete implements OnInit {
   form: FormGroup;
   typesFilteredOptions: Observable<any[]>;
   employeesFilteredOptions: Observable<any[]>;
-  employees = this.data.employees;
+  departmentsFilteredOptions: Observable<any[]>;
+  sitesFilteredOptions: Observable<any[]>;
+  employees = []
   types = [
     {
       name: 'Attendance',
       id: 1
     },
     {
-      name: 'Permission',
+      name: 'Exception code',
       id: 2
     },
     {
@@ -31,6 +36,9 @@ export class CreateTimelineComponent extends AutoComplete implements OnInit {
       id: 3
     },
   ];
+  departments = [];
+  sites = [];
+
   constructor(public dialogRef: MatDialogRef<CreateTimelineComponent>,
               private coreService: CoreService,
               private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,) {
@@ -38,55 +46,107 @@ export class CreateTimelineComponent extends AutoComplete implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      MultiselectDropdown({});
+    }, 1000)
+    this.getDepartments();
+    this.getSites();
+    this.getTeamMembers();
     this.form = this.fb.group({
-        employee: ['', Validators.compose([Validators.required])],
+        department: new FormControl(null, []),
+        site: new FormControl(null, []),
+        employees: ['', Validators.compose([Validators.required])],
         type: ['', Validators.compose([Validators.required])],
         dateFrom: [this.data?.event.start, Validators.compose([Validators.required])],
         dateTo: [this.data?.event.end, Validators.compose([Validators.required])],
       },
       {validators: [this.checkAutoComplete()]}
     );
+    this.handlerAutocomplete('department');
+    this.handlerAutocomplete('site');
     this.handlerAutocomplete('type');
-    this.handlerAutocomplete('employee');
+
     if (this.data?.event?.title) {
       this.types.push({
         name: this.data?.event.title,
         id: Math.random()
       });
       this.form.controls['type'].setValue(this.types.find(x => x.name === this.data?.event.title))
-      this.form.controls['employee'].setValue(this.data.employees.find(x => x.id === this.data?.event._def.resourceIds[0]))
+      this.form.controls['employees'].setValue(this.data.employees.find(x => x.id === this.data?.event._def.resourceIds[0]))
     }
     console.log('eee', this.data);
   }
 
+  getDepartments() {
+    this.coreService.getRequest('console/customers_departments').pipe(untilDestroyed(this)).subscribe(res => {
+      this.departments = res?.data;
+      this.departments.forEach((item: any) => {
+        item['individuals'] = item.employees?.length;
+        item.name = GetLanguage() === 'ar' ? item?.name_ar : item?.name_en;
+      });
+      this.handlerAutocomplete('department');
+    })
+  }
+
+  getSites() {
+    this.coreService.getRequest('console/customers_sites').pipe(untilDestroyed(this)).subscribe(res => {
+      this.sites = res?.data;
+      this.sites.forEach((item: any) => {
+        item.name = GetLanguage() === 'ar' ? item?.name_ar : item?.name_en;
+      });
+      this.handlerAutocomplete('site');
+    })
+  }
+
+  getTeamMembers() {
+    this.coreService.getRequest('users').pipe(untilDestroyed(this)).subscribe(res => {
+      this.employees = res?.data;
+      this.employees.forEach((item: any) => {
+      });
+    })
+  }
+
   handlerAutocomplete(type) {
-    if (type === 'type') {
+    if (type === 'department') {
+      this.departmentsFilteredOptions = this.form.controls['department']?.valueChanges.pipe(
+        startWith(''),
+        map(value => (typeof value === 'string' ? value : value?.name)),
+        map(name => (name ? this._filter(name, this.departments) : this.departments.slice())),
+      );
+    } else if (type === 'site') {
+      this.sitesFilteredOptions = this.form.controls['site']?.valueChanges.pipe(
+        startWith(''),
+        map(value => (typeof value === 'string' ? value : value?.name)),
+        map(name => (name ? this._filter(name, this.sites) : this.sites.slice())),
+      );
+    } else if (type === 'type') {
       this.typesFilteredOptions = this.form.controls['type']?.valueChanges.pipe(
         startWith(''),
         map(value => (typeof value === 'string' ? value : value?.name)),
         map(name => (name ? this._filter(name, this.types) : this.types.slice())),
-      );
-    } else if (type === 'employee') {
-      this.employeesFilteredOptions = this.form.controls['employee']?.valueChanges.pipe(
-        startWith(''),
-        map(value => (typeof value === 'string' ? value : value?.name)),
-        map(name => (name ? this._filter(name, this.employees) : this.employees.slice())),
       );
     }
   }
 
   checkAutoComplete() {
     return (formGroup: FormGroup) => {
-      const employee = formGroup?.controls['employee'];
       const type = formGroup?.controls['type'];
+      const department = formGroup?.controls['department'];
+      const site = formGroup?.controls['site'];
       //////////////////////////////////////////////////////////////
-      const indexEmp = this.employees.findIndex(res => res === employee.value);
+      const indexDep = this.departments.findIndex(res => res === department.value);
+      const indexSite = this.sites.findIndex(res => res === site.value);
       const indexType = this.types.findIndex(res => res === type.value);
       // const indexStatus = this.districtsOptions.findIndex(res => res === status.value);
-      if (indexEmp === -1) {
-        employee.setErrors({wrong: true});
+      if (indexDep === -1 && department.value) {
+        department.setErrors({wrong: true});
       } else {
-        employee.setErrors(null);
+        department.setErrors(null);
+      }
+      if (indexSite === -1 && site.value) {
+        site.setErrors({wrong: true});
+      } else {
+        site.setErrors(null);
       }
       if (indexType === -1) {
         type.setErrors({wrong: true});

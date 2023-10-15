@@ -44,6 +44,7 @@
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>{{'Type' | translate}}</mat-label>
                 <input type="text" matInput formControlName="type" [matAutocomplete]="auto1">
+                <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
                 <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
                                   (opened)="handlerAutocomplete('type')">
                   <mat-option *ngFor="let option of typesFilteredOptions | async" [value]="option">

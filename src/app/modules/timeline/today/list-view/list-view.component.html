@@ -1,10 +1,12 @@
 <div class="timeline-list-view d-flex flex-column">
-  <app-filters style="z-index: 9;"></app-filters>
+  <!--  <app-filters style="z-index: 9;"></app-filters>-->
   <div class="">
     <app-data-table-container
       [dataTableName]="'timeline'"
       [columns]="displayedColumns"
       [data]="data"
+      [has_excel_export]="true"
+      [sort_options]="sort_options"
       [showCreate]="false"
       [filtersNames]="['sites', 'departments', 'individuals']"
     ></app-data-table-container>

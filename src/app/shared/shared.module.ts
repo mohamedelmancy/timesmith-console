@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {LoaderComponent} from './components/loader/loader.component';
 import {TooltipModule} from "ng2-tooltip-directive";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -43,6 +43,8 @@ import {MenuToggleAnchorDirective, MenuToggleDirective, MenuToggleLinkDirective}
 import {BreadcrumbTranslateService} from "../services/breadcrumb-translate.service";
 import {PhoneWithCountryComponent} from "./components/phone-with-country/phone-with-country.component";
 import {NgxIntlTelephoneInputModule} from "ngx-intl-telephone-input";
+import {ActionsBarComponent} from './components/data-table-container/actions-bar/actions-bar.component';
+import {ExcelService} from "../services/excel.service";
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import {NgxIntlTelephoneInputModule} from "ngx-intl-telephone-input";
     LoaderComponent,
     SideFilterComponent,
     DataTableContainerComponent,
-    PhoneWithCountryComponent
+    PhoneWithCountryComponent,
+    ActionsBarComponent
   ],
   exports: [
     LoaderComponent,
@@ -108,6 +111,8 @@ import {NgxIntlTelephoneInputModule} from "ngx-intl-telephone-input";
     NgxIntlTelephoneInputModule,
   ],
   providers: [
+    ExcelService,
+    DatePipe,
     MenuToggleDirective,
     MenuToggleLinkDirective,
     MenuToggleAnchorDirective,

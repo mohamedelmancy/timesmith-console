@@ -5,6 +5,7 @@
         <mat-label>{{'Type' | translate}}</mat-label>
         <input [readonly]="(data?.extendedProps?.type !== 'code' && data?.extendedProps?.type !== 'leave')" type="text"
                matInput formControlName="type" [matAutocomplete]="auto1">
+        <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
         <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
                           (opened)="handlerAutocomplete('type')">
           <mat-option *ngFor="let option of typesFilteredOptions | async" [value]="option">

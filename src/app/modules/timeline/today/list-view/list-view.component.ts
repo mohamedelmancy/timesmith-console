@@ -16,6 +16,30 @@ export class ListViewComponent implements OnInit {
   constructor() {
   }
 
+  sort_options = [
+    {
+      name: 'Alphabetical',
+      id: 1
+    },
+    {
+      name: 'Punch in earliest first',
+      id: 2
+    },
+    {
+      name: 'Punch in latest first',
+      id: 3
+    },
+    {
+      name: 'Duration shortest first',
+      id: 4
+    },
+    {
+      name: 'Duration longest first',
+      id: 5
+    },
+
+  ];
+
   data = [
     {
       department: 'Marketing',

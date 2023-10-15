@@ -1,8 +1,8 @@
 import {FormGroup} from '@angular/forms';
 import 'moment/locale/ar-sa';
 import 'moment/locale/en-au';
-
 import {secureStorage} from "./secure-storage";
+import moment from "moment";
 
 export function GetLanguage() {
   return (secureStorage.getItem('lang') || 'ar');
@@ -113,4 +113,8 @@ function loopOverFilter(loopedArr, column, backup?) {
     console.log('filtered', filtered)
   }
   return filtered;
+}
+
+export function setMomentLocal() {
+  moment.locale(GetLanguage() === 'ar' ? 'ar-sa' : 'en-US');
 }

@@ -1,35 +1,69 @@
-<div class="create-timeline py-3" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+<div class="create-timeline py-3">
   <h1 class="px-3 mb-0">{{data?.event?.title ? data.event.title : 'Create new timeline' | translate}}</h1>
   <div mat-dialog-content>
     <form [formGroup]="form" (ngSubmit)="save(form?.value)">
       <div fxLayout="column wrap" fxLayoutAlign="space-between start">
         <div fxLayout="row wrap" class="full-wid" fxLayoutAlign="space-between start">
-          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" >
+          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
             <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-                <mat-label>{{'Employee name' | translate}}</mat-label>
-                <input type="text" matInput formControlName="employee" [matAutocomplete]="auto2">
-                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn"
-                                  (opened)="handlerAutocomplete('employee')">
-                  <mat-option *ngFor="let option of employeesFilteredOptions | async" [value]="option">
-                    {{option.name}}
-                  </mat-option>
-                </mat-autocomplete>
+              <mat-label>{{'From' | translate}}</mat-label>
+              <input readonly matInput [ngxMatDatetimePicker]="picker" placeholder="MM/DD/YYYY, h:mm a"
+                     formControlName="dateFrom"
+                     [disabled]="false">
+              <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false"
+                                       [stepHour]="1" [stepMinute]="1" [stepSecond]="1"
+                                       [lang]="'ar'"
+                                       [touchUi]="false" [color]="'primary'" [enableMeridian]="true"
+                                       [disableMinute]="false" [hideTime]="false">
+              </ngx-mat-datetime-picker>
             </mat-form-field>
-            <small
-              *ngIf="form.controls['employee'].hasError('required') && form.controls['employee'].touched"
-              class="warn-text gene-block">
-              {{'You must include Employee name' | translate}}
-            </small>
-            <small
-              *ngIf="form.controls['employee'].errors && !(form.controls['employee'].hasError('required')) && form.controls['employee'].touched"
-              class="warn-text gene-block">
-              {{'You must include a valid Employee name' | translate}}
-            </small>
           </div>
           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
             <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+              <mat-label>{{'To' | translate}}</mat-label>
+              <input readonly matInput [ngxMatDatetimePicker]="picker2" placeholder="MM/DD/YYYY, h:mm a"
+                     formControlName="dateTo"
+                     [disabled]="false">
+              <mat-datepicker-toggle matSuffix [for]="$any(picker2)"></mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="false"
+                                       [stepHour]="1" [stepMinute]="1" [stepSecond]="1"
+                                       [touchUi]="false" [color]="'primary'" [enableMeridian]="true"
+                                       [disableMinute]="false" [hideTime]="false">
+              </ngx-mat-datetime-picker>
+            </mat-form-field>
+          </div>
+          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+              <mat-label>{{'Site' | translate}}</mat-label>
+              <input type="text" matInput formControlName="site" [matAutocomplete]="auto2">
+              <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+              <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn" multiple
+                                (opened)="handlerAutocomplete('site')">
+                <mat-option *ngFor="let option of sitesFilteredOptions | async" [value]="option">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
+              <mat-label>{{'Department' | translate}}</mat-label>
+              <input type="text" matInput formControlName="department" [matAutocomplete]="auto0">
+              <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+              <mat-autocomplete #auto0="matAutocomplete" [displayWith]="displayFn"
+                                (opened)="handlerAutocomplete('department')">
+                <mat-option *ngFor="let option of departmentsFilteredOptions | async" [value]="option">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div fxFlex.gt-sm="100" fxFlex.gt-xs="49" fxFlex="100">
+            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
               <mat-label>{{'Type' | translate}}</mat-label>
               <input type="text" matInput formControlName="type" [matAutocomplete]="auto1">
+              <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
               <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
                                 (opened)="handlerAutocomplete('type')">
                 <mat-option *ngFor="let option of typesFilteredOptions | async" [value]="option">
@@ -48,40 +82,21 @@
               {{'You must include a valid type' | translate}}
             </small>
           </div>
-          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
-            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-              <mat-label>{{'From' | translate}}</mat-label>
-              <input readonly matInput [ngxMatDatetimePicker]="picker" placeholder="MM/DD/YYYY, h:mm a" formControlName="dateFrom"
-                     [disabled]="false">
-              <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
-              <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false"
-                                       [stepHour]="1" [stepMinute]="1" [stepSecond]="1"
-                                       [lang]="'ar'"
-                                       [touchUi]="false" [color]="'primary'" [enableMeridian]="true"
-                                       [disableMinute]="false" [hideTime]="false">
-              </ngx-mat-datetime-picker>
-            </mat-form-field>
-          </div>
-          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
-            <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
-              <mat-label>{{'To' | translate}}</mat-label>
-              <input readonly matInput [ngxMatDatetimePicker]="picker2" placeholder="MM/DD/YYYY, h:mm a" formControlName="dateTo"
-                     [disabled]="false">
-              <mat-datepicker-toggle matSuffix [for]="$any(picker2)"></mat-datepicker-toggle>
-              <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="false"
-                                       [stepHour]="1" [stepMinute]="1" [stepSecond]="1"
-                                       [touchUi]="false" [color]="'primary'" [enableMeridian]="true"
-                                       [disableMinute]="false" [hideTime]="false">
-              </ngx-mat-datetime-picker>
-            </mat-form-field>
+          <div fxFlex.gt-sm="100" fxFlex.gt-xs="49" fxFlex="100">
+            <mat-label>{{'Employees' | translate}}</mat-label>
+            <select name="employees" id="employees" multiple multiselect-search="true" multiselect-select-all="true"
+                    formControlName="employees">
+              <option value="{{option?.id}}" *ngFor="let option of employees">{{option?.name}}</option>
+            </select>
           </div>
         </div>
       </div>
     </form>
   </div>
   <div mat-dialog-actions class="d-flex justify-content-end">
-    <button  mat-button class="mx-2 warn-bg" (click)="onNoClick()">{{'Cancel' | translate}}</button>
-    <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class="" cdkFocusInitial>
+    <button mat-button class="mx-2 warn-bg" (click)="onNoClick()">{{'Cancel' | translate}}</button>
+    <button (click)="save(form?.value)" [disabled]="!form.valid" color="primary" mat-raised-button class=""
+            cdkFocusInitial>
       {{data?.event?.title ? 'Update' : 'Create' | translate}}
     </button>
   </div>

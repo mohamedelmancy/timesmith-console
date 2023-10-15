@@ -44,6 +44,7 @@
               <mat-form-field class="full-wid mrgn-b-md" appearance="outline">
                 <mat-label>{{'Manager' | translate}}</mat-label>
                 <input type="text" matInput formControlName="manager" [matAutocomplete]="auto1">
+                <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
                 <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn"
                                   (opened)="handlerAutocomplete('manager')">
                   <mat-option *ngFor="let option of managersFilteredOptions | async" [value]="option">

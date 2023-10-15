@@ -24,6 +24,8 @@
             </div>
             <div class="w-100 overflow-auto"
                  [ngClass]="{'table-with-filters': filtersNames?.length && !(isMobile$ | async)}">
+              <app-actions-bar [dataSource]="dataSource" [selection]="selection" [sort_options]="sort_options"
+                               [columns]="columns" [has_excel_export]="has_excel_export"></app-actions-bar>
               <div class="w-100 overflow-auto">
                 <table #table id="htmlData" mat-table [dataSource]="dataSource">
                   <ng-container *ngFor="let column of columns?.values; let i = index">

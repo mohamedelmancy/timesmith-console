@@ -64,6 +64,7 @@ import {BreadcrumbsModule} from "@exalif/ngx-breadcrumbs";
 import {StatusActionComponent} from './modals/status-action/status-action.component';
 import {ViewNotificationComponent} from './modals/view-notification/view-notification.component';
 import {FullCalendarModule} from "@fullcalendar/angular";
+import {MatSelectModule} from "@angular/material/select";
 // import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
 
 // FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -147,6 +148,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       postProcess: null,
       applyDistinctOn: 'text',
     }),
+    MatSelectModule,
     // PerfectScrollbarModule,
   ],
   providers: [

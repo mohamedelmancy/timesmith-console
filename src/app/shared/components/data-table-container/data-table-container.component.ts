@@ -42,6 +42,8 @@ export class DataTableContainerComponent implements OnInit, AfterViewInit, OnCha
   @Input() showCreate = true;
   @Input() filtersNames;
   @Input() data;
+  @Input() has_excel_export;
+  @Input() sort_options;
   @Input() createLink;
   @Input() viewLink;
   @Input() dataTableName;

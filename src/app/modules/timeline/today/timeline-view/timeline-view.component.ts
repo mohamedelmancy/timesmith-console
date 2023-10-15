@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Calendar, CalendarApi} from '@fullcalendar/core';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import {CoreService} from "../../../../services/core.service";
@@ -27,6 +27,7 @@ declare var jQuery: any;
   // providers: [CalendarApi]
 })
 export class TimelineViewComponent implements OnInit, AfterViewInit {
+  @Input() employees = [];
   @ViewChild("fullcalendar", {static: false}) calendarComponent: FullCalendarComponent;
   options;
   eventDidMounted = false;
@@ -227,6 +228,21 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
   }
   bsConfig;
 
+  resources = [
+    {"id": "5", "title": "Taha abd Elsalam"}, {
+      "id": "l",
+      "title": "Saeed El Sharkawy",
+      icon: 'fa-user-circle'
+    }, {"id": "a", "title": "Ahmed abd elazeem"}, {
+      "id": "b",
+      "title": "Omar khairy",
+      "eventColor": "green"
+    }, {"id": "c", "title": "Mohamed talaat", "eventColor": "orange"}, {
+      "id": "d",
+      "title": "Osama yaser"
+    }, {"id": "e", "title": "Noha alaa"}, {"id": "f", "title": "Ibrahim tarek", "eventColor": "red"}
+  ]
+
   constructor(private coreService: CoreService,
               private translateService: TranslateService,
               public dialog: MatDialog,
@@ -242,7 +258,7 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
       containerClass: 'theme-default'
     });
     setTimeout(() => {
-      console.log('ssss')
+      console.log('ssss', this.employees)
       this.renderCalendar();
       this.getEvents();
       this.getResources();
@@ -339,7 +355,7 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
       plugins: [resourceTimelinePlugin,
         dayGridPlugin,
         interactionPlugin,],
-      height: '70vh',
+      height: 'auto',
       headerToolbar: {
         // left: 'prev today next',
         left: GetLanguage() === 'en' ? 'create prev today next date' : '',
@@ -426,8 +442,8 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
       // },
       stickyHeaderDates: true,
       stickyFooterScrollbar: true,
-      slotMinTime: '09:00:00', /* calendar start Timing */
-      slotMaxTime: '19:00:00',  /* calendar end Timing */
+      slotMinTime: '00:00:00', /* calendar start Timing */
+      slotMaxTime: '24:00:00',  /* calendar end Timing */
       aspectRatio: 1.5,
       // slotDuration: '00:15:00',
       slotDuration: {minutes: 15},
@@ -457,7 +473,7 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
       direction: GetLanguage() === 'ar' ? 'rtl' : 'ltr',
       resourceAreaColumns: [
         {
-          field: 'title',
+          field: 'name',
           headerContent: this.translateService.instant('Employee name'),
           width: '100%',
           cellClassNames: 'resource-cell'
@@ -473,23 +489,15 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
       // dayMaxEvents: 3,
       resourceAreaHeaderContent: this.translateService.instant('Staff'),
       // resources: "https://fullcalendar.io/api/demo-feeds/resources.json?with-nesting&with-colors",
-      resources: [{"id": "5", "title": "Taha abd Elsalam"}, {
-        "id": "l",
-        "title": "Saeed El Sharkawy",
-        icon: 'fa-user-circle'
-      }, {"id": "a", "title": "Ahmed abd elazeem"}, {
-        "id": "b",
-        "title": "Omar khairy",
-        "eventColor": "green"
-      }, {"id": "c", "title": "Mohamed talaat", "eventColor": "orange"}, {
-        "id": "d",
-        "title": "Osama yaser"
-      }, {"id": "e", "title": "Noha alaa"}, {"id": "f", "title": "Ibrahim tarek", "eventColor": "red"}],
-      events: "https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline"
+      resources: this.employees,
+      // events: "https://fullcalendar.io/api/demo-feeds/events.json?single-day=&for-resource-timeline"
+      events: []
     }
     setTimeout(() => {
-      this.calendarApi.addResource({"id": "m", "title": "Yousef Essam"}, true)
-
+      this.employees.forEach(emp => {
+        this.calendarApi.addResource({"id": Math.random().toString(), "title": "Yousef Essam"}, true)
+      })
+      // this.calendarApi.addResource({"id": "m", "title": "Yousef Essam"}, true)
     }, 2000)
   }
 
@@ -522,17 +530,17 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
 
   eventMounted(info) {
     if (info.event?.extendedProps.html) {
-      let icons = info.event.extendedProps.html;
+      let icons = info?.event?.extendedProps.html;
       console.log('icons111111', icons);
-      const element = info.el.querySelector('.fc-event-title');
+      const element = info?.el.querySelector('.fc-event-title');
       element.innerHTML = icons;
       this.subscription = this.resizeCounter.subscribe(data => {
         console.log('count ', data);
-        console.log('info.event ', info.event);
+        console.log('info.event ', info?.event);
         console.log('this.resizedEvent ', this.resizedEvent);
-        if (this.resizedEvent.id === info.event.id) {
+        if (this.resizedEvent.id === info?.event.id) {
           console.log('yessssss ');
-          icons = info.event.extendedProps.html;
+          icons = info?.event.extendedProps.html;
           for (let i = 0; i < data - 1; i++) {
             // icons = icons + ((info.event.extendedProps.html).slice(0, 3) + `style="margin-right: 0 !Important; width: 32px;height: 27px;margin-left: 0px; color: ${info.event.extendedProps.fColor}; font-size: 25px "` + (info.event.extendedProps.html).slice(3));
             icons = icons + info.event.extendedProps.html;
@@ -546,9 +554,10 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
   }
 
   addTooltip(info) {
+    let element = void 0 || null;
+    element = jQuery(info.el);
+    element.tipso('destroy');
     setTimeout(() => {
-      let element = void 0 || null;
-      console.log('tooltip', info)
       let hours_start: any = new Date(info.event?.start).getHours();
       let hours_end: any = new Date(info.event?.end).getHours();
       let minutes_start: any = new Date(info.event?.start).getMinutes();
@@ -574,8 +583,6 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
       let header = (info.event?.title || info.event?.extendedProps?.description)
       let duration = `From ( ${hours_start + ':' + minutes_start + ' ' + start_me} ) To ( ${hours_end + ':' + minutes_end + ' ' + end_me}) `
       let content = `${header}<br>${duration}`
-      element = jQuery(info.el);
-      console.log('cont', content)
       this.AddTipso(element, content, 'auto');
     }, 500)
   }
@@ -625,8 +632,8 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(CreateTimelineComponent, {
       data: {employees: this.options.resources, event},
       direction: GetLanguage() === 'ar' ? 'rtl' : 'ltr',
-      minHeight: '50%',
-      width: window.innerWidth > 1199 ? '35%' : '90%',
+      minHeight: '80%',
+      width: window.innerWidth > 1199 ? '45%' : '90%',
       hasBackdrop: false
     });
 
@@ -651,8 +658,6 @@ export class TimelineViewComponent implements OnInit, AfterViewInit {
   }
 
   getEvents() {
-    console.log('render')
-
     const colors = ['#000', '#9e32a8', '#54ab98', '#becf3e', '#d95d7c', '#35e6e3', '#c414c1']
     const today = `2023-09-${new Date().getDate()}T00:00:00Z`
     const yesterday = `2023-09-${new Date().getDate() - 1}T00:00:00Z`

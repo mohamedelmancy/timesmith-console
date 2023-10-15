@@ -11,6 +11,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -18,16 +19,17 @@ import {MatButtonModule} from "@angular/material/button";
     LeavesComponent,
     CreateLeaveComponent,
   ],
-  imports: [
-    CommonModule,
-    LeavesRoutingModule,
-    SharedModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatDatepickerModule,
-    MatButtonModule
-  ]
+    imports: [
+        CommonModule,
+        LeavesRoutingModule,
+        SharedModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        MatDatepickerModule,
+        MatButtonModule,
+        MatIconModule
+    ]
 })
 export class LeavesModule { }
