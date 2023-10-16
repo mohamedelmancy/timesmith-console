@@ -87,14 +87,13 @@
       <lib-breadcrumbs class="gene-breadcrumbs"></lib-breadcrumbs>
     </div>
 
-    <div class="gene-base-container" id="gene-base-container" #scrollContainer [ngClass]="{'gene-base-container-no-navbar': !(loggedIn$ | async)}">
-      <div class="inner-container" fxLayout="row wrap">
-        <div class="full-wid project-content">
-          <router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
-        </div>
-        <div class="pad-t-none full-wid" fxFLex="100">
-          <app-footer></app-footer>
-        </div>
+    <div class="gene-base-container" id="gene-base-container" #scrollContainer
+         [ngClass]="{'gene-base-container-no-navbar': !(loggedIn$ | async)}">
+      <div class="full-wid project-content">
+        <router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
+      </div>
+      <div class="pad-t-none full-wid" fxFLex="100">
+        <app-footer></app-footer>
       </div>
     </div>
   </mat-sidenav-container>
